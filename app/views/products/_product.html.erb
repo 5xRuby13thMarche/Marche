@@ -1,37 +1,17 @@
-<div id="<%= dom_id product %>">
-  <p class="my-5">
-    <strong class="block mb-1 font-medium">商品名稱:</strong>
-    <%= product.name %>
-  </p>
+<section class="border border-gray-200 rounded-md shadow-md">
+  <header class= "mb-2">
+    <div>
+      <%= link_to product_path(product) do %>
+        <img src="https://fakeimg.pl/350x200/ff0000,128/000,255" class="w-full rounded-t-md">
+      <% end %>
+    </div>
+  </header>
+  <section class= "px-4">
+    <h2 class= "text-xl"><%= product.name %></h2>
+    <div>價格：<%= product.price %> 元</div>
+  </section>
 
-  <p class="my-5">
-    <strong class="block mb-1 font-medium">描述:</strong>
-    <%= product.description %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block mb-1 font-medium">價格:</strong>
-    <%= product.price %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block mb-1 font-medium">庫存:</strong>
-    <%= product.inventory %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block mb-1 font-medium">分類:</strong>
-    <%= product.category %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block mb-1 font-medium">商品狀態:</strong>
-    <%= product.status %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "檢視商品", product, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to '編輯商品', edit_product_path(product), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+  <footer class= "p-4">
+    <time><%= format_date(product.updated_at) %></time>
+  </footer>
+</section>
