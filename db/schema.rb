@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2023_04_15_073254) do
     t.float "price"
     t.integer "inventory"
     t.string "category"
-    t.string "status"
+    t.string "status", default: "0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
