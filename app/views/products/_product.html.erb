@@ -1,0 +1,17 @@
+<section class="border border-gray-200 rounded-md shadow-md">
+  <header class= "mb-2">
+    <div>
+      <%= link_to product_path(product) do %>
+        <img src="https://fakeimg.pl/350x200/ff0000,128/000,255" class="w-full rounded-t-md">
+      <% end %>
+    </div>
+  </header>
+  <section class= "px-4">
+    <h2 class= "text-xl"><%= product.name %></h2>
+    <div>價格：<%= product.price %> 元</div>
+  </section>
+
+  <footer class= "p-4">
+    <time><%= format_date(product.updated_at) %></time>
+  </footer>
+</section>
