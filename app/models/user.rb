@@ -16,4 +16,8 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
+
+  has_one :shop
+  has_one :cart
+  has_many :orders
 end
