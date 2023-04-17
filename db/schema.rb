@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(version: 2023_04_15_073254) do
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.float "price"
+    t.decimal "price"
     t.integer "inventory"
     t.string "category"
-    t.string "status", default: "0"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

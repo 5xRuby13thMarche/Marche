@@ -1,12 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: [ :show :edit :update :destroy ]
 
   def index
     @products = Product.order(created_at: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @product = Product.new
@@ -34,7 +33,7 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-      redirect_to root_path, notice: "已成功刪除商品" 
+    redirect_to root_path, notice: "已成功刪除商品" 
   end
 
   private
