@@ -9,3 +9,7 @@ Things you may want to cover:
 * Rails version 6.1.7.3
 * Node 16
 * Database PostgreSQL
+
+
+產生10筆假資料指令：
+$rake sample_data:create_products
