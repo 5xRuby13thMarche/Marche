@@ -36,6 +36,10 @@ class ProductsController < ApplicationController
     redirect_to root_path, notice: "已成功刪除商品" 
   end
 
+  def search
+    @products = Product.where("name LIKE ?", "%#{params[:keyword]}%")
+  end
+
   private
     def set_product
       @product = Product.find(params[:id])

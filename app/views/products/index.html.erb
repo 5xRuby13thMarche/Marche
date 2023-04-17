@@ -1,3 +1,17 @@
+<header class="flex justify-center w-full">
+  <section class="m-2 logo">
+    <img src="https://fakeimg.pl/162x40/ff0000,128/000,255" class=''>
+  </section>
+  <div class="m-2">
+    <%= form_with url: search_path, method: 'get' do |form|%>
+      <%= form.text_field :keyword %>
+      <%= form.submit "Search" , name: ''%>
+    <% end %>
+  </div>
+  <div class="m-2">
+    <img src="https://fakeimg.pl/40x40/ff0000,128/000,255" class=''>
+  </div>
+</header>
 <div class="w-full">
   <% if notice.present? %>
     <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
