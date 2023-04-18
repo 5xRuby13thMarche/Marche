@@ -1,0 +1,8 @@
+<div class="flex justify-center h-8 bg-orange-500 navbaar-wrapper">
+  <nav class="flex flex-wrap content-center">
+    <%= link_to "Home", root_path , class: "p-2"%>
+    <%= link_to "註冊", new_user_registration_path , class: "p-2"%>
+    <%= link_to "登入", new_user_session_path , class: "p-2"%>
+    <%= link_to "登出", destroy_user_session_path, method: 'delete' , class: "p-2"%>
+  </nav>
+</div>
