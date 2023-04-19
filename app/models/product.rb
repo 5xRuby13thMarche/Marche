@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
-  validates :name, :price, :category, presence: true
-
+  belongs_to :shop, optional: true
+  has_many :order_products
+  has_many :orders, through: :order_products
+  has_many :sale_infos
 end
