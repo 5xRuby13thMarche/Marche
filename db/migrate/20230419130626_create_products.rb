@@ -3,10 +3,7 @@ class CreateProducts < ActiveRecord::Migration[6.1]
     create_table :products do |t|
       t.string :name
       t.text :description
-      t.decimal :price
-      t.integer :inventory
-      t.string :category
-      t.integer :status, default: 0
+      t.references :shop, foreign_key: true
 
       t.timestamps
     end
