@@ -30,6 +30,7 @@ group :development do
   gem "tailwindcss-rails", "~> 2.0"
   gem 'listen', '~> 3.3'
   gem "foreman", "~> 0.87.2"
+  gem "htmlbeautifier", "~> 1.4"
   # gem 'rack-mini-profiler', '~> 2.0'
   # gem 'spring'
 end
@@ -40,3 +41,5 @@ group :test do
   gem 'webdrivers'
 end
 gem "faker", "~> 3.2"
+
+
