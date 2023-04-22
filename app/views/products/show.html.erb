@@ -43,6 +43,7 @@
   </div>
 </div>
 <%# 喜歡功能 %>
-<div class="bg-rose-500" data-controller="product--like" >
-  <i class="fa-solid fa-heart fa-bounce fa-xl text-rose-600" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
+<div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>">
+  <i class="fa-regular fa-heart fa-xl text-rose-600" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
+  <span>Like商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
 </div>
