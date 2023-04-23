@@ -8,6 +8,8 @@ class ProductsController < ApplicationController
     @product_comment = ProductComment.new
     @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
     @pagy, @records = pagy(@product_comments, items: 6, fragment: '#comment-list')
+    @sale_info = SaleInfo.find_by(product_id: @product.id)
+    @cart_product = @product.cart_products.find_by(params[:sale_info_id])
   end
 
   def new
@@ -52,3 +54,4 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :description)
   end
 end
+
