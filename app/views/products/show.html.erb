@@ -37,7 +37,7 @@
     <div class="inline-block ml-2">
       <%= button_to '刪除此商品', product_path(@product), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
-    <%= link_to '回到商品首頁', products_path, class: "ml-2   rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to '回到商品首頁', products_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>
 <%# 喜歡功能 %>
@@ -46,25 +46,29 @@
   <span>Like商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
 </div>
 <%# Comment %>
-<div class="max-w-2xl mx-auto">
-  <%= form_with model: @product_comment,  url: product_comments_path(@product.id) do |f| %>
-    <h2 class="text-lg font-bold">商品評價</h2>
-    <div class="form-control">
+<div class="max-w-2xl mx-auto ">
+  <%# 留言輸入區 %>
+  <% if user_signed_in? %>
+    <%= form_with model: @product_comment,  url: product_comments_path(@product.id) , data:{turbo: false} do |f| %>
+      <h2 class="text-lg font-bold">商品評價</h2>
       <div class="flex">
         <%= f.label "留下評論：", class: 'label'%>
         <div class="rating rating-md">
+          <%= f.radio_button :rating, ProductComment.stars[:star_0], class: "comment-star-hidden" , checked: "checked" %>
           <%= f.radio_button :rating, ProductComment.stars[:star_1], class: "comment-star" %>
           <%= f.radio_button :rating, ProductComment.stars[:star_2], class: "comment-star" %>
           <%= f.radio_button :rating, ProductComment.stars[:star_3], class: "comment-star" %>
           <%= f.radio_button :rating, ProductComment.stars[:star_4], class: "comment-star" %>
-          <%= f.radio_button :rating, ProductComment.stars[:star_5], class: "comment-star", checked: "checked" %>
+          <%= f.radio_button :rating, ProductComment.stars[:star_5], class: "comment-star"%>
         </div>
       </div>
-      <%= f.text_area :content, class: "textarea h-24 textarea-bordered bg-zinc-100"%>
-    </div>
-    <%= f.submit "送出", class: "btn m-1  px-3"%>
+      <div class="flex items-end">
+        <%= f.text_area :content, class: "textarea h-24 textarea-bordered bg-zinc-100 textarea-sm w-full max-w-xs"%>
+        <%= f.submit "Send", class: "my-1 mx-2 bg-gray-200 font-bold hover:bg-stone-300 rounded py-1 px-2 text-sm h-7 cursor-pointer border-b-slate-300 border" %>
+      </div>
+    <% end %>
   <% end %>
   <%# 當前產品評論 %>
-  <h3>所有評論：</h3>
+  <h3 class="m-2">評論：</h3>
   <%= render partial: 'comments/comment', collection: @product_comments, locals:{users: User.select(:id, :name)} %>
 </div>

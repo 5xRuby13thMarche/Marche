@@ -1,13 +1,14 @@
-<article  class="p-1 m-1 border rounded bg-neutral-100 border-b-slate-500">
-  <div>User: <%= users.find_by(id: comment.user_id).name%></div>
-  <div><%= comment.updated_at %></div>
-  <div>Product.id <%= comment.product_id %></div>
-  <div>Rating = <%= comment.rating %></div>
-  <div>Content = <%= comment.content %></div>
-  <% if user_signed_in? && current_user.id == comment.user_id %>
-    <div>
-      <button class="btn">編輯</button>
-      <button class="btn">刪除</button>
+<article  class="p-2 m-1 mb-2 border rounded bg-neutral-100 border-b-slate-500">
+  <div class="text-sm">User:XXXX <%= users.find_by(id: comment.user_id).name%></div>
+  <%# 產生星星 %>
+  <% if comment.rating != 0 %>
+    <div class="rating rating-sm">
+      <% 5.times do |i|%>
+        <input type="radio" class="pointer-events-none comment-star" <%= "checked" if  i+1 == comment.rating%>/>
+      <% end %>
     </div>
   <% end %>
+  <div class="text-sm text-slate-500"><%= format_date_with_time(comment.updated_at)%></div>
+  <%# 評論內文 %>
+  <div><%= comment.content %></div>
 </article>

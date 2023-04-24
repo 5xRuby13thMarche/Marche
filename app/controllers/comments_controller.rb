@@ -6,12 +6,6 @@ class CommentsController < ApplicationController
     @product_comment.user_id = current_user.id
     @product_comment.product_id = params[:product_id]
 
-    
-    p "-"*20
-    p params
-    p @product_comment
-    p "-"*20
-    
     if @product_comment.save
       redirect_to product_path(params[:product_id]), notice: "新增留言成功!"
     else

@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 @layer components {
+  /* 評價功能的星星radio */
   .comment-star {
     @apply bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce;
+  }
+  .comment-star-hidden {
+    @apply opacity-0 select-none rating-hidden checked:bg-none;
   }
 }
