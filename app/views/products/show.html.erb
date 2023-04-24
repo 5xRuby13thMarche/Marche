@@ -44,6 +44,29 @@
 </div>
 <%# 喜歡功能 %>
 <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>">
-  <i class="fa-regular fa-heart fa-xl text-rose-600" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
+  <i class="fa-regular fa-heart fa-xl text-rose-600 hover:animate-bounce" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
   <span>Like商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
+</div>
+<%# Comment %>
+<div class="max-w-2xl mx-auto">
+  <div class="rating rating-lg">
+    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
+    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
+    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
+    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
+    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
+  </div>
+  <%= form_with url:false do |f| %>
+    <div class="form-control">
+      <%= f.label "留言 Comment~", class: 'label'%>
+      <%= f.text_area "#", class: "textarea h-24 textarea-bordered"%>
+    </div>
+  <% end %>
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
+  suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
+  suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
 </div>
