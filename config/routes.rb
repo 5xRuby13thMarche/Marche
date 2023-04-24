@@ -12,4 +12,7 @@ Rails.application.routes.draw do
       member { post :like }
     end
   end
+  
+  # carts
+  resources :carts
 end
