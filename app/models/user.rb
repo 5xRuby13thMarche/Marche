@@ -22,8 +22,10 @@ class User < ApplicationRecord
   has_one :cart
   has_many :orders
 
-  has_many :product_likes
-  has_many :liked_products, through: :product_likes, source: :product, dependent: :destroy
+  has_many :product_likes, dependent: :destroy
+  has_many :liked_products, through: :product_likes, source: :product
+
+  has_many :product_comments, dependent: :destroy
 
   def like_product?(product)
     self.liked_products.include?(product)

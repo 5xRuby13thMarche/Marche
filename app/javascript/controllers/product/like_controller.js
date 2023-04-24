@@ -10,7 +10,6 @@ export default class extends Controller {
     this.productId = this.element.dataset.productId;
     this.likeAmount = Number(this.amountTarget.textContent);
     this.changeHeartClass();
-    console.log(`isLiked = ${this.isLiked}`);
   }
 
   async like_product() {

@@ -5,7 +5,10 @@ class ProductsController < ApplicationController
     @products = Product.order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    @product_comment = ProductComment.new
+    @product_comments = ProductComment.order(created_at: :desc)
+  end
 
   def new
     @product = Product.new

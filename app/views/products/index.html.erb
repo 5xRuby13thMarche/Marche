@@ -13,15 +13,11 @@
   </div>
 </header>
 <div class="w-full">
-  <% if notice.present? %>
-    <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
-  <% end %>
-
+  <%= render 'shared/flash' if flash.any? %>
   <div class="flex items-center justify-between mb-3">
     <h1 class="text-4xl font-bold">商品列表</h1>
     <%= link_to '新增商品', new_product_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
-
   <div class="grid grid-cols-1 gap-2 lg:grid-cols-3 md:grid-cols-2">
     <%= render  @products %>
   </div>

@@ -26,3 +26,7 @@ module.exports = {
     darkTheme: "light",
   },
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2d540e8 ([WIP]Add ProductComment model. Add routes and controller for comment.)

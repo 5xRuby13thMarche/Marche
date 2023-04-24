@@ -1,8 +1,6 @@
 <div class="flex w-full mx-auto md:w-2/3">
   <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="inline-block px-3 py-2 mb-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= notice %></p>
-    <% end %>
+    <%= render 'shared/flash' if flash.any? %>
     <h1 class="mb-3 text-4xl font-bold">檢視商品</h1>
     <header>
       <div>
@@ -49,24 +47,24 @@
 </div>
 <%# Comment %>
 <div class="max-w-2xl mx-auto">
-  <div class="rating rating-lg">
-    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
-    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
-    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
-    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
-    <input type="radio" name="rating-8" class="bg-orange-400 select-none mask mask-star-2 checked:bg-amber-500 text-amber-500 checked:bg-none hover:animate-bounce" />
-  </div>
-  <%= form_with url:false do |f| %>
+  <%= form_with model: @product_comment,  url: product_comments_path(@product.id) do |f| %>
+    <h2 class="text-lg font-bold">商品評價</h2>
     <div class="form-control">
-      <%= f.label "留言 Comment~", class: 'label'%>
-      <%= f.text_area "#", class: "textarea h-24 textarea-bordered"%>
+      <div class="flex">
+        <%= f.label "留下評論：", class: 'label'%>
+        <div class="rating rating-md">
+          <%= f.radio_button :rating, ProductComment.stars[:star_1], class: "comment-star" %>
+          <%= f.radio_button :rating, ProductComment.stars[:star_2], class: "comment-star" %>
+          <%= f.radio_button :rating, ProductComment.stars[:star_3], class: "comment-star" %>
+          <%= f.radio_button :rating, ProductComment.stars[:star_4], class: "comment-star" %>
+          <%= f.radio_button :rating, ProductComment.stars[:star_5], class: "comment-star", checked: "checked" %>
+        </div>
+      </div>
+      <%= f.text_area :content, class: "textarea h-24 textarea-bordered bg-zinc-100"%>
     </div>
+    <%= f.submit "送出", class: "btn m-1  px-3"%>
   <% end %>
-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
-  suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
-  suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas molestias quidem pariatur velit, voluptatibus hic, aspernatur minima suscipit totam animi cumque eum quaerat expedita minus, quae similique atque sint iste.
+  <%# 當前產品評論 %>
+  <h3>所有評論：</h3>
+  <%= render partial: 'comments/comment', collection: @product_comments, locals:{users: User.select(:id, :name)} %>
 </div>
