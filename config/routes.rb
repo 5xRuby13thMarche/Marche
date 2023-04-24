@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   
   # products
   root 'products#index'
-  resources :products, except: [:index]
+  resources :products, except: [:index] do
+    # comment
+    resources :comments, shallow: true, only: [:create, :update, :edit, :destroy]
+  end
   get '/search', to: 'products#search'
 
   # like
@@ -12,7 +15,11 @@ Rails.application.routes.draw do
       member { post :like }
     end
   end
+<<<<<<< HEAD
   
   # carts
   resources :carts
+=======
+
+>>>>>>> 2d540e8 ([WIP]Add ProductComment model. Add routes and controller for comment.)
 end
