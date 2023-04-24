@@ -1,2 +1,6 @@
 google_app_id: 'YOUR-APP-ID'
 google_app_secret: 'YOUR-APP-SECRET'
+
+
+user_name: 'YOUR-SMTP-USERNAME'
+password: 'YOUR-SMTP-PASSWORD'
