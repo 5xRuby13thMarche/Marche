@@ -5,5 +5,5 @@ class Product < ApplicationRecord
   has_many :sale_infos
   
   has_many :product_likes
-  has_many :product_likers, through: :product_likes, source: :user
+  has_many :product_likers, through: :product_likes, source: :user, dependent: :destroy
 end
