@@ -49,8 +49,8 @@
 <div class="max-w-2xl mx-auto ">
   <%# 留言輸入區 %>
   <% if user_signed_in? %>
-    <%= form_with model: @product_comment,  url: product_comments_path(@product.id) , data:{turbo: false} do |f| %>
-      <h2 class="text-lg font-bold">商品評價</h2>
+    <%= form_with model: @product_comment, url: product_comments_path(@product.id) do |f| %>
+      <h2 class="m-1 text-lg font-bold">商品評價</h2>
       <div class="flex">
         <%= f.label "留下評論：", class: 'label'%>
         <div class="rating rating-md">
@@ -69,6 +69,10 @@
     <% end %>
   <% end %>
   <%# 當前產品評論 %>
-  <h3 class="m-2">評論：</h3>
-  <%= render partial: 'comments/comment', collection: @product_comments, locals:{users: User.select(:id, :name)} %>
+  <section>
+    <h3 class="m-2">評論：</h3>
+    <div id="comment-list">
+      <%= render partial: 'comments/comment', collection: @product_comments, locals:{users: User.select(:id, :name)} %>
+    </div>
+  </section>
 </div>
