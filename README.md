@@ -10,6 +10,11 @@ Things you may want to cover:
 * Node 16
 * Database PostgreSQL
 
+Setup Steps
+Make sure `PGsql` is installed.
 
-產生10筆假資料指令：
-$rake sample_data:create_products
+Run `rails db:create` to create DB
+Run `rails db:migrate` to migrate table
+Run `rails db:seed` to create database
+Run `bundle install` to install gem
+Run `yarn install` to install package
