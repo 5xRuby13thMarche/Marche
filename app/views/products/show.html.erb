@@ -21,14 +21,17 @@
         </p>
 
         <p class="my-5">
-          <div class="flex" data-controller="quantity">
-            <button class="w-10 h-10 border aspect-1" data-action="click->quantity#decrease">-</button>
-            <%= form_with(model: @cart_product) do |form| %>
-              <%= form.text_field :quantity, value: 0,data: { quantity_target: 'value' } %>
-            <% end %>
-            <button class="w-10 h-10 border aspect-1" data-action="click->quantity#increase">+</button>
-          </div>
-          還剩<%= @sale_info.storage %>件
+          <%= form_with(model: CartProduct.new, url: cart_products_path, method: :post, data: { turbo: false }) do |form| %>
+            <div class="flex" data-controller="quantity">
+              <%= form.hidden_field :sale_info_id, value: @sale_info.id %>
+              <%# <button class="w-10 h-10 border aspect-1" data-action="click->quantity#decrease">-</button> %>
+              <%= form.text_field :quantity %>
+              <%# <button class="w-10 h-10 border aspect-1" data-action="click->quantity#increase">+</button> %>
+            </div>
+            還剩<%= @sale_info.storage %>件
+            <%= form.submit "加入購物車", class: "ml-4 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600" %>
+          <% end %>
+
         </p>
       </div>
     </div>

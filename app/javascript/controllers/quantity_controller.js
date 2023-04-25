@@ -14,7 +14,7 @@ export default class extends Controller {
   static targets = ["value"]
 
   increase(){
-    this.valueTarget.value = parseInt(this.valueTarget.value) + 1
+    this.valueTarget.value++;
   } 
   decrease(){
     if (parseInt(this.valueTarget.value) > 0){
