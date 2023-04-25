@@ -1,4 +1,9 @@
 class CartsController < ApplicationController
+  def new
+    @cart = current_user.cart
+    @cart_products = @cart.cart_products
+  end
+  
   def create
     @cart = Cart.new(user: current_user)
     if @cart.save
@@ -6,10 +11,5 @@ class CartsController < ApplicationController
     else
       redirect_to root_path, alert: '建立購物車失敗'
     end
-  end
-
-  def show
-    @cart = current_user.cart
-    @cart_products = @cart.cart_products.includes(:product, :sale_info)
   end
 end
