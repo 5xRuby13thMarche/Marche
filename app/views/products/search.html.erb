@@ -1,4 +1,4 @@
-<h1><%= params[:keyword]%> 搜尋結果 </h1>
-<div class="grid grid-cols-1 gap-2 lg:grid-cols-3 md:grid-cols-2">
+<h1 class="self-end w-11/12 mx-auto mt-8 mb-1 text-xl font-bold text-indigo-600"><%= params[:keyword]%> 搜尋結果 </h1>
+<div class="grid w-11/12 gap-2 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
   <%= render  @products %>
 </div>
