@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_product, only: [:create]
+  before_action :set_product_comment, only: [:edit, :update, :destroy]
 
   def create
     @product_comment = ProductComment.new(params_comment)
@@ -13,7 +14,24 @@ class CommentsController < ApplicationController
       flash[:alert] = "留言不能為空"
       render 'products/show'
     end
+  end
 
+  def edit
+
+  end
+
+  def update
+    if @product_comment.update(params_comment)
+      redirect_to product_path(@product_comment.product_id), notice: 'edit comment successfully!'
+    else
+      flash[:alert] = "fail editing comment."
+      render :edit
+    end
+  end
+
+  def destroy
+    @product_comment.destroy
+    redirect_to product_path(@product_comment.product_id), notice: 'delete comment successfully!'
   end
 
   private
@@ -24,6 +42,10 @@ class CommentsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:product_id])
+  end
+
+  def set_product_comment
+    @product_comment = ProductComment.find(params[:id])
   end
 
 end
