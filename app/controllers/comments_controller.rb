@@ -8,11 +8,10 @@ class CommentsController < ApplicationController
     @product_comment.product_id = params[:product_id]
 
     if @product_comment.save
-      redirect_to product_path(params[:product_id]), notice: "新增留言成功!"
+      # redirect_to product_path(params[:product_id]), notice: "新增留言成功!"
     else
       @product_comments = ProductComment.order(created_at: :desc)
-      flash[:alert] = "留言不能為空"
-      render 'products/show'
+      redirect_to product_path(params[:product_id]), alert: "留言不能為空!"
     end
   end
 
@@ -31,7 +30,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @product_comment.destroy
-    redirect_to product_path(@product_comment.product_id), notice: 'delete comment successfully!'
+    # redirect_to product_path(@product_comment.product_id), notice: 'delete comment successfully!'
   end
 
   private
