@@ -15,11 +15,8 @@ Rails.application.routes.draw do
       member { post :like }
     end
   end
-<<<<<<< HEAD
-  
+
   # carts
   resources :carts
-=======
 
->>>>>>> 2d540e8 ([WIP]Add ProductComment model. Add routes and controller for comment.)
 end
