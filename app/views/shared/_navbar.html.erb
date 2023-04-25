@@ -1,14 +1,13 @@
-<div class="flex justify-center h-10 bg-orange-500 navbaar-wrapper">
+<div class="flex justify-center h-8 bg-indigo-600 navbaar-wrappe">
   <nav class="flex flex-wrap content-center">
     <%= link_to "Home", root_path , class: "p-2"%>
 
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="rounded-full w-9">
-          <img src="https://imgs.search.brave.com/3uiFwAtD0XSpeSLFE4XZ8vnK9Nneow8gdAzGGNL99ck/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDAwLzU3/NC81MTIvb3JpZ2lu/YWwvdmVjdG9yLXNp/Z24tb2YtdXNlci1p/Y29uLmpwZw" alt="使用者頭像">
+          <img src="https://imgs.search.brave.com/3uiFwAtD0XSpeSLFE4XZ8vnK9Nneow8gdAzGGNL99ck/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdflex justify-center h-8 bg-indigo-600 navbaar-wrapperGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDAwLzU3/NC81MTIvb3JpZ2lu/YWwvdmVjdG9yLXNp/Z24tb2YtdXNlci1p/Y29uLmpwZw" alt="使用者頭像">
         </div>
       </label>
-      
       <ul tabindex="0" class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-60">
         <% if user_signed_in? %>
           <li><%= current_user.email %></li>
