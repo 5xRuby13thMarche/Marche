@@ -9,11 +9,12 @@ class ProductsController < ApplicationController
     @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
     @pagy, @records = pagy(@product_comments, items: 6, fragment: '#comment-list')
     @sale_info = SaleInfo.find_by(product_id: @product.id)
-    @cart_product = @product.cart_products.find_by(params[:sale_info_id])
   end
 
   def new
     @product = Product.new
+    @product.sale_infos.build
+    
   end
 
   def edit
@@ -22,10 +23,12 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
+      @product
       redirect_to root_path, notice: "新增商品成功" 
     else
       render :new, status: :unprocessable_entity 
     end
+
   end
 
   def update
@@ -50,8 +53,8 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def product_params
-    params.require(:product).permit(:name, :description)
-  end
+    def product_params
+      params.require(:product).permit(:name, :description, sale_infos_attributes: [:id, :price], category_ids: [])
+    end
 end
 

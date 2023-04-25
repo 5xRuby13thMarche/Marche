@@ -21,5 +21,10 @@ Rails.application.routes.draw do
 
   # carts
   resources :carts
+ 
+  
+  resources :categories, :cart_products
+
+  
 
 end

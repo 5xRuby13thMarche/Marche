@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2023_04_24_030556) do
+=======
+ActiveRecord::Schema.define(version: 2023_04_19_133443) do
+>>>>>>> ccfb534 (建立購買流程&category model fix)
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,23 +34,6 @@ ActiveRecord::Schema.define(version: 2023_04_24_030556) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_carts_on_user_id"
-  end
-
-  create_table "categories", force: :cascade do |t|
-    t.string "content"
-    t.bigint "parent_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["parent_id"], name: "index_categories_on_parent_id"
-  end
-
-  create_table "category_products", force: :cascade do |t|
-    t.bigint "product_id"
-    t.bigint "category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_category_products_on_category_id"
-    t.index ["product_id"], name: "index_category_products_on_product_id"
   end
 
   create_table "order_products", force: :cascade do |t|
@@ -143,9 +130,6 @@ ActiveRecord::Schema.define(version: 2023_04_24_030556) do
   add_foreign_key "cart_products", "carts"
   add_foreign_key "cart_products", "sale_infos"
   add_foreign_key "carts", "users"
-  add_foreign_key "categories", "categories", column: "parent_id"
-  add_foreign_key "category_products", "categories"
-  add_foreign_key "category_products", "products"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "users"
