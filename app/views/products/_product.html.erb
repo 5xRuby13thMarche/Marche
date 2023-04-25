@@ -2,16 +2,12 @@
   <header class= "mb-2">
     <div>
       <%= link_to product_path(product) do %>
-        <img src="https://fakeimg.pl/350x200/ff0000,128/000,255" class="w-full rounded-t-md">
+        <img src="https://fakeimg.pl/200x200/ff0000,128/000,255" class="w-full rounded-t-md">
       <% end %>
     </div>
   </header>
-  <section class= "px-4">
-    <h2 class= "text-xl"><%= product.name %></h2>
-    <div>價格：<%# product.price 元</div> %>
+  <section class= "px-2">
+    <h2 class= "mb-4 text-sm"><%= product.name %></h2>
+    <div class="mb-2 font-semibold text-indigo-600 text-md">$9,999<%# product.price %></div> 
   </section>
-
-  <footer class= "p-4">
-    <time><%= format_date(product.updated_at) %></time>
-  </footer>
 </section>
