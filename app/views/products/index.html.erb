@@ -12,6 +12,7 @@
   </div>
   <%= link_to(raw('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"><path d="M21.5,15a3,3,0,0,0-1.9-2.78l1.87-7a1,1,0,0,0-.18-.87A1,1,0,0,0,20.5,4H6.8L6.47,2.74A1,1,0,0,0,5.5,2h-2V4H4.73l2.48,9.26a1,1,0,0,0,1,.74H18.5a1,1,0,0,1,0,2H5.5a1,1,0,0,0,0,2H6.68a3,3,0,1,0,5.64,0h2.36a3,3,0,1,0,5.82,1,2.94,2.94,0,0,0-.4-1.47A3,3,0,0,0,21.5,15Zm-3.91-3H9L7.34,6H19.2ZM9.5,20a1,1,0,1,1,1-1A1,1,0,0,1,9.5,20Zm8,0a1,1,0,1,1,1-1A1,1,0,0,1,17.5,20Z"></path></svg>'), cart_path, class: "fill-gray-200") %>
 </header>
+
 <%= render 'shared/flash' if flash.any? %>
 
 <%# banner %>
@@ -27,7 +28,7 @@
   </div> 
   <div id="item4" class="w-full carousel-item">
     <img src="https://picsum.photos/1000/200/?random=4" class="w-full mt-6" />
-  </div>
+  </div> 
 </div> 
 <div class="flex justify-center w-full gap-2 py-2">
   <a href="#item1" class="btn btn-xs">1</a> 
@@ -37,45 +38,65 @@
 </div>
 
 <%# 商品分類 %>
-<section class="flex justify-center w-10/12 mx-auto my-6">
-  <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=11" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+<section class="flex flex-wrap justify-center w-11/12 mx-auto my-6 xl:flex-nowrap">
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=11" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-1</p>
   </div>
-      <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=12" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=12" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-2</p>
   </div>
-      <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=13" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=13" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-3</p>
   </div>
-      <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=14" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=14" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-4</p>
   </div>
-      <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=15" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=15" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-5</p>
   </div>
-      <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=16" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=16" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-6</p>
   </div>
-      <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=17" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=17" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-7</p>
   </div>
-      <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=18" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=18" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-8</p>
   </div>
-      <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=19" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=19" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-9</p>
   </div>
-      <div class="w-24">
-    <img src="https://picsum.photos/56/56/?random=20" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+  <div class="w-24 mb-2">
+    <div class="container mx-auto border-2 border-gray-300 rounded-lg w-14 h-14">
+      <img src="https://picsum.photos/56/56/?random=20" class='mx-auto rounded-lg '>
+    </div>
     <p class="text-xs text-center">商品分類-10</p>
   </div>
 </section>
