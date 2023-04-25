@@ -31,7 +31,8 @@ class User < ApplicationRecord
 
   def like_product?(product)
     self.liked_products.include?(product)
-
+  end 
+  
   private
 
   def build_cart

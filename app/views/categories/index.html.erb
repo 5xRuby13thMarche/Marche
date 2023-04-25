@@ -1,0 +1,10 @@
+<h1>主分類</h1>
+
+<% @categories.each do |c|%>
+  <% if c.parent_id == nil %> 
+    <li>
+      <%= c.content %>
+    </li>
+  <% end %>
+<% end %>
+

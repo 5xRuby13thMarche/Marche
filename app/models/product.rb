@@ -10,4 +10,5 @@ class Product < ApplicationRecord
   has_many :cart_products, through: :sale_infos
   
   accepts_nested_attributes_for :sale_infos
+
 end
