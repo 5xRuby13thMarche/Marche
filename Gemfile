@@ -33,6 +33,8 @@ group :development do
   gem "htmlbeautifier", "~> 1.4"
   # gem 'rack-mini-profiler', '~> 2.0'
   # gem 'spring'
+  # Preview email in the default browser instead of sending it
+  gem 'letter_opener', '~> 1.4', '>= 1.4.1'
 end
 
 group :test do
