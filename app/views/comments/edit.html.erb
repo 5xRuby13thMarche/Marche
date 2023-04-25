@@ -1,0 +1,17 @@
+<%= form_with model: @product_comment , url: comment_path(params[:id]), method: 'patch', data:{turbo: false} do |f| %>
+  <div class="flex">
+    <%= f.label "留下評論：", class: 'label'%>
+    <div class="rating rating-md">
+      <%= f.radio_button :rating, ProductComment.stars[:star_0], class: "comment-star-hidden" , checked: "checked" %>
+      <%= f.radio_button :rating, ProductComment.stars[:star_1], class: "comment-star" %>
+      <%= f.radio_button :rating, ProductComment.stars[:star_2], class: "comment-star" %>
+      <%= f.radio_button :rating, ProductComment.stars[:star_3], class: "comment-star" %>
+      <%= f.radio_button :rating, ProductComment.stars[:star_4], class: "comment-star" %>
+      <%= f.radio_button :rating, ProductComment.stars[:star_5], class: "comment-star"%>
+    </div>
+  </div>
+  <div class="flex items-end">
+    <%= f.text_area :content, class: "textarea h-24 textarea-bordered bg-zinc-100 textarea-sm w-full max-w-xs"%>
+    <%= f.submit "Send", class: "my-1 mx-2 bg-gray-200 font-bold hover:bg-stone-300 rounded py-1 px-2 text-sm h-7 cursor-pointer border-b-slate-300 border" %>
+  </div>
+<% end %>
