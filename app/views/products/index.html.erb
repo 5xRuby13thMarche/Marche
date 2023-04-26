@@ -16,7 +16,7 @@
 <%= render 'shared/flash' if flash.any? %>
 
 <%# banner %>
-<div class="w-11/12 mx-auto mt-6 carousel">
+<div class="w-11/12 mx-12 mt-6 carousel">
   <div id="item1" class="w-full carousel-item">
     <img src="https://picsum.photos/1000/200/?random=1" class="w-full mt-6" />
   </div> 
@@ -103,8 +103,8 @@
 
 <%# 商品列表 %>
   <div class="flex justify-between w-11/12 mx-auto">
-    <h1 class="self-end mb-1 text-xl font-bold text-indigo-600">商品列表</h1>
-    <%= link_to '新增商品', new_product_path, class: "self-end mb-2 py-1 btn btn-primary" %>
+    <h1 class="self-end mb-2 text-xl font-bold text-indigo-600">商品列表</h1>
+    <%= link_to '新增商品', new_product_path, class: "self-end mb-2 btn btn-primary" %>
   </div>
 
   <div class="grid w-11/12 gap-2 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
