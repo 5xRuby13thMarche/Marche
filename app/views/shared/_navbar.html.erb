@@ -16,13 +16,13 @@
           </li>
           <li>
             <%= link_to "編輯我的帳戶", edit_user_registration_path %>
-            <%= link_to "登出", destroy_user_session_path, method: :delete, class: 'navbar-item' %>
+            <%= link_to "登出", destroy_user_session_path, method: :delete %>
           </li>
         <% else %>
           <li>您現在為訪客</li>
           <li>
-            <%= link_to "註冊", new_user_registration_path, class: 'button is-primary' %>
-            <%= link_to "登入", new_user_session_path, class: 'button is-light' %>  
+            <%= link_to "註冊", new_user_registration_path %>
+            <%= link_to "登入", new_user_session_path %>  
           </li>
           
         <% end %>
