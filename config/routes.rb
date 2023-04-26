@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   # like
   namespace :api do
     resources :products, only: [] do
-      member { post :like }
+      member do
+        post :like 
+        post :dislike 
+      end
     end
   end
 
