@@ -1,1 +1,1 @@
-<%= turbo_stream.prepend 'comment-list', render('comments/comment', comment: @product_comment, users: User.select(:id, :name))%>
+<%= turbo_stream.prepend 'comment-list', render('comments/comment', comment: @product_comment)%>

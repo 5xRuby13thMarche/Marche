@@ -1,13 +1,12 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
   def index
     @products = Product.order(created_at: :desc)
   end
 
   def show
     @product_comment = ProductComment.new
-    @product_comments = ProductComment.order(created_at: :desc)
+    @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
   end
 
   def new
