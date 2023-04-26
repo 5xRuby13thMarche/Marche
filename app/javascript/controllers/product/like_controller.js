@@ -19,7 +19,7 @@ export default class extends Controller {
     this.changeLikeAmount();
 
     // 打API
-    let url = `/api/products/${this.productId}/like`;
+    let url = (this.isLiked)?`/api/products/${this.productId}/like`:`/api/products/${this.productId}/dislike`
     const response = await post(url, {body: JSON.stringify({like: "like"})});
     if (response.ok) {
       const data = await response.json;
