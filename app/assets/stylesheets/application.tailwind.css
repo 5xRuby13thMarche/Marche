@@ -10,4 +10,11 @@
   .comment-star-hidden {
     @apply opacity-0 select-none rating-hidden checked:bg-none;
   }
+  /* 評論button */
+  .comment-btn-sm{
+    @apply my-1 mx-2 bg-gray-200 font-bold hover:bg-stone-300 rounded py-1 px-2 text-sm h-7 cursor-pointer border-b-slate-300 border
+  }
+  .comment-textarea{
+    @apply textarea h-24 textarea-bordered bg-zinc-100 textarea-sm
+  }
 }

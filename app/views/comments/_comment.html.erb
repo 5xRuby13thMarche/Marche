@@ -1,20 +1,20 @@
-<% if current_user&.id == comment.user_id %>
-  <%# 使用者的留言 %>
-  <%= turbo_frame_tag(comment) do%>
-    <article  class="relative p-2 m-1 mb-2 bg-orange-100 border rounded border-b-slate-500">
-      <div class="text-sm">User:XXXX <%= users.find_by(id: comment.user_id).name%></div>
-      <%# 產生星星 %>
-      <% if comment.rating != 0 %>
-        <div class="rating rating-sm">
-          <% 5.times do |i|%>
-            <input type="radio" class="pointer-events-none comment-star" <%= "checked" if  i+1 == comment.rating%>/>
-          <% end %>
-        </div>
-      <% end %>
-      <div class="text-sm text-slate-500"><%= format_date_with_time(comment.updated_at)%></div>
-      <%# 評論內文 %>
-      <div><%= comment.content %></div>
-      <%# Dropdown: 編輯, 刪除 %>
+<%= turbo_frame_tag(comment) do%>
+  <article  class= "<%= set_comment_style(current_user&.id == comment.user_id)%>">
+    <div class="text-sm">User:XXXX <%= comment.user.name %></div>
+    <%# 產生星星 %>
+    <% if comment.rating != 0 %>
+      <div class="rating rating-sm">
+        <% 5.times do |i|%>
+          <input type="radio" class="pointer-events-none comment-star" <%= "checked" if  i+1 == comment.rating%>/>
+        <% end %>
+      </div>
+    <% end %>
+    <%# 評論日期 %>
+    <div class="text-sm text-slate-500"><%= format_date_with_time(comment.updated_at)%></div>
+    <%# 評論內文 %>
+    <div><%= comment.content %></div>
+    <%# Dropdown: 編輯, 刪除 %>
+    <% if current_user&.id == comment.user_id %>
       <div class="absolute dropdown dropdown-left top-0.5 right-0.5">
         <label tabindex="0" class="flex flex-col pl-2 m-1 cursor-pointer">
           <div class="w-1 h-1 m-px bg-gray-600 rounded"> </div>
@@ -26,21 +26,6 @@
           <li class="p-0"><%= link_to "刪除", comment_path(comment.id), method: 'delete', data:{confirm: '確定刪除留言?'}, class: "text-sm text-stone-600" %></li>
         </ul>
       </div>
-    </article>
-  <% end %>
-<% else %>
-  <article  class="p-2 m-1 mb-2 border rounded bg-neutral-100 border-b-slate-500">
-    <div class="text-sm">User:XXXX <%= users.find_by(id: comment.user_id).name%></div>
-    <%# 產生星星 %>
-    <% if comment.rating != 0 %>
-      <div class="rating rating-sm">
-        <% 5.times do |i|%>
-          <input type="radio" class="pointer-events-none comment-star" <%= "checked" if  i+1 == comment.rating%>/>
-        <% end %>
-      </div>
     <% end %>
-    <div class="text-sm text-slate-500"><%= format_date_with_time(comment.updated_at)%></div>
-    <%# 評論內文 %>
-    <div><%= comment.content %></div>
   </article>
 <% end %>

@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_product, only: [:create]
   before_action :set_product_comment, only: [:edit, :update, :destroy]
-
   def create
     @product_comment = ProductComment.new(params_comment)
     @product_comment.user_id = current_user.id
@@ -10,7 +9,7 @@ class CommentsController < ApplicationController
     if @product_comment.save
       # redirect_to product_path(params[:product_id]), notice: "新增留言成功!"
     else
-      @product_comments = ProductComment.order(created_at: :desc)
+      @product_comments = ProductComment.includes(:user).order(created_at: :desc)
       redirect_to product_path(params[:product_id]), alert: "留言不能為空!"
     end
   end
@@ -21,7 +20,7 @@ class CommentsController < ApplicationController
 
   def update
     if @product_comment.update(params_comment)
-      redirect_to product_path(@product_comment.product_id), notice: 'edit comment successfully!'
+      # redirect_to product_path(@product_comment.product_id), notice: 'edit comment successfully!'
     else
       flash[:alert] = "fail editing comment."
       render :edit
@@ -46,5 +45,4 @@ class CommentsController < ApplicationController
   def set_product_comment
     @product_comment = ProductComment.find(params[:id])
   end
-
 end
