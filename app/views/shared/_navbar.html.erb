@@ -11,9 +11,7 @@
       
       <ul tabindex="0" class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-60">
         <% if user_signed_in? %>
-          <li>
-            <%= current_user.email %>
-          </li>
+          <li><%= current_user.email %></li>
           <li>
             <%= link_to "編輯我的帳戶", edit_user_registration_path %>
             <%= link_to "登出", destroy_user_session_path, method: :delete %>
@@ -24,7 +22,6 @@
             <%= link_to "註冊", new_user_registration_path %>
             <%= link_to "登入", new_user_session_path %>  
           </li>
-          
         <% end %>
       </ul>
     </div>
