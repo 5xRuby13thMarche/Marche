@@ -18,6 +18,8 @@ gem 'omniauth-google-oauth2', '~> 1.1', '>= 1.1.1'
 gem 'omniauth-rails_csrf_protection'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem "requestjs-rails", "~> 0.0.10"
+gem "pagy", "~> 6.0"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,6 +44,7 @@ group :test do
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   gem 'webdrivers'
 end
+
 
 
 

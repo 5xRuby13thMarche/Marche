@@ -72,7 +72,8 @@
   <section>
     <h3 class="m-2">評論：</h3>
     <div id="comment-list">
-      <%= render partial: 'comments/comment', collection: @product_comments %>
+      <%= render partial: 'comments/comment', collection: @records %>
     </div>
+    <div class="flex justify-center my-4"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
   </section>
 </div>
