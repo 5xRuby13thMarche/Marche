@@ -1,0 +1,52 @@
+<div class="container w-full mx-auto">
+
+    <div class="container flex items-center justify-start w-11/12 m-auto mt-16 bg-gray-100 h-14">
+        <input type="checkbox" checked="checked" 
+        class="ml-6 mr-4 checkbox checkbox-primary" />
+        <p class="mr-2 text-sm w-96">商品</p>
+        <p class="mr-2 text-sm text-center w-28">單價</p>
+        <p class="w-40 mr-2 text-sm text-center">數量</p>
+        <p class="mr-2 text-sm text-center w-28">總計</p>
+        <p class="mr-6 text-sm text-center w-28">操作</p>
+    </div>
+
+    <div class="container flex items-center w-11/12 m-auto mt-3 bg-gray-100 border-b border-gray-300 h-14">
+        <input type="checkbox" checked="checked" 
+        class="ml-6 mr-4 checkbox checkbox-primary" />
+        <p class="mr-2 text-sm link link-hover w-96 hover:no-underline">賣家名稱賣家名稱</p>
+    </div>
+
+    <% @cart_products.each do |c| %>
+        <section class="container flex items-center w-11/12 m-auto bg-gray-100 border-b border-gray-300 h-28">
+            <input type="checkbox" checked="checked" 
+            class="ml-6 mr-4 checkbox checkbox-primary" />
+            <img src="https://picsum.photos/80/" class="w-20 h-20 mr-4 link link-hover">
+            <p class="block mr-3 text-sm hover:no-underline w-36 link link-hover"><%= c.sale_info.product.name %></p>
+            <div class="w-32 mr-3 dropdown">
+                <label tabindex="0" class="text-sm font-light link link-hover hover:no-underline"><%= c.sale_info.spec %> <span class="text-xs text-gray-500">▼</span> <br>規格名稱描述ABC</label>
+                <ul tabindex="0" class="p-2 text-sm shadow dropdown-content menu bg-base-100 rounded-box w-52">
+                    <li><a>規格名稱AAA</a></li>
+                    <li><a>規格名稱BBB</a></li>
+                    <li><a>規格名稱CCC</a></li>
+                </ul>
+            </div>
+            <p class="mr-2 text-sm font-semibold text-center w-28"><%= c.sale_info.price %></p>
+            <div class="flex justify-center w-40">
+                <button class="text-lg leading-6 text-gray-400 border border-gray-300 w-7 ">－</button>
+                <p class="self-center px-4 text-base text-center border border-gray-300"><%= c.quantity %></p>
+                <button class="text-lg leading-6 text-gray-400 border border-gray-300 w-7">＋</button>
+            </div>
+            <p class="mr-2 text-sm font-semibold text-center text-indigo-600 w-28">$9,999,999</p>
+            <p class="mr-6 text-sm text-center w-28 link link-hover hover:no-underline">刪除</p>
+        </section>
+    <% end %>
+
+    <div class="container flex items-center w-11/12 h-20 m-auto mt-6 bg-gray-100">
+        <input type="checkbox" checked="checked" 
+        class="ml-6 mr-4 checkbox checkbox-primary" />
+        <p class="mr-8 text-sm w-96">全選 (99)</p>
+        <p class="mr-3 text-sm w-fit ms-auto">總金額 (99 個商品) :<span class="ml-1 text-lg font-semibold text-indigo-600">$9,999,999</span></p>
+        <button class="px-12 mr-6 btn btn-primary">去買單</button>
+    </div>
+    
+</div>

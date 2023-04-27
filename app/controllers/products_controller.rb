@@ -7,10 +7,15 @@ class ProductsController < ApplicationController
   def show
     @product_comment = ProductComment.new
     @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
+    @pagy, @records = pagy(@product_comments, items: 6, fragment: '#comment-list')
+    @sale_info = SaleInfo.find_by(product_id: @product.id)
+    @cart_product = CartProduct.new
   end
 
   def new
     @product = Product.new
+    @product.sale_infos.build
+    
   end
 
   def edit
@@ -23,6 +28,7 @@ class ProductsController < ApplicationController
     else
       render :new, status: :unprocessable_entity 
     end
+
   end
 
   def update
@@ -47,7 +53,8 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def product_params
-    params.require(:product).permit(:name, :description)
-  end
+    def product_params
+      params.require(:product).permit(:name, :description, :category_id, sale_infos_attributes: [:storage, :price, :spec])
+    end
 end
+

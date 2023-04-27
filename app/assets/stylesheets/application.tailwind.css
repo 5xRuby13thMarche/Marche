@@ -17,4 +17,19 @@
   .comment-textarea{
     @apply textarea h-24 textarea-bordered bg-zinc-100 textarea-sm
   }
+  /* pagy 分頁 */
+  .page{
+    @apply py-1 px-2 text-stone-600 border
+  }
+  .page.active{
+    @apply bg-amber-600 text-white
+  }
+  .pagy-nav .page.prev.disabled,
+  .pagy-nav .page.next.disabled{
+    @apply hidden
+  }
+  .page.gap{
+    @apply border-none
+  }
+
 }

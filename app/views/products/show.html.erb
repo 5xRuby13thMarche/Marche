@@ -1,38 +1,49 @@
 <div class="flex w-full mx-auto md:w-2/3">
   <div class="mx-auto">
     <%= render 'shared/flash' if flash.any? %>
-    <h1 class="self-end mt-5 mb-2 text-xl font-bold text-indigo-600">檢視商品</h1>
-    <header>
+    <h1 class="self-end mt-5 mb-2 text-xl font-bold text-indigo-600" >檢視商品</h1>
+    <div class="flex ">
+      <header class="mx-2">
+        <div>
+          <img src="https://fakeimg.pl/350x200/ff0000,128/000,255" class="w-full">
+        </div>
+      </header>
       <div>
-        <img src="https://fakeimg.pl/350x200/ff0000,128/000,255" class="w-full">
+        <p class="my-5">
+          <strong class="block mb-1 font-medium">商品名稱:</strong>
+          <%= @product.name %>
+        </p>
+
+        <p class="my-5">
+          <strong class="block mb-1 font-medium" >價格:</strong>
+          <%= @sale_info.price %>
+        </p>
+
+        <p class="my-5">
+          <%= form_with(model: @cart_product, url: cart_path, method: :post, data: { turbo: false }) do |form| %>
+            <div class="flex">
+              <%= form.hidden_field :sale_info_id, value: @sale_info.id %>
+              <%= form.number_field :quantity %>
+            </div>
+            還剩<%= @sale_info.storage %>件
+            <%= form.submit "加入購物車", class: "ml-4 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600" %>
+          <% end %>
+
+        </p>
       </div>
-    </header>
-    <div>
-      <p class="my-5">
-        <strong class="block mb-1 font-medium">商品名稱:</strong>
-        <%= @product.name %>
-      </p>
-      <p class="my-5">
-        <strong class="block mb-1 font-medium">描述:</strong>
-        <%= @product.description %>
-      </p>
-      <p class="my-5">
-        <strong class="block mb-1 font-medium">價格:</strong>
-        <%# @product.price %>
-      </p>
-      <p class="my-5">
-        <strong class="block mb-1 font-medium">庫存:</strong>
-        <%# @product.inventory %>
-      </p>
-      <p class="my-5">
-        <strong class="block mb-1 font-medium">分類:</strong>
-        <%# @product.category %>
-      </p>
-      <p class="my-5">
-        <strong class="block mb-1 font-medium">商品狀態:</strong>
-        <%# @product.status %>
-      </p>
     </div>
+
+    <section class="my-5">
+      <strong class="block mb-1 font-medium">規格:</strong>
+      <%= @sale_info.spec %>
+    </section>
+
+    <section class="my-5">
+      <strong class="block mb-1 font-medium">描述:</strong>
+      <%= @product.description %>
+    </section>
+    
+
     <%= link_to '編輯此商品', edit_product_path(@product), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
       <%= button_to '刪除此商品', product_path(@product), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
@@ -72,7 +83,8 @@
   <section>
     <h3 class="m-2">評論：</h3>
     <div id="comment-list">
-      <%= render partial: 'comments/comment', collection: @product_comments %>
+      <%= render partial: 'comments/comment', collection: @records %>
     </div>
+    <div class="flex justify-center my-4"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
   </section>
 </div>
