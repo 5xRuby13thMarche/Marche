@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   end
 
   # carts
-  resources :carts
-  resources :categories, :cart_products
+  post '/cart', to: 'carts#create'
+  get '/cart', to: 'carts#index'
+  
+  # categories
+  resources :categories
+  
 
 end

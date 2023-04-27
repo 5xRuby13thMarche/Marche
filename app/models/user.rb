@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  after_create :build_cart
+  after_create :create_user_cart
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -35,7 +35,7 @@ class User < ApplicationRecord
   
   private
 
-  def build_cart
+  def create_user_cart
     self.create_cart
   end
 end
