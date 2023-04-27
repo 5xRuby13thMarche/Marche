@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   def show
     @product_comment = ProductComment.new
     @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
+    @pagy, @records = pagy(@product_comments, items: 6, fragment: '#comment-list')
   end
 
   def new
