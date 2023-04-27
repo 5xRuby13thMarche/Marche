@@ -8,36 +8,34 @@
       <%= image_tag "Marchelogo.png"%>
     </div>
     <div class="w-6/12 flex justify-center items-center text-slate-600">
-      <div class="w-4/6 bg-marcheblue rounded-xl text-center">
+      <div class="w-4/6 bg-marcheblue rounded-xl">
         <h3 class="text-left text-xl pt-10 pr-10 pl-10 pb-2 text-slate-500 ">註冊</h3>
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name))  do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="w-8/10 justify-center items-center">
+            <div class="field">
+              <%= f.label :email ,"e-mail" %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "rounded-md border-0" ,placeholder: "請輸入您的e-mail" %>
+            </div>
 
-          <div class="field">
-            <%= f.label :email ,"e-mail" %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "w-72 rounded-md border-0" ,placeholder: "請輸入您的e-mail" %>
-          </div>
+            <div class="field">
+              <%= f.label :password ,"輸入密碼" %>
+<br />
+              <%= f.password_field :password, autocomplete: "new-password" ,class: "rounded-md border-0" ,placeholder: "最少6個字符" %>
+            </div>
 
-          <div class="field p-2">
-            <%= f.label :password ,"輸入密碼" %>
-            <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password" ,class: "w-72 rounded-md border-0" ,placeholder: "請輸入您的密碼，最少6個字符" %>
-          </div>
+            <div class="field">
+              <%= f.label :password_confirmation ,"確認密碼" %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: "rounded-md border-0", placeholder: "請再次輸入您的密碼"%>
+            </div>
 
-          <div class="field">
-            <%= f.label :password_confirmation ,"確認密碼" %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: "w-72 rounded-md border-0", placeholder: "請再次輸入確認您的密碼"%>
+            <div class="actions pt-10 pb-5 flex justify-center">
+              <%= f.submit "註冊", class: " w-full text-lg btn btn-sm h-10 tracking-wider" %>
+            </div>
+            <div class="pt-2 pb-10">
+              <%= render "devise/shared/links" %>
+            </div>
           </div>
-
-          <div class="actions pt-10 pb-5">
-            <%= f.submit "註冊", class: " text-lg btn btn-sm w-72 h-10 tracking-wider" %>
-          </div>
-          <div class="pt-2 pb-10">
-            <%= render "devise/shared/links"%>
-          </div>
-          
         <% end %>
       </div>
     </div>
