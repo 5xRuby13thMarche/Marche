@@ -23,7 +23,6 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      @product
       redirect_to root_path, notice: "新增商品成功" 
     else
       render :new, status: :unprocessable_entity 
@@ -54,7 +53,7 @@ class ProductsController < ApplicationController
   end
 
     def product_params
-      params.require(:product).permit(:name, :description, sale_infos_attributes: [:id, :price], category_ids: [])
+      params.require(:product).permit(:name, :description, :category_id, sale_infos_attributes: [:storage, :price, :spec])
     end
 end
 
