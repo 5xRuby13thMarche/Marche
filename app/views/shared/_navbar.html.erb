@@ -1,26 +1,24 @@
 <div class="flex justify-center h-10 pb-1 bg-indigo-600">
   <nav class="flex flex-wrap content-center">
     <%= link_to "首頁", root_path , class: "px-6 self-center text-gray-100"%>
-
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-6 rounded-full ">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-gray-200 " id="person"><g data-name="Layer 2"><path d="M12 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm6 10a1 1 0 0 0 1-1 7 7 0 0 0-14 0 1 1 0 0 0 1 1z" data-name="person"></path></g></svg>
         </div>
-        
       </label>
       <ul tabindex="0" class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-60">
         <% if user_signed_in? %>
           <li class="py-1 pl-4 text-indigo-600 text-md"><%= current_user.email %></li>
           <li>
             <%= link_to "編輯我的帳戶", edit_user_registration_path %>
-            <%= link_to "登出", destroy_user_session_path, method: :delete %>
+            <%= link_to "登出", destroy_user_session_path, data: { turbo_method: :delete,  confirm: '是否確定登出'} %>
           </li>
         <% else %>
           <li class="py-1 pl-4 text-indigo-600 text-md">您現在為訪客</li>
           <li>
             <%= link_to "註冊", new_user_registration_path %>
-            <%= link_to "登入", new_user_session_path %>  
+            <%= link_to "登入", new_user_session_path %>
           </li>
         <% end %>
       </ul>
