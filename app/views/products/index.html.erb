@@ -1,24 +1,91 @@
-<header class="flex justify-center w-full">
-  <section class="m-2 logo">
-    <img src="https://fakeimg.pl/162x40/ff0000,128/000,255" class=''>
+<header class="flex items-center justify-between w-full px-12 pb-3 bg-indigo-600 h-14">
+  <section class="mb-2 link link-hover">
+    <img src="https://picsum.photos/id/118/144/48/">
   </section>
-  <div class="m-2">
-    <%= form_with url: search_path, method: 'get' do |form|%>
-      <%= form.text_field :keyword %>
-      <%= form.submit "Search" , name: ''%>
+  <div class="self-center mt-1 mb-2 mr-16">
+    <%= form_with url: search_path, class: "flex", method: 'get' do |form|%>
+      <%= form.text_field :keyword, class: "w-96 rounded-lg" %>
+      <%= button_tag type: 'submit', class: "ml-2 fill-gray-200" do %>
+        <%= raw('<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 48 48" id="search"><path d="M46.599 40.236L36.054 29.691C37.89 26.718 39 23.25 39 19.5 39 8.73 30.27 0 19.5 0S0 8.73 0 19.5 8.73 39 19.5 39c3.75 0 7.218-1.11 10.188-2.943l10.548 10.545a4.501 4.501 0 0 0 6.363-6.366zM19.5 33C12.045 33 6 26.955 6 19.5S12.045 6 19.5 6 33 12.045 33 19.5 26.955 33 19.5 33z"></path></svg>') %>
+      <% end %>
     <% end %>
   </div>
-  <div class="m-2">
-    <%= link_to '購物車', cart_path, class: "py-1 btn btn-primary" %>
-  </div>
+  <%= link_to(raw('<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"><path d="M21.5,15a3,3,0,0,0-1.9-2.78l1.87-7a1,1,0,0,0-.18-.87A1,1,0,0,0,20.5,4H6.8L6.47,2.74A1,1,0,0,0,5.5,2h-2V4H4.73l2.48,9.26a1,1,0,0,0,1,.74H18.5a1,1,0,0,1,0,2H5.5a1,1,0,0,0,0,2H6.68a3,3,0,1,0,5.64,0h2.36a3,3,0,1,0,5.82,1,2.94,2.94,0,0,0-.4-1.47A3,3,0,0,0,21.5,15Zm-3.91-3H9L7.34,6H19.2ZM9.5,20a1,1,0,1,1,1-1A1,1,0,0,1,9.5,20Zm8,0a1,1,0,1,1,1-1A1,1,0,0,1,17.5,20Z"></path></svg>'), cart_path, class: "fill-gray-200") %>
 </header>
-<div class="w-full">
-  <%= render 'shared/flash' if flash.any? %>
-  <div class="flex items-center justify-between mb-3">
-    <h1 class="text-4xl font-bold">商品列表</h1>
-    <%= link_to '新增商品', new_product_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+<%= render 'shared/flash' if flash.any? %>
+
+<%# banner %>
+<div class="w-11/12 mx-12 mt-6 carousel">
+  <div id="item1" class="w-full carousel-item">
+    <img src="https://picsum.photos/1000/200/?random=1" class="w-full mt-6" />
+  </div> 
+  <div id="item2" class="w-full carousel-item">
+    <img src="https://picsum.photos/1000/200/?random=2" class="w-full mt-6" />
+  </div> 
+  <div id="item3" class="w-full carousel-item">
+    <img src="https://picsum.photos/1000/200/?random=3" class="w-full mt-6" />
+  </div> 
+  <div id="item4" class="w-full carousel-item">
+    <img src="https://picsum.photos/1000/200/?random=4" class="w-full mt-6" />
   </div>
-  <div class="grid grid-cols-1 gap-2 lg:grid-cols-3 md:grid-cols-2">
-    <%= render  @products %>
+</div> 
+<div class="flex justify-center w-full gap-2 py-2">
+  <a href="#item1" class="btn btn-xs">1</a> 
+  <a href="#item2" class="btn btn-xs">2</a> 
+  <a href="#item3" class="btn btn-xs">3</a> 
+  <a href="#item4" class="btn btn-xs">4</a>
+</div>
+
+<%# 商品分類 %>
+<section class="flex justify-center w-10/12 mx-auto my-6">
+  <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=11" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-1</p>
   </div>
+      <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=12" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-2</p>
+  </div>
+      <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=13" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-3</p>
+  </div>
+      <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=14" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-4</p>
+  </div>
+      <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=15" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-5</p>
+  </div>
+      <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=16" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-6</p>
+  </div>
+      <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=17" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-7</p>
+  </div>
+      <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=18" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-8</p>
+  </div>
+      <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=19" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-9</p>
+  </div>
+      <div class="w-24">
+    <img src="https://picsum.photos/56/56/?random=20" class='mx-auto border-2 border-gray-300 rounded-lg w-14'>
+    <p class="text-xs text-center">商品分類-10</p>
+  </div>
+</section>
+
+<%# 商品列表 %>
+<div class="flex justify-between w-11/12 mx-auto">
+  <h1 class="self-end mb-2 text-xl font-bold text-indigo-600">商品列表</h1>
+  <%= link_to '新增商品', new_product_path, class: "self-end mb-2 btn btn-primary" %>
+</div>
+
+<div class="grid w-11/12 gap-2 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
+  <%= render  @products %>
 </div>
