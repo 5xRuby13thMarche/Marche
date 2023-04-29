@@ -1,0 +1,9 @@
+<div class="m-2">
+  <%= form.check_box "#{cart_product.id}" %>
+  <%= form.label "#{cart_product.id}", "id:#{cart_product.id}", class: "bg-indigo-200"%>
+  <span class="border bg-sky-100">Product: <%= cart_product.sale_info.product.name %></span>
+  <span class="bg-indigo-200 border"><%= cart_product.sale_info.spec %></span>
+  <span class="border bg-sky-100">$<%= cart_product.sale_info.price %></span>
+  <span class="bg-indigo-200 border"><%= cart_product.quantity %></span>
+  <%= link_to '刪除商品', '#', class: "bg-rose-300 p-1 rounded hover:cursor-pointer hover:bg-rose-400" %>
+</div>

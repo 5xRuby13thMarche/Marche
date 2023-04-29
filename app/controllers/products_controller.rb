@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   def show
     @product_comment = ProductComment.new
     @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
-    @pagy, @records = pagy(@product_comments, items: 6, fragment: '#comment-list')
+    @pagy, @records = pagy(@product_comments, items: 9, fragment: '#comment-list')
     @sale_info = SaleInfo.find_by(product_id: @product.id)
     @cart_product = CartProduct.new
   end

@@ -1,7 +1,8 @@
 class CartsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @cart = current_user.cart
-    @cart_products = @cart.cart_products
+    @cart_products = @cart.cart_products.includes(sale_info: [:product])
   end
   
   def create
@@ -15,6 +16,14 @@ class CartsController < ApplicationController
       # render :show  這邊還要修 
     end
   end
+
+  def checkout
+    @cart = current_user.cart
+    cart_items_keys = params[:cart].delete_if{|key, value| value == '0'}.keys
+    @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: cart_items_keys)
+  end
+
+  private
 
   def cart_product_params
     params.require(:cart_product).permit(:quantity, :sale_info_id)
