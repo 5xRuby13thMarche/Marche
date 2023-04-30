@@ -9,15 +9,20 @@ Rails.application.routes.draw do
   end
   get '/search', to: 'products#search'
 
-  # like
   namespace :api do
+    # like
     resources :products, only: [] do
       member do
         post :like 
         post :dislike 
       end
     end
+  
+    #category
+    post '/categories', to: 'categories#assign'
   end
+
+  #
 
   # carts
   post '/cart', to: 'carts#create'

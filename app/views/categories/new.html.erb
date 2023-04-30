@@ -1,7 +1,0 @@
-<h1>新建分類</h1>
-<div class="my-5">
-  <%= form_with(model: @categories, url: categories_path ) do |c| %>
-    <%= c.text_field :content, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-    <%= c.submit '建立分類', class: "px-2 py-1 bg-blue-300 rounded-md mt-2" %>
-  <% end %>
-</div>

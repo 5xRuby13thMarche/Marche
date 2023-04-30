@@ -8,8 +8,4 @@ module ProductsHelper
   def parent_categories
     Category.where(parent_id: nil).pluck(:content, :id) 
   end
-
-  def sub_categories
-    Category.where.not(parent_id: nil).pluck(:content, :id) #待修改
-  end
 end
