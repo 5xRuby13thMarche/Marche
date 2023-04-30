@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.sale_infos.build
-    
+
   end
 
   def edit
@@ -53,8 +53,8 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-    def product_params
-      params.require(:product).permit(:name, :description, :category_id, sale_infos_attributes: [:storage, :price, :spec])
-    end
+  def product_params
+    params.require(:product).permit(:name, :description, :category_id, sale_infos_attributes: [:storage, :price, :spec])
+  end
 end
 
