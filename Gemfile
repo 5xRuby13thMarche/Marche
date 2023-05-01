@@ -19,6 +19,7 @@ gem 'omniauth-rails_csrf_protection'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem "requestjs-rails", "~> 0.0.10"
 gem "pagy", "~> 6.0"
+gem "image_processing", ">= 1.2"
 
 
 group :development, :test do
