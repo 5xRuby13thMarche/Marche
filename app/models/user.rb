@@ -19,7 +19,8 @@ class User < ApplicationRecord
     end
   end
 
-
+  has_one_attached :avatar
+  
   has_one :shop
   has_one :cart
   has_many :orders
