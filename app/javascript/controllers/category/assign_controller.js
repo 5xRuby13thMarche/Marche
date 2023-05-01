@@ -31,15 +31,4 @@ export default class extends Controller {
   
   
   }
-
-
-  // async myMethod () {
-  //   const request = new FetchRequest('post', 'localhost:3000/my_endpoint', { body: JSON.stringify({ name: 'Request.JS' }) })
-  //   const response = await request.perform()
-  //   if (response.ok) {
-  //     const body = await response.text
-  //     // Do whatever do you want with the response body
-  //     // You also are able to call `response.html` or `response.json`, be aware that if you call `response.json` and the response contentType isn't `application/json` there will be raised an error.
-  //   }
-  // }
 }

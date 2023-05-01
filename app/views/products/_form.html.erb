@@ -1,6 +1,6 @@
 <%= form_with(model:product, class: "contents", data: { turbo: false }) do |form| %>
   <%= render 'shared/error_message', record: product %>
-  <section class="p-3 my-3 bg-white shadow">
+  <section class="p-3 my-3 bg-white border rounded-md shadow">
     <h2 class="text-xl font-normal">基本資料</h2>
     <div class="my-5">
       <%= form.label :name ,'商品名稱'%>
@@ -11,21 +11,20 @@
       <h3>分類</h3>
       <div data-category--assign-target="show"></div>
       <!-- The button to open modal -->
-      <label for="my-modal" class="btn">請選擇</label>
+      <label for="my-modal-4" class="btn">請選擇</label>
 
       <!-- Put this part before </body> tag -->
-      <input type="checkbox" id="my-modal" class="modal-toggle" />
-      <div class="modal">
-        <div class="modal-box">
+      <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+      <label for="my-modal-4" class="cursor-pointer modal">
+        <label class="relative modal-box" for="">
           <h3 class="text-lg font-bold">分類</h3>
           <%= form.select :main_category_id, parent_categories, { prompt: "請選擇" }, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2', data:{ category__assign_target: "main_category", action: 'change->category--assign#choose' } %>      
           <select class="block px-3 py-2 mt-2 border border-gray-200 rounded-md shadow outline-none" data-category--assign-target="subcategory" name="product[category_id]" id="product_category_id"><option value="">請選擇</option></select>  
           <div class="modal-action">
-            <label for="my-modal" class="btn" data-action="click->category--assign#whichChoose">確定</label>
+            <label for="my-modal-4" class="btn" data-action="click->category--assign#whichChoose">確定</label>
           </div>
-        </div>
-      </div>
-
+        </label>
+      </label>
     </div>
     
     <div class="my-5">
@@ -34,20 +33,34 @@
     </div>
   </section>
 
-  <section class="mb-3 bg-white shadow">
-    <div class="grid grid-cols-2 p-3 border rounded-md shadow">
-      <%= form.fields_for :sale_infos do |sale_info| %>
-        <%= sale_info.label :spec, '規格', class: "px-3 py-2" %>
-        <%= sale_info.text_field :spec, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
-        <%= sale_info.label :price, '價格', class: "px-3 py-2 mt-2" %>
-        <%= sale_info.number_field :price, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
-        <%= sale_info.label :storage, '商品庫存', class: "px-3 py-2 mt-2" %>
-        <%= sale_info.number_field :storage, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2" %>
-      <% end %> 
+  <section class="mb-3 bg-white border rounded-md shadow">
+    <div class="p-3">
+      <div data-controller="product--sale-info">
+        <%= form.fields_for :sale_infos do |sale_info| %>
+          <div data-product--sale-info-target="saleInfo">
+            <div class="relative flex flex-wrap p-3 mb-2 border rounded-md shadow deleteFields">
+              <%= render partial: 'sale_info_fields', locals: { sale_info: sale_info } %>
+              
+                <%= link_to 'X', '#', data: { action: "click->product--sale-info#decrease" }, class: "px-1 bg-gray-500 absolute -top-2 -right-2 rounded-full" %>
+              
+            </div>
+          </div>
+        <% end %>
+
+        <%= link_to '+', '#', data: { action: "click->product--sale-info#increase" }, class: "btn mt-2" %>
+          <div class="hidden">
+            <%= form.fields_for :sale_infos do |sale_info| %>
+              <div data-product--sale-info-target="template" class="relative flex flex-wrap p-3 mb-2 border rounded-md shadow deleteFields">
+                <%= render partial: 'sale_info_fields', locals: { sale_info: sale_info }%>
+                <%= link_to 'X', '#', data: { action: "click->product--sale-info#decrease" }, class: "px-1 bg-gray-500 absolute -top-2 -right-2 rounded-full" %>
+              </div>
+            <% end %>
+          </div>
+      </div>
     </div>
   </section>
 
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit '建立商品',class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>

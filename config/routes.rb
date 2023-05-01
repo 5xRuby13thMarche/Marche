@@ -36,6 +36,5 @@ Rails.application.routes.draw do
   
   # categories
   resources :categories
-  
 
 end
