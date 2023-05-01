@@ -1,5 +1,6 @@
-<div class="container w-full mx-auto">
-  <div class="container flex items-center justify-start w-11/12 m-auto mt-16 bg-gray-100 h-14">
+<%# <div class="container w-full mx-auto"> %>
+<section class="container w-11/12 m-auto border bg-gay-200">
+  <div class="flex items-center justify-start bg-gray-100 h-14">
     <input type="checkbox" checked="checked" 
         class="ml-6 mr-4 checkbox checkbox-primary" />
     <p class="mr-2 text-sm w-96">商品</p>
@@ -8,17 +9,15 @@
     <p class="mr-2 text-sm text-center w-28">總計</p>
     <p class="mr-6 text-sm text-center w-28">操作</p>
   </div>
-  <section class="p-2 m-2 border bg-gay-200">
-    <%= form_with model: @cart,  url: checkout_path, method: :get, data: { turbo: "false" } do |form| %>
-      <%= render partial:'carts/item', collection: @cart_products , as: :cart_product, locals: {form: form} %>
-      <%= form.submit "買單", class: "bg-lime-500 hover:bg-lime-600 hover:cursor-pointer p-2 m-2 rounded text-white"%>
-    <% end %>
-  </section>
-  <div class="container flex items-center w-11/12 h-20 m-auto mt-6 bg-gray-100">
+  <%= form_with model: @cart,  url: checkout_path, method: :get, data: { turbo: "false", controller: "cart--form" } do |form| %>
+    <%= render partial:'carts/item', collection: @cart_products , as: :cart_product, locals: {form: form} %>
+    <%= form.submit "買單", class: "bg-lime-500 hover:bg-lime-600 hover:cursor-pointer p-2 m-2 rounded text-white"%>
+  <% end %>
+  <div class="container flex items-center h-20 bg-gray-100">
     <input type="checkbox" checked="checked" 
         class="ml-6 mr-4 checkbox checkbox-primary" />
     <p class="mr-8 text-sm w-96">全選 (99)</p>
     <p class="mr-3 text-sm w-fit ms-auto">總金額 (99 個商品) :<span class="ml-1 text-lg font-semibold text-indigo-600">$9,999,999</span></p>
     <button class="px-12 mr-6 btn btn-primary">去買單</button>
   </div>
-</div>
+</section>

@@ -1,9 +1,25 @@
-<div class="m-2">
-  <%= form.check_box "#{cart_product.id}" %>
-  <%= form.label "#{cart_product.id}", "id:#{cart_product.id}", class: "bg-indigo-200"%>
-  <span class="border bg-sky-100">Product: <%= cart_product.sale_info.product.name %></span>
-  <span class="bg-indigo-200 border"><%= cart_product.sale_info.spec %></span>
-  <span class="border bg-sky-100">$<%= cart_product.sale_info.price %></span>
-  <span class="bg-indigo-200 border"><%= cart_product.quantity %></span>
-  <%= link_to '刪除商品', '#', class: "bg-rose-300 p-1 rounded hover:cursor-pointer hover:bg-rose-400" %>
+<div class="container flex items-center justify-start w-11/12 m-2" data-controller="cart--item">
+  <%= form.check_box "#{cart_product.id}", class: "checkbox checkbox-sm rounded m-3" %>
+  <div class="w-20 h-20 m-3 bg-slate-300">
+    <img src="https://picsum.photos/80/80/?random=12" class=''>
+  </div>
+  <h3 class="w-64"><%= cart_product.sale_info.product.name %></h3>
+  <%# 規格 %>
+  <div class="dropdown">
+    <label tabindex="0" class="m-1 spec-btn"><%= cart_product.sale_info.spec %></label>
+    <div tabindex="0" class="w-64 p-2 shadow dropdown-content card card-compact bg-primary text-primary-content">
+      <div class="card-body">test</div>
+    </div>
+  </div>
+  <%# 單價 %>
+  <div class="m-1">$<%= cart_product.sale_info.price %></div>
+  <%# 數量 %>
+  <div class="flex items-center m-2" data-cart--item-target="inputArea">
+    <button class="quantity-btn-left-arrow" data-action="click->cart--item#decrement">－</button>
+    <input type="number" class="quantity-btn-center-input" value="<%= cart_product.quantity %>" data-cart--item-target="quantity" data-action="change->cart--item#updateQuantity">
+    <button class="quantity-btn-right-arrow" data-action="click->cart--item#increment">＋</button>
+  </div>
+  <%# 總價 ＝ 單價 x 數量 %>
+  <div class="flex items-center justify-end w-20 m-2 text-amber-500" data-cart--item-target="itemTotalPrice" data-unit-price="<%= cart_product.sale_info.price %>">$?</div>
+  <%= link_to '刪除商品', '#', class: "bg-rose-300 m-2 p-1 rounded hover:cursor-pointer hover:bg-rose-400" %>
 </div>

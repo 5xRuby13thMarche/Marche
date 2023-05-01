@@ -31,5 +31,26 @@
   .page.gap{
     @apply border-none
   }
+  /* cart 購物車 */
+  .spec-btn{
+    @apply hover:cursor-pointer text-slate-600 border px-1 py-0.5 w-24 inline-block text-center 
+  }
+  .quantity-btn-left-arrow{
+    @apply w-6 h-8 -mr-1.5 pr-1 border border-black w-7
+  }
+  .quantity-btn-right-arrow{
+    @apply w-6 h-8 -ml-1.5 pl-1 border border-black w-7 z-0
+  }
+  .quantity-btn-center-input{
+    @apply z-10 w-12 h-8 p-0 text-center border-black border-slate-500
+  }
+
+  /* 去除number input 預設的上下箭頭 */
+  @layer utilities {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      @apply appearance-none;
+    }
+  }
 
 }
