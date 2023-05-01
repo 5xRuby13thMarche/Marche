@@ -6,7 +6,7 @@
    <div class="field">
     <%= f.label :avatar, '使用者頭像' %><br />
     <%= f.file_field :avatar %>
-    <%= image_tag current_user.avatar if current_user.avatar.present? %>
+    <%= avatar(current_user) %>
   </div>
   
   <div class="field">
