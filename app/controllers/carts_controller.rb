@@ -23,6 +23,12 @@ class CartsController < ApplicationController
     @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: cart_items_keys)
   end
 
+  def destroy
+    @cart_product = CartProduct.find(params[:id])
+    @cart_product.destroy()
+    redirect_to cart_path, notice: "已刪除商品"
+  end
+
   private
 
   def cart_product_params

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   # carts
   post '/cart', to: 'carts#create'
   get '/cart', to: 'carts#index'
+  delete '/cart/:id', to: 'carts#destroy', as: :cart_destroy
   get '/checkout', to: 'carts#checkout'
   
   # categories
