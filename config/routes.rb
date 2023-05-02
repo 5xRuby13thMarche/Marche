@@ -20,9 +20,10 @@ Rails.application.routes.draw do
   
     #category
     post '/categories', to: 'categories#assign'
-  end
 
-  #
+    # cart
+    post '/carts/:id/edit', to: 'carts#edit', as: :carts_edit
+  end
 
   # carts
   post '/cart', to: 'carts#create'

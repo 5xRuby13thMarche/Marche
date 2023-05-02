@@ -1,12 +1,13 @@
 import {Controller} from "@hotwired/stimulus";
+import {post} from "@rails/request.js";
 
 // Connects to data-controller="cart--item"
 export default class extends Controller {
   static targets = ["quantity", "inputArea", "itemTotalPrice", "checkbox"];
   connect() {
+    this.cartProductId = this.element.dataset.cartProductId;
     this.quantityNum = Number(this.quantityTarget.value);
     this.storageNum = Number(this.quantityTarget.dataset.storage);
-    console.log(this.storageNum);
     if (this.storageNum <= 0) this.disableComponents(); // 庫存為0
     this.updateItemTotalPrice();
   }
@@ -20,11 +21,13 @@ export default class extends Controller {
     }
     this.quantityNum = 0;
     this.setQuantityTarget();
+    this.updateCartProductQuantityViaAPI();
   }
   // User typing quantity
   updateQuantity() {
     this.quantityNum = Math.floor(this.quantityTarget.value);
     this.setQuantityTarget();
+    this.updateCartProductQuantityViaAPI();
   }
   // + button pressed
   increment(e) {
@@ -34,6 +37,7 @@ export default class extends Controller {
       this.upperOpacity();
       this.quantityNum += 1;
       this.setQuantityTarget();
+      this.updateCartProductQuantityViaAPI();
     }, 100);
   }
   // - button pressed
@@ -44,6 +48,7 @@ export default class extends Controller {
       this.upperOpacity();
       this.quantityNum -= 1;
       this.setQuantityTarget();
+      this.updateCartProductQuantityViaAPI();
     }, 100);
   }
   // lower opacity for flashing input area
@@ -82,5 +87,15 @@ export default class extends Controller {
     }
     this.quantityTarget.value = this.quantityNum;
     this.updateItemTotalPrice();
+  }
+  async updateCartProductQuantityViaAPI() {
+    let url = `/api/carts/${this.cartProductId}/edit`;
+    const response = await post(url, {
+      body: JSON.stringify({quantity: this.quantityNum}),
+    });
+    if (response.ok) {
+      const data = await response.json;
+      // console.log(data);
+    }
   }
 }
