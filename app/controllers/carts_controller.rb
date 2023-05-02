@@ -19,8 +19,7 @@ class CartsController < ApplicationController
 
   def checkout
     @cart = current_user.cart
-    cart_items_keys = params[:cart].delete_if{|key, value| value == '0'}.keys
-    @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: cart_items_keys)
+    @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: params[:cart_product_ids])
   end
 
   def destroy

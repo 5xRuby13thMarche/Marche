@@ -1,5 +1,5 @@
 <div class="container flex items-center justify-start w-11/12 m-2" data-controller="cart--item" data-cart-product-id="<%=cart_product.id%>">
-  <%= form.check_box "#{cart_product.id}", class: "checkbox checkbox-sm rounded m-3", data: {cart__item_target: "checkbox"} %>
+  <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "checkbox checkbox-sm rounded m-3" , data: {cart__item_target: "checkbox"} %>
   <div class="w-20 h-20 m-3 bg-slate-300">
     <img src="https://picsum.photos/80/80/?random=12" class=''>
   </div>
