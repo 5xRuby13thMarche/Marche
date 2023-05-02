@@ -12,6 +12,15 @@ module.exports = {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        marche_white: '#faf8f7',
+        marche_orange: '#ff8537',
+        marche_orange100: '#ffa46a',
+        marche_pearl: '#f1e9e4',
+        marche_black: '#0c0b0b',
+        marche_black100: '#8c8c8c',
+        marche_blue: '#1d4ed8',
+      },
     },
   },
   plugins: [

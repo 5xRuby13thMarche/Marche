@@ -1,4 +1,4 @@
-<div class="flex justify-center h-10 pb-1 bg-indigo-600">
+<div class="flex justify-center h-10 pb-1 bg-marche_orange">
   <nav class="flex flex-wrap content-center">
     <%= link_to "首頁", root_path , class: "px-6 self-center text-gray-100"%>
     <div class="dropdown dropdown-end">
@@ -10,13 +10,13 @@
       </label>
       <ul tabindex="0" class="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-60">
         <% if user_signed_in? %>
-          <li class="py-1 pl-4 text-indigo-600 text-md"><%= current_user.email %></li>
+          <li class="py-1 pl-4 text-marche_orange text-md"><%= current_user.email %></li>
           <li>
             <%= link_to "編輯我的帳戶", edit_user_registration_path %>
             <%= link_to "登出", destroy_user_session_path, data: { turbo_method: :delete,  confirm: '是否確定登出'} %>
           </li>
         <% else %>
-          <li class="py-1 pl-4 text-indigo-600 text-md">您現在為訪客</li>
+          <li class="py-1 pl-4 text-marche_orange text-md">您現在為訪客</li>
           <li>
             <%= link_to "註冊", new_user_registration_path %>
             <%= link_to "登入", new_user_session_path %>
