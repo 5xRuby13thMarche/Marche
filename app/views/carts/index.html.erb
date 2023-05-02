@@ -9,11 +9,11 @@
     <p class="mr-2 text-sm text-center w-28">總計</p>
     <p class="mr-6 text-sm text-center w-28">操作</p>
   </div>
-  <%= form_with model: @cart,  url: checkout_path, method: :get, data: { turbo: "false", controller: "cart--form" } do |form| %>
-    <%= render partial:'carts/item', collection: @cart_products , as: :cart_product, locals: {form: form} %>
+  <%= form_with url: checkout_path, method: :get, data: { turbo: "false", controller: "cart--form" } do |form| %>
+    <%= render partial:'carts/item', collection: @cart_products , as: :cart_product%>
     <div class="container flex items-center h-20 bg-gray-100">
       <input type="checkbox" checked="checked" 
-        class="ml-6 mr-4 checkbox checkbox-primary" />
+        class="ml-6 mr-4 checkbox checkbox-primary"/>
       <p class="mr-8 text-sm w-96">全選 (<span>0</span>)</p>
       <p class="mr-3 text-sm w-fit ms-auto">總金額 (<span>0</span> 個商品) :<span class="m-2 text-lg font-semibold text-orange-600">$0</span></p>
       <%= form.submit "去買單", class: "bg-orange-500 hover:bg-orange-600 hover:cursor-pointer p-2 m-2 rounded text-white text-sm w-28"%>
