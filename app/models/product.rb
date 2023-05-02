@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  validates :name, :category_id, presence: true
+
   belongs_to :shop, optional: true
   belongs_to :category, optional: true
   has_many :order_products
