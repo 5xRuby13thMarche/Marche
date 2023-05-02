@@ -7,7 +7,8 @@ export default class extends Controller {
   increase(e) {
     e.preventDefault();
     const content = this.templateTarget.cloneNode(true);
-    this.saleInfoTarget.insertAdjacentElement("afterbegin", content);
+    this.saleInfoTarget.insertAdjacentElement("beforeend", content);
+    console.log()
   }
   
   decrease(e) {
