@@ -21,5 +21,7 @@
   </div>
   <%# 總價 ＝ 單價 x 數量 %>
   <div class="flex items-center justify-end w-20 m-2 text-amber-500" data-cart--item-target="itemTotalPrice" data-unit-price="<%= cart_product.sale_info.price %>">$?</div>
-  <%= link_to '刪除商品', '#', class: "bg-rose-300 m-2 p-1 rounded hover:cursor-pointer hover:bg-rose-400" %>
+  <%= link_to cart_destroy_path(cart_product.id), method: :delete, data: {confirm: "確定要刪除該商品？"} do %>
+    <i class="p-1 m-1 text-red-500 rounded bg-neutral-100 drop-shadow fa-regular fa-trash-can"></i>
+  <% end %>
 </div>

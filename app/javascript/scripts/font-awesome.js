@@ -4,8 +4,10 @@ config.mutateApproach = "sync";
 
 import {faHeart as regularHeart} from "@fortawesome/free-regular-svg-icons";
 import {faHeart as solidHeart} from "@fortawesome/free-solid-svg-icons";
+import {faTrashCan} from "@fortawesome/free-regular-svg-icons";
 
 library.add(regularHeart);
 library.add(solidHeart);
+library.add(faTrashCan);
 
 dom.watch();
