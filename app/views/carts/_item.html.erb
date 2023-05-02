@@ -1,5 +1,5 @@
 <div class="container flex items-center justify-start w-11/12 m-2" data-controller="cart--item">
-  <%= form.check_box "#{cart_product.id}", class: "checkbox checkbox-sm rounded m-3" %>
+  <%= form.check_box "#{cart_product.id}", class: "checkbox checkbox-sm rounded m-3", data: {cart__item_target: "checkbox"} %>
   <div class="w-20 h-20 m-3 bg-slate-300">
     <img src="https://picsum.photos/80/80/?random=12" class=''>
   </div>
@@ -16,7 +16,7 @@
   <%# 數量 %>
   <div class="flex items-center m-2" data-cart--item-target="inputArea">
     <button class="quantity-btn-left-arrow" data-action="click->cart--item#decrement">－</button>
-    <input type="number" class="quantity-btn-center-input" value="<%= cart_product.quantity %>" data-cart--item-target="quantity" data-action="change->cart--item#updateQuantity">
+    <input type="number" class="quantity-btn-center-input" value="<%= cart_product.quantity %>" data-cart--item-target="quantity" data-action="change->cart--item#updateQuantity" data-storage="<%=cart_product.sale_info.storage%>">
     <button class="quantity-btn-right-arrow" data-action="click->cart--item#increment">＋</button>
   </div>
   <%# 總價 ＝ 單價 x 數量 %>
