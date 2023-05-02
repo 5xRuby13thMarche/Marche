@@ -3,7 +3,13 @@ import {post} from "@rails/request.js";
 
 // Connects to data-controller="cart--item"
 export default class extends Controller {
-  static targets = ["quantity", "inputArea", "itemTotalPrice", "checkbox"];
+  static targets = [
+    "quantity",
+    "inputArea",
+    "itemTotalPrice",
+    "checkbox",
+    "storageWarning",
+  ];
   connect() {
     this.cartProductId = this.element.dataset.cartProductId;
     this.quantityNum = Number(this.quantityTarget.value);
@@ -87,7 +93,20 @@ export default class extends Controller {
     }
     this.quantityTarget.value = this.quantityNum;
     this.updateItemTotalPrice();
+    // 庫存提示
+    if (this.quantityNum == this.storageNum) {
+      this.revealStorageWarning();
+    } else {
+      this.hiddenStorageWarning();
+    }
   }
+  hiddenStorageWarning() {
+    this.storageWarningTarget.classList.add("hidden");
+  }
+  revealStorageWarning() {
+    this.storageWarningTarget.classList.remove("hidden");
+  }
+  // API
   async updateCartProductQuantityViaAPI() {
     let url = `/api/carts/${this.cartProductId}/edit`;
     const response = await post(url, {

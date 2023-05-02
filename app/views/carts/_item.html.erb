@@ -16,10 +16,11 @@
   <%# 單價 %>
   <div class="m-1">$<%= cart_product.sale_info.price %></div>
   <%# 數量 %>
-  <div class="flex items-center m-2" data-cart--item-target="inputArea">
+  <div class="relative flex items-center m-2" data-cart--item-target="inputArea">
     <button class="quantity-btn-left-arrow" data-action="click->cart--item#decrement click->cart--form#update">－</button>
     <input type="number" class="quantity-btn-center-input" value="<%= cart_product.quantity %>" data-cart--item-target="quantity" data-action="change->cart--item#updateQuantity change->cart--form#update" data-storage="<%=cart_product.sale_info.storage%>">
     <button class="quantity-btn-right-arrow" data-action="click->cart--item#increment click->cart--form#update">＋</button>
+    <p class="absolute hidden text-xs font-bold text-rose-400 left-1/4 top-full" data-cart--item-target="storageWarning">庫存：<%= cart_product.sale_info.storage %></p>
   </div>
   <%# 總價 ＝ 單價 x 數量 %>
   <div class="flex items-center justify-end w-20 m-2 text-amber-500" data-cart--item-target="itemTotalPrice" data-unit-price="<%= cart_product.sale_info.price %>" data-cart--form-target="itemTotalPrice">$?</div>
