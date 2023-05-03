@@ -20,6 +20,8 @@ Rails.application.routes.draw do
         post :dislike 
       end
     end
+    # cart_product
+    post '/cart_product', to: 'cart_product#sendToCart'
   
     #category
     post '/categories', to: 'categories#assign'

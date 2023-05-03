@@ -1,5 +1,5 @@
 <div class="flex w-full max-w-2xl mx-auto">
-  <div class="w-full mx-auto" data-controller="product--cart-product">
+  <div class="w-full mx-auto">
     <%= render 'shared/flash' if flash.any? %>
     <h1 class="self-end mt-5 mb-2 text-xl font-bold text-marche_orange" >檢視商品</h1>
     <div class="flex ">
@@ -18,14 +18,18 @@
           <%= @sale_info.price %>
         </p>
         <p class="my-5">
-          <%= form_with(model: @cart_product, url: cart_path, method: :post, data: { turbo: false }) do |form| %>
+          <%= form_with(model: @cart_product, url: cart_path, method: :post, data: { turbo: false, controller: "product--cart-product" }) do |form| %>
             <div class="flex">
-              <%= form.hidden_field :sale_info_id, value: @sale_info.id %>
-              <%= form.number_field :quantity %>
+              <%= form.hidden_field :sale_info_id, value: @sale_info.id, data: { product__cart_product_target: "saleInfoId" } %>
+              <%= form.number_field :quantity, data: { product__cart_product_target: "quantity" } %>
             </div>
-            還剩<%= @sale_info.storage %>件
-            <%= form.submit "加入購物車", class: "ml-4 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600" %>
+            <p data-product--cart-product-target="storage" >還剩<%= @sale_info.storage%>件</p>
+            <%= form.submit "加入購物車", class: "ml-4 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600", data: { action: "click->product--cart-product#send"}, remote: true %>
+            
           <% end %>
+
+          <%# 測試 %>
+          <%# <button data-controller="product--cart-product" data-product--cart-product-target="message" data-action="click->product--cart-product#click">測試</button> %>
         </p>
       </div>
     </div>
