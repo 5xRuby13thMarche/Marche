@@ -4,3 +4,6 @@ google_app_secret: 'YOUR-APP-SECRET'
 
 user_name: 'YOUR-SMTP-USERNAME'
 password: 'YOUR-SMTP-PASSWORD'
+
+amazon_access_key_id: 'YOUR-AMAZON-ACCESS-KEY-ID'
+amazon_secret_access_key: 'YOUR-AMAZON-SECRET-ACCESS-KEY'
