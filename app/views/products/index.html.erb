@@ -15,26 +15,25 @@
 
 <%= render 'shared/flash' if flash.any? %>
 
-<%# banner %>
-<div class="w-10/12 mx-12 mx-auto carousel">
-  <div id="item1" class="w-full carousel-item">
-    <img src="https://picsum.photos/800/200/?random=1" class="w-full mt-12" />
-  </div> 
-  <div id="item2" class="w-full carousel-item">
-    <img src="https://picsum.photos/800/200/?random=2" class="w-full mt-12" />
-  </div> 
-  <div id="item3" class="w-full carousel-item">
-    <img src="https://picsum.photos/800/200/?random=3" class="w-full mt-12" />
-  </div> 
-  <div id="item4" class="w-full carousel-item">
-    <img src="https://picsum.photos/800/200/?random=4" class="w-full mt-12" />
-  </div> 
-</div> 
-<div class="flex justify-center w-full gap-2 py-2">
-  <a href="#item1" class="btn btn-xs">1</a> 
-  <a href="#item2" class="btn btn-xs">2</a> 
-  <a href="#item3" class="btn btn-xs">3</a> 
-  <a href="#item4" class="btn btn-xs">4</a>
+<%# test banner%>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<div class="container w-10/12 mx-auto my-10">
+  <div class="slider">
+    <div class="w-full">
+      <img src="https://picsum.photos/800/200/?random=1" class="w-full" alt="pic-1">
+    </div>
+    <div class="w-full">
+      <img src="https://picsum.photos/800/200/?random=2" class="w-full" alt="pic-2">
+    </div>
+    <div class="w-full">
+      <img src="https://picsum.photos/800/200/?random=3" class="w-full" alt="pic-3">
+    </div>
+    <div class="w-full">
+      <img src="https://picsum.photos/800/200/?random=4" class="w-full" alt="pic-4">
+    </div>
+  </div>
 </div>
 
 <%# 商品分類 %>
@@ -110,3 +109,19 @@
 <div class="grid w-10/12 gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
     <%= render  @products %>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
+<script>
+  $('.slider').slick({
+    centerMode:true,
+    centerPadding: '0px',
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,  
+    autoplaySpeed: 4000,
+    speed: 700,
+    dots: true,
+    arrows: true,
+  });     
+</script>
