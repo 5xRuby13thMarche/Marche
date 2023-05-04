@@ -1,0 +1,21 @@
+<section class="flex flex-col items-center mb-4 border rounded sm:flex-row sm:justify-left">
+  <%# 平均星星區塊 %>
+  <div class="flex flex-col items-center m-3 w-fit">
+    <p class="text-xl"><span class="text-4xl"><%= average_rating %></span>/5</p>
+    <%# 產生星星 %>
+    <div class="rating rating-md">
+      <% 5.times do |i|%>
+        <input type="radio" class="pointer-events-none comment-star bg-rose-600 checked:bg-rose-500" <%= "checked" if  i+1 == average_rating%>/>
+      <% end %>
+    </div>
+  </div>
+  <%# 排序按鈕區 %>
+  <div class="flex items-center sm:m-auto">
+    <%= link_to "全部", product_path(product, anchor: "comment-list"), class: "star-ranking" %>
+    <%= link_to "1星", product_path(product, anchor: "comment-list", star: get_star_number(:star_1)), class: "star-ranking" %>
+    <%= link_to "2星", product_path(product, anchor: "comment-list", star: get_star_number(:star_2)), class: "star-ranking" %>
+    <%= link_to "3星", product_path(product, anchor: "comment-list", star: get_star_number(:star_3)), class: "star-ranking" %>
+    <%= link_to "4星", product_path(product, anchor: "comment-list", star: get_star_number(:star_4)), class: "star-ranking" %>
+    <%= link_to "5星", product_path(product, anchor: "comment-list", star: get_star_number(:star_5)), class: "star-ranking" %>
+  </div>
+</section>
