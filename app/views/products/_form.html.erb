@@ -35,26 +35,21 @@
 
   <section class="mb-3 bg-white border rounded-md shadow">
     <div class="p-3">
+    <%# sale_info初始表單 %>
       <div data-controller="product--sale-info">
         <%= form.fields_for :sale_infos do |sale_info| %>
           <div data-product--sale-info-target="saleInfo">
             <div class="relative flex flex-wrap p-3 mb-2 border rounded-md shadow deleteFields">
               <%= render partial: 'sale_info_fields', locals: { sale_info: sale_info } %>
-              <button class="absolute bg-orange-400 btn-xs btn-circle -top-4 -right-4" data-action="click->product--sale-info#decrease">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-              </button>
             </div>
           </div>
         <% end %>
         <%= link_to '+', '#', data: { action: "click->product--sale-info#increase" }, class: "btn btn-outline mt-2" %>
-        <%# 範本，用於新增sale_info表單 %>
+        <%# 複製模板，用於新增sale_info表單 %>
           <div class="hidden">
             <%= form.fields_for :sale_infos do |sale_info| %>
               <div data-product--sale-info-target="template" class="relative flex flex-wrap p-3 mb-2 border rounded-md shadow deleteFields">
                 <%= render partial: 'sale_info_fields', locals: { sale_info: sale_info }%>
-                <button class="absolute bg-orange-400 btn-xs btn-circle -top-4 -right-4" data-action="click->product--sale-info#decrease">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                </button>
               </div>
             <% end %>
           </div>
