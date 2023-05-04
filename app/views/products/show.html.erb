@@ -53,7 +53,7 @@
 <div class="max-w-2xl mx-auto ">
   <%# 留言輸入區 %>
   <h2 class="m-1 text-lg font-bold">商品評價</h2>
-  <%= render partial: 'comments/average_comment', locals: {average_rating: @average_rating} %>
+  <%= render partial: 'comments/comment_ranking', locals: {average_rating: @average_rating, product: @product} %>
   <% if user_signed_in? %>
     <%= form_with model: @product_comment, url: product_comments_path(@product.id) do |f| %>
       <div class="flex">

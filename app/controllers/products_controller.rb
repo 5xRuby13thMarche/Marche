@@ -7,12 +7,30 @@ class ProductsController < ApplicationController
   def show
     # comment
     @product_comment = ProductComment.new
-    @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
+    if(params[:star].present?)
+      @product_comments = @product.product_comments.where(rating: params[:star].to_i).includes(:user).order(created_at: :desc)
+
+      p '-'*50
+      p "Have Star!"
+      p '-'*50
+    else
+      @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
+      p '-'*50
+      p "Don't Have Star!"
+      p '-'*50
+    end
     @pagy, @comment_records = pagy(@product_comments, items: 9, fragment: '#comment-list')
-    @average_rating = @product.product_comments.average(:rating)
+    @average_rating = @product.product_comments.average(:rating).round
     # Sale info
     @sale_info = SaleInfo.find_by(product_id: @product.id)
     @cart_product = CartProduct.new
+
+
+    p '-'*50
+    p "HERE IS PARAMS!!!!!!!!"
+    p params
+    p params[:star].class
+    p '-'*50
 
   end
 
