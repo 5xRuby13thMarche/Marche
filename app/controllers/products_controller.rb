@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   def index
     @products = Product.order(created_at: :desc)
+    @q = Product.ransack(params[:q])
   end
 
   def show
@@ -14,7 +15,6 @@ class ProductsController < ApplicationController
     end
     @pagy, @comment_records = pagy(@product_comments, items: 9, fragment: '#comment-list')
     average = @product.product_comments.where(rating: [1,2,3,4,5]).average(:rating)
-    # average = @product.product_comments.average(:rating)
     @average_rating = average.nil? ? "？": average.round
     
     # Sale info
@@ -56,7 +56,8 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = Product.where("name LIKE ?", "%#{params[:keyword]}%")
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
   end
 
   private

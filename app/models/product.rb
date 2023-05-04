@@ -13,4 +13,7 @@ class Product < ApplicationRecord
   
   accepts_nested_attributes_for :sale_infos
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["name"]
+  end
 end
