@@ -52,9 +52,10 @@
 <%# Comment %>
 <div class="max-w-2xl mx-auto ">
   <%# 留言輸入區 %>
+  <h2 class="m-1 text-lg font-bold">商品評價</h2>
+  <%= render partial: 'comments/average_comment', locals: {average_rating: @average_rating} %>
   <% if user_signed_in? %>
     <%= form_with model: @product_comment, url: product_comments_path(@product.id) do |f| %>
-      <h2 class="m-1 text-lg font-bold">商品評價</h2>
       <div class="flex">
         <%= f.label "留下評論：", class: 'label'%>
         <div class="rating rating-md">
@@ -76,7 +77,7 @@
   <section>
     <h3 class="m-2">評論：</h3>
     <div id="comment-list">
-      <%= render partial: 'comments/comment', collection: @records %>
+      <%= render partial: 'comments/comment', collection: @comment_records %>
     </div>
     <div class="flex justify-center my-4"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
   </section>

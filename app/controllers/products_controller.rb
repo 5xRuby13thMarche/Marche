@@ -5,11 +5,15 @@ class ProductsController < ApplicationController
   end
 
   def show
+    # comment
     @product_comment = ProductComment.new
     @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
-    @pagy, @records = pagy(@product_comments, items: 9, fragment: '#comment-list')
+    @pagy, @comment_records = pagy(@product_comments, items: 9, fragment: '#comment-list')
+    @average_rating = @product.product_comments.average(:rating)
+    # Sale info
     @sale_info = SaleInfo.find_by(product_id: @product.id)
     @cart_product = CartProduct.new
+
   end
 
   def new
