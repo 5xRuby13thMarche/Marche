@@ -1,10 +1,10 @@
-<header class="flex items-center justify-between w-full px-6 pb-3 bg-marche_orange 2xl:px-[136px] xl:px-32 lg:px-[104px] md:px-[88px] sm:px-14 h-14">
-  <section class="w-0 mb-2 mr-2 link link-hover md:min-w-fit">
-    <img src="https://picsum.photos/id/126/144/48/">
+<header class="flex items-center justify-between w-full px-6 pb-3 bg-marche_orange 2xl:px-[136px] xl:px-32 lg:px-[116px] md:px-28 sm:px-14 h-14">
+  <section class="w-0 mb-1 mr-2 link link-hover md:min-w-fit">
+    <%= image_tag "marche_logo_home.svg" ,class: "h-12 mb-1" %>
   </section>
   <div class="self-center mt-1 mb-2 sm:mr-6 md:mr-10 lg:mr-12 xl:mr-16">
     <%= form_with url: search_path, class: "flex", method: 'get' do |form|%>
-      <%= form.text_field :keyword, class: "w-68 sm:w-96 rounded-lg" %>
+      <%= form.text_field :keyword, class: "w-60 2xl:w-[800px] xl:w-[640px] lg:w-[420px] md:w-68 sm:w-56 rounded-lg" %>
       <%= button_tag type: 'submit', class: "ml-2 fill-marche_white" do %>
         <%= raw('<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 48 48" id="search"><path d="M46.599 40.236L36.054 29.691C37.89 26.718 39 23.25 39 19.5 39 8.73 30.27 0 19.5 0S0 8.73 0 19.5 8.73 39 19.5 39c3.75 0 7.218-1.11 10.188-2.943l10.548 10.545a4.501 4.501 0 0 0 6.363-6.366zM19.5 33C12.045 33 6 26.955 6 19.5S12.045 6 19.5 6 33 12.045 33 19.5 26.955 33 19.5 33z"></path></svg>') %>
       <% end %>
