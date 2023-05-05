@@ -90,4 +90,8 @@ Rails.application.configure do
   open_timeout:         5,
   read_timeout:         5 
   }
+
+
+  #ngrok網址，每開啟一次測試需更改，然後重新跑bin/dev
+  config.hosts << "dee5-61-220-182-115.ngrok-free.app"
 end
