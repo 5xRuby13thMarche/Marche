@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
     
     # Sale info
     @sale_info = SaleInfo.find_by(product_id: @product.id)
+    @sale_info_all = SaleInfo.where(product_id: @product.id)
     @cart_product = CartProduct.new
   end
 
