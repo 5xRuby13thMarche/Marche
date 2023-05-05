@@ -21,6 +21,7 @@ gem "requestjs-rails", "~> 0.0.10"
 gem "pagy", "~> 6.0"
 gem "image_processing", ">= 1.2"
 gem "aws-sdk-s3", require: false
+gem "ransack", "~> 4.0"
 
 
 group :development, :test do
@@ -51,4 +52,3 @@ end
 
 
 
-gem "ransack", "~> 4.0"
