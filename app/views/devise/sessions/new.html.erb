@@ -1,26 +1,47 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="flex w-full bg-marche_white items-center h-15">
+  <div class="bg-rose-300 bg-opacity-0 w-20 h-12 m-5">
+    <%= image_tag "marche_logo.svg" ,class: "h-full" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <h2 class="text-slate-600 text-lg">登入</h2>
+</div>
+<div class="w-full flex py-16 flex-col sm:flex-row justify-evenly items-center bg-marche_orange ">
+  <%# logo %>
+  <div class="bg-rose-300 bg-opacity-0 w-80 h-80 flex justify-center items-center"> 
+    <%= image_tag "marche_logo_orangewhite.png"%>
   </div>
+  <%# 輸入框 %>
+  <div class="w-[337px] bg-marche_white rounded-xl flex justify-center items-center">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name),html: {class: "p-6 w-[305px]"} )  do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <h3 class="text-left text-2xl font-bold text-slate-500 mb-3">登入</h3>
+        <div class="field mb-3">
+          <%= f.label :email ,"會員帳號" ,class: "leading-loose text-sm text-zinc-500" %>
+          <br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight " ,placeholder: "請輸入您的e-mail" %>
+        </div>
+        <div class="field mb-3">
+          <%= f.label :password ,"輸入密碼" ,class: "leading-loose text-sm text-zinc-500" %>
+          <br/>
+          <%= f.password_field :password, autocomplete: "current-password" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight" ,placeholder: "最少6個字符" %>
+        </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me ,class: "rounded border-2 border-zinc-400" %>
+            <%= f.label :remember_me ,"記住我的帳號" ,class: "leading-loose text-sm text-zinc-500" %>
+          </div>
+        <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+        <div class="actions pt-5 pb-5 flex justify-center">
+          <%= f.submit "登入", class: "w-full text-lg p-2 bg-marche_orange rounded-lg text-marche_white" %>
+        </div>
+        <div class="btn flex justify-center">
+          <%- if devise_mapping.omniauthable? %>
+            <%- resource_class.omniauth_providers.each do |provider| %>
+              <%= button_to "使用Google登入", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "tracking-wide" %><br />
+            <% end %>
+          <% end %>
+        </div>
+    <% end %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
