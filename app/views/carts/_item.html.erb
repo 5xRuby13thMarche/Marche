@@ -1,4 +1,4 @@
-<div class="container flex items-center justify-start w-11/12 m-2" data-controller="cart--item" data-cart-product-id="<%=cart_product.id%>">
+<div class="container flex items-center justify-start w-11/12 m-2" data-controller="cart--item" data-cart-product-id="<%=cart_product.id%>" id="cart_product_<%=cart_product.id%>">
   <%# checkbox %>
   <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "checkbox checkbox-sm rounded m-3" , data: {cart__item_target: "checkbox", cart__form_target: "checkbox", action: "change->cart--form#update"} %>
   <%# 商品圖片 %>
