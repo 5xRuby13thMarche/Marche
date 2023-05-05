@@ -1,9 +1,17 @@
 <h1>臨時的結帳頁面 Checkout</h1>
-<p>商品數量：<%= @cart_products.count%></p>
+<p>商品數量：<%= @cart_products.count %></p>
 <% @cart_products.each do |c| %>
   <div class="p-1 m-1 border">
     <span class="bg-sky-100">產品名稱: <%= c.sale_info.product.name %></span> | 
     <span class="bg-gray-200">規格名稱: <%= c.sale_info.spec %></span> | 
     <span class="bg-sky-100">數量：<%= c.quantity %></span>
   </div>
+<% end %>
+
+<%= form_with url: orders_path, method: :post do |form| %>
+  <% @cart_products.each do |c|%>
+  <%= hidden_field_tag "cart_product[]", value = c.id %>
+<% end %>
+
+  <%= form.submit "產生訂單" %>
 <% end %>

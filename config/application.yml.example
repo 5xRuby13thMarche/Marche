@@ -7,3 +7,6 @@ password: 'YOUR-SMTP-PASSWORD'
 
 amazon_access_key_id: 'YOUR-AMAZON-ACCESS-KEY-ID'
 amazon_secret_access_key: 'YOUR-AMAZON-SECRET-ACCESS-KEY'
+
+hash_key: 'YOUR-HASHKEY'
+hash_iv: 'YOUR-HASHIV'

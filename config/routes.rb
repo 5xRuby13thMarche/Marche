@@ -6,7 +6,8 @@ Rails.application.routes.draw do
  
   # products
   root 'products#index'
-  resources :products, except: [:index] do
+
+  resources :products do
     # comment
     resources :comments, shallow: true, only: [:create, :update, :edit, :destroy]
   end
@@ -36,9 +37,18 @@ Rails.application.routes.draw do
   get '/cart', to: 'carts#index'
   delete '/cart/:id', to: 'carts#destroy', as: :cart_destroy
   get '/checkout', to: 'carts#checkout'
+<<<<<<< HEAD
   
   # categories
   resources :categories
+=======
+
+  post '/orders', to: 'orders#create'
+    #藍新付款路徑
+  get "/orders",to: "orders#index"     #購物車頁面/付款失敗頁面
+  post "/orders/notify",to: "orders#notify"   #接收藍新post回來的頁面
+  get "/hello/:id", to: "orders#hello", as: "hello"   #付款成功的頁面
+>>>>>>> 8b268ad (fix: Fix orders routes error)
 
   
 end
