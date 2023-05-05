@@ -25,8 +25,9 @@ export default class extends Controller {
 
   whichChoose(){
     // 顯示所選子分類
-    const selectedOption = this.subcategoryTarget.options[this.subcategoryTarget.selectedIndex]
-    const selectedText = selectedOption.text  
+    const subSelectedOption = this.subcategoryTarget.options[this.subcategoryTarget.selectedIndex]
+    const mainSelectedOption = this.main_categoryTarget.options[this.main_categoryTarget.selectedIndex]
+    const selectedText = `${mainSelectedOption.text} > ${subSelectedOption.text}`
     this.showTarget.textContent = selectedText
   
   
