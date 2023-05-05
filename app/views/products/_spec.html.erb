@@ -1,0 +1,43 @@
+<section class="py-2 px-4 flex flex-col justify-around">
+  <%# 商品名稱 %>
+  <div class="my-5">
+    <strong class="block mb-1 font-normal text-xl "><%= product.name %></strong>
+  </div>
+  <%# 價格 %>
+  <div class="my-5 bg-gray-50 py-1 px-2 align-middle">
+    <strong class="block mb-1 font-bold text-2xl text-red-700" >$<%= sale_info.price %></strong>
+  </div>
+  <%# 規格 %>
+  <div class="my-5 flex">
+    <% @spec_all.each do |s| %>
+      <div id="sale-info-<%= s.id %>" class="sale-info">
+        <%= link_to (product_path(product, saleinfo: s.id )) do %>
+          <% if s.id == sale_info.id %>
+            <div class="mb-1 font-medium border border-red-600 px-2 py-1 inline text-gray-900 mr-3"><%= s.spec %></div>
+          <% else %>
+            <div class="mb-1 font-medium border px-2 py-1 inline text-gray-900 mr-3"><%= s.spec %></div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <%# 數量框 %>
+  <div class="my-5">
+    <%= form_with(model: cart_product, url: cart_path, method: :post, data: { turbo: false, controller: "product--cart-product" }) do |form| %>
+      <div class="flex mb-10">
+        <%= form.hidden_field :sale_info_id, value: sale_info.id, data: { product__cart_product_target: "saleInfoId" } %>
+        <div class="flex items-center">
+          <p class="text-gray-500 text-xs" >數量：</p>
+          <%# Quantity_button %>
+          <div class="flex items-center m-2" data-product--cart-product-target="inputArea">
+            <button class="quantity-btn-left-arrow" data-action="click->product--cart-product#decrement">－</button>
+              <%= form.number_field :quantity, data: { product__cart_product_target: "quantity", action:"change->product--cart-product#updateQuantity" }, class: "quantity-btn-center-input"%>
+            <button class="quantity-btn-right-arrow" data-action="click->product--cart-product#increment">＋</button>
+          </div>
+          <p data-product--cart-product-target="storage" class="text-gray-500 text-xs">還剩<%= sale_info.storage%>件</p>
+        </div>
+      </div >
+      <%= form.submit "加入購物車", class: "bg-orange-500 text-white px-4 py-2 rounded-xs hover:bg-orange-600", data: { action: "click->product--cart-product#send"}, remote: true %>
+    <% end %>
+  </div>
+</section>

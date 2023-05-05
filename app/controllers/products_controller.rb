@@ -18,8 +18,14 @@ class ProductsController < ApplicationController
     @average_rating = average.nil? ? "？": average.round
     
     # Sale info
-    @sale_info = SaleInfo.find_by(product_id: @product.id)
-    @sale_info_all = SaleInfo.where(product_id: @product.id)
+    #判斷是否有選擇規格沒有則隨機展示一項saleinfo
+    if(params[:saleinfo].present?)
+      @sale_info = SaleInfo.find_by(id: params[:saleinfo].to_i)
+    else
+      @sale_info = SaleInfo.find_by(product_id: @product.id)
+    end
+    #印出所有規格
+    @spec_all = SaleInfo.where(product_id: @product.id)
     @cart_product = CartProduct.new
   end
 
