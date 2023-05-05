@@ -2,13 +2,13 @@ module Newebpay
   class Mpg
     attr_accessor :info
 
-    def initialize
+    def initialize(params)
       # 建議 hash key / iv & merchant id 都使用環境變數
       @key = ENV["hash_key"]
       @iv = ENV["hash_iv"]
       @merchant_id = "MS148637229"
       @info = {}  # 使用 attr_accessor 讓 info 方便存取
-      set_info
+      set_info(params)
     end
 
     def form_info
@@ -29,12 +29,12 @@ module Newebpay
       sha256_encode(@key, @iv, trade_info)
     end
 
-    def set_info
+    def set_info(params)
       info[:MerchantID] = @merchant_id   #勿動
-      info[:MerchantOrderNo] = Time.now.strftime("%Y%m%d%H%M%S")   #訂單編號，可更改
-      info[:Amt] = "1000"               #金額 需更改  order.amount之類的
-      info[:ItemDesc] = "Marche"        #商品名稱 需更改   order.name之類的
-      info[:Email] = "kg936512@yahoo.com.tw"    #客戶的信箱，非常的莫名其妙，就算關閉此欄位，藍新結帳頁面依然會出現，須填完才可送出完成交易，所以需更改“
+      info[:MerchantOrderNo] = params[:MerchantOrderNo]   #訂單編號，可更改
+      info[:Amt] = params[:Amt]               #金額 需更改  order.amount之類的
+      info[:ItemDesc] = params[:ItemDesc]        #商品名稱 需更改   order.name之類的
+      # info[:Email] = "kg936512@yahoo.com.tw"    #客戶的信箱，非常的莫名其妙，就算關閉此欄位，藍新結帳頁面依然會出現，須填完才可送出完成交易，所以需更改“
       info[:TimeStamp] = Time.now.to_i   
       info[:RespondType] = "JSON"        #勿動
       info[:Version] = "2.0"             #勿動

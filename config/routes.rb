@@ -43,12 +43,16 @@ Rails.application.routes.draw do
   resources :categories
 =======
 
+  #藍新付款路徑
   post '/orders', to: 'orders#create'
-    #藍新付款路徑
-  get "/orders",to: "orders#index"     #購物車頁面/付款失敗頁面
+  get "/orders/:id",to: "orders#show", as: :order_show 
   post "/orders/notify",to: "orders#notify"   #接收藍新post回來的頁面
+<<<<<<< HEAD
   get "/hello/:id", to: "orders#hello", as: "hello"   #付款成功的頁面
 >>>>>>> 8b268ad (fix: Fix orders routes error)
+=======
+  # get "/hello/:id", to: "orders#hello", as: "hello"   #付款成功的頁面
+>>>>>>> 4abd70f (feat: Integrate NewebPay payment gateway APIs)
 
   
 end
