@@ -1,0 +1,16 @@
+<%= render 'shared/flash' if flash.any? %>
+<h1>這是你的訂單</h1>
+<p>訂單編號: <%= @order.tracking_number %></p>
+<p>總價: <%= @order.total_price %></p>
+<p>付款狀態: <%= @order.payment_status %></p>
+<p>Payment_Method: <%= @order.payment_method %></p>
+
+<% if @order.payment_status == "pending"%>
+  <%= form_with(url: 'https://ccore.newebpay.com/MPG/mpg_gateway', method: "post") do |form| %>
+    <input type="hidden" id="MerchantID" name="MerchantID" value="<%= @form_info[:MerchantID] %>">
+    <input type="hidden" id="TradeInfo" name="TradeInfo" value="<%= @form_info[:TradeInfo] %>">
+    <input type="hidden" id="TradeSha" name="TradeSha" value="<%= @form_info[:TradeSha] %>">
+    <input type="hidden" id="Version" name="Version" value="<%= @form_info[:Version] %>">
+    <%= form.submit "付款", class: "border bg-slate-300 hover:cursor-pointer p-1 m-1 rounded hover:bg-slate-500" %>
+  <% end %>
+<% end %>
