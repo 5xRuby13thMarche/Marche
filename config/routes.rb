@@ -46,11 +46,4 @@ Rails.application.routes.draw do
   get "/orders/:id",to: "orders#show", as: :order_show 
   post "/orders/notify",to: "orders#notify"   #接收藍新post回來的頁面
 
-  # get "/hello/:id", to: "orders#hello", as: "hello"   #付款成功的頁面
-
-
-  # get "/hello/:id", to: "orders#hello", as: "hello"   #付款成功的頁面
-
-
-  
 end
