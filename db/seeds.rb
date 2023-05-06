@@ -1,30 +1,36 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
+require 'json'
 
-# 建立五個主分類
-5.times do
-  main_category = Category.create(content: Faker::Commerce.department)
+# method: 找到第二階層的分類
+def find_sub_category(category1, category2)
+  c1 = Category.find_by(content: category1, parent_id: nil)
+  c2 = c1.children.find_by(content: category2)
+end
 
-  # 在每個主分類下建立五個子分類
-  5.times do
-    Category.create(content: Faker::Commerce.department, parent_id: main_category.id)
+
+# 產生分類
+p "開始產生商品分類..."
+path = Rails.root.join("db","category_data.json")
+data = JSON.parse(File.read(path))
+spec1_category = Category.new
+data.each do |d|
+  if spec1_category.content != d["c1"]
+    spec1_category = Category.create(content: d["c1"])
   end
+  Category.create(content: d["c2"], parent_id: spec1_category.id)
 end
+p "商品分類產生完成！"
 
-puts "分類建立完成!"
 
-10.times do |n|
-  product = Product.create(name: Faker::Commerce.product_name, description: Faker::Lorem.paragraph, category_id: Category.pluck(:id).sample)
-  product.sale_infos << SaleInfo.new(spec: Faker::Commerce.material, price: Faker::Number.between(from: 10, to: 1000), storage: Faker::Number.between(from: 0, to: 40))
-  product.sale_infos << SaleInfo.new(spec: Faker::Commerce.material, price: Faker::Number.between(from: 10, to: 1000), storage: Faker::Number.between(from: 0, to: 40))
+# 產生產品假資料
+p "開始產生商品..."
+path = Rails.root.join("db","product_data.json")
+data = JSON.parse(File.read(path))
+product = Product.new
+data.each do |d|
+  if d["name"] != ""
+    product = Product.new(name: d["name"],description: d["description"], category_id: find_sub_category(d["c1"], d["c2"]).id)
+  end
+  product.sale_infos.build(price: d["price"], storage: d["storage"], spec: d["spec"])
+  product.save
 end
-
-puts "您的商品已生成！可以開始購買了"
-
-
+p "商品產生完成！"
