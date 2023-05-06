@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   def index
     @products = Product.order(created_at: :desc)
-    @q = Product.ransack(params[:q])
+    @ransack_q = Product.ransack(params[:q])
   end
 
   def show
@@ -32,7 +32,6 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.sale_infos.build
-
   end
 
   def edit
