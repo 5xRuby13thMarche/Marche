@@ -11,9 +11,9 @@ class OrdersController < ApplicationController
       total_price += c.quantity * c.sale_info.price
       # 製作order_products
       @order.order_products.build(product_id: c.sale_info.product_id, 
-        quantity: c.quantity,
-        each_price: c.sale_info.price,
-        spec: c.sale_info.spec)
+                                  quantity: c.quantity,
+                                  each_price: c.sale_info.price,
+                                  spec: c.sale_info.spec)
     end
     @order.tracking_number = generate_tracking_number()
     @order.payment_status = "pending"
@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
     if @order.save
       redirect_to order_show_path(@order.id), notice: "產生訂單成功"
     else
-        redirect_to :back, alert: "訂單成立失敗"
+      redirect_to :back, alert: "訂單成立失敗"
     end
   end 
 
@@ -36,9 +36,7 @@ class OrdersController < ApplicationController
     end
 
     if @order.payment_status == "pending"
-      p '='*50
-      p @order.total_price.to_i.class
-      p '='*50
+
       order_products = @order.order_products
       @form_info = Newebpay::Mpg.new(
         {MerchantOrderNo: @order.tracking_number,
@@ -53,7 +51,7 @@ class OrdersController < ApplicationController
     @response = Newebpay::MpgResponse.new(params[:TradeInfo])
   
     if @response.success?
-      
+
       @order = Order.find_by(tracking_number: @response.order_no) #這裡的value在依訂單修改
       @order.payment_status = "paid" 
       @order.save
