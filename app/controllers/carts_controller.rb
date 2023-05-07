@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_q_ransack, only: [:index, :checkout]
   def index
     @cart = current_user.cart
     @cart_products = @cart.cart_products.includes(sale_info: [:product])
@@ -22,6 +23,10 @@ class CartsController < ApplicationController
 
   def cart_product_params
     params.require(:cart_product).permit(:quantity, :sale_info_id)
+  end
+
+  def set_q_ransack
+    @ransack_q = Product.ransack(params[:q])
   end
 
 end
