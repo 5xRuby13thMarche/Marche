@@ -1,17 +1,19 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<section class="container w-11/12 m-auto border bg-gay-200">
+<section class="container mx-auto mt-6 border bg-gay-200">
   <%= form_with url: checkout_path, method: :get, data: { turbo: "false", controller: "cart--form" } do |form| %>
     <div class="flex items-center justify-start bg-gray-100 h-14">
-      <p class="m-2 text-sm w-96">商品</p>
-      <p class="mr-2 text-sm text-center w-28">單價</p>
-      <p class="w-40 mr-2 text-sm text-center">數量</p>
-      <p class="mr-2 text-sm text-center w-28">總計</p>
-      <p class="mr-6 text-sm text-center w-28">操作</p>
+      <p class="w-1/2 text-sm text-center">商品</p>
+      <div class="flex w-1/2 ">
+        <p class="w-1/4 text-sm text-center">單價</p>
+        <p class="w-1/4 text-sm text-center">數量</p>
+        <p class="w-1/4 text-sm text-center">總計</p>
+        <p class="w-1/4 text-sm text-center">操作</p>
+      </div>
     </div>
     <%= render partial:'carts/item', collection: @cart_products , as: :cart_product%>
     <div class="container flex items-center h-20 bg-gray-100">
       <input type="checkbox"  
-        class="ml-6 mr-4 checkbox checkbox-primary" data-action="change->cart--form#checkAllBox"/>
+        class="ml-6 mr-4 border-black checkbox checkbox-primary" data-action="change->cart--form#checkAllBox"/>
       <p class="mr-8 text-sm w-96">全選 (<%= @cart_products.count %>)</p>
       <p class="mr-3 text-sm w-fit ms-auto">總金額 (<span data-cart--form-target="productNum">0</span> 個商品) :<span class="m-2 text-lg font-semibold text-orange-600" data-cart--form-target="totalPrice">$0</span></p>
       <%= form.submit "去買單", class: "bg-orange-500 hover:bg-orange-600 hover:cursor-pointer p-2 m-2 rounded text-white text-sm w-28"%>

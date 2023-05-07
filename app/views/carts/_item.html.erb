@@ -1,30 +1,34 @@
-<div class="container flex items-center justify-start w-11/12 m-2" data-controller="cart--item" data-cart-product-id="<%=cart_product.id%>" id="cart_product_<%=cart_product.id%>">
-  <%# checkbox %>
-  <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "checkbox checkbox-sm rounded m-3" , data: {cart__item_target: "checkbox", cart__form_target: "checkbox", action: "change->cart--form#update"} %>
-  <%# 商品圖片 %>
-  <%= link_to root_path, class: "block w-20 h-20 m-3 bg-slate-300" do %>
-    <img src="https://picsum.photos/80/80/?random=12" class=''>
-  <% end %>
-  <h3 class="w-64"><%= cart_product.sale_info.product.name %></h3>
-  <%# 規格 %>
-  <div class="dropdown">
-    <label tabindex="0" class="m-1 spec-btn"><%= cart_product.sale_info.spec %></label>
-    <div tabindex="0" class="w-64 p-2 shadow dropdown-content card card-compact bg-primary text-primary-content">
-      <div class="card-body">test</div>
+<div class="flex" data-controller="cart--item" data-cart-product-id="<%=cart_product.id%>" id="cart_product_<%=cart_product.id%>">
+  <div class="flex items-center w-1/2 px-2">
+    <%# checkbox %>
+    <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "checkbox checkbox-sm rounded p-2 m-2" , data: {cart__item_target: "checkbox", cart__form_target: "checkbox", action: "change->cart--form#update"} %>
+    <%# 商品圖片 %>
+    <%= link_to root_path, class: "block w-20 h-20 bg-slate-300 m-2" do %>
+      <img src="https://picsum.photos/80/80/?random=12" class=''>
+    <% end %>
+    <h3 class="p-2"><%= cart_product.sale_info.product.name %></h3>
+    <%# 規格 %>
+    <div class="ml-auto dropdown">
+      <label tabindex="0" class="m-1 spec-btn"><%= cart_product.sale_info.spec %></label>
+      <div tabindex="0" class="w-64 p-2 shadow dropdown-content card card-compact bg-primary text-primary-content">
+        <div class="card-body">test</div>
+      </div>
     </div>
   </div>
-  <%# 單價 %>
-  <div class="m-1">$<%= cart_product.sale_info.price %></div>
-  <%# 數量 %>
-  <div class="relative flex items-center m-2" data-cart--item-target="inputArea">
-    <button class="quantity-btn-left-arrow" data-action="click->cart--item#decrement click->cart--form#update">－</button>
-    <input type="number" class="quantity-btn-center-input" value="<%= cart_product.quantity %>" data-cart--item-target="quantity" data-action="change->cart--item#updateQuantity change->cart--form#update" data-storage="<%=cart_product.sale_info.storage%>">
-    <button class="quantity-btn-right-arrow" data-action="click->cart--item#increment click->cart--form#update">＋</button>
-    <p class="absolute hidden text-xs font-bold text-rose-400 left-1/4 top-full" data-cart--item-target="storageWarning">庫存：<%= cart_product.sale_info.storage %></p>
+  <div class="flex items-center w-1/2 px-2">
+    <%# 單價 %>
+    <div class="w-1/4 text-center">$<%= cart_product.sale_info.price %></div>
+    <%# 數量 %>
+    <div class="relative flex items-center justify-center w-1/4" data-cart--item-target="inputArea">
+      <button class="quantity-btn-left-arrow" data-action="click->cart--item#decrement click->cart--form#update">－</button>
+      <input type="number" class="quantity-btn-center-input" value="<%= cart_product.quantity %>" data-cart--item-target="quantity" data-action="change->cart--item#updateQuantity change->cart--form#update" data-storage="<%=cart_product.sale_info.storage%>">
+      <button class="quantity-btn-right-arrow" data-action="click->cart--item#increment click->cart--form#update">＋</button>
+      <p class="absolute hidden text-xs font-bold text-rose-400 left-1/4 top-full" data-cart--item-target="storageWarning">庫存：<%= cart_product.sale_info.storage %></p>
+    </div>
+    <%# 總價 ＝ 單價 x 數量 %>
+    <div class="flex items-center justify-center w-1/4 m-2 text-center text-amber-500" data-cart--item-target="itemTotalPrice" data-unit-price="<%= cart_product.sale_info.price %>" data-cart--form-target="itemTotalPrice">$?</div>
+    <%= link_to cart_destroy_path(cart_product.id), method: :delete, data: {confirm: "確定要刪除該商品？"}, class: "w-1/4 text-center" do %>
+      <i class="p-1 m-1 text-red-500 rounded bg-neutral-100 drop-shadow fa-regular fa-trash-can"></i>
+    <% end %>
   </div>
-  <%# 總價 ＝ 單價 x 數量 %>
-  <div class="flex items-center justify-end w-20 m-2 text-amber-500" data-cart--item-target="itemTotalPrice" data-unit-price="<%= cart_product.sale_info.price %>" data-cart--form-target="itemTotalPrice">$?</div>
-  <%= link_to cart_destroy_path(cart_product.id), method: :delete, data: {confirm: "確定要刪除該商品？"} do %>
-    <i class="p-1 m-1 text-red-500 rounded bg-neutral-100 drop-shadow fa-regular fa-trash-can"></i>
-  <% end %>
 </div>
