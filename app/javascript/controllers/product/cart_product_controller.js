@@ -6,11 +6,15 @@ import Swal from 'sweetalert2';
 export default class extends Controller {
   static targets = ["saleInfoId", "quantity", "storage", "inputArea"]
   connect(){
+    this.element.setAttribute(
+      "data-action",
+      "keydown.enter->product--cart-product#preventSubmit"
+    );
     const storage = this.storageTarget.textContent.match(/\d+/g);
-    this.storageNum = storage.toString();
+    this.storageNum = parseInt(storage);
     this.saleInfoId = this.saleInfoIdTarget.value;
     this.quantityNum = Number(this.quantityTarget.value);
-    console.log(this.storageNum);
+    // console.log(this.storageNum);
     if (this.storageNum <= 0) this.disableComponents(); // 庫存為0
   }
   
@@ -57,6 +61,9 @@ export default class extends Controller {
       this.quantityNum -= 1;
       this.setQuantityTarget();
     }, 100);
+  }
+  preventSubmit(e) {
+    e.preventDefault();
   }
 
 

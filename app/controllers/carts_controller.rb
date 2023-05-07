@@ -6,15 +6,6 @@ class CartsController < ApplicationController
   end
   
   def create
-    @cart_product = CartProduct.new(cart_product_params)
-    @cart_product.cart_id = current_user.cart.id
-
-    
-    if @cart_product.save
-      redirect_to cart_path, notice: "Product added to cart successfully!"
-    else
-      # render :show  這邊還要修 
-    end
   end
 
   def checkout
