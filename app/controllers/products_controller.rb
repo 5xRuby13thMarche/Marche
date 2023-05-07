@@ -7,6 +7,9 @@ class ProductsController < ApplicationController
   end
 
   def show
+    # search
+    @ransack_q = Product.ransack(params[:q])
+
     # comment
     @product_comment = ProductComment.new
     if(params[:star].present?)
