@@ -8,6 +8,6 @@
   </header>
   <section class= "flex flex-col justify-between h-24 px-2">
     <h2 class= "flex-1 text-sm line-clamp-2"><%= product.name %></h2>
-    <div class="mb-2 font-semibold text-marche_orange text-md">$9,999<%# product.price %></div>
+    <div class="mb-2 font-semibold text-marche_orange text-md">$<%= product.sale_infos.first.price %></div>
   </section>
 </section>

@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   def index
-    @products = Product.order(created_at: :desc)
+    @products = Product.includes(:sale_infos).order(created_at: :desc)
     @ransack_q = Product.ransack(params[:q])
     @categories = Category.where(parent_id: nil)
   end
