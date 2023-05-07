@@ -11,7 +11,7 @@
         </div>
       </header>
       <%# 資訊詳情 %> 
-      <%= render partial: 'products/spec', locals: {sale_info: @sale_info, product: @product, cart_product: @cart_product} %>
+      <%= render partial: 'products/info', locals: {sale_info: @sale_info, product: @product, cart_product: @cart_product} %>
     </div>
     <%# 喜歡功能 %>
         <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>">
