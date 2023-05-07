@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.order(created_at: :desc)
     @ransack_q = Product.ransack(params[:q])
+    @categories = Category.where(parent_id: nil)
   end
 
   def show
@@ -44,7 +45,6 @@ class ProductsController < ApplicationController
     else
       render :new, status: :unprocessable_entity 
     end
-
   end
 
   def update
@@ -65,6 +65,16 @@ class ProductsController < ApplicationController
     @products = @q.result(distinct: true)
   end
 
+  def category
+    @parent_category = Category.find(params[:id])
+    @categories = @parent_category.children.includes(:products)
+    @products = get_products_by_categories(@categories)
+    p '-'*30
+    p @products
+    p '-'*30
+    
+  end
+
   private
   def set_product
     @product = Product.find(params[:id])
@@ -72,6 +82,14 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :description, :category_id, sale_infos_attributes: [:storage, :price, :spec])
+  end
+
+  def get_products_by_categories(categories)
+    products = []
+    categories.each do |c|
+      products.concat(c.products)
+    end
+    return products
   end
 end
 

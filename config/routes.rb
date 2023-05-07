@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :comments, shallow: true, only: [:create, :update, :edit, :destroy]
   end
   get '/search', to: 'products#search'
+  get '/category/:id', to: 'products#category', as: :product_category
 
   namespace :api do
     # like
