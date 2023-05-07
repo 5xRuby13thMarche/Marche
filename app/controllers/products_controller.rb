@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
       @sale_info = SaleInfo.find_by(product_id: @product.id)
     end
     #印出所有規格
-    @spec_all = SaleInfo.where(product_id: @product.id)
+    @spec_all = @product.sale_infos
     @cart_product = CartProduct.new
   end
 
