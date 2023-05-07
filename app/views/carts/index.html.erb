@@ -1,4 +1,4 @@
-<%# <div class="container w-full mx-auto"> %>
+<%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <section class="container w-11/12 m-auto border bg-gay-200">
   <%= form_with url: checkout_path, method: :get, data: { turbo: "false", controller: "cart--form" } do |form| %>
     <div class="flex items-center justify-start bg-gray-100 h-14">

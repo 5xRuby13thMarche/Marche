@@ -2,9 +2,9 @@
   <%# checkbox %>
   <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "checkbox checkbox-sm rounded m-3" , data: {cart__item_target: "checkbox", cart__form_target: "checkbox", action: "change->cart--form#update"} %>
   <%# 商品圖片 %>
-  <div class="w-20 h-20 m-3 bg-slate-300">
+  <%= link_to root_path, class: "block w-20 h-20 m-3 bg-slate-300" do %>
     <img src="https://picsum.photos/80/80/?random=12" class=''>
-  </div>
+  <% end %>
   <h3 class="w-64"><%= cart_product.sale_info.product.name %></h3>
   <%# 規格 %>
   <div class="dropdown">

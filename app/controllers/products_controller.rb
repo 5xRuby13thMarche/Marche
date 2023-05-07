@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_q_ransack, only: [:index, :show, :search, :category]
+  
   def index
     @products = Product.includes(:sale_infos).order(created_at: :desc)
     @ransack_q = Product.ransack(params[:q])
@@ -7,9 +9,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    # search
-    @ransack_q = Product.ransack(params[:q])
-
     # comment
     @product_comment = ProductComment.new
     if(params[:star].present?)
@@ -64,23 +63,23 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true)
+    @products = @ransack_q.result(distinct: true)
   end
 
   def category
     @parent_category = Category.find(params[:id])
     @categories = @parent_category.children.includes(:products)
     @products = get_products_by_categories(@categories)
-    p '-'*30
-    p @products
-    p '-'*30
-    
   end
 
   private
+
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def set_q_ransack
+    @ransack_q = Product.ransack(params[:q])
   end
 
   def product_params
@@ -94,5 +93,6 @@ class ProductsController < ApplicationController
     end
     return products
   end
+
 end
 
