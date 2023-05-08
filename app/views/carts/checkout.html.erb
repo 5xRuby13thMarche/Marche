@@ -1,16 +1,33 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<h1>臨時的結帳頁面 Checkout</h1>
-<p>商品數量：<%= @cart_products.count %></p>
-<% @cart_products.each do |c| %>
-  <div class="p-1 m-1 border">
-    <span class="bg-sky-100">產品名稱: <%= c.sale_info.product.name %></span> | 
-    <span class="bg-gray-200">規格名稱: <%= c.sale_info.spec %></span> | 
-    <span class="bg-sky-100">數量：<%= c.quantity %></span>
-  </div>
-<% end %>
+<div class="flex justify-center mt-5 mb-5">
+  <h1 class="text-xl">結帳頁面</h1>
+</div>
+<div class="m-3">
+  <p>商品數量：<%= @cart_products.count %></p>
+</div>
+
+<table class="border-2 text-center w-full mx-auto ">
+  <tr class="border-b"> 
+    <td class="w-3/12">產品名稱</td>
+    <td class="w-7/12">商品規格</td>
+    <td class="w-2/12">數量</td>
+  </tr>
+
+  <% @cart_products.each do |c| %>
+    <tr> 
+      <td class="py-2"><%= c.sale_info.product.name %></td>
+      <td><%= c.sale_info.spec %></td>
+      <td><%= c.quantity %></td>
+    </tr>
+  <% end %>
+</table>
+
 <%= form_with url: orders_path, method: :post do |form| %>
   <% @cart_products.each do |c|%>
     <%= hidden_field_tag "cart_product[]", value = c.id %>
   <% end %>
-  <%= form.submit "產生訂單" %>
+  <div class="flex justify-between mr-5 mt-2 ml-5">
+    <%= link_to "上一頁", :back, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+    <%= form.submit "產生訂單", class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+  </div>
 <% end %>
