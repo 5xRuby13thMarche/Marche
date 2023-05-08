@@ -1,7 +1,7 @@
 <li class="w-1/12 p-2 border grow hover:shadow-lg">
   <%= link_to product_category_path(category.id) do%>
     <div class="mx-auto">
-      <img src="https://picsum.photos/80/80/?random=20" class="rounded-full">
+      <%= image_tag "category_icon/#{convert_category_name(category.content)}" ,class: "rounded-full", alt: "category_#{category.content}" %>
     </div>
     <p class="my-1 text-xs text-center text-gray-500"><%= category.content %></p>
   <% end %>

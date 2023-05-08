@@ -8,4 +8,7 @@ module ProductsHelper
   def parent_categories
     Category.where(parent_id: nil).pluck(:content, :id) 
   end
+  def convert_category_name(name)
+    name.gsub('/','_')
+  end
 end
