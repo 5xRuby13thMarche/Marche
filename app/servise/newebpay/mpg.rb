@@ -39,7 +39,8 @@ module Newebpay
       info[:RespondType] = "JSON"        #勿動
       info[:Version] = "2.0"             #勿動
       info[:LoginType] = 0               #勿動
-      info[:CREDIT] =  1                 #勿動
+      info[:CREDIT] =  1
+      info[:ReturnURL] = "https://#{ENV['domain']}/orders/notify"
     end
 
     def url_encoded_query_string
