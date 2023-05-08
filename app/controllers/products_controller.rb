@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
   
   def index
     @products = Product.includes(:sale_infos).order(created_at: :desc)
+    @pagy, @product_records = pagy(@products, items: 24)
     @ransack_q = Product.ransack(params[:q])
     @categories = Category.where(parent_id: nil)
   end
