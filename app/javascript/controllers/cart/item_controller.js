@@ -1,6 +1,7 @@
 import {Controller} from "@hotwired/stimulus";
-import {post} from "@rails/request.js";
+import {post, destroy} from "@rails/request.js";
 import {formatMoney} from "./application";
+import Swal from "sweetalert2";
 
 // Connects to data-controller="cart--item"
 export default class extends Controller {
@@ -10,6 +11,7 @@ export default class extends Controller {
     "itemTotalPrice",
     "checkbox",
     "storageWarning",
+    "deleteBtn",
   ];
   connect() {
     this.cartProductId = this.element.dataset.cartProductId;
@@ -17,6 +19,7 @@ export default class extends Controller {
     this.storageNum = Number(this.quantityTarget.dataset.storage);
     if (this.storageNum <= 0) this.disableComponents(); // 庫存為0
     this.updateItemTotalPrice();
+    // this.deleteBtnTarget.setAttribute(data-controller)
   }
   // disable components when storage is 0
   disableComponents() {
@@ -107,5 +110,43 @@ export default class extends Controller {
       const data = await response.json;
       // console.log(data);
     }
+  }
+  // Delete cart item
+
+  deleteCartItem(e) {
+    e.preventDefault();
+    const url = e.currentTarget.href;
+    const csrfToken = document.querySelector('[name="csrf-token"]').content;
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action cannot be undone.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(url, {
+          method: "DELETE",
+          headers: {
+            "X-CSRF-Token": csrfToken,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        }).then((response) => {
+          if (response.ok) {
+            this.element.remove();
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+            });
+          }
+        });
+      }
+    });
   }
 }

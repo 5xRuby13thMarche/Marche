@@ -15,8 +15,12 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    @cart_product = CartProduct.find(params[:id])
+    p "3"*100
+    p params[:id]
+    
+    @cart_product = CartProduct.find(params[:id].to_i)
     @cart_product.destroy()
+    
   end
 
   private

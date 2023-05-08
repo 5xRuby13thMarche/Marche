@@ -1,6 +1,6 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <section class="container mx-auto mt-6 border bg-gay-200">
-  <%= form_with url: checkout_path, method: :get, data: { turbo: "false", controller: "cart--form" } do |form| %>
+  <%= form_with url: checkout_path, method: :get, data: { controller: "cart--form" } do |form| %>
     <div class="flex items-center justify-start bg-gray-100 h-14">
       <p class="w-1/2 text-sm text-center">商品</p>
       <div class="flex w-1/2 ">
