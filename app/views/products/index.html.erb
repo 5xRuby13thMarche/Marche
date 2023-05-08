@@ -31,6 +31,6 @@
   <h1 class="self-end mb-2 text-xl font-bold text-marche_orange">商品列表</h1>
   <%= link_to '新增商品', new_product_path, class: "self-end mb-2 btn bg-marche_orange hover:bg-marche_orange100 border-none font-normal" %>
 </div>
-<div class="grid w-10/12 gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
+<div class="grid w-10/12 gap-4 mx-auto grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
   <%= render  @products %>
 </div>
