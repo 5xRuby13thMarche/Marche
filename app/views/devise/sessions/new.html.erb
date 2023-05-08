@@ -35,13 +35,14 @@
       <div class="actions pt-5 pb-5 flex justify-center">
         <%= f.submit "登入", class: "w-full text-lg p-2 bg-marche_orange rounded-lg text-marche_white cursor-pointer hover:bg-orange-600" %>
       </div>
-      <div class="btn flex justify-center">
+      
+    <% end %>
+    <div class="">
         <%- if devise_mapping.omniauthable? %>
           <%- resource_class.omniauth_providers.each do |provider| %>
-            <%= button_to "使用Google登入", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "tracking-wide" %><br />
+            <%= button_to "使用Google登入", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "btn flex justify-center tracking-wide" %><br />
           <% end %>
         <% end %>
       </div>
-    <% end %>
   </div>
 </div>
