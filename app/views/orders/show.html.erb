@@ -1,16 +1,45 @@
+<%# render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <%= render 'shared/flash' if flash.any? %>
-<h1>這是你的訂單</h1>
-<p>訂單編號: <%= @order.tracking_number %></p>
-<p>總價: <%= @order.total_price %></p>
-<p>付款狀態: <%= @order.payment_status %></p>
-<p>Payment_Method: <%= @order.payment_method %></p>
+<section class="w-5/12 mx-auto m-10">
+  <div class="flex justify-center border-l-2 border-t-2 border-r-2">
+    <h1 class="text-xl m-2">這是你的訂單</h1>
+  </div>
+  
+  <div class="border border-2">
+    <div class="flex justify-around">
+      <p class="p-3 w-1/2 text-center">訂單編號: </p>
+      <p class="p-3 w-1/2 text-center break-words"><%= @order.tracking_number %></p>
+    </div>
+    <div class="flex justify-around">
+      <p class="p-3 w-1/2 text-center">總價:</p> 
+      <p class="p-3 w-1/2 text-center"><%= @order.total_price %></p>
+    </div>
+    <div class="flex justify-around">
+      <p class="p-3 w-1/2 text-center">付款狀態: </p>
+      <p class="p-3 w-1/2 text-center"><%= @order.payment_status %></p>
+    </div>
+    <div class="flex justify-around">
+      <p class="p-3 w-1/2 text-center break-words">Payment_Method:</p>
+      <p class="p-3 w-1/2 text-center"><%= @order.payment_method %></p>
+  </div>
+  
+  <div class="border-t-2">
+    <% if @order.payment_status == "pending"%>
+      <%= form_with(url: 'https://ccore.newebpay.com/MPG/mpg_gateway', method: "post") do |form| %>
+        <input type="hidden" id="MerchantID" name="MerchantID" value="<%= @form_info[:MerchantID] %>">
+        <input type="hidden" id="TradeInfo" name="TradeInfo" value="<%= @form_info[:TradeInfo] %>">
+        <input type="hidden" id="TradeSha" name="TradeSha" value="<%= @form_info[:TradeSha] %>">
+        <input type="hidden" id="Version" name="Version" value="<%= @form_info[:Version] %>">
+        <div class="flex justify-around">
+          <%= link_to "上一頁", :back, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+          <%= form.submit "付款", class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="">
+        <%= link_to "首頁", root_path, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+      </div>
+    <% end %>
+  </div>
 
-<% if @order.payment_status == "pending"%>
-  <%= form_with(url: 'https://ccore.newebpay.com/MPG/mpg_gateway', method: "post") do |form| %>
-    <input type="hidden" id="MerchantID" name="MerchantID" value="<%= @form_info[:MerchantID] %>">
-    <input type="hidden" id="TradeInfo" name="TradeInfo" value="<%= @form_info[:TradeInfo] %>">
-    <input type="hidden" id="TradeSha" name="TradeSha" value="<%= @form_info[:TradeSha] %>">
-    <input type="hidden" id="Version" name="Version" value="<%= @form_info[:Version] %>">
-    <%= form.submit "付款", class: "border bg-slate-300 hover:cursor-pointer p-1 m-1 rounded hover:bg-slate-500" %>
-  <% end %>
-<% end %>
+</section>
