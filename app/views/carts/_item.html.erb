@@ -6,13 +6,13 @@
     <%= link_to product_path(cart_product.sale_info.product_id), class: "block w-20 h-20 bg-slate-300 m-2" do %>
       <img src="https://picsum.photos/80/80/?random=12" class=''>
     <% end %>
-    <h3 class="p-2"><%= cart_product.sale_info.product.name %></h3>
+    <h3 class="w-[70px] md:w-[120px] lg:w-[260px] xl:w-[390px]"><%= cart_product.sale_info.product.name %></h3>
     <%# 規格 %>
     <div class="ml-auto dropdown">
       <label tabindex="0" class="m-1 spec-btn"><%= cart_product.sale_info.spec %></label>
-      <div tabindex="0" class="w-64 p-2 shadow dropdown-content card card-compact bg-primary text-primary-content">
+      <%# <div tabindex="0" class="w-64 p-2 shadow dropdown-content card card-compact bg-primary text-primary-content">
         <div class="card-body">test</div>
-      </div>
+      </div> %>
     </div>
   </div>
   <div class="flex items-center w-1/2 px-2">
