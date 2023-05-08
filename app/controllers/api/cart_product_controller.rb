@@ -1,13 +1,20 @@
 class Api::CartProductController < ApplicationController
   def sendToCart
-    cart_product = CartProduct.new(cart_product_params)
-    cart_product.cart_id = current_user.cart.id
-
-    
-    if cart_product.save
-      render json: {ok: '加入購物車成功！'}
+    update_cart_product = CartProduct.find_by(sale_info_id: params[:sale_info_id])
+    if update_cart_product
+      update_quantity = update_cart_product.quantity + params[:quantity]
+      update_cart_product.update(quantity: update_quantity)
+      render json: {ok: 'update'}
     else
-      # render :show  這邊還要修 
+      cart_product = CartProduct.new(cart_product_params)
+      cart_product.cart_id = current_user.cart.id
+  
+      
+      if cart_product.save
+        render json: {ok: '加入購物車成功！'}
+      else
+        # render :show  這邊還要修 
+      end
     end
   end
 

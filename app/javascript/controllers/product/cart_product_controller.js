@@ -77,7 +77,6 @@ export default class extends Controller {
     if (isCorrect){
       const response = await post(url, {body: JSON.stringify({sale_info_id: this.saleInfoId, quantity: this.quantityNum})});
       if (response.ok) {
-        console.log("ok")
         Swal.fire({
           icon: 'success',
           title: '加入購物車成功',
