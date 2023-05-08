@@ -1,5 +1,6 @@
 import {Controller} from "@hotwired/stimulus";
 import {post} from "@rails/request.js";
+import {formatMoney} from "./application";
 
 // Connects to data-controller="cart--item"
 export default class extends Controller {
@@ -71,17 +72,7 @@ export default class extends Controller {
   updateItemTotalPrice() {
     let itemPrice =
       Number(this.itemTotalPriceTarget.dataset.unitPrice) * this.quantityNum;
-    this.itemTotalPriceTarget.textContent = this.formatMoney(itemPrice);
-  }
-  // format price to money
-  formatMoney(price) {
-    let integerPart = price.toString().split(".")[0].split("").reverse();
-    for (let i = 3; i < integerPart.length; i += 4) {
-      integerPart.splice(i, 0, ",");
-    }
-    let decimalPart = price.toString().split(".")[1];
-    decimalPart = decimalPart == undefined ? "" : `.${decimalPart}`;
-    return `$${integerPart.reverse().join("")}${decimalPart}`;
+    this.itemTotalPriceTarget.textContent = formatMoney(itemPrice);
   }
   // set quantityTarget
   setQuantityTarget() {
@@ -97,10 +88,10 @@ export default class extends Controller {
     if (this.quantityNum == this.storageNum) {
       this.revealStorageWarning();
     } else {
-      this.hiddenStorageWarning();
+      this.hideStorageWarning();
     }
   }
-  hiddenStorageWarning() {
+  hideStorageWarning() {
     this.storageWarningTarget.classList.add("hidden");
   }
   revealStorageWarning() {

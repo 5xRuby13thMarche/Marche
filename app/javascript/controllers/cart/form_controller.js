@@ -1,4 +1,5 @@
 import {Controller} from "@hotwired/stimulus";
+import {formatMoney, convertMoneyToNumber} from "./application";
 
 // Connects to data-controller="cart--form"
 export default class extends Controller {
@@ -14,33 +15,21 @@ export default class extends Controller {
   update() {
     let sum = 0;
     let checkedNum = 0;
-    for (let i = 0; i < this.checkboxTargets.length; i++) {
-      if (this.checkboxTargets[i].checked) {
-        sum += this.convertMoneyToNumber(
-          this.itemTotalPriceTargets[i].textContent
-        );
-        checkedNum += 1;
-      }
-    }
-    this.totalPriceTarget.textContent = this.formatMoney(sum);
-    this.productNumTarget.textContent = checkedNum;
-  }
-  boxChecked() {}
-  totalPriceChanged() {}
-  convertMoneyToNumber(price) {
-    return Number(price.split("$")[1].split(",").join(""));
+    setTimeout(() => {
+      this.checkboxTargets.forEach((element, index) => {
+        if (element.checked) {
+          sum += convertMoneyToNumber(
+            this.itemTotalPriceTargets[index].textContent
+          );
+          checkedNum += 1;
+        }
+      });
+      this.totalPriceTarget.textContent = formatMoney(sum);
+      this.productNumTarget.textContent = checkedNum;
+    }, 101);
   }
   preventSubmit(e) {
     e.preventDefault();
-  }
-  formatMoney(price) {
-    let integerPart = price.toString().split(".")[0].split("").reverse();
-    for (let i = 3; i < integerPart.length; i += 4) {
-      integerPart.splice(i, 0, ",");
-    }
-    let decimalPart = price.toString().split(".")[1];
-    decimalPart = decimalPart == undefined ? "" : `.${decimalPart}`;
-    return `$${integerPart.reverse().join("")}${decimalPart}`;
   }
   checkAllBox() {
     if (this.isAllChecked) {
