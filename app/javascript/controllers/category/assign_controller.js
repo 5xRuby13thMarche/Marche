@@ -4,8 +4,10 @@ import {post} from "@rails/request.js";
 // Connects to data-controller="category--assign"
 export default class extends Controller {
   static targets = ["main_category", "subcategory", "show"]
-
+  connect(){
+  }
   async choose(){
+    console.log(this.main_categoryTarget.value)
     // 避免子分類重複新增
     this.subcategoryTarget.innerHTML = ''
     // 打API 

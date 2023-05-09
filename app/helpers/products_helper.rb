@@ -6,6 +6,6 @@ module ProductsHelper
     date.strftime('%Y/%-m/%-d %-H:%-M:%-S')
   end
   def parent_categories
-    Category.where(parent_id: nil).pluck(:content, :id) 
+    Category.where(parent_id: nil).pluck(:id, :content) 
   end
 end
