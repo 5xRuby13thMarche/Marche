@@ -1,6 +1,7 @@
 import {Controller} from "@hotwired/stimulus";
 import {post} from "@rails/request.js";
 import {formatMoney} from "./application";
+import Swal from "sweetalert2";
 
 // Connects to data-controller="cart--item"
 export default class extends Controller {
@@ -107,5 +108,23 @@ export default class extends Controller {
       const data = await response.json;
       // console.log(data);
     }
+  }
+  // 刪除鍵顯示toast
+  showDeleteToast() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "成功刪除",
+    });
   }
 }
