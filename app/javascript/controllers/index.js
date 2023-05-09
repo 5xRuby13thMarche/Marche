@@ -7,6 +7,9 @@ import { application } from "./application"
 import Cart__FormController from "./cart/form_controller"
 application.register("cart--form", Cart__FormController)
 
+import Cart__IconController from "./cart/icon_controller"
+application.register("cart--icon", Cart__IconController)
+
 import Cart__ItemController from "./cart/item_controller"
 application.register("cart--item", Cart__ItemController)
 
