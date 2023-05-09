@@ -37,11 +37,14 @@ class ProductsController < ApplicationController
     @product = Product.new
     @product.sale_infos.build
   end
-
+  
   def edit
   end
-
+  
   def create
+    p '-'*100
+    p params
+    p '-'*100
     @product = Product.new(product_params)
     if @product.save
       redirect_to root_path, notice: "新增商品成功" 

@@ -18,8 +18,13 @@
       <label for="my-modal-4" class="cursor-pointer modal">
         <label class="relative modal-box" for="">
           <h3 class="text-lg font-bold">分類</h3>
-          <%= form.select :main_category_id, parent_categories, { prompt: "請選擇" }, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2', data:{ category__assign_target: "main_category", action: 'change->category--assign#choose' } %>      
-          <select class="block px-3 py-2 mt-2 border border-gray-200 rounded-md shadow outline-none" data-category--assign-target="subcategory" name="product[category_id]" id="product_category_id"><option value="">請選擇</option></select>  
+          <select id="main_category_id" class="block px-3 py-2 mt-2 border border-gray-200 rounded-md shadow outline-none" data-category--assign-target="main_category" data-action="change->category--assign#choose">
+            <option value="">請選擇</option>
+            <% parent_categories.each do |id, content| %>
+              <option value="<%= id %>"><%= content %></option>
+            <% end %>
+          </select>
+          <%= form.select :category_id, "", { prompt: "請選擇" }, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2', data:{ category__assign_target: "subcategory" }%>
           <div class="modal-action">
             <label for="my-modal-4" class="btn" data-action="click->category--assign#whichChoose">確定</label>
           </div>
@@ -45,14 +50,6 @@
           </div>
         <% end %>
         <%= link_to '+', '#', data: { action: "click->product--sale-info#increase" }, class: "btn btn-outline mt-2" %>
-        <%# 複製模板，用於新增sale_info表單 %>
-          <div class="hidden">
-            <%= form.fields_for :sale_infos do |sale_info| %>
-              <div data-product--sale-info-target="template" class="relative flex flex-wrap p-3 mb-2 border rounded-md shadow deleteFields">
-                <%= render partial: 'sale_info_fields', locals: { sale_info: sale_info }%>
-              </div>
-            <% end %>
-          </div>
       </div>
     </div>
   </section>
