@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
     # cart
     post '/carts/:id/edit', to: 'carts#edit', as: :carts_edit
+    delete '/carts/delete_all_items', to: 'carts#destroy_items'
   end
 
   # carts
