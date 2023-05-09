@@ -126,5 +126,8 @@ export default class extends Controller {
       icon: "success",
       title: "成功刪除",
     });
+    // 發布event給購物車icon
+    const event = new CustomEvent("update--cart", {detail: "decreaseCart"});
+    window.dispatchEvent(event);
   }
 }

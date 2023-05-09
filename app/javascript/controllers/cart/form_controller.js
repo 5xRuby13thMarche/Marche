@@ -93,8 +93,9 @@ export default class extends Controller {
       body: JSON.stringify({cart_id: this.element.dataset.cartId}),
     });
     if (response.ok) {
-      const data = await response.json;
-      // console.log(data);
+      // 發布event給購物車icon
+      const event = new CustomEvent("update--cart", {detail: "emptyCart"});
+      window.dispatchEvent(event);
     }
   }
 }
