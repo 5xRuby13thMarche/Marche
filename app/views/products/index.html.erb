@@ -19,16 +19,98 @@
 </div>
 <%# 商品分類 %>
 <section class="flex flex-col w-10/12 mx-auto my-6">
-  <header>
-    <h2>商品分類</h2>
-  </header>
+  <h2 class="self-start text-xl font-bold text-marche_orange">商品分類</h2>
   <ul class="grid grid-cols-11">
     <%= render partial: 'category', collection: @categories, as: :category %>
   </ul>
 </section>
+<%# 熱門商品%>
+<div class="container w-10/12 mx-auto my-10">
+  <h2 class="self-end mb-2 text-xl font-bold text-marche_orange">熱門商品</h2>
+  <div class="slider_hot">
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=1" ,class: "w-full", alt: "pic-1" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=2" ,class: "w-full", alt: "pic-2" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=3" ,class: "w-full", alt: "pic-3" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=4" ,class: "w-full", alt: "pic-4" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=5" ,class: "w-full", alt: "pic-5" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=6" ,class: "w-full", alt: "pic-6" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=7" ,class: "w-full", alt: "pic-7" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=8" ,class: "w-full", alt: "pic-8" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=9" ,class: "w-full", alt: "pic-9" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=10" ,class: "w-full", alt: "pic-10" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=11" ,class: "w-full", alt: "pic-11" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=12" ,class: "w-full", alt: "pic-12" %>
+    </div>
+  </div>
+</div>
+<%# 最新商品%>
+<div class="container w-10/12 mx-auto my-10">
+  <h2 class="self-end mb-2 text-xl font-bold text-marche_orange">最新商品</h2>
+  <div class="slider_hot">
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=12" ,class: "w-full", alt: "pic-12" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=11" ,class: "w-full", alt: "pic-11" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=10" ,class: "w-full", alt: "pic-10" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=9" ,class: "w-full", alt: "pic-9" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=8" ,class: "w-full", alt: "pic-8" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=7" ,class: "w-full", alt: "pic-7" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=6" ,class: "w-full", alt: "pic-6" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=5" ,class: "w-full", alt: "pic-5" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=4" ,class: "w-full", alt: "pic-4" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=3" ,class: "w-full", alt: "pic-3" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=2" ,class: "w-full", alt: "pic-2" %>
+    </div>
+    <div class="w-full">
+      <%= image_tag "https://picsum.photos/200/200?random=1" ,class: "w-full", alt: "pic-1" %>
+    </div>
+  </div>
+</div>
 <%# 商品列表 %>
 <div class="flex justify-between w-10/12 mx-auto">
-  <h1 class="self-end mb-2 text-xl font-bold text-marche_orange">商品列表</h1>
+  <h2 class="self-end mb-2 text-xl font-bold text-marche_orange">推薦商品</h2>
   <%= link_to '新增商品', new_product_path, class: "self-end mb-2 btn bg-marche_orange hover:bg-marche_orange100 border-none font-normal" %>
 </div>
 <div class="grid w-10/12 gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
