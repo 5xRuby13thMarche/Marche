@@ -1,0 +1,40 @@
+<div class="mt-2 mb-2 border-2 border-grey">
+
+  <div class="justify-end mt-2 bg-gray-200 mb-2border-2 border-grey"> 
+    總金額：<%= order.total_price %>
+  </div>
+  
+  <div class="flex justify-around">
+    <div class="mt-2 mb-2 border-2 border-grey">
+      <div>  
+        出貨狀態：<%= order.shipping_status %>
+      </div>
+      <div>  
+        出貨地址：<%= order.shipping_address %>
+      </div>
+      <div>  
+        備註：<%= order.note %>
+      </div>
+    </div>
+    <div class="mt-2 mb-2 border-2 border-grey">
+      <div>  
+        訂單編號：<%= order.tracking_number %>
+      </div>
+      
+      <div>  
+        收件人：<%= order.receiver %>
+      </div>
+      
+      <div>  
+        付款方式：<%= order.payment_method %>
+      </div>
+      
+      <div>  
+        付款狀態：<%= order.payment_status %>
+      </div>
+  </div>
+  </div>
+  
+
+
+</div>        
