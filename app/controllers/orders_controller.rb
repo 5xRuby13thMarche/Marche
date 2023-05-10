@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
     @cart_products = CartProduct.where(id: params[:cart_product]).includes(:sale_info)
 
     total_price = 0
+    total_price.floor
     @cart_products.each do |c|
       # 算總價
       total_price += c.quantity * c.sale_info.price

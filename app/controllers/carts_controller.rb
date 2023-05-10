@@ -13,6 +13,12 @@ class CartsController < ApplicationController
     @cart = current_user.cart
     @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: params[:cart_product_ids])
     @order = Order.new
+    @total_price = params[:total_price_checkout]
+
+    p '-'*40
+    p params
+    p @total_price
+    p '-'*40
   end
 
   def destroy

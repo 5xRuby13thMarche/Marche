@@ -5,13 +5,7 @@ import {post, destroy} from "@rails/request.js";
 
 // Connects to data-controller="cart--form"
 export default class extends Controller {
-  static targets = [
-    "checkbox",
-    "itemTotalPrice",
-    "totalPrice",
-    "productNum",
-    "cartItem",
-  ];
+  static targets = ["checkbox", "itemTotalPrice", "totalPrice", "productNum", "totalPriceCheckout"];
   connect() {
     // form表單預設會找尋第一個submit or button進行click事件，因此要preventDefault
     this.element.setAttribute(
@@ -19,6 +13,7 @@ export default class extends Controller {
       "keydown.enter->cart--form#preventSubmit"
     );
     this.isAllChecked = false;
+    console.log(this.totalPriceCheckoutTarget)
   }
   update() {
     let sum = 0;
@@ -34,6 +29,7 @@ export default class extends Controller {
       });
       this.totalPriceTarget.textContent = formatMoney(sum);
       this.productNumTarget.textContent = checkedNum;
+      this.totalPriceCheckoutTarget.setAttribute("value", formatMoney(sum))
     }, 101);
   }
   preventSubmit(e) {
