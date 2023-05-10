@@ -12,6 +12,7 @@ class CartsController < ApplicationController
   def checkout
     @cart = current_user.cart
     @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: params[:cart_product_ids])
+    @order = Order.new
   end
 
   def destroy
