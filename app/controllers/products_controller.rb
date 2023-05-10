@@ -71,8 +71,28 @@ class ProductsController < ApplicationController
 
   def category
     @parent_category = Category.find(params[:id])
-    @categories = @parent_category.children.includes(:products)
-    @products = get_products_by_categories(@categories)
+    @child_categories = @parent_category.children
+    if params[:order] == 'new'
+      @products = @parent_category.child_products.order(created_at: :desc)
+    elsif params[:order] == 'price_asc'
+      @price_order = 'price_asc'
+      @products = @parent_category.child_products.joins(:sale_infos)
+                                  .select("products.*, MAX(sale_infos.price) as max_price")
+                                  .group("products.id")
+                                  .order("max_price ASC")
+    elsif params[:order] == 'price_desc'
+      @price_order = 'price_desc'
+      @products = @parent_category.child_products.joins(:sale_infos)
+                                  .select("products.*, MAX(sale_infos.price) as max_price")
+                                  .group("products.id")
+                                  .order("max_price DESC")
+    else
+      @products = @parent_category.child_products.order(created_at: :asc)
+    end
+
+    
+
+
   end
 
   private

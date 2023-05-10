@@ -16,6 +16,9 @@ application.register("cart--item", Cart__ItemController)
 import Category__AssignController from "./category/assign_controller"
 application.register("category--assign", Category__AssignController)
 
+import Category__PriceOrderController from "./category/price_order_controller"
+application.register("category--price-order", Category__PriceOrderController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
