@@ -15,10 +15,15 @@ class OrdersController < ApplicationController
                                   each_price: c.sale_info.price,
                                   spec: c.sale_info.spec)
     end
+
     @order.tracking_number = generate_tracking_number()
     @order.payment_status = "pending"
     @order.user_id = current_user.id
     @order.total_price = total_price
+    @order.shipping_address = params[:order][:shipping_address]
+    @order.shipping_status = params[:order][:shipping_status]
+    @order.receiver = params[:order][:receiver]
+    @order.note = params[:order][:note]
 
     if @order.save
       redirect_to order_show_path(@order.id), notice: "產生訂單成功"
@@ -45,7 +50,6 @@ class OrdersController < ApplicationController
          Email: @order.user.email}
         ).form_info
     end
-
   end
     
   def notify
@@ -70,5 +74,4 @@ class OrdersController < ApplicationController
   def generate_item_desc(order_products)
     order_products.pluck(:spec).reduce{|acc, cur| acc+cur}
   end
-  
 end

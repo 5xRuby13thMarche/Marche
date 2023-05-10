@@ -8,10 +8,10 @@
   </div>
 
   <table class="border-2 text-center w-full mx-auto">
-    <tr class="border-b"> 
-      <td class="w-3/12 border-r-2">產品名稱</td>
-      <td class="w-7/12">商品規格</td>
-      <td class="w-2/12 border-l-2">數量</td>
+    <tr class="border-b">
+      <td class="text-lg w-3/12 border-r-2">產品名稱</td>
+      <td class="text-lg w-7/12">商品規格</td>
+      <td class="text-lg w-2/12 border-l-2">數量</td>
     </tr>
 
     <% @cart_products.each do |c| %>
@@ -23,11 +23,36 @@
     <% end %>
   </table>
 
-  <%= form_with url: orders_path, method: :post do |form| %>
+  <%= form_with model: @order, url: orders_path, method: :post do |form| %>
     <% @cart_products.each do |c|%>
       <%= hidden_field_tag "cart_product[]", value = c.id %>
     <% end %>
-    <div class="flex justify-between mr-2 mt-1 ml-2">
+
+    <%# 這段要讓使用者填寫收件人資訊 %>
+    <div class="flex justify-center text-2xl m-4">
+      <p>請填寫收件人資訊</p>
+    </div>
+
+    <div class="flex justify-around mt-8 mb-4">
+      <div>
+        <%= form.label :receiver, "收件人" %>
+        <%= form.text_field :receiver %>
+      </div>
+      <div>
+        <%= form.label :shipping_address, "配送地址" %>
+        <%= form.text_field :shipping_address %>
+      </div>
+      <div>
+        <%= form.label :shipping_status, "配送方式" %>
+        <%= form.text_field :shipping_status %>
+      </div>
+      <div>
+        <%= form.label :note, "備註" %>
+        <%= form.text_field :note %>
+      </div>
+    </div>
+
+    <div class="flex justify-end mr-2 mt-1 ml-2">
       <%= link_to "上一頁", :back, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
       <%= form.submit "產生訂單", class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
     </div>
