@@ -1,5 +1,5 @@
-<li class="w-full p-2 grow rounded-3xl hover:shadow-md">
-  <%= link_to product_category_path(category.id) do%>
+<li class="w-full p-2 grow hover:shadow-md rounded-3xl">
+  <%= link_to product_parent_category_path(category.id) do%>
     <div class="mx-auto">
       <%= image_tag "category_icon/#{convert_category_name(category.content)}" ,class: "rounded-3xl", alt: "category_#{category.content}" %>
     </div>

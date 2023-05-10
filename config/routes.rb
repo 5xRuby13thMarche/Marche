@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
- 
+  
   # products
   root 'products#index'
 
@@ -12,26 +12,8 @@ Rails.application.routes.draw do
     resources :comments, shallow: true, only: [:create, :update, :edit, :destroy]
   end
   get '/search', to: 'products#search'
-  get '/category/:id', to: 'products#category', as: :product_category
+  get '/parent_category/:id', to: 'products#category', as: :product_parent_category # 大項分類頁面
 
-  namespace :api do
-    # like
-    resources :products, only: [] do
-      member do
-        post :like 
-        post :dislike 
-      end
-    end
-    # cart_product
-    post '/cart_product', to: 'cart_product#sendToCart'
-  
-    #category
-    post '/categories', to: 'categories#assign'
-
-    # cart
-    post '/carts/:id/edit', to: 'carts#edit', as: :carts_edit
-    delete '/carts/delete_all_items', to: 'carts#destroy_items'
-  end
 
   # carts
   post '/cart', to: 'carts#create'
@@ -46,5 +28,27 @@ Rails.application.routes.draw do
   post '/orders', to: 'orders#create'
   get "/orders/:id",to: "orders#show", as: :order_show 
   post "/orders/notify",to: "orders#notify"   #接收藍新post回來的頁面
+
+
+  # API 路徑
+  namespace :api do
+    # like api
+    resources :products, only: [] do
+      member do
+        post :like 
+        post :dislike 
+      end
+    end
+    # cart_product
+    post '/cart_product', to: 'cart_product#sendToCart'
+  
+    #category
+    post '/categories', to: 'categories#assign'
+
+    # 購物車頁面 Cart API
+    post '/carts/:id/edit', to: 'carts#edit', as: :carts_edit
+    delete '/carts/delete_all_items', to: 'carts#destroy_items'
+  end
+
 
 end

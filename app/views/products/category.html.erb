@@ -1,5 +1,18 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <h1 class="self-end w-10/12 mx-auto mt-8 mb-1 text-xl font-bold text-marche_black">分類：<%= @parent_category.content%></h1>
+<%#  %>
+<%# 商品呈現區域 %>
+<%# 篩選器 %>
+<div class="flex items-center justify-center w-10/12 p-2 mx-auto my-4 border bg-marche_white">
+  <span class="mx-2">篩選</span>
+  <%= link_to '最新', product_parent_category_path(@parent_category, order: 'new'), class: "mx-2 py-1 px-4 border"%>
+  <%= link_to '最熱門', '#', class: "mx-2 py-1 px-4 border"%>
+  <select class="max-w-xs w-44 select select-bordered" data-controller="category--price-order" data-category-id=<%= @parent_category.id%> data-price-order=<%= @price_order %>>
+    <option disabled selected data-category--price-order-target="optionDefault">價格</option>
+    <option value="price_asc" data-category--price-order-target="optionAsc">價格： 低到高</option>
+    <option value="price_desc" data-category--price-order-target="optionDesc">價格： 高到低</option>
+  </select>
+</div>
 <div class="grid w-10/12 gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
   <%= render partial:'product',collection: @products, as: :product %>
 </div>
