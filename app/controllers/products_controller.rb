@@ -31,6 +31,13 @@ class ProductsController < ApplicationController
     #印出所有規格
     @spec_all = @product.sale_infos
     @cart_product = CartProduct.new
+
+    #category
+    @subcategory = @product.category
+    @main_category = @subcategory.parent
+
+    #property
+    @property = @product.property
   end
 
   def new
@@ -106,7 +113,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :category_id, sale_infos_attributes: [:storage, :price, :spec], property_attributes: [:brand, :size, :weight, :quantity_per_set])
+    params.require(:product).permit(:name, :description, :category_id, :images, sale_infos_attributes: [:storage, :price, :spec], property_attributes: [:brand, :size, :weight, :quantity_per_set])
   end
 
   def get_products_by_categories(categories)

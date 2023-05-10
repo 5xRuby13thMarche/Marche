@@ -6,13 +6,12 @@
       <%= form.label :name ,'商品名稱 *'%>
       <%= form.text_field :name, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
-
+    <%= form.file_field :images %>
     <div class="my-5" data-controller="category--assign">
       <h3 class="pb-2">分類 *</h3>
       <div data-category--assign-target="show" class="text-gray-700"></div>
       <!-- The button to open modal -->
       <label for="my-modal-4" class="py-2 btn bg-marche_orange border-marche_orange">請選擇</label>
-
       <!-- Put this part before </body> tag -->
       <input type="checkbox" id="my-modal-4" class="modal-toggle" />
       <label for="my-modal-4" class="cursor-pointer modal">
