@@ -1,17 +1,13 @@
-<div class="flex justify-center justify-between">
-  <div class="btn w-[123px] p-3">
+<div class="flex justify-between w-full">
     <%- if controller_name != 'sessions' %>
-      <%= link_to "登入", new_session_path(resource_name) %><br />
+      <%= link_to "登入", new_session_path(resource_name), class: "btn w-[123px] p-2" %>
     <% end %>
-  </div>
 
-  <div class="btn w-[123px] p-3">
     <%- if devise_mapping.omniauthable? %>
       <%- resource_class.omniauth_providers.each do |provider| %>
-        <%= button_to "Google", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
+        <%= button_to "Google", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "btn w-[123px] p-2" %>
       <% end %>
     <% end %>
-  </div>
 </div>
 
 
@@ -30,5 +26,4 @@
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
-
 
