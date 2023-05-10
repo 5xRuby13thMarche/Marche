@@ -9,9 +9,9 @@ class Product < ApplicationRecord
   has_many :product_likers, through: :product_likes, source: :user
   has_many :product_comments, dependent: :destroy
   has_many :sale_infos, dependent: :destroy
- 
+  has_one :property, dependent: :destroy
   
-  accepts_nested_attributes_for :sale_infos
+  accepts_nested_attributes_for :sale_infos, :property
 
   def self.ransackable_attributes(auth_object = nil)
     ["name"]
