@@ -4,14 +4,14 @@
   </div>
   <h2 class="text-slate-600 text-lg">登入</h2>
 </div>
-<div class="w-full flex py-16 flex-col sm:flex-row justify-evenly items-center bg-marche_orange ">
+<div class="w-full flex py-16 flex-col sm:flex-row justify-evenly items-center bg-marche_orange">
   <%# logo %>
   <div class="bg-rose-300 bg-opacity-0 w-80 h-80 flex justify-center items-center"> 
     <%= image_tag "marche_logo_orangewhite.png"%>
   </div>
   <%# 輸入框 %>
-  <div class="w-[337px] bg-marche_white rounded-xl flex justify-center items-center">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name),html: {class: "p-[37.99px] w-[305px]"} )  do |f| %>
+  <div class="w-[337px] bg-marche_white rounded-xl flex flex-wrap px-[37.99px] py-[53.98px]">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name),html: {class: "w-[305px]"} )  do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <h3 class="text-left text-2xl font-bold text-slate-500 mb-3">登入</h3>
       <div class="field mb-3">
@@ -35,14 +35,17 @@
       <div class="actions pt-5 pb-5 flex justify-center">
         <%= f.submit "登入", class: "w-full text-lg p-2 bg-marche_orange rounded-lg text-marche_white cursor-pointer hover:bg-orange-600" %>
       </div>
-      
     <% end %>
-    <div class="">
+    <%# 註冊與第三方google按鈕 %>
+    <div class="flex w-full justify-between">
+      <%= link_to "註冊", new_user_registration_path, class: "btn w-[123px] active:bg-marche_orange" %>
+      <div class="flex justify-center">
         <%- if devise_mapping.omniauthable? %>
           <%- resource_class.omniauth_providers.each do |provider| %>
-            <%= button_to "使用Google登入", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "btn flex justify-center tracking-wide" %><br />
+            <%= button_to "Google", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "btn w-[123px] tracking-wide" %><br />
           <% end %>
         <% end %>
       </div>
+    </div>
   </div>
 </div>
