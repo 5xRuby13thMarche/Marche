@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: Marche_production
-  username: Marche
-  password: <%= ENV['MARCHE_DATABASE_PASSWORD'] %>
+  # database: Marche_production
+  # username: Marche
+  # password: <%= ENV['MARCHE_DATABASE_PASSWORD'] %>
