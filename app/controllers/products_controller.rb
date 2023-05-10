@@ -36,15 +36,14 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.sale_infos.build
+    @product.build_property
+
   end
   
   def edit
   end
   
   def create
-    p '-'*100
-    p params
-    p '-'*100
     @product = Product.new(product_params)
     if @product.save
       redirect_to root_path, notice: "新增商品成功" 
@@ -87,7 +86,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :category_id, sale_infos_attributes: [:storage, :price, :spec])
+    params.require(:product).permit(:name, :description, :category_id, sale_infos_attributes: [:storage, :price, :spec], property_attributes: [:brand, :size, :weight, :quantity_per_set])
   end
 
   def get_products_by_categories(categories)
