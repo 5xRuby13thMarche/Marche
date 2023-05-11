@@ -3,17 +3,12 @@
     <%# checkbox %>
     <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "checkbox checkbox-sm rounded p-2 m-2" , data: {cart__item_target: "checkbox", cart__form_target: "checkbox", action: "change->cart--form#update"} %>
     <%# 商品圖片 %>
-    <%= link_to product_path(cart_product.sale_info.product_id), class: "block w-20 h-20 bg-slate-300 m-2" do %>
-      <img src="https://picsum.photos/80/80/?random=12" class=''>
+    <%= link_to product_path(cart_product.sale_info.product_id), class: "block w-20 h-20 bg-slate-300 m-2 rounded" do %>
+      <%= show_image(cart_product.sale_info.product) %>
     <% end %>
     <h3 class="w-[70px] md:w-[120px] lg:w-[260px] xl:w-[390px] text-center"><%= cart_product.sale_info.product.name %></h3>
     <%# 規格 %>
-    <div class="ml-auto dropdown">
-      <label tabindex="0" class="m-1 spec-btn"><%= cart_product.sale_info.spec %></label>
-      <%# <div tabindex="0" class="w-64 p-2 shadow dropdown-content card card-compact bg-primary text-primary-content">
-        <div class="card-body">test</div>
-      </div> %>
-    </div>
+    <p class="ml-auto spec-btn"><%= cart_product.sale_info.spec %></p>
   </div>
   <div class="flex items-center w-1/2 px-2">
     <%# 單價 %>

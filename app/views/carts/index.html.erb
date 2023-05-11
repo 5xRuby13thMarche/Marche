@@ -1,6 +1,7 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <section class="container mx-auto mt-6 border bg-gay-200">
   <%= form_with url: checkout_path, method: :get, data: { turbo: "false", controller: "cart--form", cart_id: current_user.cart.id} do |form| %>
+    <%# 標題欄區域 %>
     <div class="flex items-center justify-start bg-gray-100 h-14">
       <p class="w-1/2 text-sm text-center">商品</p>
       <div class="flex w-1/2 ">
@@ -10,7 +11,9 @@
         <p class="w-1/4 text-sm text-center">操作</p>
       </div>
     </div>
+    <%# 購物車項目區域 %>
     <%= render partial:'carts/item', collection: @cart_products , as: :cart_product%>
+    <%# 下方勾選、刪除、提交操作區域 %>
     <div class="container flex items-center h-20 bg-gray-100">
       <div class="flex items-center ml-2 mr-5">
         <input type="checkbox"
