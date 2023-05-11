@@ -1,18 +1,49 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<h1 class="self-end w-10/12 mx-auto mt-8 mb-1 text-xl font-bold text-marche_black">分類：<%= @parent_category.content%></h1>
-<%#  %>
-<%# 商品呈現區域 %>
-<%# 篩選器 %>
-<div class="flex items-center justify-center w-10/12 p-2 mx-auto my-4 border bg-marche_white">
-  <span class="mx-2">篩選</span>
-  <%= link_to '最新', product_parent_category_path(@parent_category, order: 'new'), class: "mx-2 py-1 px-4 border"%>
-  <%= link_to '最熱門', '#', class: "mx-2 py-1 px-4 border"%>
-  <select class="max-w-xs w-44 select select-bordered" data-controller="category--price-order" data-category-id=<%= @parent_category.id%> data-price-order=<%= @price_order %>>
-    <option disabled selected data-category--price-order-target="optionDefault">價格</option>
-    <option value="price_asc" data-category--price-order-target="optionAsc">價格： 低到高</option>
-    <option value="price_desc" data-category--price-order-target="optionDesc">價格： 高到低</option>
-  </select>
+<%# 標題區 %>
+<div class="flex items-center w-10/12 mx-auto mt-8 mb-1">
+  <%# 標題 %>
+  <%= link_to product_parent_category_path(@parent_category), class: "mr-4" do %>
+    <h1 class="text-xl font-bold text-marche_black">分類：<%= @parent_category.content%></h1>
+  <% end %>
+  <%# 麵包屑 %>
+  <div class="text-sm breadcrumbs">
+    <ul>
+      <li><%= link_to '首頁', root_path %></li>
+      <li><%= link_to @parent_category.content, product_parent_category_path(@parent_category) %></li>
+      <% if @recent_child.present? %>
+        <li><%= get_category_content_by_id(@recent_child)%></li>
+      <% end %>
+      <% if @recent_order.present? %>
+        <li><%= get_order_bread_name(@recent_order)%></li>
+      <% end %>
+    </ul>
+  </div>
 </div>
-<div class="grid w-10/12 gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
-  <%= render partial:'product',collection: @products, as: :product %>
+<%# 商品＆篩選器呈現區域 %>
+<div class="flex w-10/12 mx-auto" data-controller="category--order" data-parent-category-id=<%= @parent_category.id%> data-recent-order="<%= @recent_order %>" data-recent-child="<%= @recent_child %>">
+  <%# 左方篩選器 %>
+  <div class="flex flex-col w-2/12 my-4">
+    <p class="p-1 font-bold">所有分類</p>
+    <span class="w-10/12 h-0.5 bg-marche_pearl"></span>
+    <ul>
+      <%= render partial: 'category_list', collection: @child_categories, as: :child_category,  locals:{parent_category: @parent_category} %>
+    </ul>
+  </div>
+  <%# 右側商品區 %>
+  <section class="w-10/12">
+    <%# 上方篩選器 %>
+    <div class="flex items-center justify-center p-2 mx-auto my-4 border bg-marche_white">
+      <span class="mx-2">篩選</span>
+      <%= link_to '最新', product_parent_category_path(@parent_category, order: 'new'), class: "mx-2 py-1 px-4 border", data: {action: "click->category--order#changeRecentOrderByNewLink", turbo: "false"}%>
+      <select class="max-w-xs w-44 select select-bordered" data-category--order-target="selectArea" data-action="change->category--order#changeRecentOrderBySelector">
+        <option disabled selected data-category--order-target="optionDefault">價格</option>
+        <option value="price_asc" data-category--order-target="optionAsc">價格： 低到高</option>
+        <option value="price_desc" data-category--order-target="optionDesc">價格： 高到低</option>
+      </select>
+    </div>
+    <%# 商品顯示區 %>
+    <div class="grid gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-4 md:grid-cols-4 xl:grid-cols-5">
+      <%= render partial:'product',collection: @products, as: :product %>
+    </div>
+  </section>
 </div>
