@@ -15,10 +15,8 @@ module ProductsHelper
     current_user&.cart&.cart_products&.count
   end
   def image(product, size: [250, 250])
-    if product && product.images.present?
-      product.images.each do |i|
-        image_tag i.representation(resize_to_limit: [100, 100])
-      end
+    if product.images.present?
+        image_tag product.images[0].representation(resize_to_limit: [400, 400]), class:"w-full rounded-t-sm aspect-1"
     else
       image_tag 'https://cdn.iconscout.com/icon/free/png-512/free-user-1851010-1568997.png?f=avif&w=256', size: "#{size[0]}x#{size[1]}"
     end

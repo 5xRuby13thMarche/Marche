@@ -1,19 +1,8 @@
+      <%= link_to product_path(product) do %>
 <section class="border-b border-gray-200 rounded-sm shadow-md">
   <header class= "mb-2">
     <div>
-      <%= link_to product_path(product) do %>
-        <ul>
-          <% product.images.each do |image| %>
-            <li>
-              <% if image.representable? %>
-                <%= image_tag image.representation(resize_to_limit: [400, 400]), class:"w-full rounded-t-sm" %>
-              <% else %>
-                <%= image_tag 'https://cdn.iconscout.com/icon/free/png-512/free-user-1851010-1568997.png?f=avif&w=256', size: [200, 200] %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
+      <%= image(product) %>
     </div>
   </header>
   <section class= "flex flex-col justify-between h-24 px-2">
@@ -21,3 +10,4 @@
     <div class="mb-2 font-semibold text-marche_orange text-md">$<%= product.sale_infos.first.price %></div>
   </section>
 </section>
+      <% end %>
