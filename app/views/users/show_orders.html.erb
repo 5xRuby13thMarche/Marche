@@ -1,3 +1,20 @@
-閱覽我的訂單
+<div class="container flex mx-auto">
 
-<%= render partial:'users/order', collection: @orders, as: :order %>
+  <div class="w-2/12 mx-auto mt-1 0">
+    <div class="mt-4 mb-4">
+      <div class="flex items-center hover:cursor-pointer">
+        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/user--v1.png" alt="user--v1"/>
+        <%= link_to '編輯帳戶', edit_user_registration_path %>
+      </div>
+      <div class="flex items-center">
+        <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
+        <p class="block">查看訂單</p>
+     </div>
+    </div>
+  </div>
+  
+  <div class="w-10/12 mx-auto mt-1 0">
+    <h1 class="mt-4 mb-4 text-2xl font-bold">我的訂單</h1>
+    <%= render partial:'users/order', collection: @orders, as: :order %>
+  <div>
+</div>
