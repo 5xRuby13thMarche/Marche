@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   get '/search', to: 'products#search'
 
+  resources :shops
 
   # carts
   post '/cart', to: 'carts#create'
