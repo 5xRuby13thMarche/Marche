@@ -8,19 +8,18 @@
         <%# 圖片 %>
         <header class="mr-5">
           <div class="mb-2 bg-gray-400 w-100 h-100">
-          <%# 目前只能丟出一張 %>
+            <%# 目前只能丟出一張 %>
             <%= show_image(@product) %>
           </div>
-        <%# 喜歡功能 %>
-        <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>">
-          <i class="fa-regular fa-heart fa-xl text-rose-600 hover:animate-bounce" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
-          <span>Like商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
-        </div>
+          <%# 喜歡功能 %>
+          <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>">
+            <i class="fa-regular fa-heart fa-xl text-rose-600 hover:animate-bounce" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
+            <span>Like商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
+          </div>
         </header>
         <%# 資訊詳情 %>
         <%= render partial: 'products/info', locals: {sale_info: @sale_info, product: @product, cart_product: @cart_product} %>
       </div>
-      
     </div>
     <%# 商品規格 %>
     <section class="p-3 mb-3">
@@ -31,15 +30,15 @@
       </div>
       <div class="flex mb-2">
         <span class="block text-gray-400">品牌:</span>
-        <div class="ml-8"><%= @property.brand %></div>
+        <div class="ml-8"><%= @property&.brand %></div>
       </div>
       <div class="flex mb-2">
         <span class="block text-gray-400">尺寸:</span>
-        <div class="ml-8"><%= @property.size %></div>
+        <div class="ml-8"><%= @property&.size %></div>
       </div>
       <div class="flex mb-2">
         <span class="block text-gray-400">重量:</span>
-        <div class="ml-8"><%= @property.weight %></div>
+        <div class="ml-8"><%= @property&.weight %></div>
       </div>
     </section>
     <%# 商品詳情 %>
