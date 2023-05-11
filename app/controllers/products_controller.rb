@@ -3,10 +3,11 @@ class ProductsController < ApplicationController
   before_action :set_q_ransack, only: [:index, :show, :search, :category]
   
   def index
-    @products = Product.includes(:sale_infos).order(created_at: :desc)
+    @products = Product.includes(:sale_infos)
     @pagy, @product_records = pagy(@products, items: 24)
     @ransack_q = Product.ransack(params[:q])
     @categories = Category.where(parent_id: nil)
+    @new_products = Product.includes(:sale_infos).order(created_at: :desc).limit(12)
   end
 
   def show
