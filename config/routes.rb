@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     resources :comments, shallow: true, only: [:create, :update, :edit, :destroy]
   end
   get '/search', to: 'products#search'
-  get '/parent_category/:id', to: 'products#category', as: :product_parent_category # 大項分類頁面
 
 
   # carts
@@ -23,6 +22,8 @@ Rails.application.routes.draw do
   
   # categories
   resources :categories
+  get '/parent_category/:id', to: 'products#category', as: :product_parent_category # 大項分類頁面
+
 
   #藍新付款路徑
   post '/orders', to: 'orders#create'
