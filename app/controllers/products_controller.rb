@@ -79,27 +79,30 @@ class ProductsController < ApplicationController
   def category
     @parent_category = Category.find(params[:id])
     @child_categories = @parent_category.children
-    if params[:order] == 'new'
-      @products = @parent_category.child_products.order(created_at: :desc)
-    elsif params[:order] == 'price_asc'
-      @price_order = 'price_asc'
-      @products = @parent_category.child_products.joins(:sale_infos)
+    @recent_child  = (params[:sub_category].present?) ? params[:sub_category] : nil
+    @recent_order = (params[:order].present?) ? params[:order] : nil
+
+    if @recent_child.nil? == false
+      @products = Category.find(params[:sub_category]).products
+    else
+      @products = @parent_category.child_products
+    end
+
+    if @recent_order == 'new'
+      @products = @products.order(created_at: :desc)
+    elsif @recent_order == 'price_asc'
+      @products = @products.joins(:sale_infos)
                                   .select("products.*, MAX(sale_infos.price) as max_price")
                                   .group("products.id")
                                   .order("max_price ASC")
-    elsif params[:order] == 'price_desc'
-      @price_order = 'price_desc'
-      @products = @parent_category.child_products.joins(:sale_infos)
+    elsif @recent_order == 'price_desc'
+      @products = @products.joins(:sale_infos)
                                   .select("products.*, MAX(sale_infos.price) as max_price")
                                   .group("products.id")
                                   .order("max_price DESC")
     else
-      @products = @parent_category.child_products.order(created_at: :asc)
+      @products = @products.order(created_at: :asc)
     end
-
-    
-
-
   end
 
   private
@@ -114,14 +117,6 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:name, :description, :category_id, :images, sale_infos_attributes: [:storage, :price, :spec], property_attributes: [:brand, :size, :weight, :quantity_per_set])
-  end
-
-  def get_products_by_categories(categories)
-    products = []
-    categories.each do |c|
-      products.concat(c.products)
-    end
-    return products
   end
 
 end
