@@ -9,7 +9,7 @@
         <header class="mr-5">
           <div class="mb-2 bg-gray-400 w-100 h-100">
           <%# 目前只能丟出一張 %>
-            <%= image(@product) %>
+            <%= show_image(@product) %>
           </div>
         <%# 喜歡功能 %>
         <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>">
