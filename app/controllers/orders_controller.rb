@@ -75,6 +75,7 @@ class OrdersController < ApplicationController
   def shop_order
     @shop = current_user.shop
     @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
+    
 
 
     render layout: 'backend'
