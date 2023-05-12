@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_01_082417) do
+ActiveRecord::Schema.define(version: 2023_05_10_090846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,8 +122,20 @@ ActiveRecord::Schema.define(version: 2023_05_01_082417) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "category_id"
+    t.string "images"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["shop_id"], name: "index_products_on_shop_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "brand"
+    t.string "size"
+    t.string "weight"
+    t.integer "quantity_per_set"
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_properties_on_product_id"
   end
 
   create_table "sale_infos", force: :cascade do |t|
@@ -176,6 +188,7 @@ ActiveRecord::Schema.define(version: 2023_05_01_082417) do
   add_foreign_key "product_likes", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "shops"
+  add_foreign_key "properties", "products"
   add_foreign_key "sale_infos", "products"
   add_foreign_key "shops", "users"
 end

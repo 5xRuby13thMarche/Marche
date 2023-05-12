@@ -1,37 +1,59 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <div class="flex w-full max-w-2xl mx-auto">
   <div class="w-full mx-auto">
-    <%= render 'shared/flash' if flash.any? %>
-    <h1 class="self-end mt-5 mb-2 text-xl font-bold text-marche_orange" >檢視商品</h1>
-    <%# 商品基本欄位 %>
-    <div class="flex grid w-full grid-cols-2">
-      <%# 圖片 %>
-      <header class="mr-5 ">
-        <div class="w-100 h-100">
-          <img src="https://picsum.photos/350/400/" class="w-full">
-        </div>
-      </header>
-      <%# 資訊詳情 %>
-      <%= render partial: 'products/info', locals: {sale_info: @sale_info, product: @product, cart_product: @cart_product} %>
+    <div class="w-full p-3 mx-auto my-3">
+      <%= render 'shared/flash' if flash.any? %>
+      <%# 商品基本欄位 %>
+      <div class="flex grid w-full grid-cols-2">
+        <%# 圖片 %>
+        <header class="mr-5">
+          <div class="mb-2 bg-gray-400 w-100 h-100">
+            <%# 目前只能丟出一張 %>
+            <%= show_image(@product) %>
+          </div>
+          <%# 喜歡功能 %>
+          <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>">
+            <i class="fa-regular fa-heart fa-xl text-rose-600 hover:animate-bounce" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
+            <span>Like商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
+          </div>
+        </header>
+        <%# 資訊詳情 %>
+        <%= render partial: 'products/info', locals: {sale_info: @sale_info, product: @product, cart_product: @cart_product} %>
+      </div>
     </div>
-    <%# 喜歡功能 %>
-    <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>">
-      <i class="fa-regular fa-heart fa-xl text-rose-600 hover:animate-bounce" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
-      <span>Like商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
-    </div>
+    <%# 商品規格 %>
+    <section class="p-3 mb-3">
+      <h2 class="block py-1 mb-1 text-lg font-bold border-b-2">商品規格</h2>
+      <div class="flex my-2">
+        <span class="block text-gray-400">分類:</span>
+        <div class="ml-8"><%= @main_category.content %>><%= @subcategory.content %></div>
+      </div>
+      <div class="flex mb-2">
+        <span class="block text-gray-400">品牌:</span>
+        <div class="ml-8"><%= @property&.brand %></div>
+      </div>
+      <div class="flex mb-2">
+        <span class="block text-gray-400">尺寸:</span>
+        <div class="ml-8"><%= @property&.size %></div>
+      </div>
+      <div class="flex mb-2">
+        <span class="block text-gray-400">重量:</span>
+        <div class="ml-8"><%= @property&.weight %></div>
+      </div>
+    </section>
     <%# 商品詳情 %>
-    <section>
-      <div class="my-5">
-        <strong class="block mb-1 font-medium">描述:</strong>
+    <section class="p-3 mb-3">
+      <div class="mb-5">
+        <h2 class="block py-1 mb-1 text-lg font-bold border-b-2">商品詳情</h2>
         <%= @product.description %>
       </div>
     </section>
   </div>
 </div>
 <%# Comment %>
-<div class="max-w-2xl mx-auto ">
+<div class="max-w-2xl p-3 mx-auto">
   <%# 留言輸入區 %>
-  <h2 class="m-1 text-lg font-bold">商品評價</h2>
+  <h2 class="py-1 m-1 text-lg font-bold ">商品評價</h2>
   <%= render partial: 'comments/comment_ranking', locals: {average_rating: @average_rating, product: @product} %>
   <% if user_signed_in? %>
     <%= form_with model: @product_comment, url: product_comments_path(@product.id) do |f| %>

@@ -14,4 +14,33 @@ module ProductsHelper
   def get_user_cart_products_num
     current_user&.cart&.cart_products&.count
   end
+  def image(product, size: [250, 250])
+    if product.images.present?
+        image_tag product.images[0].representation(resize_to_limit: [400, 400]), class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
+    else
+      image_tag 'https://cdn.iconscout.com/icon/free/png-512/free-user-1851010-1568997.png?f=avif&w=256', size: "#{size[0]}x#{size[1]}", class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
+    end
+  end
+  def show_image(product, size: [250, 250])
+    if product.images.present?
+        image_tag product.images[0].representation(resize_to_limit: [800, 800]), class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
+    else
+      image_tag 'https://cdn.iconscout.com/icon/free/png-512/free-user-1851010-1568997.png?f=avif&w=256', size: "#{size[0]}x#{size[1]}"
+    end
+  end
+  # 分類商品顯示頁面用
+  def get_category_content_by_id(id)
+    Category.find_by(id: id).content
+  end
+  def get_order_bread_name(recent_order)
+    case recent_order
+    when "new"
+      return "最新"
+    when "price_asc"
+      return "價格 低到高"
+    when "price_desc"
+      return "價格高到低"
+    end
+  end
+  
 end

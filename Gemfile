@@ -22,6 +22,7 @@ gem "pagy", "~> 6.0"
 gem "image_processing", ">= 1.2"
 gem "aws-sdk-s3", require: false
 gem "ransack", "~> 4.0"
+gem "tailwindcss-rails", "~> 2.0"
 
 
 group :development, :test do
@@ -32,7 +33,6 @@ end
 
 group :development do
   gem 'web-console', '>= 4.1.0'
-  gem "tailwindcss-rails", "~> 2.0"
   gem 'listen', '~> 3.3'
   gem "foreman", "~> 0.87.2"
   gem "htmlbeautifier", "~> 1.4"
@@ -52,3 +52,5 @@ end
 
 
 
+
+gem "dockerfile-rails", ">= 1.2", :group => :development

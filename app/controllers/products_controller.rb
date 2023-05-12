@@ -3,10 +3,11 @@ class ProductsController < ApplicationController
   before_action :set_q_ransack, only: [:index, :show, :search, :category]
   
   def index
-    @products = Product.includes(:sale_infos).order(created_at: :desc)
+    @products = Product.includes(:sale_infos)
     @pagy, @product_records = pagy(@products, items: 24)
     @ransack_q = Product.ransack(params[:q])
     @categories = Category.where(parent_id: nil)
+    @new_products = Product.includes(:sale_infos).order(created_at: :desc).limit(12)
   end
 
   def show
@@ -31,20 +32,26 @@ class ProductsController < ApplicationController
     #印出所有規格
     @spec_all = @product.sale_infos
     @cart_product = CartProduct.new
+
+    #category
+    @subcategory = @product.category
+    @main_category = @subcategory.parent
+
+    #property
+    @property = @product.property
   end
 
   def new
     @product = Product.new
     @product.sale_infos.build
+    @product.build_property
+
   end
   
   def edit
   end
   
   def create
-    p '-'*100
-    p params
-    p '-'*100
     @product = Product.new(product_params)
     if @product.save
       redirect_to root_path, notice: "新增商品成功" 
@@ -72,8 +79,31 @@ class ProductsController < ApplicationController
 
   def category
     @parent_category = Category.find(params[:id])
-    @categories = @parent_category.children.includes(:products)
-    @products = get_products_by_categories(@categories)
+    @child_categories = @parent_category.children
+    @recent_child  = (params[:sub_category].present?) ? params[:sub_category] : nil
+    @recent_order = (params[:order].present?) ? params[:order] : nil
+
+    if @recent_child.nil? == false
+      @products = Category.find(params[:sub_category]).products
+    else
+      @products = @parent_category.child_products
+    end
+
+    if @recent_order == 'new'
+      @products = @products.order(created_at: :desc)
+    elsif @recent_order == 'price_asc'
+      @products = @products.joins(:sale_infos)
+                                  .select("products.*, MAX(sale_infos.price) as max_price")
+                                  .group("products.id")
+                                  .order("max_price ASC")
+    elsif @recent_order == 'price_desc'
+      @products = @products.joins(:sale_infos)
+                                  .select("products.*, MAX(sale_infos.price) as max_price")
+                                  .group("products.id")
+                                  .order("max_price DESC")
+    else
+      @products = @products.order(created_at: :asc)
+    end
   end
 
   private
@@ -87,15 +117,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :category_id, sale_infos_attributes: [:storage, :price, :spec])
-  end
-
-  def get_products_by_categories(categories)
-    products = []
-    categories.each do |c|
-      products.concat(c.products)
-    end
-    return products
+    params.require(:product).permit(:name, :description, :category_id, :images, sale_infos_attributes: [:storage, :price, :spec], property_attributes: [:brand, :size, :weight, :quantity_per_set])
   end
 
 end

@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+.slick-prev {
+    left: 10px !important;
+    width: 40px !important;
+    height: 40px !important;
+    z-index: 1;
+  }
+
+.slick-prev:before {
+    font-size: 40px !important;
+  }
+   
+.slick-next {
+    right: 10px !important;
+    width: 40px !important;
+    height: 40px !important;
+    z-index: 1;
+  }
+
+.slick-next:before {
+    font-size: 40px !important;
+  }
