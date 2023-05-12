@@ -1,28 +1,30 @@
-<div class="flex" data-controller="cart--item" data-cart-product-id="<%=cart_product.id%>" data-cart--form-target="cartItem" id="cart_product_<%=cart_product.id%>">
-  <div class="flex items-center w-1/2 px-2">
+<div class="flex my-2 md:my-0" data-controller="cart--item" data-cart-product-id="<%=cart_product.id%>" data-cart--form-target="cartItem" id="cart_product_<%=cart_product.id%>">
+  <div class="flex items-center w-36">
     <%# checkbox %>
-    <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "checkbox checkbox-sm rounded p-2 m-2" , data: {cart__item_target: "checkbox", cart__form_target: "checkbox", action: "change->cart--form#update"} %>
+    <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "focus:outline-gray-600 checkbox checkbox-sm rounded ml-3 mr-2 md:ml-5" , data: {cart__item_target: "checkbox", cart__form_target: "checkbox", action: "change->cart--form#update"} %>
     <%# 商品圖片 %>
-    <%= link_to product_path(cart_product.sale_info.product_id), class: "block w-20 h-20 bg-slate-300 m-2 rounded" do %>
+    <%= link_to product_path(cart_product.sale_info.product_id), class: "block w-20 h-20 bg-slate-300 m-1 rounded mx-auto" do %>
       <%= show_image(cart_product.sale_info.product) %>
     <% end %>
-    <h3 class="w-[70px] md:w-[120px] lg:w-[260px] xl:w-[390px] text-center"><%= cart_product.sale_info.product.name %></h3>
-    <%# 規格 %>
-    <p class="ml-auto spec-btn"><%= cart_product.sale_info.spec %></p>
   </div>
-  <div class="flex items-center w-1/2 px-2">
+  <div class="flex flex-wrap items-center w-10/12 px-2 md:flex-nowrap">
+    <%# 商品名稱 %>
+    <h3 class="w-full my-2 text-sm text-left md:mx-2 md:w-4/12 lg:w-5/12"><%= cart_product.sale_info.product.name %></h3>
+    <%# 規格 %>
+    <p class="block w-20 text-sm md:w-2/12 spec-btn"><%= cart_product.sale_info.spec %></p>
     <%# 單價 %>
-    <div class="w-1/4 text-center">$<%= cart_product.sale_info.price %></div>
+    <div class="block w-full my-2 text-sm md:mx-3 md:text-gray-900 text-marche_orange text:start md:text-center md:w-1/12">$<%= cart_product.sale_info.price %></div>
     <%# 數量 %>
-    <div class="relative flex items-center justify-center w-1/4" data-cart--item-target="inputArea">
+    <div class="relative flex items-center justify-start w-full md:justify-center md:w-2/12" data-cart--item-target="inputArea">
       <button class="quantity-btn-left-arrow" data-action="click->cart--item#decrement click->cart--form#update">－</button>
       <input type="number" class="quantity-btn-center-input" value="<%= cart_product.quantity %>" data-cart--item-target="quantity" data-action="change->cart--item#updateQuantity change->cart--form#update" data-storage="<%=cart_product.sale_info.storage%>">
       <button class="quantity-btn-right-arrow" data-action="click->cart--item#increment click->cart--form#update">＋</button>
       <p class="absolute hidden text-xs font-bold text-rose-400 left-1/4 top-full" data-cart--item-target="storageWarning">庫存：<%= cart_product.sale_info.storage %></p>
     </div>
     <%# 總價 ＝ 單價 x 數量 %>
-    <div class="flex items-center justify-center w-1/4 m-2 text-center text-amber-500" data-cart--item-target="itemTotalPrice" data-unit-price="<%= cart_product.sale_info.price %>" data-cart--form-target="itemTotalPrice">$?</div>
-    <%= link_to cart_destroy_path(cart_product.id), method: :delete, data: {action: "cart--item#showDeleteToast"}, class: "w-1/4 text-center" do %>
+    <div class="hidden mx-1 text-sm text-center md:block md:w-1/12 text-marche_orange" data-cart--item-target="itemTotalPrice" data-unit-price="<%= cart_product.sale_info.price %>" data-cart--form-target="itemTotalPrice">$?</div>
+    <%# 刪除 %>
+    <%= link_to cart_destroy_path(cart_product.id), method: :delete, data: {action: "cart--item#showDeleteToast"}, class: "w-full md:w-1/12 text-right md:text-center" do %>
       <i class="p-1 m-1 text-red-500 rounded bg-neutral-100 drop-shadow fa-regular fa-trash-can"></i>
     <% end %>
   </div>

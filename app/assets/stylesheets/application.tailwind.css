@@ -39,13 +39,13 @@
     @apply text-slate-600 border px-1 py-0.5 w-24 inline-block text-center 
   }
   .quantity-btn-left-arrow{
-    @apply w-6 h-8 -mr-1.5 pr-1 border border-black w-7
+    @apply w-9 h-8 -mr-1.5 pr-1 border border-gray-300
   }
   .quantity-btn-right-arrow{
-    @apply w-6 h-8 -ml-1.5 pl-1 border border-black w-7 z-0
+    @apply w-9 h-8 -ml-1.5 pl-1 border border-gray-300 z-0
   }
   .quantity-btn-center-input{
-    @apply z-10 w-12 h-8 p-0 text-center border-black border-slate-500
+    @apply z-10 w-12 h-8 p-0 text-center border-gray-300
   }
 
   /* 去除number input 預設的上下箭頭 */
