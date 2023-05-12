@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   end
   get '/search', to: 'products#search'
 
-  resources :shops
+  resources :shops do 
+    # get '/products', to: 'shops#'
+  end
+
 
   # carts
   post '/cart', to: 'carts#create'
@@ -25,13 +28,20 @@ Rails.application.routes.draw do
   resources :categories
   get '/parent_category/:id', to: 'products#category', as: :product_parent_category # 大項分類頁面
 
+  #order
+  get '/shop/:id/order', to: 'orders#shop_order', as: :shop_order
 
-  #藍新付款路徑
-  post '/orders', to: 'orders#create'
+  resources :orders, only: %i[create] do
+    collection do
+      post :notify
+    end
+  end
+
+  # post '/orders', to: 'orders#create'
   get "/orders/:id",to: "orders#show", as: :order_show 
-  post "/orders/notify",to: "orders#notify"   #接收藍新post回來的頁面
   # users' orders
   get '/orders', to: 'orders#show_orders', as: :show_orders
+  # post "/orders/notify",to: "orders#notify"   #接收藍新post回來的頁面
 
 
   # API 路徑
