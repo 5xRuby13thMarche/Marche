@@ -1,7 +1,9 @@
-<div class="flex w-full bg-marche_orange">
+<div class="flex w-full p-3 bg-marche_backend_primary">
   <nav class="w-full items-center flex flex-wrap justify-end content-center mx-[30px] 2xl:mx-[140px] xl:mx-[132px] lg:mx-[120px] md:mx-[116px] sm:mx-[60px]">
     <% if current_user&.shop.present? %>
-      <%= link_to "賣家中心", shops_path , class: "text-gray-100 text-xs mr-auto border border-x-0 border-t-0"%>
+      <%#= link_to "${<%= @shop.name%>的賣場}", shops_path , class: "text-gray-100 text-xs mr-auto border border-x-0 border-t-0" do %>
+        <h1><%= @shop.name%>的賣場</h1>
+      <% end %>
     <% else %>
       <%= link_to "賣家中心", new_shop_path , class: "text-gray-100 text-xs mr-auto border border-x-0 border-t-0"%>
     <% end %>
@@ -15,17 +17,16 @@
       </label>
       <ul tabindex="0" class="p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-60">
         <% if user_signed_in? %>
-          <li class="py-1 pl-4 text-marche_orange text-md"><%= current_user.email %></li>
+          <li class="p-4 py-1 pl-4 text-marche_backend_primary text-md"><%= current_user.email %></li>
           <li>
-            <%= link_to "我的帳戶", edit_user_registration_path, class: "active:bg-marche_orange" %>
-            <%= link_to "我的訂單", show_orders_path, class: "active:bg-marche_orange" %>
-            <%= link_to "登出", destroy_user_session_path, data: { turbo_method: :delete,  confirm: '是否確定登出'}, class: "active:bg-marche_orange" %>
+            <%= link_to "編輯我的帳戶", edit_user_registration_path, class: "active:bg-marche_backend_primary p-4" %>
+            <%= link_to "登出", destroy_user_session_path, data: { turbo_method: :delete,  confirm: '是否確定登出'}, class: "active:bg-marche_backend_primary p-4" %>
           </li>
         <% else %>
-          <li class="py-1 pl-4 text-marche_orange text-md">您現在為訪客</li>
+          <li class="p-4 py-1 pl-4 text-marche_backend_primary text-md">您現在為訪客</li>
           <li>
-            <%= link_to "註冊", new_user_registration_path, class: "active:bg-marche_orange" %>
-            <%= link_to "登入", new_user_session_path, class: "active:bg-marche_orange" %>
+            <%= link_to "註冊", new_user_registration_path, class: "active:bg-marche_backend_primary p-4" %>
+            <%= link_to "登入", new_user_session_path, class: "active:bg-marche_backend_primary p-4" %>
           </li>
         <% end %>
       </ul>

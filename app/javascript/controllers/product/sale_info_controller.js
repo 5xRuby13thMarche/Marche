@@ -31,7 +31,6 @@ export default class extends Controller {
   
   decrease(e) {
     e.preventDefault();
-    console.log(this.saleInfoTarget)
     if (this.element.children.length > 2){
       e.target.closest("div.deleteFields").remove();
       this.formAmount = this.formAmount - 1
