@@ -1,7 +1,20 @@
-<div class="flex justify-center w-full max-w-screen-lg px-4 mx-auto lg:px-6 xl:px-8">
+<div class="container flex flex-col mx-auto sm:flex-row sm:items-start">
 
-  <div class="mx-auto">
-    <h2 class="mt-4 mb-4 text-2xl font-bold">編輯我的帳戶</h2>
+  <div class="mx-auto mt-1 lg:w-2/12 0 sm:flex-row">
+    <div class="mx-2 mt-4 mb-4">
+      <div class="flex items-center inline-block px-4 py-2 text-center text-gray-400 cursor-not-allowed">
+        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/user--v1.png" alt="user--v1"/>
+        <p class="inline-block">我的帳戶</p>
+      </div>
+      <div class="flex items-center block inline-block px-4 py-2 text-center text-orange-500 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
+        <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
+        <%= link_to '我的訂單', show_orders_path %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="w-10/12 mx-auto mt-1 0">
+    <h2 class="mt-4 mb-4 text-2xl font-bold">我的帳戶</h2>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
     <div class="block sm:inline">
@@ -42,14 +55,14 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "更新", class: "mt-2 px-4 py-2 bg-green-500 text-white rounded-lg" %>
+      <%= f.submit "更新", class: "mt-2 px-4 py-2 text-green-500 bg-green-50 hover:bg-green-100 rounded-lg hover:cursor-pointer" %>
     </div>
     <% end %>
 
     <div class="my-4">
-      <h3 class="text-lg">刪除我的帳號</h3>
+      <h3 class="text-lg">刪除我的帳戶</h3>
       <div class="mt-2">
-        <%= button_to "刪除", registration_path(resource_name), class: "px-4 py-2 bg-red-500 text-white rounded-lg", data: { confirm: "確認刪除？" }, method: :delete %>
+        <%= button_to "刪除", registration_path(resource_name), class: "px-4 py-2 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 hover:cursor-pointer", data: { confirm: "確認刪除？" }, method: :delete %>
       </div>
     </div>
   </div>

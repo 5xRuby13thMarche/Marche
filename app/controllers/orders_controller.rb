@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
 
   def create
@@ -64,6 +65,10 @@ class OrdersController < ApplicationController
     else
       redirect_to order_show_path(@order.id), alert: "交易失敗"
     end
+  end
+
+  def show_orders
+    @orders = current_user.orders.includes(order_products: [:product])
   end
   
   private 

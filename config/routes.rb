@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { 
     omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
   }
-  
+
   # products
   root 'products#index'
 
@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   post '/orders', to: 'orders#create'
   get "/orders/:id",to: "orders#show", as: :order_show 
   post "/orders/notify",to: "orders#notify"   #接收藍新post回來的頁面
+  # users' orders
+  get '/orders', to: 'orders#show_orders', as: :show_orders
 
 
   # API 路徑
