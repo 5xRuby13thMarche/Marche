@@ -5,11 +5,8 @@ class ShopsController < ApplicationController
   
   def index
     @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
-    @total_price = @shop_products.sum{|shop_product| shop_product.each_price}
+    @total_price = @shop_products.sum{|shop_product| (shop_product.each_price * shop_product.quantity) }
     @total_quantity = @shop_products.sum{|shop_product| shop_product.quantity}
-    p '-'*100
-    p @shop_products
-    p '-'*100
 
   end
   
