@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
-  def show_orders
-    @orders = current_user.orders
-  end
+  # def show_orders
+  #   @orders = current_user.orders
+  # end
 
   
 end
