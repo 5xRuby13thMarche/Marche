@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
   #賣家訂單
   def shop_order
     @shop = current_user.shop
-    @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id })
+    @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
 
 
     render layout: 'backend'
