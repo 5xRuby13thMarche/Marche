@@ -11,7 +11,7 @@
     @apply opacity-0 select-none rating-hidden checked:bg-none;
   }
   .star-ranking{
-    @apply bg-marche_white px-4 rounded border py-1 m-1 text-sm
+    @apply bg-marche_white px-3 md:px-4 rounded border py-1 m-1 text-sm
   }
   /* 評論button */
   .comment-btn-sm{
