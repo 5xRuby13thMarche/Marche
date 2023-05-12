@@ -68,7 +68,7 @@ class OrdersController < ApplicationController
   end
 
   def show_orders
-    @orders = current_user.orders
+    @orders = current_user.orders.includes(order_products: [:product])
   end
   
   private 
