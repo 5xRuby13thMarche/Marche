@@ -4,15 +4,15 @@
     <div class="w-full p-3 mx-auto my-3">
       <%= render 'shared/flash' if flash.any? %>
       <%# 商品基本欄位 %>
-      <div class="flex grid w-full grid-cols-2">
+      <div class="flex w-full grid grid-cols-1 sm:grid-cols-2 flex-wrap sm:flex-none">
         <%# 圖片 %>
-        <header class="mr-5">
-          <div class="mb-2 bg-gray-400 w-100 h-100">
-            <%# 目前只能丟出一張 %>
-            <%= show_image(@product) %>
+        <header class="mr-0 md:mr-5 flex-wrap">
+          <div class="mb-2 bg-gray-400 w-80 h-80 rounded-xl mx-auto">
+          <%# 目前只能丟出一張 %>
+            <%= image(@product)%>
           </div>
           <%# 喜歡功能 %>
-          <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>">
+          <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>" class="p-2">
             <i class="fa-regular fa-heart fa-xl text-rose-600 hover:animate-bounce" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
             <span>Like商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
           </div>
@@ -26,7 +26,7 @@
       <h2 class="block py-1 mb-1 text-lg font-bold border-b-2">商品規格</h2>
       <div class="flex my-2">
         <span class="block text-gray-400">分類:</span>
-        <div class="ml-8"><%= @main_category.content %>><%= @subcategory.content %></div>
+        <div class="ml-8"><%= @main_category.content %><%= @subcategory.content %></div>
       </div>
       <div class="flex mb-2">
         <span class="block text-gray-400">品牌:</span>
