@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
     @products = Product.includes(:sale_infos)
     @pagy, @product_records = pagy(@products, items: 24)
     @categories = Category.where(parent_id: nil)
-    @new_products = Product.includes(:sale_infos).order(created_at: :desc).limit(12)
+    @new_products = Product.includes(:sale_infos).order(created_at: :desc).limit(12) 
   end
 
   def show
@@ -49,11 +49,15 @@ class ProductsController < ApplicationController
   
   def create
     @product = Product.new(product_params)
+    @product.shop_id = current_user.shop.id
     if @product.save
       redirect_to root_path, notice: "新增商品成功" 
     else
       render :new, status: :unprocessable_entity 
     end
+  end
+
+  def edit
   end
 
   def update
@@ -115,6 +119,4 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :description, :category_id, :images, sale_infos_attributes: [:storage, :price, :spec], property_attributes: [:brand, :size, :weight, :quantity_per_set])
   end
-
 end
-

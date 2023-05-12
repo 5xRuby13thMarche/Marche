@@ -66,12 +66,22 @@ class OrdersController < ApplicationController
       redirect_to order_show_path(@order.id), alert: "交易失敗"
     end
   end
-
+  #買家訂單
   def show_orders
     @orders = current_user.orders.includes(order_products: [:product])
   end
   
-  private 
+  #賣家訂單
+  def shop_order
+    @shop = current_user.shop
+    @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id })
+
+
+    render layout: 'backend'
+  end
+
+  private
+  
   def generate_tracking_number
     "#{Time.now.strftime("%Y%m%d%H%M%S")}#{SecureRandom.base36(6)}"
   end

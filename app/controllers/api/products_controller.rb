@@ -1,6 +1,7 @@
 class Api::ProductsController < ApplicationController
   before_action :set_product, only: [:like, :dislike]
   before_action :user_not_signed_in, only: [:like, :dislike]
+  
   def like
     current_user.liked_products << @product
     render json: {signInState: "true", new_like_state: "like"}

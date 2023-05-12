@@ -1,4 +1,5 @@
 class Api::CartProductController < ApplicationController
+  
   def sendToCart
     update_cart_product = CartProduct.find_by(sale_info_id: params[:sale_info_id])
     if update_cart_product

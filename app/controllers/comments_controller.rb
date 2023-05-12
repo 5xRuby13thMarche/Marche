@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_product, only: [:create]
   before_action :set_product_comment, only: [:edit, :update, :destroy]
+  
   def create
     @product_comment = ProductComment.new(params_comment)
     @product_comment.user_id = current_user.id
