@@ -108,7 +108,7 @@ class ProductsController < ApplicationController
     if @recent_child.present?
       @products = Category.find(params[:sub_category]).products
     else
-      @products = @parent_category.child_products
+      @products = @parent_category.child_products.includes(images_attachments: :blob).includes(:sale_infos)
     end
     @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
     # 最新 or 價格排序商品
