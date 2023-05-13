@@ -28,5 +28,8 @@ application.register("product--cart-product", Product__CartProductController)
 import Product__LikeController from "./product/like_controller"
 application.register("product--like", Product__LikeController)
 
+import Product__OrderController from "./product/order_controller"
+application.register("product--order", Product__OrderController)
+
 import Product__SaleInfoController from "./product/sale_info_controller"
 application.register("product--sale-info", Product__SaleInfoController)

@@ -1,12 +1,13 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_q_ransack, only: [:index, :show, :search, :category]
+  before_action :set_user_cart_product_num, only: [:index, :show, :search, :category]
   
   def index
-    @products = Product.includes(:sale_infos)
+    @products = Product.includes(images_attachments: :blob).includes(:sale_infos)
     @pagy, @product_records = pagy(@products, items: 24)
     @categories = Category.where(parent_id: nil)
-    @new_products = Product.includes(:sale_infos).order(created_at: :desc).limit(12) 
+    @new_products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(created_at: :desc).limit(12)
   end
 
   def show
@@ -75,6 +76,26 @@ class ProductsController < ApplicationController
 
   def search
     @products = @ransack_q.result(distinct: true)
+    @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
+    @recent_order = (params[:order].present?) ? params[:order] : nil
+
+    # 最新 or 價格排序商品
+    case @recent_order
+    when 'new'
+      @productcs = @products.order(created_at: :desc)
+    when 'price_asc'
+      @products = @products.joins(:sale_infos)
+                                  .select("products.*, MAX(sale_infos.price) as max_price")
+                                  .group("products.id")
+                                  .order("max_price ASC")
+    when  'price_desc'
+      @products = @products.joins(:sale_infos)
+                                  .select("products.*, MAX(sale_infos.price) as max_price")
+                                  .group("products.id")
+                                  .order("max_price DESC")
+    else
+      @products = @products.order(created_at: :asc)
+    end
   end
 
   def category
@@ -83,20 +104,23 @@ class ProductsController < ApplicationController
     @recent_child  = (params[:sub_category].present?) ? params[:sub_category] : nil
     @recent_order = (params[:order].present?) ? params[:order] : nil
 
-    if @recent_child.nil? == false
-      @products = Category.find(params[:sub_category]).products
+    # 是否依照子分類搜尋商品
+    if @recent_child.present?
+      @products = Category.find(params[:sub_category]).products.includes(images_attachments: :blob).includes(:sale_infos)
     else
-      @products = @parent_category.child_products
+      @products = @parent_category.child_products.includes(images_attachments: :blob).includes(:sale_infos)
     end
 
-    if @recent_order == 'new'
-      @products = @products.order(created_at: :desc)
-    elsif @recent_order == 'price_asc'
+    # 最新 or 價格排序商品
+    case @recent_order
+    when 'new'
+      @productcs = @products.order(created_at: :desc)
+    when 'price_asc'
       @products = @products.joins(:sale_infos)
                                   .select("products.*, MAX(sale_infos.price) as max_price")
                                   .group("products.id")
                                   .order("max_price ASC")
-    elsif @recent_order == 'price_desc'
+    when  'price_desc'
       @products = @products.joins(:sale_infos)
                                   .select("products.*, MAX(sale_infos.price) as max_price")
                                   .group("products.id")
@@ -114,6 +138,12 @@ class ProductsController < ApplicationController
 
   def set_q_ransack
     @ransack_q = Product.ransack(params[:q])
+  end
+
+  def set_user_cart_product_num
+    if user_signed_in?
+      @user_cart_product_num = current_user.cart.cart_products.count
+    end
   end
 
   def product_params

@@ -1,5 +1,19 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <h1 class="self-end w-10/12 mx-auto mt-8 mb-1 text-xl font-bold text-marche_orange"><%= params[:keyword]%> 搜尋結果 </h1>
-<div class="grid w-10/12 gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
-  <%= render  @products %>
-</div>
+<%# 右側商品區 %>
+<section class="w-10/12">
+  <%# 上方篩選器 %>
+  <div class="flex items-center justify-center p-2 mx-auto my-4 border bg-marche_white">
+    <span class="mx-2">篩選</span>
+    <%= link_to '最新', search_path(order: 'new'), class: "mx-2 py-1 px-4 border", data: {action: "click->product--order#changeRecentOrderByNewLink", turbo: "false"}%>
+    <select class="max-w-xs w-44 select select-bordered" data-product--order-target="selectArea" data-action="change->product--order#changeRecentOrderBySelector">
+      <option disabled selected data-product--order-target="optionDefault">價格</option>
+      <option value="price_asc" data-product--order-target="optionAsc">價格： 低到高</option>
+      <option value="price_desc" data-product--order-target="optionDesc">價格： 高到低</option>
+    </select>
+  </div>
+  <%# 商品顯示區 %>
+  <div class="grid gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-4 md:grid-cols-4 xl:grid-cols-5">
+    <%= render  @products %>
+  </div>
+</section>
