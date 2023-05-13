@@ -75,26 +75,26 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = @ransack_q.result(distinct: true)
-    @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
     @recent_order = (params[:order].present?) ? params[:order] : nil
 
+    @products = @ransack_q.result(distinct: true)
+    @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
     # 最新 or 價格排序商品
     case @recent_order
     when 'new'
       @productcs = @products.order(created_at: :desc)
     when 'price_asc'
-      @products = @products.joins(:sale_infos)
-                                  .select("products.*, MAX(sale_infos.price) as max_price")
-                                  .group("products.id")
-                                  .order("max_price ASC")
+      # @products = @products.joins(:sale_infos).group('products.id').order('MAX(sale_infos.price) ASC')
+      @products = @products.left_outer_joins(:sale_infos)
+                    .select('products.*, MAX(sale_infos.price) as max_price')
+                    .group('products.id')
+                    .order('max_price ASC')
     when  'price_desc'
-      @products = @products.joins(:sale_infos)
-                                  .select("products.*, MAX(sale_infos.price) as max_price")
-                                  .group("products.id")
-                                  .order("max_price DESC")
-    else
-      @products = @products.order(created_at: :asc)
+      # @products = @products.joins(:sale_infos).group('products.id').order('MAX(sale_infos.price) DESC')
+      @products = @products.left_outer_joins(:sale_infos)
+                    .select('products.*, MAX(sale_infos.price) as max_price')
+                    .group('products.id')
+                    .order('max_price DESC')
     end
   end
 
@@ -106,30 +106,27 @@ class ProductsController < ApplicationController
 
     # 是否依照子分類搜尋商品
     if @recent_child.present?
-      @products = Category.find(params[:sub_category]).products.includes(images_attachments: :blob).includes(:sale_infos)
+      @products = Category.find(params[:sub_category]).products
     else
-      @products = @parent_category.child_products.includes(images_attachments: :blob).includes(:sale_infos)
+      @products = @parent_category.child_products
     end
-
+    @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
     # 最新 or 價格排序商品
     case @recent_order
     when 'new'
       @productcs = @products.order(created_at: :desc)
     when 'price_asc'
-      @products = @products.joins(:sale_infos)
-                                  .select("products.*, MAX(sale_infos.price) as max_price")
-                                  .group("products.id")
-                                  .order("max_price ASC")
+      @products = @products.left_outer_joins(:sale_infos)
+                    .select('products.*, MAX(sale_infos.price) as max_price')
+                    .group('products.id')
+                    .order('max_price ASC')
     when  'price_desc'
-      @products = @products.joins(:sale_infos)
-                                  .select("products.*, MAX(sale_infos.price) as max_price")
-                                  .group("products.id")
-                                  .order("max_price DESC")
-    else
-      @products = @products.order(created_at: :asc)
+      @products = @products.left_outer_joins(:sale_infos)
+                    .select('products.*, MAX(sale_infos.price) as max_price')
+                    .group('products.id')
+                    .order('max_price DESC')
     end
   end
-
   private
 
   def set_product

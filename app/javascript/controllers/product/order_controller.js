@@ -4,14 +4,16 @@ import {Controller} from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["optionDesc", "optionAsc", "optionDefault", "selectArea"];
   connect() {
-    // this.parentCategoryId = this.element.dataset.parentCategoryId;
-    // this.recentChild = this.element.dataset.recentChild;
     this.recentOrder = this.element.dataset.recentOrder;
     this.setSelect(this.recentOrder);
   }
   //  送出連結
   link() {
-    window.location.href = `${this.parentCategoryId}?order=${this.recentOrder}&sub_category=${this.recentChild}`;
+    let location_search = window.location.search;
+    let order_index = location_search.indexOf("&order=");
+    location_search =
+      order_index != -1 ? location_search.split("&order=")[0] : location_search;
+    window.location.href = `${location_search}&order=${this.recentOrder}`;
   }
   // 設定價格排序下拉選單的顯示選項
   setSelect(option) {
@@ -34,10 +36,4 @@ export default class extends Controller {
     this.recentOrder = "new";
     this.link();
   }
-  // 按下子分類連結
-  // changeRecentChild(e) {
-  //   e.preventDefault();
-  //   this.recentChild = e.target.dataset.childCategory;
-  //   this.link();
-  // }
 }
