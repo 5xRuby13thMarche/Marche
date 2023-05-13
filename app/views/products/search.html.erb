@@ -1,7 +1,17 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<h1 class="self-end w-10/12 mx-auto mt-8 mb-1 text-xl font-bold text-marche_orange"><%= params[:keyword]%> 搜尋結果 </h1>
-<%# 右側商品區 %>
-<section class="w-10/12">
+<section class="w-9/12 mx-auto" data-controller="product--order" data-recent-order="<%= @recent_order%>">
+  <%# 標題 %>
+  <h1 class="mt-8 mb-1 mr-4 text-xl font-bold text-marche_black">搜尋結果：<%= params[:q][:name_cont]%> </h1>
+  <%# 麵包屑 %>
+  <div class="text-sm breadcrumbs">
+    <ul>
+      <li><%= link_to '首頁', root_path %></li>
+      <li><%= params[:q][:name_cont] %></li>
+      <% if @recent_order.present? %>
+        <li><%= get_order_bread_name(@recent_order)%></li>
+      <% end %>
+    </ul>
+  </div>
   <%# 上方篩選器 %>
   <div class="flex items-center justify-center p-2 mx-auto my-4 border bg-marche_white">
     <span class="mx-2">篩選</span>
@@ -14,6 +24,6 @@
   </div>
   <%# 商品顯示區 %>
   <div class="grid gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-4 md:grid-cols-4 xl:grid-cols-5">
-    <%= render  @products %>
+    <%= render @products %>
   </div>
 </section>
