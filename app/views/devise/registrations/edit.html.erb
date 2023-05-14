@@ -26,6 +26,11 @@
       <%= f.file_field :avatar %>
       <%= avatar(current_user) %>
     </div>
+
+    <div class="field">
+      <%= f.label :name, '使用者帳號', class: "text-md text-black-500" %> <i>(範例：@astro13)</i>
+      <%= f.text_field :name, class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
+    </div>
     
     <div class="field">
       <%= f.label :email, 'Email 信箱', class: "text-md text-black-500" %><br />
@@ -37,7 +42,7 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :password, '重新設定密碼', class: "text-md text-black-500" %> <i>(若您不想修改，請留空白)</i><br />
+      <%= f.label :password, '重新設定密碼', class: "text-md text-black-500" %> <i>(若您不想修改，請留空白)</i>
       <%= f.password_field :password, autocomplete: "new-password", class: "block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
       <% if @minimum_password_length %>
         <em>最少 <%= @minimum_password_length %>字元</em>
