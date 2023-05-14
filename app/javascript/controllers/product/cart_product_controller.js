@@ -70,7 +70,7 @@ export default class extends Controller {
   //打API
   async send(e) {
     e.preventDefault();
-    const url = "/api/cart_product";
+    const url = "/api/cart_products";
     const isCorrect =
       this.quantityNum <= this.storageNum &&
       this.quantityNum > 0 &&

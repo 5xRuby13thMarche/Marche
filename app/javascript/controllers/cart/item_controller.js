@@ -1,5 +1,5 @@
 import {Controller} from "@hotwired/stimulus";
-import {post} from "@rails/request.js";
+import {patch} from "@rails/request.js";
 import {formatMoney} from "./application";
 import Swal from "sweetalert2";
 
@@ -100,8 +100,8 @@ export default class extends Controller {
   }
   // API
   async updateCartProductQuantityViaAPI() {
-    let url = `/api/carts/${this.cartProductId}/edit`;
-    const response = await post(url, {
+    let url = `/api/cart_products/${this.cartProductId}`;
+    const response = await patch(url, {
       body: JSON.stringify({quantity: this.quantityNum}),
     });
     if (response.ok) {
