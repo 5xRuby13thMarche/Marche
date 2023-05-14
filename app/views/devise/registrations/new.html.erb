@@ -1,16 +1,10 @@
-<div class="flex items-center w-full bg-marche_white h-15">
-  <%= link_to root_path, class: "w-20 h-12 m-5 bg-opacity-0 bg-rose-300" do%>
-    <%= image_tag "marche_logo.svg" ,class: "h-full" %>
-  <% end %>
-  <h2 class="text-lg text-slate-600">註冊</h2>
-</div>
-<div class="flex flex-col items-center w-full py-16 sm:flex-row justify-evenly bg-marche_orange ">
+<div class="flex flex-col items-center w-full py-16 sm:flex-row justify-evenly bg-marche_white mtn-h-full py-20">
   <%# logo %>
   <div class="flex items-center justify-center bg-opacity-0 bg-rose-300 w-80 h-80">
-    <%= image_tag "marche_logo_orangewhite.png" %>
+    <%= image_tag "marche_logo.svg", class:"w-3/4"%>
   </div>
   <%# 輸入框 %>
-  <div class="w-[337px] bg-marche_white rounded-xl flex flex-wrap p-[37.99px]">
+  <div class="w-[337px] shadow shadow-3xl bg-marche_white rounded-xl flex flex-wrap p-[37.99px]">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: {class: "w-[305px]"} )  do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <h3 class="mb-3 text-2xl font-bold text-left text-slate-500">註冊</h3>

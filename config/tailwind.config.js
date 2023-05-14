@@ -21,6 +21,9 @@ module.exports = {
         marche_black100: '#8c8c8c',
         marche_blue: '#1d4ed8',
       },
+      boxShadow: {
+        '3xl': 'rgba(0, 0, 0, 0.15) 0px 2px 8px'
+      }
     },
   },
   plugins: [

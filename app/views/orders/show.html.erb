@@ -1,6 +1,7 @@
 <%# render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <%= render 'shared/flash' if flash.any? %>
-<section class="w-8/12 mx-auto min-h-[50vh] mt-20 border-2">
+
+<section class="w-8/12 mx-auto mt-20 mb-44 border-2">
   <div class="flex justify-center border-b-2">
     <h1 class="text-xl m-2">這是你的訂單</h1>
   </div>
@@ -19,7 +20,7 @@
   </div>
   <div class="flex justify-around px-3 pt-2">
     <p class="w-1/2 text-center text-lg">付款方式</p>
-    <p class="w-1/2 text-center text-lg"><%= @order.payment_method %></p>
+    <p class="w-1/2 text-center text-lg">信用卡付款</p>
   </div>
 
   <% if @order.payment_status == "pending"%>

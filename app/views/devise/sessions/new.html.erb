@@ -1,22 +1,16 @@
-<div class="flex items-center w-full bg-marche_white h-15">
-  <%= link_to root_path, class: "w-20 h-12 m-5 bg-opacity-0 bg-rose-300" do%>
-    <%= image_tag "marche_logo.svg" ,class: "h-full" %>
-  <% end %>
-  <h2 class="text-lg text-slate-600">登入</h2>
-</div>
-<div class="flex flex-col items-center w-full py-16 sm:flex-row justify-evenly bg-marche_orange">
+<div class="flex flex-col items-center w-full py-16 sm:flex-row justify-evenly bg-marche_white py-20">
   <%# logo %>
   <div class="flex items-center justify-center bg-opacity-0 bg-rose-300 w-80 h-80">
-    <%= image_tag "marche_logo_orangewhite.png"%>
+    <%= image_tag "marche_logo.svg", class:"w-3/4"%>
   </div>
   <%# 輸入框 %>
-  <div class="w-[337px] bg-marche_white rounded-xl flex flex-wrap px-[37.99px] py-[53.98px]">
+  <div class="w-[337px] shadow-3xl bg-marche_white shadow rounded-xl flex flex-wrap px-[37.99px] py-[53.98px]">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name),html: {class: "w-[305px]"} )  do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <h3 class="mb-3 text-2xl font-bold text-left text-slate-500">登入</h3>
       <div class="mb-3 field">
         <%= f.label :email ,"會員帳號" ,class: "leading-loose text-sm text-zinc-500" %>
-        <br />
+        <br/>
         <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight active:ring active:ring-zinc-300 focus:ring-2 focus:ring-zinc-300" ,placeholder: "請輸入您的e-mail" %>
       </div>
       <div class="mb-3 field">
@@ -40,7 +34,7 @@
       <div class="flex justify-center">
         <%- if devise_mapping.omniauthable? %>
           <%- resource_class.omniauth_providers.each do |provider| %>
-            <%= button_to "Google", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "btn w-[123px] tracking-wide" %><br />
+            <%= button_to "Google", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: "btn w-[123px] tracking-wide" %><br/>
           <% end %>
         <% end %>
       </div>
