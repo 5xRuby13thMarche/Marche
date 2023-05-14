@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
+  # User
   devise_for :users, controllers: { 
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations',
   }
+  get '/users/liked_products', to: 'users#show_like', as: :show_like # 收藏商品
 
   # 商品 （含買家、賣家）
   root 'products#index'
   resources :products do
-    # comment
-    resources :comments, shallow: true, only: [:create, :update, :edit, :destroy]
+    resources :comments, shallow: true, only: [:create, :update, :edit, :destroy] # comment
   end
   get '/search', to: 'products#search'
   get '/shops/products', to: 'products#shop_products', as: :shop_products
@@ -28,35 +29,31 @@ Rails.application.routes.draw do
   get '/orders/:id/paid', to: 'orders#paid', as: :order_paid # 付款完導到的頁面
   get '/shops/:id/order', to: 'orders#shop_order', as: :shop_order # 賣家自己的所有訂單
 
+  # 購物車 cart
+  resources :carts, only: [:index] # 購物車首頁
 
-  # carts
-  post '/cart', to: 'carts#create'
-  get '/cart', to: 'carts#index'
-  delete '/cart/:id', to: 'carts#destroy', as: :cart_destroy
-  get '/checkout', to: 'carts#checkout'
+  # 購物車商品 cart_products
+  resources :cart_products, only: [:destroy] # 刪除購物車內的一項商品
 
-  # API 路徑
+  # API 路徑---------------------------------------------
   namespace :api do
-    # like api
+    # 收藏、喜歡功能
     resources :products, only: [] do
       member do
         post :like 
         post :dislike 
       end
     end
-    # cart_product
-    post '/cart_product', to: 'cart_product#sendToCart'
-  
-    #category
+
+    #category 新增商品找分類
     post '/categories', to: 'categories#assign'
 
-    # 購物車頁面 Cart API
-    post '/carts/:id/edit', to: 'carts#edit', as: :carts_edit
-    delete '/carts/delete_all_items', to: 'carts#destroy_items'
+    # cart_product 商品加到購物車
+    resources :cart_products, only: [:create, :update] do
+      collection do
+        delete :delete_all
+      end
+    end
+
   end
-
-  # 收藏商品
-  get '/users/liked_products', to: 'users#show_like', as: :show_like
-
-
 end

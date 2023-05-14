@@ -7,23 +7,8 @@ class CartsController < ApplicationController
     @cart = current_user.cart
     @cart_products = @cart.cart_products.includes(sale_info: [:product])
   end
-  
-  def create
-  end
-
-  
-
-  # CartProductsControler
-  def destroy
-    @cart_product = CartProduct.find(params[:id])
-    @cart_product.destroy()
-  end
 
   private
-
-  def cart_product_params
-    params.require(:cart_product).permit(:quantity, :sale_info_id)
-  end
 
   def set_q_ransack
     @ransack_q = Product.ransack(params[:q])

@@ -18,26 +18,26 @@
   <%# 規格 %>
   <div class="flex flex-wrap mb-5">
     <% @spec_all.each do |s| %>
-        <%= link_to (product_path(product, saleinfo: s.id )) do %>
-          <% if s.id == sale_info.id %>
-            <div class="block px-2 py-1 mb-2 mr-3 font-medium text-gray-900 border border-rose-600 border-2 rounded-md"><%= s.spec %></div>
-          <% else %>
-            <div class="block px-2 py-1 mb-2 mr-3 font-medium text-gray-900 border "><%= s.spec %></div>
-          <% end %>
+      <%= link_to (product_path(product, saleinfo: s.id )) do %>
+        <% if s.id == sale_info.id %>
+          <div class="block px-2 py-1 mb-2 mr-3 font-medium text-gray-900 border border-2 rounded-md border-rose-600"><%= s.spec %></div>
+        <% else %>
+          <div class="block px-2 py-1 mb-2 mr-3 font-medium text-gray-900 border "><%= s.spec %></div>
         <% end %>
+      <% end %>
     <% end %>
   </div>
   <%# 數量框 %>
-  <%= form_with(model: cart_product, url: cart_path, method: :post, data: { turbo: false, controller: "product--cart-product" }) do |form| %>
+  <%= form_with(model: cart_product, url: '#', method: :post, data: { turbo: false, controller: "product--cart-product" }) do |form| %>
     <div class="flex mb-5">
       <%= form.hidden_field :sale_info_id, value: sale_info.id, data: { product__cart_product_target: "saleInfoId" } %>
       <div class="flex items-center">
         <p class="text-base text-gray-500" >數量：</p>
         <%# Quantity_button %>
         <div class="flex items-center m-2" data-product--cart-product-target="inputArea">
-          <button class="quantity-btn-left-arrow rounded-md border-gray-200" data-action="click->product--cart-product#decrement">－</button>
-            <%= form.number_field :quantity, data: { product__cart_product_target: "quantity", action:"change->product--cart-product#updateQuantity" }, class: "quantity-btn-center-input border-gray-200"%>
-          <button class="quantity-btn-right-arrow rounded-md border-gray-200" data-action="click->product--cart-product#increment">＋</button>
+          <button class="border-gray-200 rounded-md quantity-btn-left-arrow" data-action="click->product--cart-product#decrement">－</button>
+          <%= form.number_field :quantity, data: { product__cart_product_target: "quantity", action:"change->product--cart-product#updateQuantity" }, class: "quantity-btn-center-input border-gray-200"%>
+          <button class="border-gray-200 rounded-md quantity-btn-right-arrow" data-action="click->product--cart-product#increment">＋</button>
         </div>
         <p data-product--cart-product-target="storage" class="text-base text-gray-500">還剩<%= sale_info.storage%>件</p>
       </div>
