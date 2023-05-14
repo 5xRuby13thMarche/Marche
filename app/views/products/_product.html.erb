@@ -7,8 +7,8 @@
     </header>
     <section class= "flex flex-col justify-between h-24 px-2">
       <h2 class= "flex-1 text-sm line-clamp-2"><%= product.name %></h2>
-      <div class="flex flex-col justify-between m-2 md:flex-row">
-        <div class="text-sm font-semibold text-marche_orange">$<%= product.sale_infos.first.price %></div>
+      <div class="flex flex-col justify-between mt-1 mb-2">
+        <div class="text-sm font-semibold text-marche_orange">$<%= get_highest_price(product) %> ~ $<%= get_lowest_price(product) %></div>
         <%= render partial: 'star', locals:{ size: "xs", average_rating: product.average_rating} %>
       </div>
     </section>
