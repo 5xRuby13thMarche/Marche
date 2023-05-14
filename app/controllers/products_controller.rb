@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_q_ransack, only: [:index, :show, :search, :category]
   before_action :set_user_cart_product_num, only: [:index, :show, :search, :category]
+  layout 'backend', only: [:create]
   
   def index
     @products = Product.includes(images_attachments: :blob).includes(:sale_infos)
@@ -53,6 +54,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.shop_id = current_user.shop.id
+    @shop = current_user.shop
     if @product.save
       redirect_to root_path, notice: "新增商品成功" 
     else
