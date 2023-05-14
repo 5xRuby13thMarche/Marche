@@ -31,6 +31,13 @@ module ProductsHelper
     end
   end
 
+  def get_highest_price(product)
+    product.sale_infos.maximum(:price).round
+  end
+  
+  def get_lowest_price(product)
+    product.sale_infos.minimum(:price).round
+  end
   # 分類商品顯示頁面用----------------------------------
   def get_category_content_by_id(id)
     Category.find_by(id: id).content

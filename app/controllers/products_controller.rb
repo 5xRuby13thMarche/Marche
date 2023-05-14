@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
     @pagy, @product_records = pagy(@products, items: 24)
     @categories = Category.where(parent_id: nil)
     @new_products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(created_at: :desc).limit(12)
+    @new_products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(average_rating: :desc).limit(12)
   end
 
   def show
