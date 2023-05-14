@@ -12,10 +12,12 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
   </head>
-  <body>
+  <body class="flex flex-col min-h-screen">
     <%= render 'shared/navbar' %>
-    <%= yield %>
-    <%= render 'shared/footer' %>
+    <div class="flex-grow">
+      <%= yield %>
+    </div>
+    <%= render 'shared/footer', class: "flex-shrink-0 flex-basis-0" %>
     <%# Banner JQuery%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
