@@ -4,20 +4,17 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
   }
 
-  # products
+  # 商品 （含買家、賣家）
   root 'products#index'
-
   resources :products do
     # comment
     resources :comments, shallow: true, only: [:create, :update, :edit, :destroy]
   end
   get '/search', to: 'products#search'
   get '/shops/products', to: 'products#shop_products', as: :shop_products
-
-  resources :shops do 
-    # get '/products', to: 'shops#'
-  end
-
+  
+  # 商店
+  resources :shops
 
   # carts
   post '/cart', to: 'carts#create'
@@ -26,7 +23,7 @@ Rails.application.routes.draw do
   get '/checkout', to: 'carts#checkout'
   
   # categories
-  resources :categories
+  resources :categories, only: [:show]
   get '/parent_category/:id', to: 'products#category', as: :product_parent_category # 大項分類頁面
 
   #order

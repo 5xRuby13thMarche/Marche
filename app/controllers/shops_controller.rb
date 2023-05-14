@@ -7,14 +7,12 @@ class ShopsController < ApplicationController
     @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
     @total_price = @shop_products.sum{|shop_product| (shop_product.each_price * shop_product.quantity) }
     @total_quantity = @shop_products.sum{|shop_product| shop_product.quantity}
-
   end
   
   def new
     @shop = Shop.new
   end
 
-  
   def create
     @shop = Shop.new(shop_params)
     @shop.user_id = current_user.id
@@ -44,6 +42,4 @@ class ShopsController < ApplicationController
   def set_shop
     @shop = current_user.shop
   end
-  
-
 end

@@ -1,9 +1,10 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :set_q_ransack, only: [:index, :show, :search, :category]
-  before_action :set_user_cart_product_num, only: [:index, :show, :search, :category]
+  before_action :set_q_ransack, only: [:index, :show, :search]
+  before_action :set_user_cart_product_num, only: [:index, :show, :search]
   layout 'backend', only: [:create]
   
+  # 買家-------------------------------
   def index
     @products = Product.includes(images_attachments: :blob).includes(:sale_infos)
     @pagy, @product_records = pagy(@products, items: 24)
@@ -42,6 +43,37 @@ class ProductsController < ApplicationController
     @property = @product.property
   end
 
+  def search
+    @search_keyword = params[:q][:name_cont]
+    @recent_order = (params[:order].present?) ? params[:order] : nil
+    @products = @ransack_q.result(distinct: true)
+    # 搜尋不到商品的話 > 推薦最新商品
+    if @products.count == 0 
+      @products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(created_at: :desc).limit(12)
+      @no_search_result = true
+    else
+      @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
+      @no_search_result = false
+    end
+
+    # 最新 or 價格排序商品
+    case @recent_order
+    when 'new'
+      @productcs = @products.order(created_at: :desc)
+    when 'price_asc'
+      @products = @products.left_outer_joins(:sale_infos)
+                    .select('products.*, MAX(sale_infos.price) as max_price')
+                    .group('products.id')
+                    .order('max_price ASC')
+    when  'price_desc'
+      @products = @products.left_outer_joins(:sale_infos)
+                    .select('products.*, MAX(sale_infos.price) as max_price')
+                    .group('products.id')
+                    .order('max_price DESC')
+    end
+  end
+
+  # 賣家-------------------------------
   def new
     @shop = current_user.shop
     @product = Product.new
@@ -81,74 +113,11 @@ class ProductsController < ApplicationController
     redirect_to root_path, notice: "已成功刪除商品" 
   end
 
-  def search
-    @search_keyword = params[:q][:name_cont]
-    @recent_order = (params[:order].present?) ? params[:order] : nil
-    @products = @ransack_q.result(distinct: true)
-    # 搜尋不到商品的話 > 推薦最新商品
-    if @products.count == 0 
-      @products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(created_at: :desc).limit(12)
-      @no_search_result = true
-    else
-      @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
-      @no_search_result = false
-    end
-
-
-    # 最新 or 價格排序商品
-    case @recent_order
-    when 'new'
-      @productcs = @products.order(created_at: :desc)
-    when 'price_asc'
-      @products = @products.left_outer_joins(:sale_infos)
-                    .select('products.*, MAX(sale_infos.price) as max_price')
-                    .group('products.id')
-                    .order('max_price ASC')
-    when  'price_desc'
-      @products = @products.left_outer_joins(:sale_infos)
-                    .select('products.*, MAX(sale_infos.price) as max_price')
-                    .group('products.id')
-                    .order('max_price DESC')
-    end
-  end
-
-  def category
-    @parent_category = Category.find(params[:id])
-    @child_categories = @parent_category.children
-    @recent_child  = (params[:sub_category].present?) ? params[:sub_category] : nil
-    @recent_order = (params[:order].present?) ? params[:order] : nil
-
-    # 是否依照子分類搜尋商品
-    if @recent_child.present?
-      @products = Category.find(params[:sub_category]).products
-    else
-      @products = @parent_category.child_products.includes(images_attachments: :blob).includes(:sale_infos)
-    end
-    @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
-    # 最新 or 價格排序商品
-    case @recent_order
-    when 'new'
-      @productcs = @products.order(created_at: :desc)
-    when 'price_asc'
-      @products = @products.left_outer_joins(:sale_infos)
-                    .select('products.*, MAX(sale_infos.price) as max_price')
-                    .group('products.id')
-                    .order('max_price ASC')
-    when  'price_desc'
-      @products = @products.left_outer_joins(:sale_infos)
-                    .select('products.*, MAX(sale_infos.price) as max_price')
-                    .group('products.id')
-                    .order('max_price DESC')
-    end
-  end
-
+  # 顯示賣家自己上架的所有商品
   def shop_products 
     @shop = current_user.shop
     @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
-    
-
     render layout: 'backend'
-    
   end
 
   private
