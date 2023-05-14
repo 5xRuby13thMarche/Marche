@@ -2,14 +2,14 @@
 <%# 標題區 %>
 <div class="flex items-center w-full mt-8 mb-1 ml-2 sm:mx-auto sm:w-10/12">
   <%# 標題 %>
-  <%= link_to product_parent_category_path(@parent_category), class: "mr-4" do %>
+  <%= link_to category_path(@parent_category), class: "mr-4" do %>
     <h1 class="text-xl font-bold text-marche_black">分類：<%= @parent_category.content%></h1>
   <% end %>
   <%# 麵包屑 %>
   <div class="text-sm breadcrumbs">
     <ul>
       <li><%= link_to '首頁', root_path %></li>
-      <li><%= link_to @parent_category.content, product_parent_category_path(@parent_category) %></li>
+      <li><%= link_to @parent_category.content, category_path(@parent_category) %></li>
       <% if @recent_child.present? %>
         <li><%= get_category_content_by_id(@recent_child)%></li>
       <% end %>
@@ -34,7 +34,7 @@
     <%# 上方篩選器 %>
     <div class="flex items-center justify-center p-2 mx-auto my-4 border bg-marche_white">
       <span class="px-2 py-1 mx-1 text-xs border sm:px-4 sm:text-base sm:mx-2">篩選</span>
-      <%= link_to '最新', product_parent_category_path(@parent_category, order: 'new'), class: "sm:text-base sm:mx-2 mx-1 py-1 sm:px-4 border text-xs px-2", data: {action: "click->category--order#changeRecentOrderByNewLink", turbo: "false"}%>
+      <%= link_to '最新', category_path(@parent_category, order: 'new'), class: "sm:text-base sm:mx-2 mx-1 py-1 sm:px-4 border text-xs px-2", data: {action: "click->category--order#changeRecentOrderByNewLink", turbo: "false"}%>
       <select class="max-w-xs ml-2 w-36 sm:w-44 select select-bordered" data-category--order-target="selectArea" data-action="change->category--order#changeRecentOrderBySelector">
         <option disabled selected data-category--order-target="optionDefault">價格</option>
         <option value="price_asc" data-category--order-target="optionAsc">價格： 低到高</option>
@@ -43,7 +43,7 @@
     </div>
     <%# 商品顯示區 %>
     <div class="grid grid-cols-2 gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
-      <%= render partial:'product',collection: @products, as: :product %>
+      <%= render partial:'products/product',collection: @products, as: :product %>
     </div>
   </section>
 </div>
