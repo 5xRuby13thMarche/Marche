@@ -27,6 +27,7 @@
           <li>
             <%= link_to "我的帳戶", edit_user_registration_path, class: "active:bg-marche_orange" %>
             <%= link_to "我的訂單", show_orders_path, class: "active:bg-marche_orange" %>
+            <%= link_to "我的收藏", show_like_path, class: "active:bg-marche_orange" %>
             <%= link_to "登出", destroy_user_session_path, data: { turbo_method: :delete,  confirm: '是否確定登出'}, class: "active:bg-marche_orange" %>
           </li>
         <% else %>
