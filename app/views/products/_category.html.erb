@@ -1,8 +1,8 @@
-<li class="w-full p-2 grow hover:shadow-md rounded-3xl">
+<li class="w-full p-1 sm:p-2 grow hover:shadow-md rounded-2xl sm:rounded-3xl">
   <%= link_to product_parent_category_path(category.id) do%>
     <div class="mx-auto">
-      <%= image_tag "category_icon/#{convert_category_name(category.content)}" ,class: "rounded-3xl", alt: "category_#{category.content}" %>
+      <%= image_tag "category_icon/#{convert_category_name(category.content)}" ,class: " rounded-2xl sm:rounded-3xl", alt: "category_#{category.content}" %>
     </div>
-    <p class="my-1 text-xs text-center text-gray-500"><%= category.content %></p>
+    <p class="my-1 text-xs text-center text-gray-500 line-clamp-2"><%= category.content %></p>
   <% end %>
 </li>
