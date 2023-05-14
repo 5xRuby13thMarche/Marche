@@ -1,7 +1,7 @@
 class Api::CartProductController < ApplicationController
   
   def sendToCart
-    update_cart_product = CartProduct.find_by(sale_info_id: params[:sale_info_id])
+    update_cart_product = current_user.cart.cart_products.find_by(sale_info_id: params[:sale_info_id])
     if update_cart_product
       update_quantity = update_cart_product.quantity + params[:quantity]
       update_cart_product.update(quantity: update_quantity)
