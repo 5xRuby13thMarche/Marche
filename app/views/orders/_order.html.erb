@@ -27,36 +27,30 @@
 
   <!-- 分隔線 -->
   <div class="flex pt-1 m-2">
-    <div class="w-4/5 border-b"></div>
+    <div class="w-full mx-3 mb-3 border-b"></div>
   </div>
 
   <!-- 訂單裡的商品 -->
-  <div class="flex justify-around px-3 pt-1 m-2">
-    <p class="w-1/2 text-left">購買商品</p>
+  <div class="flex-row justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left break-words"></p>
     <% order.order_products.each do |order_product| %>
-      <div>
-        <%= order_product.product.name %>
-        <%= order_product.quantity %>
-        <%= order_product.each_price %>
-        <%= order_product.spec %>
+      <div class="flex-row mb-2 border-b">
+        <p class="text-sm"><%= order_product.product.name %></p>
+        <p class="px-1 py-[2px] border w-fit text-sm text-gray-500"><%= order_product.spec %></p>
+        <p class="text-sm">x <%= order_product.quantity %></p>
+        <p class="mb-1 text-sm text-marche_orange">$<%= order_product.each_price %></p>
       </div>
     <% end %>
   </div>
-
-  <!-- 分隔線 -->
-  <div class="flex pt-1 m-2">
-    <div class="w-4/5 border-b"></div>
-  </div>
     
   <div class="flex justify-around px-3 pt-1 m-2">
-    <p class="w-1/2 text-left">出貨狀態</p>
+    <p class="w-1/2 mt-1 text-left">出貨狀態</p>
     <p class="w-1/2 text-left"><%= order.shipping_status %>
   </div>
 
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">配送地址</p>
-    <p class="w-1/2 text-left"><%= order.shipping_address %>
+    <p class="w-1/2 text-sm text-left text-gray-500 break-words"><%= order.shipping_address %>
   </div>
 
   <div class="flex justify-around px-3 pt-1 m-2">
@@ -67,7 +61,7 @@
 
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">備註</p>
-    <p class="w-1/2 text-left"><%= order.note %>
+    <p class="w-1/2 text-sm text-left text-gray-500 break-words"><%= order.note %>
   </div>
   
 </div>        
