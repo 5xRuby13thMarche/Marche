@@ -1,0 +1,33 @@
+<div class="flex w-full p-3 bg-marche_backend_primary">
+  <nav class="flex flex-wrap items-center content-center justify-end w-full mx-2 my-1">
+    <% if current_user&.shop.present? %>
+      <%= link_to "#{@shop.name}的賣場", shops_path , class: "text-gray-100 text-xl mr-auto" %>
+    <% else %>
+      <%= link_to "賣家中心", new_shop_path , class: "text-gray-100 text-xs mr-auto border border-x-0 border-t-0"%>
+    <% end %>
+    <%= link_to "返回商城", root_path , class: "px-4 text-gray-100 text-xs"%>
+    <div class="block w-6 pt-1 dropdown dropdown-end">
+      <label tabindex="0" class="btn-xs btn-ghost btn-circle avatar btn ">
+        <div class="items-center w-6 rounded-full ">
+          <%= avatar(current_user, size: [100, 100]) %>
+        </div>
+        
+      </label>
+      <ul tabindex="0" class="p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-60">
+        <% if user_signed_in? %>
+          <li class="p-4 py-1 pl-4 text-marche_backend_primary text-md"><%= current_user.email %></li>
+          <li>
+            <%= link_to "編輯我的帳戶", edit_user_registration_path, class: "active:bg-marche_backend_primary p-4" %>
+            <%= link_to "登出", destroy_user_session_path, data: { turbo_method: :delete,  confirm: '是否確定登出'}, class: "active:bg-marche_backend_primary p-4" %>
+          </li>
+        <% else %>
+          <li class="p-4 py-1 pl-4 text-marche_backend_primary text-md">您現在為訪客</li>
+          <li>
+            <%= link_to "註冊", new_user_registration_path, class: "active:bg-marche_backend_primary p-4" %>
+            <%= link_to "登入", new_user_session_path, class: "active:bg-marche_backend_primary p-4" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</div>
