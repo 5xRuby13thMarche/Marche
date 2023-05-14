@@ -4,8 +4,14 @@
     <p class="text-xl"><span class="text-4xl"><%= average_rating %></span>/5</p>
     <%# 產生星星 %>
     <div class="rating rating-md">
-      <% 5.times do |i|%>
-        <input type="radio" class="pointer-events-none comment-star bg-rose-600 checked:bg-rose-500" <%= "checked" if  i+1 == average_rating%>/>
+      <% if average_rating == "?" %>
+        <% 5.times do |i|%>
+          <input type="radio" class="pointer-events-none comment-star bg-slate-300"/>
+        <% end %>
+      <% else %>
+        <% 5.times do |i|%>
+          <input type="radio" class="pointer-events-none comment-star bg-rose-600 checked:bg-rose-500" <%= "checked" if  i+1 == average_rating%>/>
+        <% end %>
       <% end %>
     </div>
   </div>

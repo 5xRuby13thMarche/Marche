@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
     end
     @pagy, @comment_records = pagy(@product_comments, items: 9, fragment: '#comment-list')
     average = @product.product_comments.where(rating: [1,2,3,4,5]).average(:rating)
-    @average_rating = average.nil? ? "？": average.round
+    @average_rating = @product.average_rating == 0 ? "?": @product.average_rating
     
     # Sale info
     #判斷是否有選擇規格沒有則隨機展示一項saleinfo
