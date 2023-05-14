@@ -15,32 +15,25 @@ Rails.application.routes.draw do
   
   # 商店
   resources :shops
+  
+  # 父分類搜尋商品
+  resources :categories, only: [:show]
+
+  # 訂單
+  resources :orders, only: [:index, :new, :create, :show] do
+    collection do
+      post :notify # 接收藍新導回來的資料
+    end
+  end
+  get '/orders/:id/paid', to: 'orders#paid', as: :order_paid # 付款完導到的頁面
+  get '/shops/:id/order', to: 'orders#shop_order', as: :shop_order # 賣家自己的所有訂單
+
 
   # carts
   post '/cart', to: 'carts#create'
   get '/cart', to: 'carts#index'
   delete '/cart/:id', to: 'carts#destroy', as: :cart_destroy
   get '/checkout', to: 'carts#checkout'
-  
-  # categories
-  resources :categories, only: [:show]
-  get '/parent_category/:id', to: 'products#category', as: :product_parent_category # 大項分類頁面
-
-  #order
-  get '/shops/:id/order', to: 'orders#shop_order', as: :shop_order
-
-  resources :orders, only: %i[create] do
-    collection do
-      post :notify
-    end
-  end
-
-  # post '/orders', to: 'orders#create'
-  get "/orders/:id",to: "orders#show", as: :order_show 
-  # users' orders
-  get '/orders', to: 'orders#show_orders', as: :show_orders
-  # post "/orders/notify",to: "orders#notify"   #接收藍新post回來的頁面
-
 
   # API 路徑
   namespace :api do
