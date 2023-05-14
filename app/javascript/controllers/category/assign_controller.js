@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import {post} from "@rails/request.js";
+import {get} from "@rails/request.js";
 
 // Connects to data-controller="category--assign"
 export default class extends Controller {
@@ -11,8 +11,8 @@ export default class extends Controller {
     // 避免子分類重複新增
     this.subcategoryTarget.innerHTML = ''
     // 打API 
-    let url = '/api/categories'
-    const response = await post(url, {body: JSON.stringify({main_id: this.main_categoryTarget.value})});
+    let url = `/api/categories/${this.main_categoryTarget.value}`
+    const response = await get(url);
     if (response.ok) {
       const data = await response.json;
       // 印出所選主分類之所有子分類

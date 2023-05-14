@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     end
 
     #category 新增商品找分類
-    post '/categories', to: 'categories#assign'
+    resources :categories, only: [:show]
 
     # cart_product 商品加到購物車
     resources :cart_products, only: [:create, :update] do
