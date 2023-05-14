@@ -31,7 +31,7 @@ module ProductsHelper
     end
   end
 
-  # 分類商品顯示頁面用
+  # 分類商品顯示頁面用----------------------------------
   def get_category_content_by_id(id)
     Category.find_by(id: id).content
   end

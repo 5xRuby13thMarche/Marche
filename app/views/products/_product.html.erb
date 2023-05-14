@@ -7,7 +7,10 @@
     </header>
     <section class= "flex flex-col justify-between h-24 px-2">
       <h2 class= "flex-1 text-sm line-clamp-2"><%= product.name %></h2>
-      <div class="mb-2 font-semibold text-marche_orange text-md">$<%= product.sale_infos.first.price %></div>
+      <div class="flex flex-col justify-between m-2 md:flex-row">
+        <div class="text-sm font-semibold text-marche_orange">$<%= product.sale_infos.first.price %></div>
+        <%= render partial: 'star', locals:{ size: "xs", average_rating: product.average_rating} %>
+      </div>
     </section>
   </section>
 <% end %>
