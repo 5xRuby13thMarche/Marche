@@ -1,5 +1,5 @@
 <li>
-  <%= link_to product_parent_category_path(parent_category, sub_category: child_category.id), class: "p-1 mr-4 text-sm border-b cursor-pointer w-24 sm:w-28 hover:bg-marche_pearl block", data: {child_category: child_category.id, action: "click->category--order#changeRecentChild"} do %>
+  <%= link_to category_path(parent_category, sub_category: child_category.id), class: "p-1 mr-4 text-sm border-b cursor-pointer w-24 sm:w-28 hover:bg-marche_pearl block", data: {child_category: child_category.id, action: "click->category--order#changeRecentChild"} do %>
     <%= child_category.content %>
   <% end %>
 </li>

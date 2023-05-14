@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: [:notify]
+  before_action :authenticate_user!, except: [:notify, :paid]
   before_action :set_q_ransack, only: [:new]
   before_action :set_user_cart_product_num, only: [:new]
   skip_before_action :verify_authenticity_token
@@ -55,9 +55,6 @@ class OrdersController < ApplicationController
   def notify
     @response = Newebpay::MpgResponse.new(params[:TradeInfo])
     @order = Order.find_by(tracking_number: @response.order_no) #這裡的value在依訂單修改
-    p '-'*40
-    p @order
-    p '-'*40
     
     if @response.success?
       @order.payment_status = "paid" 
@@ -93,9 +90,6 @@ class OrdersController < ApplicationController
   def shop_order
     @shop = current_user.shop
     @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
-    
-
-
     render layout: 'backend'
   end
 
