@@ -3,3 +3,10 @@ zh-TW:
         pagination:
           prev: "上一頁"
           next: "下一頁"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              blank: "請輸入您的當前密碼"
