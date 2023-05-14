@@ -1,31 +1,31 @@
 <div class="relative flex">
   <%= render 'shared/backend_sidebar' %>
   <div class="w-5/6 ml-auto">
-    <h1 class="self-end w-5/6 pl-4 mx-auto mt-5 text-3xl font-bold border-l-2 border-marche_backend_primary text-marche_backend_primary">我的銷售</h1>
+    <h1 class="self-end w-5/6 pl-4 mx-auto mt-5 text-3xl font-bold border-l-2 border-marche_backend_primary text-marche_backend_primary">我的商品</h1>
     <table class="table w-5/6 mx-auto mt-3 shadow-xl table-compact">
       <!-- head -->
       <thead class="">
         <tr>
           <th></th>
-          <th>出售時間</th>
           <th>產品名稱</th>
           <th>產品規格</th>
-          <th>出售數量</th>
-          <th>出售總額</th>
+          <th>價格</th>
+          <th>已出售</th>
+          <th>操作</th>
         </tr>
       </thead>
-      <tbody>
-        <% @shop_products.each_with_index do |shop_products, index| %>
+      <% @shop_products.each_with_index do |shop_products, index| %>
+        <tbody>
           <tr class="hover"> 
             <th><%= index + 1 %></th>
-            <td><%= format_date_with_time(shop_products.updated_at) %></td>
             <td><%= shop_products.product.name %></td>
             <td><%= shop_products.spec %></td>
+            <td><%= shop_products.each_price %></td>
             <td><%= shop_products.quantity %></td>
-            <td><%= shop_products.each_price * shop_products.quantity %></td>
+            <td><%= link_to "編輯", edit_product_path(shop_products.product_id), class:"btn"%></td>
           </tr>
-        <% end %>
-      </tbody>
+        </tbody>
+      <% end %>
     </table>
   </div>
 </div>

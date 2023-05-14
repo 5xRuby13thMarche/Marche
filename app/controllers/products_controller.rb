@@ -42,10 +42,12 @@ class ProductsController < ApplicationController
   end
 
   def new
+    @shop = current_user.shop
     @product = Product.new
     @product.sale_infos.build
     @product.build_property
 
+    render layout: 'backend'
   end
   
   def create
@@ -59,14 +61,17 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @shop = current_user.shop
+    render layout: 'backend'
   end
 
   def update
     if @product.update(product_params)
-      redirect_to root_path, notice: "商品資訊已更新" 
+      redirect_to shops_path, notice: "商品資訊已更新" 
     else
       render :edit, status: :unprocessable_entity 
     end
+    render layout: 'backend'
   end
 
   def destroy
@@ -134,6 +139,16 @@ class ProductsController < ApplicationController
                     .order('max_price DESC')
     end
   end
+
+  def shop_products 
+    @shop = current_user.shop
+    @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
+    
+
+    render layout: 'backend'
+    
+  end
+
   private
 
   def set_product
