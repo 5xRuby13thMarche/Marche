@@ -75,22 +75,29 @@ class ProductsController < ApplicationController
   end
 
   def search
+    @search_keyword = params[:q][:name_cont]
     @recent_order = (params[:order].present?) ? params[:order] : nil
-
     @products = @ransack_q.result(distinct: true)
-    @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
+    # 搜尋不到商品的話 > 推薦最新商品
+    if @products.count == 0 
+      @products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(created_at: :desc).limit(12)
+      @no_search_result = true
+    else
+      @products = @products.includes(images_attachments: :blob).includes(:sale_infos)
+      @no_search_result = false
+    end
+
+
     # 最新 or 價格排序商品
     case @recent_order
     when 'new'
       @productcs = @products.order(created_at: :desc)
     when 'price_asc'
-      # @products = @products.joins(:sale_infos).group('products.id').order('MAX(sale_infos.price) ASC')
       @products = @products.left_outer_joins(:sale_infos)
                     .select('products.*, MAX(sale_infos.price) as max_price')
                     .group('products.id')
                     .order('max_price ASC')
     when  'price_desc'
-      # @products = @products.joins(:sale_infos).group('products.id').order('MAX(sale_infos.price) DESC')
       @products = @products.left_outer_joins(:sale_infos)
                     .select('products.*, MAX(sale_infos.price) as max_price')
                     .group('products.id')
