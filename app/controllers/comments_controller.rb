@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
     @product_comment.product_id = params[:product_id]
 
     if @product_comment.save
+      update_product_average_rating(@product_comment.product)
       # redirect_to product_path(params[:product_id]), notice: "新增留言成功!"
     else
       @product_comments = ProductComment.includes(:user).order(created_at: :desc)
@@ -21,6 +22,7 @@ class CommentsController < ApplicationController
 
   def update
     if @product_comment.update(params_comment)
+      update_product_average_rating(@product_comment.product)
       # redirect_to product_path(@product_comment.product_id), notice: 'edit comment successfully!'
     else
       flash[:alert] = "fail editing comment."
@@ -30,6 +32,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @product_comment.destroy
+    update_product_average_rating(@product_comment.product)
     # redirect_to product_path(@product_comment.product_id), notice: 'delete comment successfully!'
   end
 
@@ -45,5 +48,11 @@ class CommentsController < ApplicationController
 
   def set_product_comment
     @product_comment = ProductComment.find(params[:id])
+  end
+
+  def update_product_average_rating(product)
+    average = product.product_comments.where(rating: [1,2,3,4,5]).average(:rating)
+    product.average_rating = average.nil? ? 0 : average.round
+    product.save
   end
 end

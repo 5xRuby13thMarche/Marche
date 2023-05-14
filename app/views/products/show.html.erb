@@ -4,11 +4,11 @@
     <div class="w-full p-3 mx-auto my-3">
       <%= render 'shared/flash' if flash.any? %>
       <%# 商品基本欄位 %>
-      <div class="flex w-full grid grid-cols-1 sm:grid-cols-2 flex-wrap sm:flex-none">
+      <div class="flex grid flex-wrap w-full grid-cols-1 sm:grid-cols-2 sm:flex-none">
         <%# 圖片 %>
-        <header class="mr-0 md:mr-5 flex-wrap">
-          <div class="mb-2 bg-gray-400 w-80 h-80 rounded-xl mx-auto">
-          <%# 目前只能丟出一張 %>
+        <header class="flex-wrap mr-0 md:mr-5">
+          <div class="mx-auto mb-2 bg-gray-400 w-80 h-80 rounded-xl">
+            <%# 目前只能丟出一張 %>
             <%= image(@product)%>
           </div>
           <%# 喜歡功能 %>
@@ -18,7 +18,7 @@
           </div>
         </header>
         <%# 資訊詳情 %>
-        <%= render partial: 'products/info', locals: {sale_info: @sale_info, product: @product, cart_product: @cart_product} %>
+        <%= render partial: 'products/info', locals: {sale_info: @sale_info, product: @product, cart_product: @cart_product, average_rating: @average_rating, spec_all: @spec_all} %>
       </div>
     </div>
     <%# 商品規格 %>
