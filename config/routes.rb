@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :comments, shallow: true, only: [:create, :update, :edit, :destroy]
   end
   get '/search', to: 'products#search'
+  get '/shops/products', to: 'products#shop_products', as: :shop_products
 
   resources :shops do 
     # get '/products', to: 'shops#'
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
   get '/parent_category/:id', to: 'products#category', as: :product_parent_category # 大項分類頁面
 
   #order
-  get '/shop/:id/order', to: 'orders#shop_order', as: :shop_order
+  get '/shops/:id/order', to: 'orders#shop_order', as: :shop_order
 
   resources :orders, only: %i[create] do
     collection do

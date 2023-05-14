@@ -1,6 +1,11 @@
-<div class="w-full mx-auto md:w-2/3">
-  <h1 class="self-end mt-5 text-3xl font-bold rounded-md text-marche_orange">新增商品</h1>
-  <%= render "form", product: @product %>
+<div class="relative flex">
+  <%= render 'shared/backend_sidebar' %>
+  <div class="w-5/6 ml-auto">
+    <div class="w-5/6 mx-auto">
+    <h1 class="self-end pl-4 mt-5 text-3xl font-bold border-l-2 border-marche_backend_primary text-marche_backend_primary">新增商品</h1>
+      <%= render "form", product: @product %>
+    </div>
+  </div>
 </div>
 
 
