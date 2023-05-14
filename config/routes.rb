@@ -65,5 +65,8 @@ Rails.application.routes.draw do
     delete '/carts/delete_all_items', to: 'carts#destroy_items'
   end
 
+  # 收藏商品
+  get '/users/liked_products', to: 'users#show_like', as: :show_like
+
 
 end

@@ -5,23 +5,23 @@
         <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/user--v1.png" alt="user--v1"/>
         <%= link_to '我的帳戶', edit_user_registration_path %>
       </div>
-      <div class="flex items-center inline-block px-4 py-2 text-center text-gray-400 cursor-not-allowed">
-        <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
-        <p class="inline-block">我的訂單</p>
-      </div>
       <div class="flex items-center block inline-block px-4 py-2 text-center text-orange-500 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
         <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
-        <%= link_to '我的收藏', show_like_path %>
+        <%= link_to '我的訂單', show_orders_path %>
+      </div>
+      <div class="flex items-center inline-block px-4 py-2 text-center text-gray-400 cursor-not-allowed">
+        <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
+        <p class="inline-block">我的收藏</p>
       </div>
     </div>
   </div>
   
   <div class="w-10/12 mx-auto mt-1 0">
-    <h1 class="mt-4 mb-4 text-2xl font-bold">我的訂單</h1>
-    <% if @orders.present? %>
-      <%= render partial:'orders/order', collection: @orders, as: :order %>
+    <h1 class="mt-4 mb-4 text-2xl font-bold">我的收藏</h1>
+    <% if @products.present? %>
+      <%= render partial:'products/product', collection: @products %>
     <% else %>
-      <button><%= link_to '您目前沒有訂單，去 Marche 市集逛逛', root_path, class: "px-4 py-2 m-2 mt-4 text-sm font-bold border-orange-200 rounded text-marche_white bg-marche_orange hover:bg-marche_orange100 hover:text-black-100 hover:cursor-pointer" %></button>
+      <button><%= link_to '您目前沒有收藏商品，去 Marche 市集逛逛', root_path, class: "px-4 py-2 m-2 mt-4 text-sm font-bold border-orange-200 rounded text-marche_white bg-marche_orange hover:bg-marche_orange100 hover:text-black-100 hover:cursor-pointer" %></button>
     <% end %>
   </div>
 </div>
