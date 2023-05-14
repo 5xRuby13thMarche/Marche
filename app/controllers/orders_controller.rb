@@ -1,6 +1,14 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:notify]
+  before_action :set_q_ransack, only: [:new]
+  before_action :set_user_cart_product_num, only: [:new]
   skip_before_action :verify_authenticity_token
+
+  def new
+    @cart = current_user.cart
+    @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: params[:cart_product_ids])
+    @order = Order.new
+  end
 
   def create
     @order = Order.new
@@ -27,7 +35,7 @@ class OrdersController < ApplicationController
     @order.note = params[:order][:note]
 
     if @order.save
-      redirect_to order_show_path(@order.id), notice: "產生訂單成功"
+      redirect_to order_path(@order.id), notice: "產生訂單成功"
     else
       redirect_to :back, alert: "訂單成立失敗"
     end
@@ -35,39 +43,49 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @user = @order.user
-    # 判斷是否登入
-    if user_signed_in? == false
-      sign_in @user   #勿動
-    end
-
-    if @order.payment_status == "pending"
-
-      order_products = @order.order_products
-      @form_info = Newebpay::Mpg.new(
-        {MerchantOrderNo: @order.tracking_number,
-         Amt: @order.total_price.to_i,
-         ItemDesc: generate_item_desc(order_products),
-         Email: @order.user.email}
-        ).form_info
-    end
+    order_products = @order.order_products
+    @form_info = Newebpay::Mpg.new(
+      {MerchantOrderNo: @order.tracking_number,
+        Amt: @order.total_price.to_i,
+        ItemDesc: generate_item_desc(order_products),
+        Email: @order.user.email}
+      ).form_info
   end
     
   def notify
     @response = Newebpay::MpgResponse.new(params[:TradeInfo])
-  
+    @order = Order.find_by(tracking_number: @response.order_no) #這裡的value在依訂單修改
+    p '-'*40
+    p @order
+    p '-'*40
+    
     if @response.success?
-
-      @order = Order.find_by(tracking_number: @response.order_no) #這裡的value在依訂單修改
       @order.payment_status = "paid" 
       @order.save
-      redirect_to order_show_path(@order.id), notice: "交易完成"
+      redirect_to order_paid_path(@order.id), notice: "交易完成"
     else
-      redirect_to order_show_path(@order.id), alert: "交易失敗"
+      redirect_to order_paid_path(@order.id), alert: "交易失敗"
     end
   end
+
+  def paid
+    @order = Order.find(params[:id])
+    @user = @order.user
+    if user_signed_in? == false
+      sign_in @user 
+    end
+
+    order_products = @order.order_products
+    @form_info = Newebpay::Mpg.new(
+      {MerchantOrderNo: @order.tracking_number,
+        Amt: @order.total_price.to_i,
+        ItemDesc: generate_item_desc(order_products),
+        Email: @order.user.email}
+      ).form_info
+  end
+
   #買家訂單
-  def show_orders
+  def index
     @orders = current_user.orders.includes(order_products: [:product])
   end
   
@@ -83,6 +101,16 @@ class OrdersController < ApplicationController
 
   private
   
+  def set_q_ransack
+    @ransack_q = Product.ransack(params[:q])
+  end
+
+  def set_user_cart_product_num
+    if user_signed_in?
+      @user_cart_product_num = current_user.cart.cart_products.count
+    end
+  end
+
   def generate_tracking_number
     "#{Time.now.strftime("%Y%m%d%H%M%S")}#{SecureRandom.base36(6)}"
   end
@@ -90,4 +118,6 @@ class OrdersController < ApplicationController
   def generate_item_desc(order_products)
     order_products.pluck(:spec).reduce{|acc, cur| acc+cur}
   end
+
+
 end

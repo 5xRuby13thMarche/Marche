@@ -1,5 +1,4 @@
 <div class="container flex flex-col w-full mx-auto sm:w-10/12 sm:flex-row sm:items-start">
-
   <div class="flex-row mx-auto mt-1 w-44">
     <div class="mx-2 mt-4 mb-4" >
       <div class="flex items-center inline-block px-4 py-2 text-center text-gray-400 cursor-not-allowed">
@@ -8,7 +7,7 @@
       </div>
       <div class="flex items-center block inline-block px-4 py-2 text-center text-orange-500 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
         <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
-        <%= link_to '我的訂單', show_orders_path %>
+        <%= link_to '我的訂單', orders_path %>
       </div>
       <div class="flex items-center block inline-block px-4 py-2 text-center text-orange-500 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
         <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
@@ -16,58 +15,47 @@
       </div>
     </div>
   </div>
-  
-  <div class="w-10/12 mx-auto mt-1">
+  <div class="w-10/12 mx-auto mt-1 0">
     <h2 class="mt-4 mb-4 text-2xl font-bold">我的帳戶</h2>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-
-    <div class="block sm:inline">
-      <%= render "devise/shared/error_messages", resource: resource %>
-    </div>
-
-    <div class="field">
-      <%= f.label :avatar, '使用者頭像', class: "text-md text-black-500" %><br />
-      <%= f.file_field :avatar %>
-      <%= avatar(current_user) %>
-    </div>
-
-    <div class="field">
-      <%= f.label :name, '使用者帳號', class: "text-md text-black-500" %> <i>(範例：@astro13)</i>
-      <%= f.text_field :name, class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
-    </div>
-    
-    <div class="field">
-      <%= f.label :email, 'Email 信箱', class: "text-md text-black-500" %><br />
-      <%= f.email_field :email, autocomplete: "email", class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
-    </div>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :password, '重新設定密碼', class: "text-md text-black-500" %> <i>(若您不想修改，請留空白)</i>
-      <%= f.password_field :password, autocomplete: "new-password", class: "block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
-      <% if @minimum_password_length %>
-        <em>最少 <%= @minimum_password_length %>字元</em>
+      <div class="block sm:inline">
+        <%= render "devise/shared/error_messages", resource: resource %>
+      </div>
+      <div class="field">
+        <%= f.label :avatar, '使用者頭像', class: "text-md text-black-500" %><br />
+        <%= f.file_field :avatar %>
+        <%= avatar(current_user) %>
+      </div>
+      <div class="field">
+        <%= f.label :name, '使用者帳號', class: "text-md text-black-500" %> <i>(範例：@astro13)</i>
+        <%= f.text_field :name, class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
+      </div>
+      <div class="field">
+        <%= f.label :email, 'Email 信箱', class: "text-md text-black-500" %><br />
+        <%= f.email_field :email, autocomplete: "email", class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
+      </div>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
-    </div>
-
-    <div class="mt-5 field">
-      <%= f.label :password_confirmation, '確認密碼', class: "text-md text-black-500" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :current_password, '輸入當前密碼', class: "text-md text-black-500" %> <i>(我們需要您目前的密碼以確認您的更改)</i>
-      <%= f.password_field :current_password, autocomplete: "current-password", class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "更新", class: "mt-2 px-4 py-2 text-green-500 bg-green-50 hover:bg-green-100 rounded-lg hover:cursor-pointer" %>
-    </div>
+      <div class="field">
+        <%= f.label :password, '重新設定密碼', class: "text-md text-black-500" %> <i>(若您不想修改，請留空白)</i>
+        <%= f.password_field :password, autocomplete: "new-password", class: "block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
+        <% if @minimum_password_length %>
+          <em>最少 <%= @minimum_password_length %>字元</em>
+        <% end %>
+      </div>
+      <div class="mt-5 field">
+        <%= f.label :password_confirmation, '確認密碼', class: "text-md text-black-500" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
+      </div>
+      <div class="field">
+        <%= f.label :current_password, '輸入當前密碼', class: "text-md text-black-500" %> <i>(我們需要您目前的密碼以確認您的更改)</i>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "更新", class: "mt-2 px-4 py-2 text-green-500 bg-green-50 hover:bg-green-100 rounded-lg hover:cursor-pointer" %>
+      </div>
     <% end %>
-
     <div class="my-4">
       <h3 class="text-lg">刪除我的帳戶</h3>
       <div class="mt-2">

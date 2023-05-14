@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_q_ransack, only: [:index, :checkout]
+  before_action :set_q_ransack, only: [:index]
   before_action :set_user_cart_product_num, only: [:index]
 
   def index
@@ -11,12 +11,7 @@ class CartsController < ApplicationController
   def create
   end
 
-  # order 
-  def checkout
-    @cart = current_user.cart
-    @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: params[:cart_product_ids])
-    @order = Order.new
-  end
+  
 
   # CartProductsControler
   def destroy
