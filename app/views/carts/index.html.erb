@@ -1,8 +1,8 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<section class="container w-full mx-auto mt-6 border lg:w-11/12 xl:w-10/12 bg-gay-200">
+<section class="container w-full mx-auto mt-12 border lg:w-11/12 xl:w-10/12 bg-gay-200">
   <%= form_with url: new_order_path, method: :get, data: { turbo: "false", controller: "cart--form", cart_id: current_user.cart.id} do |form| %>
     <%# 標題欄區域 %>
-    <div class="flex items-center justify-start w-full bg-gray-100 h-14">
+    <div class="flex items-center justify-start w-full bg-gray-100 h-10">
       <p class="hidden w-36 md:inline"></p>
       <div class="flex items-center w-10/12">
         <p class="w-full mx-2 my-2 ml-24 text-sm text-center md:ml-0 lg:w-5/12 md:w-4/12">商品</p>
@@ -14,9 +14,11 @@
       </div>
     </div>
     <%# 購物車項目區域 %>
-    <%= render partial:'carts/item', collection: @cart_products , as: :cart_product%>
+    <div class="py-6">
+      <%= render partial:'carts/item', collection: @cart_products , as: :cart_product %>
+    </div>  
     <%# 下方勾選、刪除、提交操作區域 %>
-    <div class="container flex items-center h-20 bg-gray-100">
+    <div class="container flex items-center h-14 bg-gray-100">
       <div class="flex items-center mr-3 md:mr-5 md:ml-2">
         <input type="checkbox"
           class="ml-3 mr-2 rounded checkbox checkbox-sm focus:outline-gray-600" data-action="change->cart--form#checkAllBox"/>
