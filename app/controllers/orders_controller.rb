@@ -7,13 +7,16 @@ class OrdersController < ApplicationController
   def new
     @cart = current_user.cart
     @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: params[:cart_product_ids])
+    if @cart_products.count == 0
+      redirect_to carts_path, alert: '請先選擇商品'
+    end
     @order = Order.new
   end
 
   def create
     @order = Order.new
     @cart_products = CartProduct.where(id: params[:cart_product]).includes(:sale_info)
-
+    
     total_price = 0
     @cart_products.each do |c|
       # 算總價
