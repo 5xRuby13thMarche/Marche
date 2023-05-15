@@ -47,6 +47,12 @@
   .quantity-btn-center-input{
     @apply z-10 w-12 h-8 p-0 text-center border-gray-300
   }
+  .checkout-btn{
+    @apply bg-marche_orange hover:bg-marche_orange100 hover:cursor-pointer -mr-[1px] py-[30px] md:p-2 md:md:me-5 rounded-none md:rounded text-white text-sm w-28
+  }
+  .checkout-disabled-btn{
+    @apply bg-slate-400 cursor-not-allowed -mr-[1px] py-[30px] md:p-2 md:md:me-5 rounded-none md:rounded text-white text-sm w-28
+  }
 
   /* 去除number input 預設的上下箭頭 */
   @layer utilities {
