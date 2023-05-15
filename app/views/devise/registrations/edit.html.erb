@@ -1,21 +1,20 @@
 <div class="container flex flex-col w-full mx-auto sm:w-10/12 sm:flex-row sm:items-start">
-<div class="w-full mx-auto mt-1 sm:w-44 sm:flex-row">
-  <div class="flex justify-between mx-5 mt-4 mb-4 sm:mx-2 sm:flex-col">
-    <div class="flex items-center px-2 py-2 text-center cursor-not-allowed text-marche_orange">
-      <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/user--v1.png" alt="user--v1"/>
-      <p>我的帳戶</p>
-    </div>
-    <div class="flex items-center px-2 py-2 text-center text-gray-400 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
-      <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
-      <%= link_to '我的訂單', orders_path %>
-    </div>
-    <div class="flex items-center px-2 py-2 text-center text-gray-400 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
-      <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
-      <%= link_to '我的收藏', show_like_path %>
+  <div class="w-full mx-auto mt-1 sm:w-44 sm:flex-row">
+    <div class="flex justify-between mx-5 mt-4 mb-4 sm:mx-2 sm:flex-col">
+      <div class="flex items-center px-2 py-2 text-center cursor-not-allowed text-marche_orange">
+        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/user--v1.png" alt="user--v1"/>
+        <p>我的帳戶</p>
+      </div>
+      <div class="flex items-center px-2 py-2 text-center text-gray-400 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
+        <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
+        <%= link_to '我的訂單', orders_path %>
+      </div>
+      <div class="flex items-center px-2 py-2 text-center text-gray-400 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
+        <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
+        <%= link_to '我的收藏', show_like_path %>
+      </div>
     </div>
   </div>
-</div>
-
   <div class="w-10/12 mx-auto mt-1 0">
     <h2 class="mt-2 mb-4 text-2xl font-bold sm:mt-7 text-marche_orange">我的帳戶</h2>
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
