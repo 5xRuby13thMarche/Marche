@@ -13,8 +13,8 @@
           </div>
           <%# 喜歡功能 %>
           <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>" class="p-2">
-            <i class="fa-regular fa-heart fa-xl text-rose-600 hover:animate-bounce" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
-            <span>Like商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
+            <i class="cursor-pointer fa-regular fa-heart fa-xl text-rose-600 hover:scale-125" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
+            <span>收藏商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
           </div>
         </header>
         <%# 資訊詳情 %>

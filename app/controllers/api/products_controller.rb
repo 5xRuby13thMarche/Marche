@@ -4,12 +4,12 @@ class Api::ProductsController < ApplicationController
   
   def like
     current_user.liked_products << @product
-    render json: {signInState: "true", new_like_state: "like"}
+    render json: {signInState: "true"}
   end
 
   def dislike
     current_user.liked_products.destroy(@product)
-    render json: {signInState: "true", new_like_state: "dislike"}
+    render json: {signInState: "true"}
   end
 
   private
