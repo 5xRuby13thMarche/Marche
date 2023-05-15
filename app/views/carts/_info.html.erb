@@ -1,0 +1,10 @@
+<%# 購物車懸浮商品提示%>
+<% if @product.any? %>
+    <div>
+    <% product.each do |p|%>
+        <%= p.name %>
+<% end %>
+</div>
+<% else %>
+    <span>目前無任何商品</span>
+<% end %>
