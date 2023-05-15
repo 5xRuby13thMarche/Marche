@@ -19,8 +19,10 @@ export default class extends Controller {
     this.changeLikeAmount();
 
     // 打API
-    let url = (this.isLiked)?`/api/products/${this.productId}/like`:`/api/products/${this.productId}/dislike`
-    const response = await post(url, {body: JSON.stringify({like: "like"})});
+    let url = this.isLiked
+      ? `/api/products/${this.productId}/like`
+      : `/api/products/${this.productId}/dislike`;
+    const response = await post(url);
     if (response.ok) {
       const data = await response.json;
       if (data.signInState === "false") window.location.href = data.signInUrl;
