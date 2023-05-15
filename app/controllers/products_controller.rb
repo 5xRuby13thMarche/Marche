@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_q_ransack, only: [:index, :show, :search]
   before_action :set_user_cart_product_num, only: [:index, :show, :search]
   before_action :shop_params,only: [:new, :create, :edit, :update, :destroy, :shop_products]
-  layout 'backend', only: [:create, :update]
+  layout 'backend', only: [:new, :create, :update, :destory, :edit]
   
   # 買家-------------------------------
   def index
@@ -80,8 +80,6 @@ class ProductsController < ApplicationController
     @product = Product.new
     @product.sale_infos.build
     @product.build_property
-
-    render layout: 'backend'
   end
   
   def create
@@ -96,7 +94,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    render layout: 'backend'
   end
 
   def update
