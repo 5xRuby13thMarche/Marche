@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_q_ransack, only: [:index, :show, :search]
   before_action :set_user_cart_product_num, only: [:index, :show, :search]
-  layout 'backend', only: [:create]
+  before_action :shop_params
+  layout 'backend', only: [:create, :update]
   
   # 買家-------------------------------
   def index
@@ -76,7 +77,6 @@ class ProductsController < ApplicationController
 
   # 賣家-------------------------------
   def new
-    @shop = current_user.shop
     @product = Product.new
     @product.sale_infos.build
     @product.build_property
@@ -87,17 +87,19 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.shop_id = current_user.shop.id
+<<<<<<< HEAD
     @product.average_rating = get_star_number(:star_0)
     @shop = current_user.shop
+=======
+>>>>>>> 66a00eb (fix: Product new&shop_products cant show)
     if @product.save
-      redirect_to root_path, notice: "新增商品成功" 
+      redirect_to shops_path, notice: "新增商品成功" 
     else
       render :new, status: :unprocessable_entity 
     end
   end
 
   def edit
-    @shop = current_user.shop
     render layout: 'backend'
   end
 
@@ -107,7 +109,6 @@ class ProductsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity 
     end
-    render layout: 'backend'
   end
 
   def destroy
@@ -117,8 +118,10 @@ class ProductsController < ApplicationController
 
   # 顯示賣家自己上架的所有商品
   def shop_products 
-    @shop = current_user.shop
-    @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
+    @shop_products = @shop.products.includes(:sale_infos).order(created_at: :desc)
+    shop_cart_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
+    @quantity_by_spec = shop_cart_products.group_by(&:spec).transform_values { |products| products.sum(&:quantity) }
+
     render layout: 'backend'
   end
 
@@ -136,6 +139,10 @@ class ProductsController < ApplicationController
     if user_signed_in?
       @user_cart_product_num = current_user.cart.cart_products.count
     end
+  end
+
+  def shop_params
+    @shop = current_user.shop
   end
 
   def product_params

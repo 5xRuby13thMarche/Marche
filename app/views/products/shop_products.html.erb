@@ -11,20 +11,29 @@
           <th>產品規格</th>
           <th>價格</th>
           <th>已出售</th>
+          <th>上架數量</th>
           <th>操作</th>
         </tr>
       </thead>
       <% @shop_products.each_with_index do |shop_products, index| %>
+        <% shop_products.sale_infos.each do |s| %>
         <tbody>
           <tr class="hover"> 
             <th><%= index + 1 %></th>
-            <td><%= shop_products.product.name %></td>
-            <td><%= shop_products.spec %></td>
-            <td><%= shop_products.each_price %></td>
-            <td><%= shop_products.quantity %></td>
-            <td><%= link_to "編輯", edit_product_path(shop_products.product_id), class:"btn"%></td>
+            <td><%= shop_products.name %></td>
+            <td>
+                <%= s.spec %>
+            </td>
+            <td><%#= shop_products.each_price %></td>
+            <td><%#= @quantity_by_spec[shop_products.spec] %></td>
+            <td>
+              <%# sale_info = shop_products.product.sale_infos.find { |si| si.spec == shop_products.spec } %>
+              <%#= sale_info ? sale_info.storage : "N/A" %>
+            </td>
+            <td><%= link_to "編輯", edit_product_path(shop_products.id), class:"btn"%></td>
           </tr>
         </tbody>
+        <% end %>
       <% end %>
     </table>
   </div>
