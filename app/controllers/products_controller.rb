@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
     @pagy, @product_records = pagy(@products, items: 24)
     @categories = Category.where(parent_id: nil)
     @new_products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(created_at: :desc).limit(12)
-    @new_products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(average_rating: :desc).limit(12)
+    @hot_products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(average_rating: :desc).limit(12)
   end
 
   def show
@@ -87,6 +87,10 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.shop_id = current_user.shop.id
+    @product.average_rating = get_star_number(:star_0)
+    p '---'*30
+    p @product
+    p '---'*30
     @shop = current_user.shop
     if @product.save
       redirect_to root_path, notice: "新增商品成功" 
