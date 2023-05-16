@@ -1,16 +1,12 @@
 <%# render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <%= render 'shared/flash' if flash.any? %>
-<section class="w-8/12 mx-auto min-h-[50vh] mt-20 border-2">
-  <div class="flex justify-center border-b-2">
-    <h1 class="m-2 text-xl">這是你的訂單</h1>
+<section class="w-8/12 mx-auto mt-20 border-2">
+  <div class="flex justify-center border-b-2 bg-gray-100">
+    <h1 class="m-2 text-xl">訂單資訊</h1>
   </div>
   <div class="flex justify-around px-3 pt-2">
     <p class="w-1/2 text-lg text-center">訂單編號</p>
     <p class="w-1/2 text-lg text-center break-words"><%= @order.tracking_number %></p>
-  </div>
-  <div class="flex justify-around px-3 pt-2">
-    <p class="w-1/2 text-lg text-center">總價</p>
-    <p class="w-1/2 text-lg text-center"><%= @order.total_price %></p>
   </div>
   <div class="flex justify-around px-3 pt-2">
     <p class="w-1/2 text-lg text-center">付款狀態</p>
@@ -20,6 +16,16 @@
     <p class="w-1/2 text-lg text-center">付款方式</p>
     <p class="w-1/2 text-lg text-center"><%= @order.payment_method %></p>
   </div>
+  <div class="flex justify-around px-3 pt-2">
+    <p class="w-1/2 text-lg text-center text-red-600">總價</p>
+    <p class="w-1/2 text-lg text-center text-red-600"><%= @order.total_price.to_i %></p>
+  </div>
+
+      <%# 分隔線 %>
+  <div class="flex justify-center m-3">
+    <div class="border-b w-4/5"></div>
+  </div>
+
   <% if @order.payment_status == "pending"%>
     <%# 這段是要送給藍新的資訊%>
     <%= form_with(url: 'https://ccore.newebpay.com/MPG/mpg_gateway', method: "post") do |form| %>
@@ -36,11 +42,11 @@
         <p class="w-1/2 text-lg text-center">配送地址</p>
         <p class="w-1/2 text-lg text-center"><%= @order.shipping_address %></p>
       </div>
-      <div class="flex justify-around p-2 px-3">
+      <div class="flex justify-around px-3 p-2">
         <p class="w-1/2 text-lg text-center">配送方式</p>
         <p class="w-1/2 text-lg text-center"><%= @order.shipping_status %></p>
       </div>
-      <div class="flex justify-around p-2 px-3">
+      <div class="flex justify-around px-3 p-2">
         <p class="w-1/2 text-lg text-center">備註</p>
         <p class="w-1/2 text-lg text-center"><%= @order.note %></p>
       </div>
@@ -54,11 +60,13 @@
       </div>
     <% end %>
   <% else %>
-    <div class="flex justify-around">
-      <%= link_to "首頁", root_path, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
-    </div>
-    <div class="flex justify-around">
-      <%= link_to "查看所有訂單", orders_path, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+    <div class="flex justify-around px-3 pt-2 py-4 ">
+      <div class=" text-center w-1/2">
+        <%= link_to "首頁", root_path, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 rounded hover:bg-green-100" %>
+      </div>
+      <div class="text-center w-1/2">
+        <%= link_to "查看所有訂單", orders_path, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+      </div>
     </div>
   <% end %>
 </section>
