@@ -21,6 +21,7 @@
       <div class="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
         <%= render partial:'products/product', collection: @products %>
       </div>
+      <div class="flex justify-center my-4"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
     <% else %>
       <button><%= link_to '您目前沒有收藏商品，去 Marche 市集逛逛', root_path, class: "px-4 py-2 m-2 mt-4 text-sm font-bold border-orange-200 rounded text-marche_white bg-marche_orange hover:bg-marche_orange100 hover:text-black-100 hover:cursor-pointer" %></button>
     <% end %>
