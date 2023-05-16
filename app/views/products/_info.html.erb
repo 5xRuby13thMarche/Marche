@@ -34,7 +34,7 @@
         <%# Quantity_button %>
         <div class="flex items-center m-2" data-product--cart-product-target="inputArea">
           <button class="border-gray-200 rounded-md quantity-btn-left-arrow" data-action="click->product--cart-product#decrement">－</button>
-          <%= form.number_field :quantity, data: { product__cart_product_target: "quantity", action:"change->product--cart-product#updateQuantity" }, class: "quantity-btn-center-input border-gray-200"%>
+          <%= form.number_field :quantity, data: { product__cart_product_target: "quantity", action:"change->product--cart-product#updateQuantity" }, class: "quantity-btn-center-input border-gray-200", value: 1%>
           <button class="border-gray-200 rounded-md quantity-btn-right-arrow" data-action="click->product--cart-product#increment">＋</button>
         </div>
         <p data-product--cart-product-target="storage" class="text-base text-gray-500">還剩<%= sale_info.storage%>件</p>

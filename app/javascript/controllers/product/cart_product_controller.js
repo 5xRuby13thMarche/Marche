@@ -84,6 +84,8 @@ export default class extends Controller {
         }),
       });
       if (response.ok) {
+        const data = await response.json;
+        if (data.signInState == "false") window.location.href = data.signInUrl;
         Swal.fire({
           icon: "success",
           title: "加入購物車成功",
@@ -95,8 +97,7 @@ export default class extends Controller {
           background: "#eee",
         });
         // 如果是新增商品到購物車，發布event給購物車icon
-        const data = await response.json;
-        if (data.ok !== "update") {
+        if (data.message == "added_to_cart") {
           const event = new CustomEvent("update--cart", {
             detail: "increaseCart",
           });
