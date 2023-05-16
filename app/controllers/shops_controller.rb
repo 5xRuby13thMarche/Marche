@@ -1,12 +1,13 @@
 class ShopsController < ApplicationController
-  layout "backend"
+  layout "shop"
+  
   before_action :authenticate_user!
-  before_action :set_shop, only: [:index, :edit, :update, :destroy]
+  before_action :set_shop
   
   def index
-    @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
-    @total_price = @shop_products.sum{|shop_product| (shop_product.each_price * shop_product.quantity) }
-    @total_quantity = @shop_products.sum{|shop_product| shop_product.quantity}
+    @shop_products = @shop.order_products_infos
+    @total_price = Shop.total_price(@shop_products)
+    @total_quantity = Shop.total_quantity(@shop_products)
   end
   
   def new
@@ -14,8 +15,7 @@ class ShopsController < ApplicationController
   end
 
   def create
-    @shop = Shop.new(shop_params)
-    @shop.user_id = current_user.id
+    @shop = current_user.build_shop(shop_params)
     if @shop.save
       redirect_to shops_path, notice: "您的賣場已建立" 
     else
@@ -33,7 +33,14 @@ class ShopsController < ApplicationController
       render :edit, status: :unprocessable_entity 
     end
   end
+
+  def order
+    @shop_orders = @shop.order_products_infos
+  end
   
+  def products
+  end
+
   private
   def shop_params
     params.require(:shop).permit(:name, :image, :description)

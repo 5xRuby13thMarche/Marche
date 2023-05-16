@@ -1,7 +1,7 @@
 class Api::CategoriesController < ApplicationController
   def show
-    mainCategory = Category.find(params[:id])
-    subcategries = mainCategory.children
-    render json: subcategries&.map { |s| {value: s.id, content: s.content} }
+    main_category = Category.find(params[:id])
+    sub_categries = main_category.children
+    render json: sub_categries&.map { |category| {value: category.id, content: category.content} }
   end
 end

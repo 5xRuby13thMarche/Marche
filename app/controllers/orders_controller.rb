@@ -71,13 +71,6 @@ class OrdersController < ApplicationController
     @orders = current_user.orders.includes(order_products: [:product]).order(created_at: :desc)
     @pagy, @orders = pagy(@orders, items: 6)
   end
-  
-  #賣家訂單
-  def shop_order
-    @shop = current_user.shop
-    @shop_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
-    render layout: 'backend'
-  end
 
   private
 

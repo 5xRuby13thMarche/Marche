@@ -12,10 +12,17 @@ Rails.application.routes.draw do
     resources :comments, shallow: true, only: [:create, :update, :edit, :destroy] # comment
   end
   get '/search', to: 'products#search'
-  get '/shops/products', to: 'products#shop_products', as: :shop_products
   
   # 商店
-  resources :shops
+  resources :shops do
+    resources :products, only: [:index]
+    member do
+      get :order
+    end
+    collection do 
+      get :products
+    end
+  end
   
   # 父分類搜尋商品
   resources :categories, only: [:show]
@@ -29,7 +36,6 @@ Rails.application.routes.draw do
       get :paid # 付款完導到的頁面
     end
   end
-  get '/shops/:id/order', to: 'orders#shop_order', as: :shop_order # 賣家自己的所有訂單
 
   # 購物車 cart
   resources :carts, only: [:index] # 購物車首頁

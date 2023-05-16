@@ -1,12 +1,11 @@
 <div class="relative flex">
-  <%= render 'shared/backend_sidebar' %>
+  <%= render 'shared/shop_sidebar' %>
   <div class="w-5/6 ml-auto">
-    <h1 class="self-end w-5/6 pl-4 mx-auto mt-5 text-3xl font-bold border-l-2 border-marche_backend_primary text-marche_backend_primary">我的商品</h1>
+    <h1 class="self-end w-5/6 pl-4 mx-auto mt-5 text-3xl font-bold border-l-2 border-marche_shop_primary text-marche_shop_primary">我的商品</h1>
     <table class="table w-5/6 mx-auto mt-3 shadow-xl table-compact">
       <!-- head -->
       <thead class="">
         <tr>
-          <th></th>
           <th>產品名稱</th>
           <th>產品規格</th>
           <th>價格</th>
@@ -15,15 +14,14 @@
           <th>操作</th>
         </tr>
       </thead>
-      <% @shop_products.each_with_index do |shop_products, index| %>
+      <% @shop.shop_products_infos.each_with_index do |shop_products| %>
         <% shop_products.sale_infos.each do |s| %>
         <tbody>
           <tr class="hover"> 
-            <th><%= index + 1 %></th>
             <td><%= shop_products.name %></td>
             <td><%= s.spec %></td>
             <td><%= s.price %></td>
-            <td><%= @quantity_all[s.spec] %></td>
+            <td><%= @shop.total_sales[s.spec] || 0 %></td>
             <td><%= s.storage %></td>
             <td><%= link_to "編輯", edit_product_path(shop_products.id), class:"btn"%></td>
           </tr>

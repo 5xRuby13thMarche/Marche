@@ -11,7 +11,7 @@
       <h3 class="pb-2">分類 *</h3>
       <div data-category--assign-target="show" class="text-gray-700"></div>
       <!-- The button to open modal -->
-      <label for="my-modal-4" class="py-2 btn bg-marche_backend_primary border-marche_backend_primary">請選擇</label>
+      <label for="my-modal-4" class="py-2 btn bg-marche_shop_primary border-marche_shop_primary">請選擇</label>
       <!-- Put this part before </body> tag -->
       <input type="checkbox" id="my-modal-4" class="modal-toggle" />
       <label for="my-modal-4" class="cursor-pointer modal">
@@ -76,9 +76,9 @@
 
   <div class="mb-10">
     <% if action_name == "new" %>
-      <%= form.submit "建立商品", class: "rounded-lg py-3 px-5 bg-marche_backend_primary text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit "建立商品", class: "rounded-lg py-3 px-5 bg-marche_shop_primary text-white inline-block font-medium cursor-pointer" %>
     <% else %>
-      <%= form.submit "儲存", class: "rounded-lg py-3 px-5 bg-marche_backend_primary text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit "儲存", class: "rounded-lg py-3 px-5 bg-marche_shop_primary text-white inline-block font-medium cursor-pointer" %>
     <% end %>
   </div>
 <% end %>
