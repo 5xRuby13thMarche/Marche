@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_14_163141) do
+ActiveRecord::Schema.define(version: 2023_05_15_171334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,9 +83,9 @@ ActiveRecord::Schema.define(version: 2023_05_14_163141) do
   create_table "orders", force: :cascade do |t|
     t.string "tracking_number"
     t.string "payment_method"
-    t.string "payment_status"
+    t.string "payment_status", default: "pending"
     t.string "shipping_address"
-    t.string "shipping_status"
+    t.string "shipping_status", default: "pending"
     t.decimal "total_price", default: "0.0"
     t.text "note"
     t.string "receiver"

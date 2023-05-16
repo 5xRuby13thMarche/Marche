@@ -25,8 +25,10 @@ Rails.application.routes.draw do
     collection do
       post :notify # 接收藍新導回來的資料
     end
+    member do 
+      get :paid # 付款完導到的頁面
+    end
   end
-  get '/orders/:id/paid', to: 'orders#paid', as: :order_paid # 付款完導到的頁面
   get '/shops/:id/order', to: 'orders#shop_order', as: :shop_order # 賣家自己的所有訂單
 
   # 購物車 cart
@@ -41,7 +43,7 @@ Rails.application.routes.draw do
     resources :products, only: [] do
       member do
         post :like 
-        post :dislike 
+        post :unlike 
       end
     end
 

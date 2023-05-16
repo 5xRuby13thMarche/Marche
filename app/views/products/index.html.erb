@@ -21,7 +21,7 @@
 <section class="flex flex-col w-full mx-auto my-6 sm:w-10/12">
   <h2 class="self-start pl-2 text-xl font-bold text-marche_orange sm:pl-0">商品分類</h2>
   <ul class="grid grid-cols-6 md:grid-cols-8 md: lg:grid-cols-11">
-    <%= render partial: 'category', collection: @categories, as: :category %>
+    <%= render partial: 'category', collection: @root_categories, as: :category %>
   </ul>
 </section>
 <%# 熱門商品%>

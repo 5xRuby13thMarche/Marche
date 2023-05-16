@@ -21,7 +21,7 @@ export default class extends Controller {
     // 打API
     let url = this.isLiked
       ? `/api/products/${this.productId}/like`
-      : `/api/products/${this.productId}/dislike`;
+      : `/api/products/${this.productId}/unlike`;
     const response = await post(url);
     if (response.ok) {
       const data = await response.json;

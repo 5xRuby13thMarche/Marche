@@ -1,3 +1,3 @@
 class Property < ApplicationRecord
-  belongs_to :product, optional: true
+  belongs_to :product
 end

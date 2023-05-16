@@ -1,8 +1,12 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
-  helper_method :get_star_number
-  
-  def get_star_number(star_number)
-    ProductComment.stars[star_number]
+  def set_cart_num
+    if user_signed_in?
+      @user_cart_product_num = current_user.cart.cart_products.count
+    end
+  end
+
+  def set_q_ransack
+    @ransack_q = Product.ransack(params[:q])
   end
 end

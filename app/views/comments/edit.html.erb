@@ -3,12 +3,12 @@
     <div class="flex">
       <%= f.label "修改評論：", class: 'label'%>
       <div class="rating rating-md">
-        <%= f.radio_button :rating, get_star_number(:star_0), class: "comment-star-hidden" , checked: "checked" %>
-        <%= f.radio_button :rating, get_star_number(:star_1), class: "comment-star" %>
-        <%= f.radio_button :rating, get_star_number(:star_2), class: "comment-star" %>
-        <%= f.radio_button :rating, get_star_number(:star_3), class: "comment-star" %>
-        <%= f.radio_button :rating, get_star_number(:star_4), class: "comment-star" %>
-        <%= f.radio_button :rating, get_star_number(:star_5), class: "comment-star"%>
+        <%= f.radio_button :rating, 0, class: "comment-star-hidden" , checked: "checked" %>
+        <%= f.radio_button :rating, 1, class: "comment-star" %>
+        <%= f.radio_button :rating, 2, class: "comment-star" %>
+        <%= f.radio_button :rating, 3, class: "comment-star" %>
+        <%= f.radio_button :rating, 4, class: "comment-star" %>
+        <%= f.radio_button :rating, 5, class: "comment-star"%>
       </div>
     </div>
     <%= f.text_area :content, class: "comment-textarea  w-full"%>
