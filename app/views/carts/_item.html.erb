@@ -24,7 +24,7 @@
     <%# 總價 ＝ 單價 x 數量 %>
     <div class="hidden mx-1 text-sm text-center md:block md:w-1/12 text-marche_orange" data-cart--item-target="itemTotalPrice" data-unit-price="<%= cart_product.sale_info.price %>" data-cart--form-target="itemTotalPrice">$?</div>
     <%# 刪除 %>
-    <%= link_to cart_product_path(cart_product.id), method: :delete, data: {action: "cart--item#showDeleteToast"}, class: "w-full md:w-1/12 text-right md:text-center" do %>
+    <%= link_to cart_product_path(cart_product.id), method: :delete, data: {action: "cart--item#showDeleteToast cart--form#update"}, class: "w-full md:w-1/12 text-right md:text-center" do %>
       <i class="p-1 m-1 text-red-500 rounded bg-neutral-100 drop-shadow fa-regular fa-trash-can"></i>
     <% end %>
   </div>
