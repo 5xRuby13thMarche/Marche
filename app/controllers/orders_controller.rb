@@ -65,9 +65,10 @@ class OrdersController < ApplicationController
       ).form_info
   end
 
-  #買家訂單
+  #會員所有訂單
   def index
-    @orders = current_user.orders.includes(order_products: [:product])
+    @orders = current_user.orders.includes(order_products: [:product]).order(created_at: :desc)
+    @pagy, @orders = pagy(@orders, items: 6)
   end
   
   #賣家訂單
