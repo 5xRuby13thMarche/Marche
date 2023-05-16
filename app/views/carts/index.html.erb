@@ -1,5 +1,5 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<section class="container w-full mx-auto mt-12 border lg:w-11/12 xl:w-10/12 bg-gay-200">
+<section class="container w-full mx-auto my-12 border lg:w-11/12 xl:w-10/12 bg-gay-200">
   <%= form_with url: new_order_path, method: :get, data: { turbo: "false", controller: "cart--form", cart_id: current_user.cart.id} do |form| %>
     <%# 標題欄區域 %>
     <div class="flex items-center justify-start w-full bg-gray-100 h-10">

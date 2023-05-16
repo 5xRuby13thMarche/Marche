@@ -74,14 +74,6 @@ class OrdersController < ApplicationController
     if user_signed_in? == false
       sign_in @user 
     end
-
-    order_products = @order.order_products
-    @form_info = Newebpay::Mpg.new(
-      {MerchantOrderNo: @order.tracking_number,
-        Amt: @order.total_price.to_i,
-        ItemDesc: generate_item_desc(order_products),
-        Email: @order.user.email}
-      ).form_info
   end
 
   #買家訂單
