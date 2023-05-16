@@ -1,0 +1,7 @@
+<div class="relative mb-2 border-b">
+  <p class="text-sm"><%= order_product.product.name %></p>
+  <p class="px-1 py-[2px] border w-fit text-sm text-gray-500"><%= order_product.spec %></p>
+  <p class="text-sm">x <%= order_product.quantity %></p>
+  <p class="mb-1 text-sm text-marche_orange"><%= number_to_currency(order_product.each_price, precision: 0) %></p>
+  <%= link_to '再買一次', product_path(order_product.product), class: "px-2 py-1 m-2 text-xs rounded text-marche_white bg-marche_orange hover:bg-marche_orange100 hover:text-slate-700 cursor-pointer absolute right-0 bottom-0"%>
+</div>

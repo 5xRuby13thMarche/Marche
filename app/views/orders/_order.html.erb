@@ -1,67 +1,46 @@
 <div class="mt-2 mb-4 border-2 border-grey">
-
-  <div class="flex items-center justify-between px-3 bg-gray-100">
+  <div class="px-3 py-1 bg-gray-100">
     <h1 class="m-2 text-xl text-left">訂單資訊</h1>
-    <%= link_to '再買一次', product_path(order.order_products.first.product.id), class: "px-4 py-2 m-2 text-sm font-bold border-orange-200 rounded text-marche_white bg-marche_orange hover:bg-marche_orange100 hover:text-black-100 hover:cursor-pointer"%>
   </div>
-
   <div class="flex justify-around px-3 pt-1 m-2">
-    <p class="w-1/2 text-left text-red-600">總金額</p> 
-    <p class="w-1/2 text-left text-red-600"><%= number_with_delimiter(order.total_price.floor, delimiter: ',') %></p>
+    <p class="w-1/2 text-left text-red-600">總金額</p>
+    <p class="w-1/2 text-left text-red-600"><%= number_to_currency(order.total_price.floor, precision: 0) %></p>
   </div>
-
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">訂單編號</p>
     <p class="w-1/2 text-left break-words"><%= order.tracking_number %></p>
   </div>
-  
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">付款狀態</p>
     <p class="w-1/2 text-left"><%= order.payment_status %></p>
   </div>
-  
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">付款方式</p>
     <p class="w-1/2 text-left">信用卡付費</p>
   </div>
-
   <!-- 分隔線 -->
   <div class="flex pt-1 m-2">
     <div class="w-full mx-3 mb-3 border-b"></div>
   </div>
-
   <!-- 訂單裡的商品 -->
-  <div class="flex-row justify-around px-3 pt-1 m-2">
+  <section class="flex-row justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left break-words"></p>
-    <% order.order_products.each do |order_product| %>
-      <div class="flex-row mb-2 border-b">
-        <p class="text-sm"><%= order_product.product.name %></p>
-        <p class="px-1 py-[2px] border w-fit text-sm text-gray-500"><%= order_product.spec %></p>
-        <p class="text-sm">x <%= order_product.quantity %></p>
-        <p class="mb-1 text-sm text-marche_orange">$<%= order_product.each_price %></p>
-      </div>
-    <% end %>
-  </div>
-    
+    <%= render partial: 'order_product', collection: order.order_products %>
+  </section>
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 mt-1 text-left">出貨狀態</p>
-    <p class="w-1/2 text-left"><%= order.shipping_status %>
+    <p class="w-1/2 text-left"><%= order.shipping_status %></p>
   </div>
-
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">配送地址</p>
-    <p class="w-1/2 text-sm text-left text-gray-500 break-words"><%= order.shipping_address %>
+    <p class="w-1/2 text-sm text-left text-gray-500 break-words"><%= order.shipping_address %></p>
   </div>
-
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">收件人</p>
-    <p class="w-1/2 text-left"><%= order.receiver %>
+    <p class="w-1/2 text-left"><%= order.receiver %></p>
   </div>
-
-
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">備註</p>
-    <p class="w-1/2 text-sm text-left text-gray-500 break-words"><%= order.note %>
+    <p class="w-1/2 text-sm text-left text-gray-500 break-words"><%= order.note %></p>
   </div>
-  
-</div>        
+</div>
