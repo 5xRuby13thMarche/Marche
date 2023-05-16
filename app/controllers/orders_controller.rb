@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   def new
     @cart = current_user.cart
     @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: params[:cart_product_ids])
-    if @cart_products.count == 0
+    if @cart_products.count.zero?
       redirect_to carts_path, alert: '請先選擇商品'
     end
     @order = Order.new
@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
     @order.total_price = total_price
 
     if @order.save
+      @cart_products.destroy_all # 購物車中減去訂單的商品
       redirect_to order_path(@order), notice: "訂單成立"
     else
       redirect_to :back, alert: "訂單不成立"
