@@ -87,8 +87,8 @@ export default class extends Controller {
       .then((result) => {
         if (result.isConfirmed) {
           swalWithBootstrapButtons.fire("成功刪除");
-          // 前後端刪除購物車內商品
-          this.deleteAllCartItems();
+          this.deleteAllCartItems(); // 前後端刪除購物車內商品
+          this.update();
         }
       });
   }
