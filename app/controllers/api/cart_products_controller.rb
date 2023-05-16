@@ -1,17 +1,19 @@
 class Api::CartProductsController < ApplicationController
-  before_action :check_user_signed_in!, only: [:like, :dislike]
+  before_action :check_user_signed_in!, only: [:create, :update]
 
   def create
     update_cart_product = current_user.cart.cart_products.find_by(sale_info_id: params[:sale_info_id])
     if update_cart_product
+      # 購物車內已有該商品
       update_quantity = update_cart_product.quantity + params[:quantity]
       update_cart_product.update(quantity: update_quantity)
-      render json: {ok: 'update'}
+      render json: {message: 'update_quantity', signInState: 'true'}
     else
+      # 購物車內尚無該商品
       cart_product = CartProduct.new(cart_product_params)
       cart_product.cart_id = current_user.cart.id
       if cart_product.save
-        render json: {ok: '加入購物車成功！'}
+        render json: {message: 'added_to_cart', signInState: 'true'}
       end
     end
   end
