@@ -91,6 +91,8 @@ Rails.application.configure do
   read_timeout:         5 
   }
 
+  #關閉Rails的HTTP預載入連結(Preload Links)功能，解決瀏覽器相容性問題
+  config.action_view.preload_links_header = false
 
   #ngrok網址，每開啟一次測試需更改，然後重新跑bin/dev
   config.hosts << ENV['domain']

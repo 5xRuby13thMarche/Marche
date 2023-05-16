@@ -23,7 +23,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
     <script>
-      $('.slider').slick({
+      $('.slider').not('.slick-initialized').slick({
         centerMode: true,
         centerPadding: '0px',
         slidesToShow: 1,
@@ -37,7 +37,7 @@
     </script>
     <%# 熱門商品&最新商品 JQuery%>
     <script>
-      $('.slider_hot').slick({
+      $('.slider_hot').not('.slick-initialized').slick({
         infinite: false,
         slidesToShow: 6,
         slidesToScroll: 3,
