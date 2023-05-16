@@ -42,7 +42,7 @@
 <div class="flex justify-between w-full mx-auto sm:w-10/12">
   <h2 class="self-end pl-2 mb-2 text-xl font-bold text-marche_orange sm:pl-0">推薦商品</h2>
 </div>
-<div class="grid w-full grid-cols-2 gap-4 mx-auto sm:w-10/12 sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
+<div class="grid w-full grid-cols-2 gap-4 mx-auto sm:w-10/12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
   <%= render  @product_records %>
 </div>
 <div class="flex justify-center mx-auto mt-6 mb-4"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
