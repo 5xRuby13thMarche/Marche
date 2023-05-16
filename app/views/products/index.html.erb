@@ -26,7 +26,7 @@
 </section>
 <%# 熱門商品%>
 <div class="container w-full mx-auto my-10 sm:w-10/12">
-  <h2 class="self-end pl-2 mb-2 text-xl font-bold text-marche_orange sm:pl-0">熱門商品</h2>
+  <h2 class="self-end pl-2 mb-2 text-xl font-bold text-marche_orange sm:pl-0">好評商品</h2>
   <div class="slider_hot">
     <%= render partial:'product', collection: @hot_products, as: :product %>
   </div>
@@ -41,7 +41,6 @@
 <%# 商品列表 %>
 <div class="flex justify-between w-full mx-auto sm:w-10/12">
   <h2 class="self-end pl-2 mb-2 text-xl font-bold text-marche_orange sm:pl-0">推薦商品</h2>
-  <%= link_to '新增商品', new_product_path, class: "self-end mb-2 btn bg-marche_orange hover:bg-marche_orange100 border-none font-normal mr-2 sm:mr-0" %>
 </div>
 <div class="grid w-full grid-cols-2 gap-4 mx-auto sm:w-10/12 sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
   <%= render  @product_records %>
