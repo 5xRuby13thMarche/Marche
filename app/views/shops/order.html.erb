@@ -1,0 +1,31 @@
+<div class="relative flex">
+  <%= render 'shared/shop_sidebar' %>
+  <div class="w-5/6 ml-auto">
+    <h1 class="self-end w-5/6 pl-4 mx-auto mt-5 text-3xl font-bold border-l-2 border-marche_shop_primary text-marche_shop_primary">我的銷售</h1>
+    <table class="table w-5/6 mx-auto mt-3 shadow-xl table-compact">
+      <!-- head -->
+      <thead class="">
+        <tr>
+          <th></th>
+          <th>出售時間</th>
+          <th>產品名稱</th>
+          <th>產品規格</th>
+          <th>出售數量</th>
+          <th>出售總額</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @shop_orders.each_with_index do |shop_orders, index| %>
+          <tr class="hover"> 
+            <th><%= index + 1 %></th>
+            <td><%= format_date_with_time(shop_orders.updated_at) %></td>
+            <td><%= shop_orders.product.name %></td>
+            <td><%= shop_orders.spec %></td>
+            <td><%= shop_orders.quantity %></td>
+            <td><%= shop_orders.each_price * shop_orders.quantity %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_q_ransack, only: [:index, :show, :search]
   before_action :set_cart_num, only: [:index, :show, :search]
-  before_action :shop_params,only: [:new, :create, :edit, :update, :destroy, :shop_products]
-  layout 'backend', only: [:new, :create, :update, :destory, :edit]
+  before_action :shop_params,only: [:new, :create, :edit, :update, :destroy]
+  layout 'shop', only: [:new, :create, :update, :destory, :edit]
   
   def index
     @products = Product.includes(images_attachments: :blob).includes(:sale_infos)
@@ -39,9 +39,6 @@ class ProductsController < ApplicationController
     #category
     @subcategory = @product.category
     @main_category = @subcategory.parent
-
-    #property
-    @property = @product.property ### 這邊要去掉 ###
   end
 
   def search
@@ -102,12 +99,11 @@ class ProductsController < ApplicationController
   end
 
   # 顯示賣家自己上架的所有商品
-  def shop_products 
-    @shop_products = @shop.products.includes(:sale_infos, :order_products).order(created_at: :desc)
-    shop_order_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop_id: @shop.id }).order(created_at: :desc)
-    @quantity_all = shop_order_products.group_by(&:spec).transform_values { |products| products.sum(&:quantity) }
-    render layout: 'backend'
-  end
+  # def shop_products 
+  #   @shop_products = @shop.products.includes(:sale_infos, :order_products).order(created_at: :desc)
+  #   shop_order_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop: @shop }).order(created_at: :desc)
+  #   @quantity_all = shop_order_products.group_by(&:spec).transform_values { |products| products.sum(&:quantity) }
+  # end
 
   private
 
@@ -120,6 +116,12 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :category_id, :images, sale_infos_attributes: [:storage, :price, :spec], property_attributes: [:brand, :size, :weight, :quantity_per_set])
+    params.require(:product).permit(:name, 
+                                    :description, 
+                                    :category_id, 
+                                    :images, 
+                                    sale_infos_attributes: [:storage, :price, :spec], 
+                                    property_attributes: [:brand, :size, :weight, :quantity_per_set]
+                                  )
   end
 end
