@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
       redirect_to carts_path, alert: '請先選擇商品'
     end
     @order = Order.new
+    @total_price = CartProduct.cal_total_price(@cart_products) # 算總價
   end
 
   def create
