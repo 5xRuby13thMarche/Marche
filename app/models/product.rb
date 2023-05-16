@@ -1,8 +1,8 @@
 class Product < ApplicationRecord
   validates :name, :category_id, presence: true
 
-  belongs_to :shop, optional: true
-  belongs_to :category, optional: true
+  belongs_to :shop
+  belongs_to :category
   has_many :order_products
   has_many :orders, through: :order_products
   has_many :product_likes, dependent: :destroy
@@ -18,5 +18,16 @@ class Product < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["name"]
+  end
+
+  def self.products_max_price(products, order)
+    products = products.left_outer_joins(:sale_infos)
+                        .select('products.*, MAX(sale_infos.price) as max_price')
+                        .group('products.id')
+                        .order("max_price #{order}")
+  end
+
+  def price_range
+    [self.sale_infos.minimum(:price).round, self.sale_infos.maximum(:price).round]
   end
 end

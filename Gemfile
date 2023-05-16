@@ -17,7 +17,6 @@ gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'omniauth-google-oauth2', '~> 1.1', '>= 1.1.1'
 gem 'omniauth-rails_csrf_protection'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
-gem "requestjs-rails", "~> 0.0.10"
 gem "pagy", "~> 6.0"
 gem "image_processing", ">= 1.2"
 gem "aws-sdk-s3", require: false

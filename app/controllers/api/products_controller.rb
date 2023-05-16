@@ -1,13 +1,13 @@
 class Api::ProductsController < ApplicationController
-  before_action :set_product, only: [:like, :dislike]
-  before_action :user_not_signed_in, only: [:like, :dislike]
+  before_action :set_product, only: [:like, :unlike]
+  before_action :check_user_signed_in!, only: [:like, :unlike]
   
   def like
     current_user.liked_products << @product
     render json: {signInState: "true"}
   end
 
-  def dislike
+  def unlike
     current_user.liked_products.destroy(@product)
     render json: {signInState: "true"}
   end
@@ -21,7 +21,7 @@ class Api::ProductsController < ApplicationController
     params.require(:product).permit(:name, :description)
   end
 
-  def user_not_signed_in
-    render json: {signInState: "false", signInUrl: new_user_session_path} if user_signed_in? == false
+  def check_user_signed_in!
+    render json: {signInState: "false", signInUrl: new_user_session_path} unless user_signed_in?
   end
 end

@@ -1,15 +1,14 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_q_ransack, only: [:index, :show, :search]
-  before_action :set_user_cart_product_num, only: [:index, :show, :search]
+  before_action :set_cart_num, only: [:index, :show, :search]
   before_action :shop_params,only: [:new, :create, :edit, :update, :destroy, :shop_products]
   layout 'backend', only: [:new, :create, :update, :destory, :edit]
   
-  # 買家-------------------------------
   def index
     @products = Product.includes(images_attachments: :blob).includes(:sale_infos)
     @pagy, @product_records = pagy(@products, items: 24)
-    @categories = Category.where(parent_id: nil)
+    @root_categories = Category.where(parent_id: nil)
     @new_products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(created_at: :desc).limit(12)
     @hot_products = Product.includes(images_attachments: :blob).includes(:sale_infos).order(average_rating: :desc).limit(12)
   end
@@ -31,7 +30,7 @@ class ProductsController < ApplicationController
     if(params[:saleinfo].present?)
       @sale_info = SaleInfo.find_by(id: params[:saleinfo].to_i)
     else
-      @sale_info = SaleInfo.find_by(product_id: @product.id)
+      @sale_info = SaleInfo.find_by(product: @product)
     end
     #印出所有規格
     @spec_all = @product.sale_infos
@@ -42,7 +41,7 @@ class ProductsController < ApplicationController
     @main_category = @subcategory.parent
 
     #property
-    @property = @product.property
+    @property = @product.property ### 這邊要去掉 ###
   end
 
   def search
@@ -63,19 +62,12 @@ class ProductsController < ApplicationController
     when 'new'
       @productcs = @products.order(created_at: :desc)
     when 'price_asc'
-      @products = @products.left_outer_joins(:sale_infos)
-                    .select('products.*, MAX(sale_infos.price) as max_price')
-                    .group('products.id')
-                    .order('max_price ASC')
+      @products = Product.products_max_price(@products, "ASC")
     when  'price_desc'
-      @products = @products.left_outer_joins(:sale_infos)
-                    .select('products.*, MAX(sale_infos.price) as max_price')
-                    .group('products.id')
-                    .order('max_price DESC')
+      @products = Product.products_max_price(@products, "DESC")
     end
   end
 
-  # 賣家-------------------------------
   def new
     @product = Product.new
     @product.sale_infos.build
@@ -85,7 +77,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.shop_id = current_user.shop.id
-    @product.average_rating = get_star_number(:star_0)
+    @product.average_rating = 0
     if @product.save
       redirect_to shops_path, notice: "新增商品成功" 
     else
@@ -121,16 +113,6 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
-  end
-
-  def set_q_ransack
-    @ransack_q = Product.ransack(params[:q])
-  end
-
-  def set_user_cart_product_num
-    if user_signed_in?
-      @user_cart_product_num = current_user.cart.cart_products.count
-    end
   end
 
   def shop_params

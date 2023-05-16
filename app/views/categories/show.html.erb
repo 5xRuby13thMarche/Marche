@@ -11,7 +11,7 @@
       <li><%= link_to '首頁', root_path %></li>
       <li><%= link_to @parent_category.content, category_path(@parent_category) %></li>
       <% if @recent_child.present? %>
-        <li><%= get_category_content_by_id(@recent_child)%></li>
+        <li><%= @child_content %></li>
       <% end %>
       <% if @recent_order.present? %>
         <li><%= get_order_bread_name(@recent_order)%></li>

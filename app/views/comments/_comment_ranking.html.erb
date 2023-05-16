@@ -18,10 +18,10 @@
   <%# 排序按鈕區 %>
   <div class="flex items-center m-auto">
     <%= link_to "全部", product_path(product, anchor: "comment-list"), class: "star-ranking" %>
-    <%= link_to "1星", product_path(product, anchor: "comment-list", star: get_star_number(:star_1)), class: "star-ranking" %>
-    <%= link_to "2星", product_path(product, anchor: "comment-list", star: get_star_number(:star_2)), class: "star-ranking" %>
-    <%= link_to "3星", product_path(product, anchor: "comment-list", star: get_star_number(:star_3)), class: "star-ranking" %>
-    <%= link_to "4星", product_path(product, anchor: "comment-list", star: get_star_number(:star_4)), class: "star-ranking" %>
-    <%= link_to "5星", product_path(product, anchor: "comment-list", star: get_star_number(:star_5)), class: "star-ranking" %>
+    <%= link_to "1星", product_path(product, anchor: "comment-list", star: 1), class: "star-ranking" %>
+    <%= link_to "2星", product_path(product, anchor: "comment-list", star: 2), class: "star-ranking" %>
+    <%= link_to "3星", product_path(product, anchor: "comment-list", star: 3), class: "star-ranking" %>
+    <%= link_to "4星", product_path(product, anchor: "comment-list", star: 4), class: "star-ranking" %>
+    <%= link_to "5星", product_path(product, anchor: "comment-list", star: 5), class: "star-ranking" %>
   </div>
 </section>

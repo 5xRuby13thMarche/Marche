@@ -1,5 +1,5 @@
 class Api::CartProductsController < ApplicationController
-  before_action :user_not_signed_in, only: [:like, :dislike]
+  before_action :check_user_signed_in!, only: [:like, :dislike]
 
   def create
     update_cart_product = current_user.cart.cart_products.find_by(sale_info_id: params[:sale_info_id])
@@ -43,7 +43,7 @@ class Api::CartProductsController < ApplicationController
     params.require(:cart_product).permit(:quantity, :sale_info_id)
   end
 
-  def user_not_signed_in
-    render json: {signInState: "false", signInUrl: new_user_session_path} if user_signed_in? == false
+  def check_user_signed_in!
+    render json: {signInState: "false", signInUrl: new_user_session_path} unless user_signed_in?
   end
 end

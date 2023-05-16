@@ -1,7 +1,13 @@
 class ProductComment < ApplicationRecord
-  validates :content, :rating, presence: true
-  enum stars: {star_0: 0, star_1: 1, star_2: 2, star_3: 3, star_4: 4, star_5: 5}
-  belongs_to :user, optional: true
-  belongs_to :product, optional: true
+  after_save :update_product_average_rating
+  after_destroy :update_product_average_rating
 
+  validates :content, :rating, presence: true
+  belongs_to :user
+  belongs_to :product
+
+  def update_product_average_rating()
+    average = product.product_comments.where.not(rating: 0).average(:rating) || 0
+    self.product.update(average_rating: average.round)
+  end
 end

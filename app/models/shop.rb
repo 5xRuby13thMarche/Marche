@@ -1,5 +1,5 @@
 class Shop < ApplicationRecord
-  belongs_to :user, optional: true
+  belongs_to :user
   has_many :products
   has_many :order_products, through: :products
   has_one_attached :images do |attachable|

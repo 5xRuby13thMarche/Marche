@@ -4,6 +4,4 @@ class UsersController < ApplicationController
   def show_like
     @products = current_user.liked_products
   end
-
-  
 end
