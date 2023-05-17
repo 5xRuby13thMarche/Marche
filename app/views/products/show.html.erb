@@ -3,6 +3,7 @@
   <div class="w-full mx-auto">
     <div class="w-full p-3 mx-auto my-3">
       <%= render 'shared/flash' if flash.any? %>
+      <div class="flex items-center p-2 mb-1"><i class="mr-1 fa-solid fa-backward text-zinc-800"></i><%= link_to '上一頁', :back, class: 'border-b-0.5 text-zinc-800 font-bold' %></div>
       <%# 商品基本欄位 %>
       <div class="grid flex-wrap w-full grid-cols-1 sm:grid-cols-2 sm:flex-none">
         <%# 圖片 %>

@@ -97,6 +97,7 @@ export default class extends Controller {
     // 前端畫面購物車內商品刪除
     const cartLength = this.cartItemTargets.length;
     for (let i = cartLength - 1; i >= 0; i--) this.cartItemTargets[i].remove();
+    this.update();
     // 打API刪除後端購物車內的所有商品
     let url = `/api/cart_products/delete_all`;
     const response = await destroy(url, {
