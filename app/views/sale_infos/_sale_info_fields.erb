@@ -1,0 +1,21 @@
+  <%# sale_info欄位 %>
+  <div class="w-full ">
+    <div class="form-control">
+      <label class="mb-2 input-group input-group-vertical">
+        <span><%= sale_info.label :spec, '規格' %></span>
+         <%= sale_info.text_field :spec, class:"input input-bordered"%>
+      </label>
+    </div>
+    <div class="form-control">
+      <label class="mb-2 input-group input-group-vertical">
+        <span><%= sale_info.label :price, '價格' %></span>
+         <%= sale_info.number_field :price, class:"input input-bordered"%>
+      </label>
+    </div>
+    <div class="form-control">
+      <label class="mb-2 input-group input-group-vertical">
+        <span><%= sale_info.label :storage, '商品庫存' %></span>
+         <%= sale_info.number_field :storage, class:"input input-bordered"%>
+      </label>
+    </div>
+  </div> 

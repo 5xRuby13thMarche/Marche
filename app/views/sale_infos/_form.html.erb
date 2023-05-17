@@ -1,0 +1,14 @@
+  <section class="p-3 my-3 bg-white border rounded-md shadow-xl">
+    <h2 class="mb-4 text-xl font-bold">銷售資訊</h2>
+    <%# sale_info表單 %>
+    <div>
+      <%= form_with model:sale_info do |sale_info| %>
+        <div class="relative flex flex-wrap p-3 mb-2 border rounded-md deleteFields">
+          <%= render partial: 'sale_info_fields', locals: { sale_info: sale_info } %>
+        </div>
+        <div class="mb-10">
+          <%= sale_info.submit "儲存", class: "rounded-lg py-3 px-5 bg-marche_shop_primary text-white inline-block font-medium cursor-pointer" %>
+        </div>
+      <% end %>
+    </div>
+  </section>
