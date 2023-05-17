@@ -6,9 +6,6 @@ class Api::OrderProductsController < ApplicationController
     if order_product.shipping_status == "not_shipped"
       order_product.update(shipping_status: params[:shipping])
       render json: {ok: 'shipped！', signInState: 'true'}
-      p '-'*100
-      p order_product.shipping_status
-      p '-'*100
     else
       render json: {ok: 'product is already shipped！', signInState: 'true'}
     end
