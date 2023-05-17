@@ -7,22 +7,30 @@
       <thead class="">
         <tr>
           <th></th>
+          <th>商品狀態</th>
           <th>出售時間</th>
           <th>產品名稱</th>
           <th>產品規格</th>
           <th>出售數量</th>
           <th>出售總額</th>
+          <th>操作</th>
         </tr>
       </thead>
       <tbody>
         <% @shop_orders.each_with_index do |shop_orders, index| %>
-          <tr class="hover"> 
+          <tr class="hover" data-controller="shop--order" data-order-product-id="<%= shop_orders.id %>"> 
             <th><%= index + 1 %></th>
+            <th data-shop--order-traget="status"><%= shop_orders.shipping_status %></th>
             <td><%= format_date_with_time(shop_orders.updated_at) %></td>
             <td><%= shop_orders.product.name %></td>
             <td><%= shop_orders.spec %></td>
             <td><%= shop_orders.quantity %></td>
             <td><%= shop_orders.each_price * shop_orders.quantity %></td>
+            <td>
+              <button class="flex items-center justify-center w-5 h-5 p-5 m-2 border-gray-500 rounded-full hover:bg-green-600 hover:text-white" data-action="click->shop--order#sendShippedMail">
+                <i class="fa-solid fa-truck"></i>
+              </button>
+            </td>
           </tr>
         <% end %>
       </tbody>

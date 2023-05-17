@@ -18,7 +18,7 @@
         <% shop_products.sale_infos.each do |s| %>
         <tbody>
           <tr class="hover"> 
-            <td><%= shop_products.name %></td>
+            <td><%= link_to shop_products.name, product_path(shop_products.id) %></td>
             <td><%= s.spec %></td>
             <td><%= s.price %></td>
             <td><%= @shop.total_sales[s.spec] || 0 %></td>
