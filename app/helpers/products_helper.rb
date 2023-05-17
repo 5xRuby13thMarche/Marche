@@ -19,10 +19,10 @@ module ProductsHelper
     if product && product.images.present?
         image_tag product.images[0].representation(resize_to_limit: [400, 400]), class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
     else
-      image_tag 'https://cdn.iconscout.com/icon/free/png-512/free-user-1851010-1568997.png?f=avif&w=256', size: "#{size[0]}x#{size[1]}", class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
+      image_tag "user.png", size: "#{size[0]}x#{size[1]}", class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
     end
   end
-  
+
   # 分類商品顯示頁面用----------------------------------
   
   def get_order_bread_name(recent_order)

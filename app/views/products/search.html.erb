@@ -25,9 +25,9 @@
   <% end %>
   <%# 上方篩選器 %>
   <% if @no_search_result == false %>
-    <div class="flex items-center justify-center p-2 mx-auto my-4 border bg-marche_white">
-      <span class="mx-2">篩選</span>
-      <%= link_to '最新', search_path(order: 'new'), class: "mx-2 py-1 px-4 border", data: {action: "click->product--order#changeRecentOrderByNewLink", turbo: "false"}%>
+    <div class="flex items-center justify-center mx-auto bg-marche_white">
+      <span class="px-3 py-2 my-5 mr-2 text-xs border sm:text-base">篩選</span>
+      <%= link_to '最新', search_path(order: 'new'), class: " border text-xs sm:text-base mr-2 px-3 py-2 my-5", data: {action: "click->product--order#changeRecentOrderByNewLink", turbo: "false"}%>
       <select class="max-w-xs w-44 select select-bordered" data-product--order-target="selectArea" data-action="change->product--order#changeRecentOrderBySelector">
         <option disabled selected data-product--order-target="optionDefault">價格</option>
         <option value="price_asc" data-product--order-target="optionAsc">價格： 低到高</option>
