@@ -17,7 +17,6 @@ class OrdersController < ApplicationController
   def create
     @cart_products = CartProduct.where(id: params[:cart_product]).includes(:sale_info)
     total_price = CartProduct.cal_total_price(@cart_products) # 算總價
-    
     @order = Order.new(order_params)
     @order.build_cart_products(@cart_products) # 製作order_products
     @order.generate_tracking_number()

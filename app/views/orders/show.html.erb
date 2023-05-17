@@ -26,6 +26,10 @@
       <p class="w-1/2 text-md text-center">備註</p>
       <p class="w-1/2 text-md text-center"><%= @order.note %></p>
     </div>
+    <div class="flex justify-around px-2 pb-4">
+      <p class="w-1/2 text-md text-center text-red-600">總價</p>
+      <p class="w-1/2 text-md text-center text-red-600"><%= @order.total_price %></p>
+    </div>
 
       <%# 分隔線 %>
     <div class="flex justify-center m-2">
