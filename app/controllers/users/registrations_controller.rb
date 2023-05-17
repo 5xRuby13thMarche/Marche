@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
-      resource.name = "@#{Faker::Internet.password(min_length: 8)}" #帶修改
+      resource.name = "@" + params[:user][:email].split('@').first
       resource.save
     end
   end
