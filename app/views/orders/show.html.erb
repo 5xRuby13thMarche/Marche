@@ -6,28 +6,39 @@
   <input type="hidden" id="TradeSha" name="TradeSha" value="<%= @form_info[:TradeSha] %>">
   <input type="hidden" id="Version" name="Version" value="<%= @form_info[:Version] %>">
   <%# 客戶資訊 %>
-  <div class="flex justify-around px-3 pt-2">
-    <p class="w-1/2 text-lg text-center">收件人</p>
-    <p class="w-1/2 text-lg text-center"><%= @order.receiver %></p>
-  </div>
-  <div class="flex justify-around px-3 pt-2">
-    <p class="w-1/2 text-lg text-center">配送地址</p>
-    <p class="w-1/2 text-lg text-center"><%= @order.shipping_address %></p>
-  </div>
-  <div class="flex justify-around p-2 px-3">
-    <p class="w-1/2 text-lg text-center">配送方式</p>
-    <p class="w-1/2 text-lg text-center"><%= @order.shipping_status %></p>
-  </div>
-  <div class="flex justify-around p-2 px-3">
-    <p class="w-1/2 text-lg text-center">備註</p>
-    <p class="w-1/2 text-lg text-center"><%= @order.note %></p>
-  </div>
-  <div class="flex justify-around">
-    <div class="flex items-center justify-around w-1/2 p-2 px-3">
-      <%= link_to "上一頁", :back, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+  <section class="border-2 my-20 mx-auto w-10/12">
+    <div class="flex justify-center p-2 bg-gray-100 border-b">
+      <p class="text-lg">配送資訊</p>
     </div>
-    <div class="flex items-center justify-around w-1/2 p-2 px-3">
-      <%= form.submit "付款", class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+    <div class="flex justify-around px-2 pt-4">
+      <p class="w-1/2 text-md text-center">收件人</p>
+      <p class="w-1/2 text-md text-center"><%= @order.receiver %></p>
     </div>
-  </div>
+    <div class="flex justify-around px-2 pt-2">
+      <p class="w-1/2 text-md text-center">配送地址</p>
+      <p class="w-1/2 text-md text-center"><%= @order.shipping_address %></p>
+    </div>
+    <div class="flex justify-around px-2 p-2">
+      <p class="w-1/2 text-md text-center">配送方式</p>
+      <p class="w-1/2 text-md text-center"><%= @order.shipping_status %></p>
+    </div>
+    <div class="flex justify-around px-2 pb-4">
+      <p class="w-1/2 text-md text-center">備註</p>
+      <p class="w-1/2 text-md text-center"><%= @order.note %></p>
+    </div>
+
+      <%# 分隔線 %>
+    <div class="flex justify-center m-2">
+      <div class="border w-4/5"></div>
+    </div>
+
+    <div class="flex justify-around mb-2">
+      <div class="flex items-center justify-around w-1/2 px-3">
+        <%= link_to "重新選購", :back, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+      </div>
+      <div class="flex items-center justify-around w-1/2 px-3">
+        <%= form.submit "確認無誤，結帳", class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+      </div>
+    </div>
+  </section>
 <% end %>
