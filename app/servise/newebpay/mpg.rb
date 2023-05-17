@@ -40,7 +40,7 @@ module Newebpay
       info[:Version] = "2.0"          
       info[:LoginType] = 0            
       info[:CREDIT] =  1
-      info[:ReturnURL] = "https://#{ENV['domain']}/orders/notify"
+      info[:ReturnURL] = "https://#{ENV['domain']}orders/notify"
     end
 
     def url_encoded_query_string
