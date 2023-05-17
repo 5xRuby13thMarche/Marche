@@ -82,7 +82,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
   address:              'smtp.mailgun.org',
   port:                 587,
-  domain:               'https://marche.herokuapp.com/',
+  domain:               'https://www.marche.asia/',
   user_name:            ENV['user_name'],
   password:             ENV['password'],
   authentication:       'plain',
