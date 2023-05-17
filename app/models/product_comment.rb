@@ -10,4 +10,8 @@ class ProductComment < ApplicationRecord
     average = product.product_comments.where.not(rating: 0).average(:rating) || 0
     self.product.update(average_rating: average.round)
   end
+
+  def self.contain_user_comments?(product_comments, user)
+    return product_comments.any? { |comment| user.product_comments.include?(comment) }
+  end
 end

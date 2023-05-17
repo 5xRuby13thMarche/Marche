@@ -1,1 +1,4 @@
-<%= turbo_stream.prepend 'comment-list', render('comments/comment', comment: @product_comment)%>
+<% unless @cotain_comment %>
+  <%= turbo_stream.prepend 'comment-list', render('comments/comment', comment: @product_comment)%>
+<% end %>
+<%= turbo_stream.remove 'comment-input' %>

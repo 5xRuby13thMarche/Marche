@@ -30,4 +30,5 @@ class Product < ApplicationRecord
   def price_range
     [self.sale_infos.minimum(:price).round, self.sale_infos.maximum(:price).round]
   end
+
 end

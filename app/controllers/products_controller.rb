@@ -22,9 +22,9 @@ class ProductsController < ApplicationController
       @product_comments = @product.product_comments.includes(:user).order(created_at: :desc)
     end
     @pagy, @comment_records = pagy(@product_comments, items: 9, fragment: '#comment-list')
-    average = @product.product_comments.where(rating: [1,2,3,4,5]).average(:rating)
     @average_rating = @product.average_rating == 0 ? "?": @product.average_rating
-    
+    @contain_comments = (user_signed_in? && ProductComment.contain_user_comments?(@product_comments, current_user))
+
     # Sale info
     #判斷是否有選擇規格沒有則隨機展示一項saleinfo
     if(params[:saleinfo].present?)
