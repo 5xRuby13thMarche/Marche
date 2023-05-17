@@ -1,6 +1,6 @@
 <%= turbo_frame_tag(comment) do%>
   <article  class= "<%= set_comment_style(current_user&.id == comment.user_id)%>">
-    <div class="text-sm">User:XXXX <%= comment.user.name %></div>
+    <div class="text-sm"><%= comment.user.name %></div>
     <%# 產生星星 %>
     <% if comment.rating != 0 %>
       <div class="rating rating-sm">

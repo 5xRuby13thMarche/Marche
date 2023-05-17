@@ -1,14 +1,19 @@
 class CommentsController < ApplicationController
   before_action :set_product, only: [:create]
   before_action :set_product_comment, only: [:edit, :update, :destroy]
-  
-  def create
-    @product_comment = current_user.product_comments.build(params_comment)
-    @product_comment.product_id = params[:product_id]
+  before_action :authenticate_user!
 
-    unless @product_comment.save
-      @product_comments = ProductComment.includes(:user).order(created_at: :desc)
-      redirect_to product_path(params[:product_id]), alert: "留言不能為空!"
+  def create
+    if ProductComment.contain_user_comments?(@product.product_comments, current_user)
+      redirect_to product_path(params[:product_id]), alert: "已經留下過評論!"
+    else
+      @product_comment = current_user.product_comments.build(params_comment)
+      @product_comment.product_id = params[:product_id]
+
+      unless @product_comment.save
+        @product_comments = ProductComment.includes(:user).order(created_at: :desc)
+        redirect_to product_path(params[:product_id]), alert: "留言內容不能為空!"
+      end
     end
   end
 
@@ -17,7 +22,7 @@ class CommentsController < ApplicationController
 
   def update
     unless @product_comment.update(params_comment)
-      flash[:alert] = "fail editing comment."
+      flash[:alert] = "修改留言失敗"
       render :edit
     end
   end

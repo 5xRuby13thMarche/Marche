@@ -55,8 +55,8 @@
   <%# 留言輸入區 %>
   <h2 class="py-1 m-1 text-lg font-bold ">商品評價</h2>
   <%= render partial: 'comments/comment_ranking', locals: {average_rating: @average_rating, product: @product} %>
-  <% if user_signed_in? %>
-    <%= form_with model: @product_comment, url: product_comments_path(@product.id) do |f| %>
+  <% if user_signed_in? && !@contain_comments %>
+    <%= form_with model: @product_comment, url: product_comments_path(@product.id), id: 'comment-input' do |f| %>
       <div class="flex">
         <%= f.label "留下評論：", class: 'label'%>
         <div class="rating rating-md">
