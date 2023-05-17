@@ -55,6 +55,9 @@ Rails.application.routes.draw do
       end
     end
 
+    #order_products
+    resources :order_products, only: [:update]
+
     #category 新增商品找分類
     resources :categories, only: [:show]
 

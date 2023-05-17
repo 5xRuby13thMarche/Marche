@@ -33,3 +33,6 @@ application.register("product--order", Product__OrderController)
 
 import Product__SaleInfoController from "./product/sale_info_controller"
 application.register("product--sale-info", Product__SaleInfoController)
+
+import Shop__OrderController from "./shop/order_controller"
+application.register("shop--order", Shop__OrderController)
