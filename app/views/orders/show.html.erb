@@ -28,7 +28,7 @@
     </div>
     <div class="flex justify-around px-2 pb-4">
       <p class="w-1/2 text-md text-center text-red-600">總價</p>
-      <p class="w-1/2 text-md text-center text-red-600"><%= @order.total_price %></p>
+      <p class="w-1/2 text-md text-center text-red-600"><%=  number_to_currency(@order.total_price, precision: 0) %></p>
     </div>
 
       <%# 分隔線 %>
