@@ -7,6 +7,10 @@ namespace :sample_data do
       c2 = c1.children.find_by(content: category2)
     end
 
+    def find_user(email)
+      User.find_by(email: email)
+    end
+
     p "開始產生商品..."
     path = Rails.root.join("db","product_data.json")
     data = JSON.parse(File.read(path))
@@ -14,6 +18,8 @@ namespace :sample_data do
     data.each do |d|
       if d["name"] != ""
         product = Product.new(name: d["name"],description: d["description"], category_id: find_sub_category(d["c1"], d["c2"]).id)
+        product.build_property(brand: d["brand"], size: d["dimension"], weight: d["weight"], quantity_per_set: d["each_quantity"])
+        product.shop_id = find_user(d["shop"]).shop.id
       end
       product.sale_infos.build(price: d["price"], storage: d["storage"], spec: d["spec"])
       product.save
