@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   # 父分類搜尋商品
   resources :categories, only: [:show]
 
+  resources :sale_infos, only: [:edit, :update]
+
   # 訂單
   resources :orders, only: [:index, :new, :create, :show] do
     collection do

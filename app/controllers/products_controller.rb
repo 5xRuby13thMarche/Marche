@@ -76,18 +76,20 @@ class ProductsController < ApplicationController
     @product.shop_id = current_user.shop.id
     @product.average_rating = 0
     if @product.save
-      redirect_to shops_path, notice: "新增商品成功" 
+      redirect_to products_shops_path, notice: "新增商品成功" 
     else
       render :new, status: :unprocessable_entity 
     end
   end
 
   def edit
+    @subcategory = @product.category
+    @main_category = @subcategory.parent
   end
 
   def update
     if @product.update(product_params)
-      redirect_to shops_path, notice: "商品資訊已更新" 
+      redirect_to products_shops_path, notice: "商品資訊已更新" 
     else
       render :edit, status: :unprocessable_entity 
     end
@@ -95,15 +97,8 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.destroy
-    redirect_to root_path, notice: "已成功刪除商品" 
+    redirect_to products_shops_path, notice: "已成功刪除商品" 
   end
-
-  # 顯示賣家自己上架的所有商品
-  # def shop_products 
-  #   @shop_products = @shop.products.includes(:sale_infos, :order_products).order(created_at: :desc)
-  #   shop_order_products = @shop.order_products.includes(product: :sale_infos).where(product: { shop: @shop }).order(created_at: :desc)
-  #   @quantity_all = shop_order_products.group_by(&:spec).transform_values { |products| products.sum(&:quantity) }
-  # end
 
   private
 

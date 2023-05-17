@@ -1,0 +1,70 @@
+<%= form_with(model:product, class: "contents", data: { turbo: false }) do |form| %>
+  <%= render 'shared/error_message', record: product %>
+  <section class="p-3 my-3 bg-white border rounded-md shadow-xl">
+    <h2 class="text-xl font-bold">基本資料</h2>
+    <div class="my-5">
+      <%= form.label :name ,'商品名稱 *'%>
+      <%= form.text_field :name, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+    <%= form.file_field :images %>
+    <div class="my-5" data-controller="category--assign">
+      <h3 class="pb-2">分類 *</h3>
+      <div data-category--assign-target="show" class="text-gray-700"><%= @main_category.content %> > <%= @subcategory.content %></div>
+      <!-- The button to open modal -->
+      <label for="my-modal-4" class="py-2 btn bg-marche_shop_primary border-marche_shop_primary">請選擇</label>
+      <!-- Put this part before </body> tag -->
+      <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+      <label for="my-modal-4" class="cursor-pointer modal">
+        <label class="relative modal-box" for="">
+          <h3 class="text-lg font-bold">分類</h3>
+          <select id="main_category_id" class="block px-3 py-2 mt-2 border border-gray-200 rounded-md shadow outline-none" data-category--assign-target="main_category" data-action="change->category--assign#choose">
+            <option value="">請選擇</option>
+            <% parent_categories.each do |id, content| %>
+              <option value="<%= id %>"><%= content %></option>
+            <% end %>
+          </select>
+          <%= form.select :category_id, "", { prompt: "請選擇" }, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2', data:{ category__assign_target: "subcategory" }%>
+          <div class="modal-action">
+            <label for="my-modal-4" class="btn" data-action="click->category--assign#whichChoose">確定</label>
+          </div>
+        </label>
+      </label>
+    </div>
+    
+    <div class="my-5">
+      <%= form.label :description, '商品描述 *' %>
+      <%= form.text_area :description, rows: 4, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+  </section>
+
+  <section class="flex flex-wrap p-3 mb-3 bg-white border rounded-md shadow-xl deleteFields">
+    <h2 class="mb-4 text-xl font-bold">屬性</h2>
+   <%= form.fields_for :property do |p| %>
+      <div class="grid w-full grid-cols-2">
+        <div class="grid items-center grid-cols-3 pr-2 mb-2">
+          <%= p.label :brand, '品牌', class: "text-center " %>
+          <%= p.text_field :brand, class: "col-span-2 rounded-md border border-gray-200" %>
+        </div>
+        <div class="grid items-center grid-cols-3 pr-2 mb-2">
+          <%= p.label :size, '尺寸', class: "text-center " %>
+          <%= p.text_field :size, class: "col-span-2 rounded-md border border-gray-200" %>
+        </div>
+        <div class="grid items-center grid-cols-3 pr-2 mb-2">
+          <%= p.label :weight, '重量', class: "text-center " %>
+          <%= p.text_field :weight, class: "col-span-2 rounded-md border border-gray-200" %>
+        </div>
+        <div class="grid items-center grid-cols-3 pr-2 mb-2">
+          <%= p.label :quantity_per_set, '每組數量', class: "text-center" %>
+          <%= p.number_field :quantity_per_set, class: "col-span-2 rounded-md border border-gray-200" %>
+        </div>
+      </div>  
+    <% end %>
+  </section>
+  <div class="mb-10">
+    <% if action_name == "new" %>
+      <%= form.submit "建立商品", class: "rounded-lg py-3 px-5 bg-marche_shop_primary text-white inline-block font-medium cursor-pointer" %>
+    <% else %>
+      <%= form.submit "儲存", class: "rounded-lg py-3 px-5 bg-marche_shop_primary text-white inline-block font-medium cursor-pointer" %>
+    <% end %>
+  </div>
+<% end %>
