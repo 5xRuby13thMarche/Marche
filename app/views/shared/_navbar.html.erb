@@ -1,9 +1,9 @@
 <div class="flex w-full bg-marche_orange">
   <nav class="w-full items-center flex flex-wrap justify-end content-center mx-[30px] 2xl:mx-[140px] xl:mx-[132px] lg:mx-[120px] md:mx-[116px] sm:mx-[60px]">
     <% if current_user&.shop&.present? %>
-      <%= link_to "賣家中心", shops_path , class: "text-gray-100 text-xs mr-auto border border-x-0 border-t-0"%>
+      <%= link_to "賣家中心", shops_path , class: "hidden md:inline-block text-gray-100 text-xs mr-auto border border-x-0 border-t-0"%>
     <% else %>
-      <%= link_to "賣家中心", new_shop_path , class: "text-gray-100 text-xs mr-auto border border-x-0 border-t-0"%>
+      <%= link_to "賣家中心", new_shop_path , class: "hidden md:inline-block text-gray-100 text-xs mr-auto border border-x-0 border-t-0"%>
     <% end %>
     <%= link_to "首頁", root_path , class: "px-4 text-gray-100 text-xs"%>
     <!-- 顯示使用者名稱 or 未登入字樣-->
