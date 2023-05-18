@@ -23,6 +23,7 @@ class ProductsController < ApplicationController
     end
     @pagy, @comment_records = pagy(@product_comments, items: 9, fragment: '#comment-list')
     @average_rating = @product.average_rating == 0 ? "?": @product.average_rating
+    @contain_orders = (user_signed_in?) && Order.contain_user_orders?(@product.orders, current_user)
     @contain_comments = (user_signed_in? && ProductComment.contain_user_comments?(@product_comments, current_user))
 
     # Sale info
