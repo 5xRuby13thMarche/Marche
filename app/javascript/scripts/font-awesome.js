@@ -9,6 +9,8 @@ import {faX} from "@fortawesome/free-solid-svg-icons";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import {faBackward} from "@fortawesome/free-solid-svg-icons";
 import {faTruck} from "@fortawesome/free-solid-svg-icons";
+import {faGithub} from '@fortawesome/free-brands-svg-icons'
+
 
 library.add(regularHeart);
 library.add(solidHeart);
@@ -17,5 +19,6 @@ library.add(faX);
 library.add(faMagnifyingGlass);
 library.add(faBackward);
 library.add(faTruck);
+library.add(faGithub)
 
 dom.watch();
