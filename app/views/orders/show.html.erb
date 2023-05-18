@@ -10,38 +10,38 @@
     <div class="flex justify-center p-2 bg-gray-100 border-b">
       <p class="text-lg">配送資訊</p>
     </div>
-    <div class="flex justify-around px-2 pt-4">
-      <p class="w-1/2 text-md text-center">收件人</p>
-      <p class="w-1/2 text-md text-center"><%= @order.receiver %></p>
+    <div class="flex justify-around items-center px-2 pt-4">
+      <p class="w-1/2 text-base text-center">收件人</p>
+      <p class="w-1/2 text-base text-center break-words"><%= @order.receiver %></p>
     </div>
-    <div class="flex justify-around px-2 pt-2">
-      <p class="w-1/2 text-md text-center">配送地址</p>
-      <p class="w-1/2 text-md text-center"><%= @order.shipping_address %></p>
+    <div class="flex justify-around items-center px-2 pt-2">
+      <p class="w-1/2 text-base text-center">配送地址</p>
+      <p class="w-1/2 text-base text-center break-words"><%= @order.shipping_address %></p>
     </div>
-    <div class="flex justify-around px-2 p-2">
-      <p class="w-1/2 text-md text-center">配送方式</p>
-      <p class="w-1/2 text-md text-center">宅配</p>
+    <div class="flex justify-around items-center px-2 p-2">
+      <p class="w-1/2 text-base text-center">配送方式</p>
+      <p class="w-1/2 text-base text-center ">宅配</p>
     </div>
-    <div class="flex justify-around px-2 pb-4">
-      <p class="w-1/2 text-md text-center">備註</p>
-      <p class="w-1/2 text-md text-center"><%= @order.note %></p>
+    <div class="flex justify-around items-center px-2 pb-4">
+      <p class="w-1/2 text-base text-center">備註</p>
+      <p class="w-1/2 text-base text-center break-words"><%= @order.note %></p>
     </div>
-    <div class="flex justify-around px-2 pb-4">
-      <p class="w-1/2 text-md text-center text-red-600">總價</p>
-      <p class="w-1/2 text-md text-center text-red-600"><%=  number_to_currency(@order.total_price, precision: 0) %></p>
+    <div class="flex justify-around items-center px-2 pb-4">
+      <p class="w-1/2 text-xl text-center text-red-600">總價</p>
+      <p class="w-1/2 text-xl text-center text-red-600"><%=  number_to_currency(@order.total_price, precision: 0) %></p>
     </div>
 
       <%# 分隔線 %>
     <div class="flex justify-center m-2">
-      <div class="border w-4/5"></div>
+      <div class="border w-4/5"></div> 
     </div>
 
     <div class="flex justify-around mb-2">
       <div class="flex items-center justify-around w-1/2 px-3">
-        <%= link_to "重新選購", root_path, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+        <%= link_to "重新選購", root_path, class: "border text-green-500 text-base bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
       </div>
       <div class="flex items-center justify-around w-1/2 px-3">
-        <%= form.submit "確認無誤，結帳", class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+        <%= form.submit "確認無誤，結帳", class: "border text-green-500 text-base bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
       </div>
     </div>
   </section>

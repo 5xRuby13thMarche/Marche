@@ -1,24 +1,31 @@
 <%# render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <%= render 'shared/flash' if flash.any? %>
-<section class="w-8/12 mx-auto my-20 border-2">
+<section class="w-9/12 mx-auto my-20 border-2">
   <div class="flex justify-center border-b-2 bg-gray-100">
     <h1 class="m-2 text-xl">訂單資訊</h1>
   </div>
-  <div class="flex justify-around px-3 pt-2">
+  <div class="flex justify-around px-3 pt-2 items-center">
     <p class="w-1/2 text-lg text-center">訂單編號</p>
     <p class="w-1/2 text-lg text-center break-words"><%= @order.tracking_number %></p>
   </div>
+
   <div class="flex justify-around px-3 pt-2">
-    <p class="w-1/2 text-lg text-center">付款狀態</p>
-    <p class="w-1/2 text-lg text-center">付款成功</p>
+    <% if @order.payment_status == "pending"%>
+      <p class="w-1/2 text-lg text-center font-bold text-red-600">付款狀態</p>
+      <p class="w-1/2 text-lg text-center font-bold text-red-600">付款失敗</p>
+    <% else %>
+      <p class="w-1/2 text-lg text-center">付款狀態</p>
+      <p class="w-1/2 text-lg text-center">付款成功</p>
+    <% end %>
   </div>
+
   <div class="flex justify-around px-3 pt-2">
     <p class="w-1/2 text-lg text-center">付款方式</p>
     <p class="w-1/2 text-lg text-center">信用卡</p>
   </div>
-  <div class="flex justify-around px-3 pt-2">
-    <p class="w-1/2 text-lg text-center text-red-600">總價</p>
-    <p class="w-1/2 text-lg text-center text-red-600"><%= number_to_currency(@order.total_price, precision: 0) %></p>
+  <div class="flex justify-around px-3 pt-2 items-center">
+    <p class="w-1/2 text-xl text-center text-red-600">總價</p>
+    <p class="w-1/2 text-xl text-center text-red-600 break-words"><%= number_to_currency(@order.total_price, precision: 0) %></p>
   </div>
 
       <%# 分隔線 %>
@@ -34,38 +41,38 @@
       <input type="hidden" id="TradeSha" name="TradeSha" value="<%= @form_info[:TradeSha] %>">
       <input type="hidden" id="Version" name="Version" value="<%= @form_info[:Version] %>">
       <%# 客戶資訊 %>
-      <div class="flex justify-around px-3 pt-2">
+      <div class="flex justify-around px-3 pt-2 items-center">
         <p class="w-1/2 text-lg text-center">收件人</p>
-        <p class="w-1/2 text-lg text-center"><%= @order.receiver %></p>
+        <p class="w-1/2 text-lg text-center break-words"><%= @order.receiver %></p>
       </div>
-      <div class="flex justify-around px-3 pt-2">
+      <div class="flex justify-around px-3 pt-2 items-center">
         <p class="w-1/2 text-lg text-center">配送地址</p>
-        <p class="w-1/2 text-lg text-center"><%= @order.shipping_address %></p>
+        <p class="w-1/2 text-lg text-center break-words"><%= @order.shipping_address %></p>
       </div>
       <div class="flex justify-around px-3 p-2">
         <p class="w-1/2 text-lg text-center">配送方式</p>
-        <p class="w-1/2 text-lg text-center"><%= @order.shipping_status %></p>
+        <p class="w-1/2 text-lg text-center">宅配</p>
       </div>
-      <div class="flex justify-around px-3 p-2">
+      <div class="flex justify-around px-3 p-2 items-center">
         <p class="w-1/2 text-lg text-center">備註</p>
-        <p class="w-1/2 text-lg text-center"><%= @order.note %></p>
+        <p class="w-1/2 text-lg text-center break-words"><%= @order.note %></p>
       </div>
       <div class="flex justify-around">
         <div class="flex items-center justify-around w-1/2 p-2 px-3">
-          <%= link_to "上一頁", :back, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+          <%= link_to "上一頁", :back, class: "border text-green-500 text-lg bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
         </div>
         <div class="flex items-center justify-around w-1/2 p-2 px-3">
-          <%= form.submit "付款", class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+          <%= form.submit "重新結帳", class: "border text-green-500 text-lg bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
         </div>
       </div>
     <% end %>
   <% else %>
-    <div class="flex justify-around px-3 pt-2 py-4 ">
-      <div class=" text-center w-1/2">
-        <%= link_to "首頁", root_path, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 rounded hover:bg-green-100" %>
+    <div class="flex justify-around pt-2 py-4 ">
+      <div class="text-center w-1/2 px-3">
+        <%= link_to "首頁", root_path, class: "border text-green-500 text-lg bg-green-50 hover:cursor-pointer p-2 rounded hover:bg-green-100" %>
       </div>
-      <div class="text-center w-1/2">
-        <%= link_to "查看所有訂單", orders_path, class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
+      <div class="text-center w-1/2 px-3">
+        <%= link_to "查看所有訂單", orders_path, class: "border text-green-500 text-lg bg-green-50 hover:cursor-pointer p-2 rounded hover:bg-green-100" %>
       </div>
     </div>
   <% end %>
