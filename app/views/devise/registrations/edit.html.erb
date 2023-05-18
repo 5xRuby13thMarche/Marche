@@ -21,11 +21,13 @@
       <div class="block sm:inline">
         <%= render "devise/shared/error_messages", resource: resource %>
       </div>
-      <div class="field">
+      <div class="field" data-controller="user--avatar">
         <%= f.label :avatar, '使用者頭像', class: "text-md text-black-500" %><br />
-        <%= f.file_field :avatar %>
-        <%= avatar(current_user) %>
+        <%= f.file_field :avatar, data: { user__avatar_target: "input" } %>
+        <img src="" alt="" class="hidden w-[250px] h-[250px] object-cover rounded my-2" data-user--avatar-target="preview">
+        <div class="m-2 rounded bg-slate-300 w-fit"><%= avatar(current_user) %></div>
       </div>
+
       <div class="field">
         <%= f.label :name, '使用者帳號', class: "text-md text-black-500" %> <i>(範例：@astro13)</i>
         <%= f.text_field :name, class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
@@ -56,11 +58,5 @@
         <%= f.submit "更新", class: "mt-2 px-4 py-2 text-green-500 bg-green-50 hover:bg-green-100 rounded-lg hover:cursor-pointer" %>
       </div>
     <% end %>
-    <div class="my-4">
-      <h3 class="text-lg">刪除我的帳戶</h3>
-      <div class="mt-2">
-        <%= button_to "刪除", registration_path(resource_name), class: "px-4 py-2 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 hover:cursor-pointer", data: { confirm: "確認刪除？" }, method: :delete %>
-      </div>
-    </div>
   </div>
 </div>
