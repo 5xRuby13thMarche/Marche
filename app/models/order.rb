@@ -19,5 +19,9 @@ class Order < ApplicationRecord
   def self.generate_item_desc(order_products)
     order_products.pluck(:spec).reduce{|acc, cur| acc + cur}
   end
+
+  def self.contain_user_orders?(orders, user)
+    return orders.any? { |order| user.orders.include?(order) }
+  end
   
 end

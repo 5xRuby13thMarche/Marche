@@ -4,8 +4,10 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    if ProductComment.contain_user_comments?(@product.product_comments, current_user)
-      redirect_to product_path(params[:product_id]), alert: "已經留下過評論!"
+    contain_orders = Order.contain_user_orders?(@product.orders, current_user)
+    contain_comments = ProductComment.contain_user_comments?(@product.product_comments, current_user)
+    if contain_comments || !contain_orders
+      redirect_to product_path(params[:product_id])
     else
       @product_comment = current_user.product_comments.build(params_comment)
       @product_comment.product_id = params[:product_id]
