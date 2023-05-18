@@ -1,5 +1,5 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<section class="w-10/12 mx-auto my-12 mt-20">  
+<section class="w-10/12 mx-auto my-12">  
   <div class="flex justify-center mt-5 mb-5">
     <h1 class="text-2xl">結帳頁面</h1>
   </div>
@@ -26,35 +26,32 @@
   <%= form_with model: @order, url: orders_path, method: :post do |form| %>
     <% @cart_products.each do |c|%>
       <%= hidden_field_tag "cart_product[]", value = c.id %>
-    <% end %>
+      <% end %>
 
     <%# 這段要讓使用者填寫收件人資訊 %>
     <div class="border-2 mt-8">
-      <div class="flex justify-start pl-[18px] text-lg py-[6px] border-b-2 w-full bg-gray-100">
-        <p>請填寫收件人資訊</p>
-      </div>
+    <div class="flex justify-center md:justify-start pl-[18px] text-lg py-[6px] border-b-2 w-full bg-gray-100">
+      <p>請填寫收件人資訊</p>
+    </div>
       
-      <div class="flex flex-wrap items-cemter justify-around mt-8 mb-4">
-        <div class="mb-4">
-          <%= form.label :receiver, "收件人" %>
-          <%= form.text_field :receiver %>
-        </div>
-        <div class="mb-4">
-          <%= form.label :shipping_address, "配送地址" %>
-          <%= form.text_field :shipping_address %>
-        </div>
-        <div class="mb-4 flex items-center">
-          <%= form.label :shipping_status, "配送方式" %>
-          <p class="pl-4">宅配</p>
-        </div>
-        <div class="mb-4">
-          <%= form.label :note, "備註" %>
-          <%= form.text_field :note %>
-        </div>
+    <div class="flex flex-wrap items-center justify-start md:justify-around mt-8 mb-4">
+      <div class="mb-4 flex items-center justify-between md:justify-around w-full md:w-auto">
+        <%= form.label :shipping_address, "配送地址", class: "ml-2 md:mr-2" %>
+        <%= form.text_field :shipping_address, class: "mr-2"%>
+      </div>
+      <div class="mb-4 flex items-center justify-between md:justify-around w-full md:w-auto">
+        <%= form.label :receiver, "收件人", class: "ml-2 md:mr-2" %>
+        <%= form.text_field :receiver, class: "mr-2" %>
+      </div>
+      <div class="mb-4 flex items-center justify-between md:justify-around w-full md:w-auto">
+        <%= form.label :note, "備註", class: "ml-2 md:mr-2" %>
+        <%= form.text_field :note, class: "mr-2"%>
+      </div>
+      <div class="mb-4 flex items-center justify-center md:justify-around w-full md:w-auto">
+        <p class="text-red-600 text-base">僅供宅配</p>
       </div>
     </div>
-
-    <div class="flex flex-wrap justify-end items-center pr-2 mt-8 pl-2 bg-gray-100">
+    <div class="flex flex-wrap justify-end items-center pr-2 mt-4 pl-2 bg-gray-100">
       <%= link_to "上一頁", :back, class: "mr-auto border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
       <p class="mx-6 text-lg text-red-600">本次結帳金額為 <%= number_to_currency(@total_price, precision: 0) %> </p>
       <%= form.submit "金額確認，產生訂單", class: "border text-green-500 bg-green-50 hover:cursor-pointer p-2 m-2 rounded hover:bg-green-100" %>
