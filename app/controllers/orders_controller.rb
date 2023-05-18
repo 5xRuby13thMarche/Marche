@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:notify, :paid]
-  before_action :set_q_ransack, only: [:new]
-  before_action :set_cart_num, only: [:new]
+  before_action :set_q_ransack, only: [:new, :index, :show, :search]
+  before_action :set_cart_num, only: [:new, :index, :show, :search]
   skip_before_action :verify_authenticity_token, only: [:notify]
 
   def new
