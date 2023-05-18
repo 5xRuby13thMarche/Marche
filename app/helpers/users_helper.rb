@@ -3,7 +3,7 @@ module UsersHelper
     if user && user.avatar.present?
       image_tag user.avatar.variant(resize_to_fill: size).processed, data: { user__avatar_target: "initialPic" }
     else
-      image_tag "user.png", size: "#{size[0]}x#{size[1]}"
+      image_tag "user.png", size: "#{size[0]}x#{size[1]}", data: { user__avatar_target: "initialPic" }
     end
   end
 end
