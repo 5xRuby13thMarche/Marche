@@ -1,26 +1,28 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<div class="flex w-full max-w-2xl mx-auto">
+<div class="flex max-w-2xl mx-auto">
   <div class="w-full mx-auto">
-    <div class="w-full p-3 mx-auto my-3">
+    <div class="w-full p-2 mx-auto mt-3">
       <%= render 'shared/flash' if flash.any? %>
-      <div class="flex items-center p-2 mb-1"><i class="mr-1 fa-solid fa-backward text-zinc-800"></i><%= link_to '上一頁', :back, class: 'border-b-0.5 text-zinc-800 font-bold' %></div>
+      <div class="flex items-center p-2 mb-1">
+        <i class="mr-1 fa-solid fa-backward text-zinc-800"></i>
+        <%= link_to '上一頁', :back, class: 'text-zinc-800 font-bold' %>
+      </div>
       <%# 商品基本欄位 %>
       <div class="grid flex-wrap w-full grid-cols-1 sm:grid-cols-2 sm:flex-none">
         <%# 圖片 %>
         <header class="flex-wrap mr-0 md:mr-5">
-          <div class="mx-auto mb-2 bg-gray-400 w-80 h-80 rounded-xl">
-            <%# 目前只能丟出一張 %>
-            <%= product_image(@product)%>
-          </div>
-          <%# 喜歡功能 %>
-          <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>" class="p-2">
-            <i class="cursor-pointer fa-regular fa-heart fa-xl text-rose-600 hover:scale-125" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
-            <span>收藏商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
+          <div class="mx-auto mb-2 w-80 h-100%">
+            <%= render "products/swiper" %>
           </div>
         </header>
         <%# 資訊詳情 %>
         <%= render partial: 'products/info', locals: {sale_info: @sale_info, product: @product, cart_product: @cart_product, average_rating: @average_rating, spec_all: @spec_all} %>
       </div>
+    </div>
+    <%# 喜歡功能 %>
+    <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>" class="p-2">
+      <i class="cursor-pointer fa-regular fa-heart fa-xl text-rose-600 hover:scale-125" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
+      <span>收藏商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
     </div>
     <%# 商品規格 %>
     <section class="p-3 mb-3">
