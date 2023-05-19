@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_075406) do
+ActiveRecord::Schema.define(version: 2023_05_19_104441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2023_05_17_075406) do
   end
 
   create_table "cart_products", force: :cascade do |t|
-    t.integer "quantity", default: 0
+    t.integer "quantity", default: 1
     t.bigint "cart_id"
     t.bigint "sale_info_id"
     t.datetime "created_at", precision: 6, null: false
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 2023_05_17_075406) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image"
+    t.string "logo"
     t.index ["user_id"], name: "index_shops_on_user_id"
   end
 

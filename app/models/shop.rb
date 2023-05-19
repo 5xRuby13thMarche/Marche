@@ -2,9 +2,7 @@ class Shop < ApplicationRecord
   belongs_to :user
   has_many :products
   has_many :order_products, through: :products
-  has_one_attached :images do |attachable|
-    attachable.variant :thumb, resize_to_limit: [100, 100]
-  end
+  has_one_attached :logo
 
   def self.total_price(shop_products)
     shop_products.sum{|shop_product| (shop_product.each_price * shop_product.quantity) }
