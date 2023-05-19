@@ -97,7 +97,7 @@ export default class extends Controller {
           background: "#eee",
         });
         // 如果是新增商品到購物車，發布event給購物車icon
-        if (data.message == "added_to_cart") {
+        if (data.ok == "create success！") {
           const event = new CustomEvent("update--cart", {
             detail: "increaseCart",
           });

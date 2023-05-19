@@ -12,13 +12,15 @@ export default class extends Controller {
     "productNum",
     "cartItem",
     "submitBtn",
+    "allProductsNum",
   ];
   connect() {
     // form表單預設會找尋第一個submit or button進行click事件，因此要preventDefault
     this.element.setAttribute(
       "data-action",
-      "keydown.enter->cart--form#preventSubmit"
+      "keydown.enter->cart--form#preventSubmit update--cart@window->cart--form#decreaseAllProductsNum"
     );
+
     this.isAllChecked = false;
     this.canPressSubmit = false;
     this.update();
@@ -35,8 +37,8 @@ export default class extends Controller {
           checkedNum += 1;
         }
       });
-      this.totalPriceTarget.textContent = formatMoney(priceSum);
-      this.productNumTarget.textContent = checkedNum;
+      this.totalPriceTarget.textContent = formatMoney(priceSum); // 設定總金額
+      this.productNumTarget.textContent = checkedNum; // 設定總選擇商品數
       if (checkedNum == 0) {
         this.canPressSubmit = false;
         this.updateSubmitBtn();
@@ -63,6 +65,7 @@ export default class extends Controller {
     }
     this.update();
   }
+  // 購物車一鍵刪除
   clearAllCartItems(e) {
     e.preventDefault();
     // sweet alert
@@ -94,22 +97,20 @@ export default class extends Controller {
   }
   // 刪除所有購物車項目
   async deleteAllCartItems() {
-    // 前端畫面購物車內商品刪除
-    const cartLength = this.cartItemTargets.length;
-    for (let i = cartLength - 1; i >= 0; i--) this.cartItemTargets[i].remove();
-    this.update();
     // 打API刪除後端購物車內的所有商品
     let url = `/api/cart_products/delete_all`;
     const response = await destroy(url, {
       body: JSON.stringify({cart_id: this.element.dataset.cartId}),
     });
     if (response.ok) {
-      // 發布event給購物車icon
+      this.allProductsNumTarget.textContent = "全選 (0)";
+      // 發布清空購物車 event
       const event = new CustomEvent("update--cart", {detail: "emptyCart"});
       window.dispatchEvent(event);
     }
+    this.update();
   }
-  // 切換結帳按鈕狀態
+  // 切換結帳按鈕的顯示狀態
   updateSubmitBtn() {
     if (this.canPressSubmit) {
       this.submitBtnTarget.disabled = false;
@@ -121,6 +122,14 @@ export default class extends Controller {
       this.submitBtnTarget.value = "選擇商品";
       this.submitBtnTarget.classList.remove("checkout-btn");
       this.submitBtnTarget.classList.add("checkout-disabled-btn");
+    }
+  }
+  // 全選數量的顯示減 1
+  decreaseAllProductsNum(e) {
+    if (e.detail == "decreaseCart") {
+      this.allProductsNumTarget.textContent = `全選 ${
+        this.checkboxTargets.length - 1
+      }`;
     }
   }
 }

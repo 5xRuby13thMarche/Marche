@@ -18,6 +18,7 @@ export default class extends Controller {
     this.storageNum = Number(this.quantityTarget.dataset.storage);
     if (this.storageNum <= 0) this.disableComponents(); // 庫存為0
     this.updateItemTotalPrice();
+    this.setQuantityTarget();
   }
   // disable components when storage is 0
   disableComponents() {
@@ -69,7 +70,7 @@ export default class extends Controller {
     this.inputAreaTarget.classList.remove("opacity-30");
     this.inputAreaTarget.classList.add("opacity-100");
   }
-  // set total price
+  // 設定單一項目的總價
   updateItemTotalPrice() {
     let itemPrice =
       Number(this.itemTotalPriceTarget.dataset.unitPrice) * this.quantityNum;
@@ -78,11 +79,7 @@ export default class extends Controller {
   // set quantityTarget
   setQuantityTarget() {
     if (this.quantityNum <= 0) this.quantityNum = 1;
-    if (this.quantityNum > this.storageNum) {
-      this.quantityNum = this.storageNum;
-      // 顯示當前存貨的提示訊息
-      // 待開發.......
-    }
+    if (this.quantityNum > this.storageNum) this.quantityNum = this.storageNum;
     this.quantityTarget.value = this.quantityNum;
     this.updateItemTotalPrice();
     // 庫存提示
@@ -109,7 +106,7 @@ export default class extends Controller {
       // console.log(data);
     }
   }
-  // 刪除鍵顯示toast
+  // 刪除鍵顯示toast，發布刪除項目的訊息
   showDeleteToast() {
     const Toast = Swal.mixin({
       toast: true,
@@ -126,8 +123,12 @@ export default class extends Controller {
       icon: "success",
       title: "成功刪除",
     });
-    // 發布event給購物車icon
+    // 發布event
     const event = new CustomEvent("update--cart", {detail: "decreaseCart"});
     window.dispatchEvent(event);
+  }
+  // 接收event，刪除購物車商品項目本身
+  destroySelfItem(e) {
+    if (e.detail == "emptyCart") this.element.remove();
   }
 }
