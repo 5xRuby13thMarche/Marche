@@ -8,11 +8,8 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%# Banner CSS%>
-    <%# <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> %>
-    <%# <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/> %>
   </head>
-  <body class="h-full min-h-screen bg-cover bg-gradient-to-b from-marche_shop_blue to-marche_shop_blue500">
+  <body class="h-full bg-cover bg-sky-100">
     <%= render 'shared/shop_navbar' %>
     <%= yield %>
   </body>

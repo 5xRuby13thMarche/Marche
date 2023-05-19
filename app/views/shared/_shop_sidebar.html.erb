@@ -1,30 +1,34 @@
 <%# 左方邊欄 %>
-  <div class="fixed flex flex-col content-center w-1/5 h-screen my-4">
+  <div class="fixed flex flex-col content-center w-1/5 mt-3 mt-[84px] xl:ml-24 md:ml-16 sm:ml-10">
     <ul>
       <li class="w-3/4 mx-auto">
-        <h2 class="block w-3/4 p-1 mt-2 ml-1 text-base cursor-pointer text-marche_shop_primary">我的賣場</h2>
+        <h2 class="block w-3/4 p-1 mt-2 ml-1 text-base text-sky-800">我的賣場</h2>
         <ul>
           <li>
-            <%= link_to "賣場簡介", edit_shop_path(@shop.id), class: "mt-2 ml-4 py-1 border-l-2 border-marche_shop_blue text-sm text-gray-300 cursor-pointer hover:text-marche_shop_blue500 hover:border-marche_shop_blue500 block justify-center flex" %>
+            <span class="py-2 ml-4 border-l-2 border-gray-400"></span>
+            <%= link_to "賣場簡介", edit_shop_path(@shop.id), class: "mt-2 ml-12 py-1 text-sm text-gray-400 cursor-pointer hover:text-sky-700 hover:border-sky-600" %>
           </li>
         </ul>
       </li>
       <li class="w-3/4 mx-auto">
-        <h2 class="block w-3/4 p-1 mt-2 ml-1 text-base cursor-pointer text-marche_shop_primary">訂單管理</h2>
+        <h2 class="block w-3/4 p-1 mt-2 ml-1 text-base text-sky-800">訂單管理</h2>
         <ul>
           <li>
-            <%= link_to "我的銷售", order_shop_path(@shop.id) , class: "mt-2 ml-4 py-1 border-l-2 border-marche_shop_blue text-sm text-gray-300 cursor-pointer hover:text-marche_shop_blue500 hover:border-marche_shop_blue500 justify-center flex" %>
+            <span class="py-2 ml-4 border-l-2 border-gray-400"></span>
+            <%= link_to "我的銷售", order_shop_path(@shop.id) , class: "mt-2 ml-12 py-1 text-sm text-gray-400 cursor-pointer hover:text-sky-700 hover:border-sky-600" %>
           </li>
         </ul>
       </li>
       <li class="w-3/4 mx-auto">
-        <h2 class="block w-3/4 p-1 mt-2 ml-1 text-base cursor-pointer text-marche_shop_primary">商品管理</h2>
+        <h2 class="block w-3/4 p-1 mt-2 ml-1 text-base cursor-pointer text-sky-800">商品管理</h2>
         <ul>
           <li>
-            <%= link_to "我的商品", products_shops_path , class: "mt-2 ml-4 py-1 border-l-2 border-marche_shop_blue text-sm text-gray-300 cursor-pointer hover:text-marche_shop_blue500 hover:border-marche_shop_blue500 block justify-center flex" %>
+            <span class="py-2 ml-4 border-l-2 border-gray-400"></span>
+            <%= link_to "我的商品", products_shops_path , class: "mt-2 ml-12 py-1 text-sm text-gray-400 cursor-pointer hover:text-sky-700 hover:border-sky-600" %>
           </li>
           <li>
-            <%= link_to "新增商品", new_product_path , class: "ml-4 py-1 border-l-2 border-marche_shop_blue text-sm text-gray-300 cursor-pointer hover:text-marche_shop_blue500 hover:border-marche_shop_blue500 justify-center flex" %>
+            <span class="py-2 ml-4 border-l-2 border-gray-400"></span>
+            <%= link_to "新增商品", new_product_path , class: "mt-2 ml-12 py-1 text-sm text-gray-400 cursor-pointer hover:text-sky-700 hover:border-sky-600" %>
           </li>
         </ul>
       </li>

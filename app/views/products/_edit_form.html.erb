@@ -1,6 +1,6 @@
 <%= form_with(model:product, class: "contents", data: { turbo: false }) do |form| %>
   <%= render 'shared/error_message', record: product %>
-  <section class="p-3 my-3 bg-white border rounded-md shadow-xl">
+  <section class="px-6 py-3 my-3 mt-10 bg-white border rounded-md shadow-xl">
     <h2 class="text-xl font-bold">基本資料</h2>
     <div class="my-5">
       <%= form.label :name ,'商品名稱 *'%>
@@ -11,7 +11,7 @@
       <h3 class="pb-2">分類 *</h3>
       <div data-category--assign-target="show" class="text-gray-700"><%= @main_category.content %> > <%= @subcategory.content %></div>
       <!-- The button to open modal -->
-      <label for="my-modal-4" class="py-2 btn bg-marche_shop_primary border-marche_shop_primary">請選擇</label>
+      <label for="my-modal-4" class="py-2 text-base btn bg-sky-600 border-sky-600">請選擇</label>
       <!-- Put this part before </body> tag -->
       <input type="checkbox" id="my-modal-4" class="modal-toggle" />
       <label for="my-modal-4" class="cursor-pointer modal">
@@ -37,7 +37,7 @@
     </div>
   </section>
 
-  <section class="flex flex-wrap p-3 mb-3 bg-white border rounded-md shadow-xl deleteFields">
+  <section class="flex flex-wrap px-6 py-3 mb-3 bg-white border rounded-md shadow-xl deleteFields">
     <h2 class="mb-4 text-xl font-bold">商品詳細資訊</h2>
    <%= form.fields_for :property do |p| %>
       <div class="grid w-full grid-cols-2">
@@ -62,9 +62,9 @@
   </section>
   <div class="mb-10">
     <% if action_name == "new" %>
-      <%= form.submit "建立商品", class: "rounded-lg py-3 px-5 bg-marche_shop_primary text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit "建立商品", class: "ml-5 rounded-lg py-3 px-5 bg-sky-600 border-sky-600 text-base text-white inline-block font-medium cursor-pointer" %>
     <% else %>
-      <%= form.submit "儲存", class: "rounded-lg py-3 px-5 bg-marche_shop_primary text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit "儲存", class: "ml-5 text-base btn rounded-lg py-3 px-5 bg-sky-600 border-sky-600 text-white font-medium cursor-pointer" %>
     <% end %>
   </div>
 <% end %>

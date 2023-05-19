@@ -1,32 +1,32 @@
 <div class="relative flex">
   <%= render 'shared/shop_sidebar' %>
-  <div class="w-5/6 ml-auto">
-    <h1 class="self-end w-5/6 pl-4 mx-auto mt-5 text-3xl font-bold border-l-2 border-marche_shop_primary text-marche_shop_primary">我的商品</h1>
+  <div class="w-5/6 ml-auto mt-[84px] bg-sky-100 h-screen">
+    <h1 class="self-end w-5/6 pl-3 mx-auto mt-5 text-3xl font-bold text-sky-800">我的商品</h1>
     <table class="table w-5/6 mx-auto mt-3 shadow-xl table-compact">
       <!-- head -->
-      <thead class="">
-        <tr>
-          <th>產品名稱</th>
-          <th>產品規格</th>
-          <th>價格</th>
-          <th>已出售</th>
-          <th>上架數量</th>
-          <th>操作</th>
+      <thead>
+        <tr class="text-center">
+          <th class="text-base">產品名稱</th>
+          <th class="text-base">產品規格</th>
+          <th class="text-base">價格</th>
+          <th class="text-base">已出售</th>
+          <th class="text-base">上架數量</th>
+          <th class="text-base">操作</th>
         </tr>
       </thead>
       <% @shop.shop_products_infos.each_with_index do |shop_products| %>
         <% shop_products.sale_infos.each do |s| %>
         <tbody>
-          <tr class="hover"> 
+          <tr class="text-center hover"> 
             <td><%= link_to shop_products.name, product_path(shop_products.id) %></td>
             <td><%= s.spec %></td>
-            <td><%= s.price %></td>
-            <td><%= @shop.total_sales[s.spec] || 0 %></td>
-            <td><%= s.storage %></td>
+            <td class="text-center"><%= s.price %></td>
+            <td class="text-center"><%= @shop.total_sales[s.spec] || 0 %></td>
+            <td class="text-center"><%= s.storage %></td>
             <td>
               <!-- Dropdown menu -->
-              <div class="dropdown dropdown-hover dropdown-end">
-                <label tabindex="0" class="m-1 btn bg-marche_shop_blue500 border-marche_shop_blue500 ">設定<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></label>
+              <div class="w-20 dropdown dropdown-hover dropdown-end">
+                <label tabindex="0" class="btn bg-sky-600 border-sky-600">設定<svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></label>
                 <ul tabindex="0" class="p-2 shadow bg-marche_shop_white dropdown-content menu rounded-box w-52">
                   <li><%= link_to "編輯商品", edit_product_path(shop_products.id), class:"active:bg-marche_shop_blue" %></li>
                   <li><%= link_to '修改規格', edit_sale_info_path(s.id), class:"active:bg-marche_shop_blue" %></li>
