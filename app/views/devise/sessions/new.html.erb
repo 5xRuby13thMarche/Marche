@@ -4,9 +4,9 @@
   <% end %>
   <h2 class="text-lg text-slate-600">登入</h2>
 </div>
-<div class="flex flex-col items-center w-full py-16 sm:flex-row justify-evenly bg-marche_orange">
+<div class="flex flex-col items-center w-full pt-2 pb-16 sm:pt-16 sm:pb-16 sm:flex-row justify-evenly bg-marche_orange">
   <%# logo %>
-  <div class="flex items-center justify-center bg-opacity-0 bg-rose-300 w-80 h-80">
+  <div class="flex items-center justify-center w-40 h-40 bg-opacity-0 bg-rose-300 sm:w-80 sm:h-80">
     <%= image_tag "marche_logo_orangewhite.png"%>
   </div>
   <%# 輸入框 %>
@@ -22,7 +22,7 @@
       <div class="mb-3 field">
         <%= f.label :password ,"輸入密碼" ,class: "leading-loose text-sm text-zinc-500" %>
         <br/>
-        <%= f.password_field :password, autocomplete: "current-password" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight active:ring active:ring-zinc-300 focus:ring-2 focus:ring-zinc-300" ,placeholder: "最少6個字符" %>
+        <%= f.password_field :password, autocomplete: "current-password" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight active:ring active:ring-zinc-300 focus:ring-2 focus:ring-zinc-300" ,placeholder: "最少輸入6個字" %>
       </div>
       <% if devise_mapping.rememberable? %>
         <div class="field">
