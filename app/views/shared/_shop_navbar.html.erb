@@ -1,13 +1,16 @@
 <div class="flex w-full p-3 bg-marche_shop_primary">
   <nav class="flex flex-wrap items-center content-center justify-end w-full mx-2 my-1">
     <% if current_user&.shop.present? %>
+      <div class="w-10 mr-4 border rounded-full">
+        <%= logo(@shop, size: [100, 100]) %>
+      </div>
       <%= link_to "#{@shop.name}的賣場", shops_path , class: "text-gray-100 text-xl mr-auto" %>
     <% else %>
       <%= link_to "賣家中心", new_shop_path , class: "text-gray-100 text-xs mr-auto border border-x-0 border-t-0"%>
     <% end %>
     <%= link_to "我的商店", shop_path(@shop) , class: "px-4 text-gray-100 text-xs"%>
     <%= link_to "返回商城", root_path , class: "px-4 text-gray-100 text-xs"%>
-   <div>
+    <div>
       <% if user_signed_in? %>
         <p class="px-4 text-xs text-marche_white"><%= current_user.name %></p>
       <% else %>

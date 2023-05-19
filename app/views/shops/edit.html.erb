@@ -12,7 +12,7 @@
           <%= form_with(model: @shop) do |form|%>
             <div class="flex flex-col items-center justify-center my-5">
               <img src="" alt="" class="hidden object-cover w-full my-2 rounded aspect-1" data-user--avatar-target="preview">
-              <div class="m-2 rounded bg-slate-300 w-fit"><%= logo(@shop) %></div>
+              <div class="m-2 rounded bg-slate-300 w-fit"><%= logo(@shop, size: [400, 400]) %></div>
             </div>
             <div class="flex items-center justify-center my-5">
               <%= form.label :name ,'賣場名稱', class:"w-1/4 text-marche_shop_black"%>
