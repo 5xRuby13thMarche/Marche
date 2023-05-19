@@ -2,7 +2,7 @@ class Api::CartProductsController < ApplicationController
   before_action :check_user_signed_in!, only: [:create, :update]
 
   def create
-    cart_product = current_user.cart.cart_products.find_or_create_by(sale_info_id: params[:sale_info_id])
+    cart_product = current_user.cart.cart_products.find_or_initialize_by(sale_info_id: params[:sale_info_id])
     if cart_product.persisted?
       cart_product.update(quantity: cart_product.quantity + params[:quantity].to_i)
       render json: {ok: 'update success!', signInState: 'true'}

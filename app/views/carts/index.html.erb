@@ -20,7 +20,7 @@
       <div class="flex items-center mr-3 md:mr-5 md:ml-2">
         <input type="checkbox"
           class="ml-3 mr-2 rounded checkbox checkbox-sm focus:outline-gray-600" data-action="change->cart--form#checkAllBox"/>
-        <p class="w-[60px] text-sm">全選 (<%= @cart_products.count %>)</p>
+        <p class="w-[60px] text-sm" data-cart--form-target="allProductsNum">全選 (<%= @cart_products.count %>)</p>
       </div>
       <div class="items-center hidden m-2 md:flex">
         <button class="flex items-center justify-center w-5 h-5 p-2 m-2 border border-gray-500 rounded hover:bg-red-600 hover:text-white" data-action="click->cart--form#clearAllCartItems">

@@ -1,4 +1,4 @@
-<div class="flex my-2 border-b md:my-0 md:border-none" data-controller="cart--item" data-cart-product-id="<%=cart_product.id%>" data-cart--form-target="cartItem" id="cart_product_<%=cart_product.id%>">
+<div class="flex my-2 border-b md:my-0 md:border-none" data-controller="cart--item" data-cart-product-id="<%=cart_product.id%>" id="cart_product_<%=cart_product.id%>" data-action="update--cart@window->cart--item#destroySelfItem">
   <div class="flex items-center w-36">
     <%# checkbox %>
     <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "focus:outline-gray-600 checkbox checkbox-sm rounded ml-3 mr-2 md:ml-5" , data: {cart__item_target: "checkbox", cart__form_target: "checkbox", action: "change->cart--form#update"} %>
