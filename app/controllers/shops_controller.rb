@@ -26,7 +26,7 @@ class ShopsController < ApplicationController
 
   def show
     @products = @shop.products.includes(:category)
-    @sub_categories = @shop.products.includes(:category).pluck(:category_id ,:content)
+    @sub_categories = @shop.products.includes(:category).pluck(:category_id ,:content).uniq
    
     if params[:category].present?
       @products = @products.where(category_id: params[:category])
