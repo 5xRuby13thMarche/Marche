@@ -1,5 +1,5 @@
-<div class="flex w-full p-3 bg-marche_shop_primary">
-  <nav class="flex flex-wrap items-center content-center justify-end w-full mx-2 my-1">
+<div class="fixed z-50 flex w-full p-3 bg-sky-900">
+  <nav class="flex flex-wrap items-center content-center justify-end w-10/12 mx-auto my-1">
     <% if current_user&.shop.present? %>
       <%= link_to "#{@shop.name}的賣場", shops_path , class: "text-gray-100 text-xl mr-auto" %>
     <% else %>
