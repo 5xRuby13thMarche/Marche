@@ -19,7 +19,7 @@ zh-TW:
         sale_info:
           attributes:
             spec:
-              blank: "銷售資訊中的規格不能為空白"
+              blank: "銷售資訊中的商品詳細資訊不能為空白"
       messages:
         record_invalid: 校驗失敗：%{errors}
         restrict_dependent_destroy:
