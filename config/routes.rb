@@ -4,7 +4,16 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations',
   }
+
   get '/users/liked_products', to: 'users#show_like', as: :show_like # 收藏商品
+  patch '/user/user_update', to: 'users#user_update', as: :user_update
+
+  resource :users, only: [] do 
+    collection do
+      get :profile
+    end
+  end
+
 
   # 商品 （含買家、賣家）
   root 'products#index'
