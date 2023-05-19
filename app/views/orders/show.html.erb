@@ -1,5 +1,4 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-
 <%= render 'shared/flash' if flash.any? %>
 <%# 這段是要送給藍新的資訊%>
 <%= form_with(url: 'https://ccore.newebpay.com/MPG/mpg_gateway', method: "post") do |form| %>
