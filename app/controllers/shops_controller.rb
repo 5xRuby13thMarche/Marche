@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
-  layout "shop"
-  
+  layout "shop", except: [:show]
+  before_action :set_q_ransack, only: [:show]
+  before_action :set_cart_num, only: [:show]
   before_action :authenticate_user!
   before_action :set_shop
   
@@ -22,7 +23,27 @@ class ShopsController < ApplicationController
       render :new, status: :unprocessable_entity 
     end
   end
-  
+
+  def show
+    @products = @shop.products.includes(:category)
+    @sub_categories = @shop.products.includes(:category).pluck(:category_id ,:content)
+   
+    if params[:category].present?
+      @products = @products.where(category_id: params[:category])
+    end
+
+    case params[:sort]
+      when 'new'
+        @products = @products.order(created_at: :desc)
+      when 'price_high'
+        @products = @products.products_max_price(@products, "DESC")
+      when 'price_low'
+        @products = @products.products_max_price(@products, "ASC")
+    end
+
+  end
+
+    
   def edit
   end
 

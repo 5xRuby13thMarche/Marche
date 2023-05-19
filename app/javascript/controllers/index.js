@@ -39,3 +39,7 @@ application.register("shop--order", Shop__OrderController);
 
 import User__AvatarController from "./user/avatar_controller";
 application.register("user--avatar", User__AvatarController);
+
+import Shop__ProductController from "./shop/product_controller"
+application.register("shop--product", Shop__ProductController);
+
