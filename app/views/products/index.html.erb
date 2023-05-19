@@ -3,20 +3,31 @@
 <%# Banner%>
 <div class="container w-full mx-auto my-10 sm:w-10/12">
   <div class="slider">
-    <div class="w-full">
-      <%= image_tag "marche_ad/ad01.png" ,class: "w-full", alt: "marche_ad1" %>
+    <div class="w-full cursor-pointer">
+      <%= link_to category_path(86) do%>
+        <%= image_tag "marche_ad/ad01.png" ,class: "w-full", alt: "marche_ad1" %>
+      <% end %>
     </div>
-    <div class="w-full">
-      <%= image_tag "marche_ad/ad02.png" ,class: "w-full", alt: "marche_ad2" %>
+    <div class="w-full cursor-pointer">
+      <%= link_to category_path(86) do%>
+        <%= image_tag "marche_ad/ad02.png" ,class: "w-full", alt: "marche_ad2" %>
+      <% end %>
     </div>
-    <div class="w-full">
-      <%= image_tag "marche_ad/ad03.png" ,class: "w-full", alt: "marche_ad3" %>
+    <div class="w-full cursor-pointer">
+      <%= link_to category_path(86) do%>
+        <%= image_tag "marche_ad/ad03.png" ,class: "w-full", alt: "marche_ad3" %>
+      <% end %>
     </div>
-    <div class="w-full">
-      <%= image_tag "marche_ad/ad04.png" ,class: "w-full", alt: "marche_ad4" %>
+    <div class="w-full cursor-pointer">
+      <%= link_to category_path(86) do%>
+        <%= image_tag "marche_ad/ad04.png" ,class: "w-full", alt: "marche_ad4" %>
+      <% end %>
     </div>
   </div>
 </div>
+
+
+
 <%# 商品分類 %>
 <section class="flex flex-col w-full mx-auto my-6 sm:w-10/12">
   <h2 class="self-start pl-2 text-xl font-bold text-marche_orange sm:pl-0">商品分類</h2>
