@@ -1,0 +1,37 @@
+<%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
+<%# 標題區 %>
+<div class="flex items-center w-full mt-8 mb-1 ml-2 bg-red-500 sm:mx-auto sm:w-10/12">
+  <%# 標題 %>
+  <h1 class="text-xl font-bold text-marche_black"><%= @shop.name %></h1>
+</div>
+<%# 分類區 %>
+<div class="flex w-full mx-auto sm:w-10/12">
+  <div class="flex flex-col my-4 ml-2 w-30 sm:ml-0">
+    <p class="p-1 font-bold">分類</p>
+    <span class="h-px w-28 bg-marche_pearl"></span>
+    <ul>
+      <%= render 'shops/category_list' %>
+    </ul>
+  </div>
+  <%# 商品區 %>
+  <section class="w-full">
+    <%# 上方篩選器 %>
+    <div class="flex items-center justify-center p-2 mx-auto my-4 border bg-marche_white">
+      <span class="px-2 py-1 mx-1 text-xs sm:px-4 sm:text-base sm:mx-2">篩選</span>
+      <%= form_with url: shop_path, method: :get, data:{ controller: 'shop--product' } do %>
+        <%= hidden_field_tag :category, params[:category] %>
+        <%= select_tag :sort, options_for_select([
+        ['創建時間 (最新)', 'new'], 
+        ['價格 (由高到低)', 'price_high'], 
+        ['價格 (由低到高)', 'price_low']
+        ], params[:sort]), 
+        class:"max-w-xs ml-2 w-36 sm:w-44 select select-bordered", 
+        data: { action: 'change->shop--product#submitOnChange' }%>
+      <% end %>
+    </div>
+    <%# 商品顯示區 %>
+    <div class="grid grid-cols-2 gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
+      <%= render partial:'products/product',collection: @products, as: :product %>
+    </div>
+  </section>
+</div>
