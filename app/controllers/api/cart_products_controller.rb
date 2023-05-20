@@ -6,7 +6,7 @@ class Api::CartProductsController < ApplicationController
     else
       session_cart = Cart.create()
       session[:_cart_] =  session_cart.id
-      session_cart.cart_products.create(quantity: 1, sale_info_id: params[:sale_info_id])
+      session_cart.cart_products.create(quantity: params[:quantity], sale_info_id: params[:sale_info_id])
       message = {ok: 'create success！'}
     end
     render json: message
