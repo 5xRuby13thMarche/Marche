@@ -58,7 +58,7 @@
   <%= render partial: 'comments/comment_ranking', locals: {average_rating: @average_rating, product: @product} %>
   <% if user_signed_in? && !@contain_comments && @contain_orders %>
     <%= form_with model: @product_comment, url: product_comments_path(@product.id), id: 'comment-input' do |f| %>
-      <div class="flex">
+      <div class="flex items-center">
         <%= f.label "留下評論：", class: 'label'%>
         <div class="rating rating-md">
           <%= f.radio_button :rating, 0, class: "comment-star-hidden" , checked: "checked" %>
@@ -69,9 +69,9 @@
           <%= f.radio_button :rating, 5, class: "comment-star"%>
         </div>
       </div>
-      <div class="flex items-end">
-        <%= f.text_area :content, class: "comment-textarea w-full max-w-xs resize-none"%>
-        <%= f.submit "Send", class: "comment-btn-sm" %>
+      <div class="flex flex-col items-start">
+        <%= f.text_area :content, class: "comment-textarea w-full max-w-sm resize-none"%>
+        <%= f.submit "送出", class: "btn btn-sm mt-2 bg-marche_orange border-marche_orange hover:bg-marche_orange100 hover:border-marche_orange100" %>
       </div>
     <% end %>
   <% end %>
