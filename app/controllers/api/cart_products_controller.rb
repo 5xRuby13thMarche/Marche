@@ -1,18 +1,15 @@
 class Api::CartProductsController < ApplicationController
-  before_action :check_user_signed_in!, only: [:create, :update]
 
   def create
-    cart_product = current_user.cart.cart_products.find_or_initialize_by(sale_info_id: params[:sale_info_id])
-    if cart_product.persisted?
-      cart_product.update(quantity: cart_product.quantity + params[:quantity].to_i)
-      render json: {ok: 'update success!', signInState: 'true'}
+    if user_signed_in? || session[:_cart_].present?
+      message = CartProduct.update_or_create_cart_product(current_user, session[:_cart_], params)
     else
-      cart_product.assign_attributes(cart_product_params)
-      cart_product.cart = current_user.cart
-      if cart_product.save
-        render json: {ok: 'create success！', signInState: 'true'}
-      end
+      session_cart = Cart.create()
+      session[:_cart_] =  session_cart.id
+      session_cart.cart_products.create(quantity: 1, sale_info_id: params[:sale_info_id])
+      message = {ok: 'create success！'}
     end
+    render json: message
   end
 
   # 購物車內商品數量的增減
@@ -40,9 +37,5 @@ class Api::CartProductsController < ApplicationController
 
   def cart_product_params
     params.require(:cart_product).permit(:quantity, :sale_info_id)
-  end
-
-  def check_user_signed_in!
-    render json: {signInState: "false", signInUrl: new_user_session_path} unless user_signed_in?
   end
 end
