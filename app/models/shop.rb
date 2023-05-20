@@ -17,7 +17,7 @@ class Shop < ApplicationRecord
   end
 
   def order_products_infos
-    order_products.includes(product: :sale_infos).where(product: { shop: self }).order(created_at: :desc)
+    order_products.includes(product: :sale_infos).where(product: { shop: self })
   end
   
   def total_sales
