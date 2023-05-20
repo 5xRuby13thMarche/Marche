@@ -13,6 +13,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do |resource|
       resource.name = "@" + params[:user][:email].split('@').first
+      if session[:_cart_].present?
+        cart = Cart.find(session[:_cart_])
+        cart.update(user_id: resource.id)
+        session.delete(:_cart_)
+      else
+        resource.build_cart()
+      end
       resource.save
       if session[:_cart_].present?
         cart = Cart.find(session[:_cart_])
