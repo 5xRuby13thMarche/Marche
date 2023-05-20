@@ -10,7 +10,10 @@
     <p class="p-1 font-bold">分類</p>
     <span class="h-px w-28 bg-marche_pearl"></span>
     <ul>
-      <%= render 'shops/category_list' %>
+      <li>
+        <%= link_to '所有商品', shop_path, class: "p-1 mr-4 text-sm border-b cursor-pointer w-24 sm:w-28 hover:bg-marche_pearl block" %>
+      </li>
+      <%= render partial:'shops/category_list', collection: @sub_categories, as: :sub_category %>
     </ul>
   </div>
   <%# 商品區 %>
