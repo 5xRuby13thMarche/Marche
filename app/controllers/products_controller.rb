@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_q_ransack, only: [:index, :show, :search]
-  before_action :set_cart_num, only: [:index, :show, :search]
+  # before_action :set_cart_num, only: [:index, :show, :search]
   before_action :shop_params,only: [:new, :create, :edit, :update, :destroy]
   layout 'shop', only: [:new, :create, :update, :destory, :edit]
   
