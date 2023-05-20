@@ -85,7 +85,6 @@ export default class extends Controller {
       });
       if (response.ok) {
         const data = await response.json;
-        if (data.signInState == "false") window.location.href = data.signInUrl;
         Swal.fire({
           icon: "success",
           title: "加入購物車成功",
