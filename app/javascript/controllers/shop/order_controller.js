@@ -7,7 +7,6 @@ export default class extends Controller {
   
   connect() {
     this.orderProductId = this.element.dataset.orderProductId
-    console.log(this.element.innerHTML)
   }
   sendShippedMail(e) {
     e.preventDefault();
@@ -46,7 +45,8 @@ export default class extends Controller {
     if (response.ok) {
       // 
       const data = await response.json
-      this.element.innerHTML = this.element.innerHTML.replace("not_shipped", "shipped")
+      // this.element.innerHTML = this.element.innerHTML.replace("not_shipped", "shipped")
+      location.reload();
     }
   }
 }
