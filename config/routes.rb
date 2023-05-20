@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
     member do
       get :order
+      get :shipped
     end
     collection do 
       get :products

@@ -56,9 +56,13 @@ class ShopsController < ApplicationController
   end
 
   def order
-    @shop_orders = @shop.order_products_infos
+    @shop_orders = @shop.order_products_infos.where(shipping_status: 'not_shipped')
   end
-  
+
+  def shipped
+    @shop_orders = @shop.order_products_infos.where(shipping_status: 'shipped')
+  end
+
   def products
   end
 
