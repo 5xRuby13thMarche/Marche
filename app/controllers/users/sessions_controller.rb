@@ -17,7 +17,9 @@ class Users::SessionsController < Devise::SessionsController
         cart.delete()
         session.delete(:_cart_)
         resource.save
+        redirect_to carts_path and return
       end
+
     end
   end
 

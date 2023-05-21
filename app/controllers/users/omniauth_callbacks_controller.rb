@@ -12,6 +12,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         cart.delete()
         session.delete(:_cart_)
         @user.save
+
       elsif @user.cart.nil? && session[:_cart_].present?
         # session的購物車指向新使用者
         cart = Cart.find(session[:_cart_])
@@ -22,8 +23,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         @user.build_cart()
         @user.save
       end
-
-      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+      # sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+      sign_in @user, event: :authentication
+      redirect_to carts_path
       set_flash_message(:notice, :success, kind: "Google") if is_navigational_format?
     else
       session["devise.google_data"] = request.env["omniauth.auth"].except(:extra) # Removing extra as it can overflow some session stores
