@@ -6,7 +6,7 @@
       <%= form.label :name ,'商品名稱 *'%>
       <%= form.text_field :name, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
-    <%= form.file_field :images %>
+    <%= form.file_field :images, multiple: true %>
     <div class="my-5" data-controller="category--assign">
       <h3 class="pb-2">分類 *</h3>
       <div data-category--assign-target="show" class="text-gray-700"></div>
