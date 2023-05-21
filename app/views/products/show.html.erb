@@ -30,7 +30,7 @@
         <div class="ml-8">
           <%= link_to @main_category.content, category_path(@main_category.id), class:"border-b border-black" %>
           > 
-          <%= link_to @subcategory.content, category_path(@subcategory.id), class:"border-b border-black" %>
+          <%= link_to @subcategory.content, category_path(@main_category.id, sub_category: @subcategory.id), class:"border-b border-black" %>
         </div>
       </div>
       <div class="flex mb-2">
