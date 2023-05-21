@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   def set_cart_num
     if user_signed_in?
       @user_cart_product_num = current_user.cart.cart_products.count
+    elsif session[:_cart_].present?
+      @user_cart_product_num = Cart.find(session[:_cart_]).cart_products.count
     end
   end
 

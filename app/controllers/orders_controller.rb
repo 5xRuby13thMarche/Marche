@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   before_action :set_cart_num, only: [:new, :index, :show, :search]
   skip_before_action :verify_authenticity_token, only: [:notify]
 
+  # 結帳頁面
   def new
     @cart = current_user.cart
     @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: params[:cart_product_ids])

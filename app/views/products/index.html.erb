@@ -1,4 +1,4 @@
-<%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
+<%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q, user_cart_product_num: @user_cart_product_num} %>
 <%= render 'shared/flash' if flash.any? %>
 <%# Banner%>
 <div class="container w-full mx-auto my-10 sm:w-10/12">
@@ -25,9 +25,6 @@
     </div>
   </div>
 </div>
-
-
-
 <%# 商品分類 %>
 <section class="flex flex-col w-full mx-auto my-6 sm:w-10/12">
   <h2 class="self-start pl-2 text-xl font-bold text-marche_orange sm:pl-0">商品分類</h2>

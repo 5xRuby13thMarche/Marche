@@ -1,35 +1,43 @@
-<%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<section class="container w-full mx-auto my-12 border lg:w-11/12 xl:w-10/12 bg-gay-200">
-  <%= form_with url: new_order_path, method: :get, data: { turbo: "false", controller: "cart--form", cart_id: @cart.id} do |form| %>
-    <%# 標題欄區域 %>
-    <div class="flex items-center justify-start w-full bg-gray-100 h-14">
-      <p class="hidden w-36 md:inline"></p>
-      <div class="flex items-center w-10/12">
-        <p class="w-full mx-2 my-2 ml-24 text-sm text-center md:ml-0 lg:w-5/12 md:w-4/12">商品</p>
-        <p class="hidden w-2/12 text-sm md:inline"></p>
-        <p class="hidden w-1/12 my-2 text-sm text-center md:inline md:mx-3">單價</p>
-        <p class="hidden w-2/12 text-sm text-center md:inline">數量</p>
-        <p class="hidden w-1/12 mx-1 text-sm text-center md:inline">總計</p>
-        <p class="hidden w-1/12 text-sm text-center md:inline ">操作</p>
+<%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q, user_cart_product_num: @user_cart_product_num} %>
+<% if @cart.nil? || @cart_products.blank? %>
+  <p>沒有商品拉！！！！ </p>
+<% else %>
+  <section class="container w-full mx-auto my-12 border lg:w-11/12 xl:w-10/12 bg-gay-200">
+    <%= form_with url: new_order_path, method: :get, data: { turbo: "false", controller: "cart--form", cart_id: @cart&.id} do |form| %>
+      <%# 標題欄區域 %>
+      <div class="flex items-center justify-start w-full bg-gray-100 h-14">
+        <p class="hidden w-36 md:inline"></p>
+        <div class="flex items-center w-10/12">
+          <p class="w-full mx-2 my-2 ml-24 text-sm text-center md:ml-0 lg:w-5/12 md:w-4/12">商品</p>
+          <p class="hidden w-2/12 text-sm md:inline"></p>
+          <p class="hidden w-1/12 my-2 text-sm text-center md:inline md:mx-3">單價</p>
+          <p class="hidden w-2/12 text-sm text-center md:inline">數量</p>
+          <p class="hidden w-1/12 mx-1 text-sm text-center md:inline">總計</p>
+          <p class="hidden w-1/12 text-sm text-center md:inline ">操作</p>
+        </div>
       </div>
-    </div>
-    <%# 購物車項目區域 %>
-    <%= render partial:'carts/item', collection: @cart_products , as: :cart_product%>
-    <%# 下方勾選、刪除、提交操作區域 %>
-    <div class="container flex items-center h-20 bg-gray-100">
-      <div class="flex items-center mr-3 md:mr-5 md:ml-2">
-        <input type="checkbox"
+      <%# 購物車項目區域 %>
+      <%= render partial:'carts/item', collection: @cart_products , as: :cart_product%>
+      <%# 下方勾選、刪除、提交操作區域 %>
+      <div class="container flex items-center h-20 bg-gray-100">
+        <div class="flex items-center mr-3 md:mr-5 md:ml-2">
+          <input type="checkbox"
           class="ml-3 mr-2 rounded checkbox checkbox-sm focus:outline-gray-600" data-action="change->cart--form#checkAllBox"/>
-        <p class="w-[60px] text-sm" data-cart--form-target="allProductsNum">全選 (<%= @cart_products.count %>)</p>
-      </div>
-      <div class="items-center hidden m-2 md:flex">
-        <button class="flex items-center justify-center w-5 h-5 p-2 m-2 border border-gray-500 rounded hover:bg-red-600 hover:text-white" data-action="click->cart--form#clearAllCartItems">
-          <i class="fa-solid fa-x"></i>
-        </button>
-        <p class="text-sm">清空購物車</p>
-      </div>
-      <p class="mr-2 text-sm w-fit ms-auto">總金額<span class="hidden md:inline"> (<span data-cart--form-target="productNum">0</span> 個商品)</span> :<span class="m-2 font-semibold texy-sm md:text-lg text-marche_orange" data-cart--form-target="totalPrice">$0</span></p>
-      <%= form.submit "去買單", data: {cart__form_target: "submitBtn"} ,class: "checkout-btn"%>
-    <% end %>
-  </div>
-</section>
+          <p class="w-[60px] text-sm" data-cart--form-target="allProductsNum">全選 (<%= @cart_products.count %>)</p>
+        </div>
+        <div class="items-center hidden m-2 md:flex">
+          <button class="flex items-center justify-center w-5 h-5 p-2 m-2 border border-gray-500 rounded hover:bg-red-600 hover:text-white" data-action="click->cart--form#clearAllCartItems">
+            <i class="fa-solid fa-x"></i>
+          </button>
+          <p class="text-sm">清空購物車</p>
+        </div>
+        <p class="ml-auto mr-2 text-sm">總金額<span class="hidden md:inline"> (<span data-cart--form-target="productNum">0</span> 個商品)</span> :<span class="m-2 font-semibold texy-sm md:text-lg text-marche_orange" data-cart--form-target="totalPrice">$0</span></p>
+        <% if user_signed_in? %>
+          <%= form.submit "去買單", data: {cart__form_target: "submitBtn"} ,class: "checkout-btn"%>
+        <% else %>
+          <div class="flex items-center justify-center login-link"><%= link_to '登入即可結帳', new_user_session_path, class: "" %></div>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+<% end %>
