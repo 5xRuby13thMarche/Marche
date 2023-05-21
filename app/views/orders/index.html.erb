@@ -1,6 +1,6 @@
 <div class="container flex flex-col w-full mx-auto sm:w-10/12 sm:flex-row sm:items-start">
   <div class="w-full mx-auto mt-1 sm:w-44 sm:flex-row">
-    <div class="flex justify-between mx-5 mt-4 mb-4 sm:mx-2 sm:flex-col">
+    <div class="flex justify-between mx-1 mt-4 mb-4 sm:mx-2 sm:flex-col">
       <div class="flex items-center px-2 py-2 text-center text-gray-400 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
         <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/user--v1.png" alt="user--v1"/>
         <%= link_to '我的帳戶', profile_users_path %>
@@ -15,8 +15,8 @@
       </div>
     </div>
   </div>
-  <div class="w-10/12 mx-auto mt-1 0">
-    <h1 class="mt-2 mb-4 text-2xl font-bold sm:mt-7 text-marche_orange">我的訂單</h1>
+  <div class="w-full mx-auto mt-1 sm:w-10/12">
+    <h1 class="mt-2 mb-4 ml-3 text-2xl font-bold sm:ml-0 sm:mt-7 text-marche_orange">我的訂單</h1>
     <% if @orders.present? %>
       <%= render partial:'orders/order', collection: @orders, as: :order %>
       <div class="flex justify-center my-4"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
