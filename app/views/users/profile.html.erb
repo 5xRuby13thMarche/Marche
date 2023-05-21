@@ -1,35 +1,37 @@
 <div class="container flex flex-col w-full mx-auto sm:w-10/12 sm:flex-row sm:items-start">
-  <div class="flex justify-between mx-5 mt-4 mb-4 sm:mx-2 sm:flex-col">
-    <div class="flex items-center px-2 py-2 text-center cursor-not-allowed text-marche_orange">
-      <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/user--v1.png" alt="user--v1"/>
-      <p>我的帳戶</p>
-    </div>
-    <div class="flex items-center px-2 py-2 text-center text-gray-400 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
-      <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
-      <%= link_to '我的訂單', orders_path %>
-    </div>
-    <div class="flex items-center px-2 py-2 text-center text-gray-400 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
-       <img width="30" height="30" src="https://img.icons8.com/windows/32/hearts.png" alt="hearts"/>
-      <%= link_to '我的收藏', show_like_path %>
+  <div class="w-full mx-auto mt-1 sm:w-44 sm:flex-row">
+    <div class="flex justify-between mx-1 mt-4 mb-4 sm:mx-2 sm:flex-col">
+      <div class="flex items-center px-2 py-2 text-center cursor-not-allowed text-marche_orange">
+        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/user--v1.png" alt="user--v1"/>
+        <p>我的帳戶</p>
+      </div>
+      <div class="flex items-center px-2 py-2 text-center text-gray-400 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
+        <img width="30" height="30" src="https://img.icons8.com/windows/32/ingredients-list.png" alt="ingredients-list"/>
+        <%= link_to '我的訂單', orders_path %>
+      </div>
+      <div class="flex items-center px-2 py-2 text-center text-gray-400 border border-white rounded hover:cursor-pointer hover:border-gray-200 hover:bg-gray-200">
+        <img width="30" height="30" src="https://img.icons8.com/windows/32/hearts.png" alt="hearts"/>
+        <%= link_to '我的收藏', show_like_path %>
+      </div>
     </div>
   </div>
-  <div class="w-10/12 mx-auto mt-1">
+  <div class="w-full mx-auto mt-1 sm:w-10/12">
     <%= render 'shared/flash' if flash.any? %>
-    <h2 class="mt-2 mb-4 text-2xl font-bold sm:mt-7 text-marche_orange">我的帳戶</h2>
+    <h2 class="mt-2 mb-4 ml-3 text-2xl font-bold sm:mt-7 sm:ml-0 text-marche_orange">我的帳戶</h2>
     <%= form_with model: @user, url: user_update_path, method: :patch do |f| %>
       <div class="field" data-controller="user--avatar">
-        <%= f.label :avatar, '使用者頭像', class: "text-md text-black-500" %><br />
-        <%= f.file_field :avatar, data: { user__avatar_target: "input" } %>
+        <%= f.label :avatar, '使用者頭像', class: "text-md sm:ml-0 ml-2 text-black-500" %><br />
+        <%= f.file_field :avatar, class: "sm:ml-0 ml-2", data: { user__avatar_target: "input" } %>
         <img src="" alt="" class="hidden w-[250px] h-[250px] object-cover rounded my-2" data-user--avatar-target="preview">
         <div class="m-2 rounded bg-slate-300 w-fit"><%= avatar(@user) %></div>
       </div>
 
       <div class="field">
-        <%= f.label :name, '使用者帳號', class: "text-md text-black-500" %> <i>(範例：@astro13)</i>
+        <%= f.label :name, '使用者帳號', class: "text-md text-black-500 sm:ml-0 ml-4" %> <i>(範例：@astro13)</i>
         <%= f.text_field :name, class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
       </div>
       <div class="field">
-        <%= f.label :email, 'Email 信箱', class: "text-md text-black-500" %><br />
+        <%= f.label :email, 'Email 信箱', class: "text-md text-black-500 sm:ml-0 ml-2" %><br />
         <%= f.email_field :email, autocomplete: "email", class: "mb-5 block w-full px-4 py-3 rounded-lg bg-gray-200 border-transparent focus:border-gray-500 focus:ring-0" %>
       </div>
      
