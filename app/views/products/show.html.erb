@@ -12,7 +12,20 @@
         <%# 圖片 %>
         <header class="flex-wrap mr-0 md:mr-5">
           <div class="mx-auto mb-2 w-80 h-100%">
-            <%= render "products/swiper" %>
+            <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <%= render partial:"products/swiper", collection: @product.images, as: :image if @product.images.present? %>
+                </div>
+              </div>
+            </div>
+            <div thumbsSlider="" class="swiper mySwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <%= render partial:"products/swiper", collection: @product.images, as: :image if @product.images.present? %>
+                </div>
+              </div>
+            </div>
           </div>
         </header>
         <%# 資訊詳情 %>

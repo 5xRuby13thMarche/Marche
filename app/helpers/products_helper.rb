@@ -17,7 +17,14 @@ module ProductsHelper
 
   def product_image(product, size: [250, 250])
     if product && product.images.present?
-        image_tag product.images[0].representation(resize_to_limit: [400, 400]), class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
+      image_tag product.images[0].representation(resize_to_limit: [400, 400]), class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
+    else
+      image_tag "user.png", size: "#{size[0]}x#{size[1]}", class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
+    end
+  end
+  def show_image(image, size: [250, 250])
+    if  image.present?
+      image_tag image.representation(resize_to_limit: [400, 400]), class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
     else
       image_tag "user.png", size: "#{size[0]}x#{size[1]}", class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
     end
