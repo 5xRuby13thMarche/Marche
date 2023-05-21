@@ -61,4 +61,27 @@
       @apply appearance-none;
     }
   }
+
+  /* swiper */
+  .swiper-slide{
+    @apply text-center text-18px p-4 flex justify-center items-center bg-cover bg-center
+  }
+  .swiper-slide img{
+    @apply block w-full h-full object-cover
+  }
+  .swiper{
+    @apply w-full h-72 mx-auto
+  }
+  .mySwiper2{
+    @apply h-4/5 w-full
+  }
+  .mySwiper{
+    @apply h-1/5 box-border py-[10px]
+  }
+  .mySwiper .swiper-slide{
+    @apply w-1/4 h-full opacity-40
+  }
+  .mySwiper .swiper-slide-thumb-active{
+    @apply opacity-100
+  }
 }
