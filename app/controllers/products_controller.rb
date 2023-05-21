@@ -115,7 +115,7 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, 
                                     :description, 
                                     :category_id, 
-                                    :images: [], 
+                                    images: [], 
                                     sale_infos_attributes: [:storage, :price, :spec], 
                                     property_attributes: [:brand, :size, :weight, :quantity_per_set]
                                   )
