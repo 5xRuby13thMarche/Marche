@@ -1,8 +1,11 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
 <%# 標題區 %>
-<div class="flex items-center w-full mt-8 mb-1 ml-2 bg-red-500 sm:mx-auto sm:w-10/12">
+<div class="flex items-center w-full mt-6 rounded bg-marche_orange sm:mx-auto sm:w-10/12">
   <%# 標題 %>
-  <h1 class="text-xl font-bold text-marche_black"><%= @shop.name %></h1>
+  <div class="w-10 my-2 ml-2 mr-4 border rounded-full">
+    <%= logo(@shop, size: [80, 80]) %>
+  </div>
+  <h1 class="py-2 text-xl font-bold text-gray-50"><%= @shop.name %></h1>
 </div>
 <%# 分類區 %>
 <div class="flex w-full mx-auto sm:w-10/12">

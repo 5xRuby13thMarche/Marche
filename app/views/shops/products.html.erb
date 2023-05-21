@@ -1,8 +1,8 @@
 <div class="relative flex">
   <%= render 'shared/shop_sidebar' %>
-  <div class="w-5/6 ml-auto mt-[84px] bg-sky-100 h-screen">
+  <div class="w-5/6 ml-auto mt-[84px] bg-sky-100 h-full">
     <h1 class="self-end w-5/6 pl-3 mx-auto mt-5 text-3xl font-bold text-sky-800">我的商品</h1>
-    <table class="table w-5/6 mx-auto mt-3 shadow-xl table-compact">
+    <table class="table w-5/6 mx-auto mt-3 shadow-xl table-compact mb-28">
       <!-- head -->
       <thead>
         <tr class="text-center">
@@ -19,7 +19,7 @@
         <% shop_products.sale_infos.each do |s| %>
         <tbody>
           <tr class="text-center hover"> 
-            <td class="w-1/6">
+            <td class="w-20 h-20">
             <%= link_to product_path(shop_products.id) do %>
               <%= product_image(shop_products) %>
             <% end %>
