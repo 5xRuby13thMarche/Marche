@@ -47,7 +47,7 @@ class OrdersController < ApplicationController
     @order = Order.find_by(tracking_number: @response.order_no) #這裡的value在依訂單修改
 
     if @response.success?
-      @order.update(payment_status: "付款成功" )
+      @order.update(payment_status: "paid" )
       redirect_to paid_order_path(@order), notice: "交易成功"
     else
       redirect_to paid_order_path(@order), alert: "交易失敗"
@@ -59,7 +59,7 @@ class OrdersController < ApplicationController
     sign_in @order.user unless user_signed_in?
     
     if @order.payment_status == "pending"
-      @order.update(tracking_number: "#{Time.now.strftime("%Y%m%d%H%M%S")}#{SecureRandom.alphanumeric(6)}" )
+      @order.update(tracking_number: @order.generate_tracking_number() )
     end
 
     @form_info = Newebpay::Mpg.new(
