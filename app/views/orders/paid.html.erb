@@ -1,5 +1,5 @@
 <%# render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
-<%= render 'shared/for_paid' if flash.any? %>
+<%= render 'shared/paid' if flash.any? %>
 <section class="w-10/12 mx-auto mt-10 mb-20 border-2">
   <div class="flex justify-center border-b-2 bg-gray-100">
     <h1 class="m-2 text-xl">訂單資訊</h1>
@@ -10,7 +10,7 @@
   </div>
 
   <div class="flex justify-around px-3 pt-2">
-    <% if @order.payment_status == "付款成功"%>
+    <% if @order.payment_status == "paid" %>
       <p class="w-1/2 text-lg text-center">付款狀態</p>
       <p class="w-1/2 text-lg text-center"><%= @order.payment_status %></p>
     <% else %>
@@ -33,7 +33,7 @@
     <div class="border-b w-4/5"></div>
   </div>
 
-  <% if @order.payment_status != "付款成功" %>
+  <% if @order.payment_status == "pending" %>
     <%# 這段是要送給藍新的資訊%>
     <%= form_with(url: 'https://ccore.newebpay.com/MPG/mpg_gateway', method: "post") do |form| %>
       <input type="hidden" id="MerchantID" name="MerchantID" value="<%= @form_info[:MerchantID] %>">
