@@ -1,17 +1,16 @@
 <div class="relative flex">
   <%= render 'shared/shop_sidebar' %>
-  <div class="w-5/6 ml-auto mt-[84px] bg-sky-100 h-screen">
+  <div class="w-5/6 ml-auto mt-[84px] bg-sky-100 h-full">
     <h1 class="self-end w-5/6 pl-3 mx-auto mt-5 text-3xl font-bold text-sky-800">我的銷售</h1>
-    <div class="w-5/6 mx-auto mt-3">
-      <div class="tabs ">
-        <%= link_to '未出貨', order_shop_path(@shop), class: "tab tab-lifted tab-active"%>
+    <div class="w-5/6 mx-auto mt-3 mb-16">
+      <div class="tabs">
+        <%= link_to '未出貨', order_shop_path(@shop), class: "tab tab-lifted tab-active text-sky-700 text-base font-semibold"%>
         <%= link_to '已出貨', shipped_shop_path(@shop), class: "tab tab-lifted"%>
       </div>
       <table class="table w-full mx-auto shadow-xl table-compact">
         <!-- head -->
         <thead class="">
           <tr class="text-center">
-            <th></th>
             <th class="text-base">商品狀態</th>
             <th class="text-base">出售時間</th>
             <th class="text-base">產品名稱</th>
@@ -23,8 +22,7 @@
         </thead>
         <tbody>
           <% @shop_orders.each_with_index do |shop_orders, index| %>
-            <tr class="hover" data-controller="shop--order" data-order-product-id="<%= shop_orders.id %>"> 
-              <td><%= index + 1 %></td>
+            <tr class="text-center hover" data-controller="shop--order" data-order-product-id="<%= shop_orders.id %>"> 
               <td data-shop--order-traget="status"><%= shop_orders.shipping_status %></td>
               <td><%= format_date_with_time(shop_orders.updated_at) %></td>
               <td><%= shop_orders.product.name %></td>
