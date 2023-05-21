@@ -12,6 +12,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         cart.delete()
         session.delete(:_cart_)
         @user.save
+
       elsif @user.cart.nil? && session[:_cart_].present?
         # session的購物車指向新使用者
         cart = Cart.find(session[:_cart_])

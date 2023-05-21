@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   before_action :set_q_ransack, only: [:index]
-  # before_action :set_cart_num, only: [:index]
+  before_action :set_cart_num, only: [:index]
 
   def index
     if user_signed_in?
