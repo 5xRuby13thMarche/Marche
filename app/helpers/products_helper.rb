@@ -32,6 +32,12 @@ module ProductsHelper
     end
   end
 
+  # 商品卡片價格區間
+  def currency_price_range(price_range)
+    price_range.map!{|e| number_to_currency(e, precision: 0)}
+    return (price_range[0] == price_range[1]) ? price_range[0] : "#{price_range[0]} ~ #{price_range[1]}"
+  end
+  
   # 分類商品顯示頁面用----------------------------------
   
   def get_order_bread_name(recent_order)
