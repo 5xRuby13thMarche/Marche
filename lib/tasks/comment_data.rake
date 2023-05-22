@@ -7,11 +7,15 @@ namespace :sample_data do
     p "開始產生商品留言..."
     path = Rails.root.join("db", "comment_data.json")
     data = JSON.parse(File.read(path))
-    user = User.find_by(email: "aaa@aaa.aaa")
+    user_email = ('a'..'t').to_a.map{|e| "#{e * 3}@#{e * 3}.#{e * 3}"}
+    users = user_email.map{|e| User.find_by(email: e)}
     Product.all.each do |product|
       srand(product.name.hash)
-      data.sample(rand(10..20)).each do |c|
-        product.product_comments.create(content: c["content"], rating: c["rating"], user_id: user.id)
+      rand_number = rand(10..20)
+      rand_user = users.sample(rand_number)
+      rand_data = data.sample(rand_number)
+      rand_data.each.with_index do |c, i|
+        product.product_comments.create(content: c["content"], rating: c["rating"], user_id: rand_user[i].id)
       end
     end
     p "商品留言產生完成！"

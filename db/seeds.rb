@@ -14,9 +14,9 @@ data.each do |d|
 end
 p "商品分類產生完成！"
 p "創建Demo帳號"
-user_email = ["aaa@aaa.aaa", "bbb@bbb.bbb", "ccc@ccc.ccc", "ddd@ddd.ddd"]
+user_email = ('a'..'t').to_a.map{|e| "#{e * 3}@#{e * 3}.#{e * 3}"}
 user_email.each do |e|
-  user = User.new(email: e, password: "111111")
+  user = User.new(email: e, password: "111111", name: "@#{e.split("@").first}")
   user.build_shop()
   user.save
 end
