@@ -107,6 +107,6 @@
     <div id="comment-list">
       <%= render partial: 'comments/comment', collection: @comment_records %>
     </div>
-    <div class="flex justify-center my-4"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
+    <div class="flex justify-center my-4 mb-16"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
   </section>
 </div>
