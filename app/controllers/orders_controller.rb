@@ -2,7 +2,9 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, except: [:notify, :paid]
   before_action :set_q_ransack, only: [:new, :index, :show, :search]
   before_action :set_cart_num, only: [:new, :index, :show, :search]
+  before_action :record_recent_path, only: [:index]
   skip_before_action :verify_authenticity_token, only: [:notify]
+
 
   # 結帳頁面
   def new

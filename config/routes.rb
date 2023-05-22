@@ -81,5 +81,5 @@ Rails.application.routes.draw do
   end
 
   # Catch-all route for handling unmatched routes
-  match "*path", to: "application#render_404", via: :all
+  # match "*path", to: "application#render_404", via: :all
 end
