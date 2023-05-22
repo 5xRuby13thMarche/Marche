@@ -26,7 +26,7 @@
             </td>
             <td><%= link_to shop_products.name, product_path(shop_products.id) %></td>
             <td><%= s.spec %></td>
-            <td class="text-center"><%= s.price %></td>
+            <td class="text-center">$ <%= s.price.to_i %></td>
             <td class="text-center"><%= @shop.total_sales[s.spec] || 0 %></td>
             <td class="text-center"><%= s.storage %></td>
             <td>

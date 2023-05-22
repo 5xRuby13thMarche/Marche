@@ -29,7 +29,7 @@
               <td><%= shop_orders.product.name %></td>
               <td><%= shop_orders.spec %></td>
               <td><%= shop_orders.quantity %></td>
-              <td><%= shop_orders.each_price * shop_orders.quantity %></td>
+              <td>$ <%= shop_orders.each_price.to_i * shop_orders.quantity %></td>
             </tr>
           <% end %>
         </tbody>
