@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   # 商品 （含買家、賣家）
   root 'products#index'
   resources :products do
@@ -80,4 +79,7 @@ Rails.application.routes.draw do
     end
 
   end
+
+  # Catch-all route for handling unmatched routes
+  match "*path", to: "application#render_404", via: :all
 end
