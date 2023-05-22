@@ -7,8 +7,18 @@ class ShopsController < ApplicationController
   
   def index
     @shop_products = @shop.order_products_infos
+    @shipped_product = @shop.shipped_order_products
     @total_price = Shop.total_price(@shop_products)
     @total_quantity = Shop.total_quantity(@shop_products)
+    
+    case params[:chart]
+    when 'total_price'
+      @chart = @shop.total_price_by_day
+    when 'top_products'
+      @chart = @shop.top_of_products(5)
+    when 'total_order'
+      @chart = @shop.order_product_by_day
+    end
   end
   
   def new
