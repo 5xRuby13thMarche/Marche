@@ -29,12 +29,23 @@
       </div>
     </div>
     <%# 喜歡功能 %>
-    <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>" class="p-2">
+    <div data-controller="product--like" data-product-id="<%=@product.id%>" data-user-like="<%=current_user&.like_product?(@product)%>" class="p-2 border-b-2">
       <i class="cursor-pointer fa-regular fa-heart fa-xl text-rose-600 hover:scale-125" data-action="click->product--like#like_product" data-product--like-target="heart"></i>
       <span>收藏商品(<span data-product--like-target="amount"><%= @product.product_likes.count%></span>)</span>
     </div>
+    <%# 商店資訊 %>
+    <section class="pt-6 pb-2">
+      <%= link_to shop_path(@product.shop.id) do %>
+        <div class="flex items-center py-1 mb-1 text-lg font-bold shadow sm:mx-auto">
+          <div class="w-10 my-2 ml-2 mr-4 border rounded-full">
+            <%= logo(@product.shop, size: [80, 80]) %>
+          </div>
+          <h1 class="py-2 text-xl font-bold text-black"><%= @product.shop.name %></h1>
+        </div>
+      <% end %>
+    </section>
     <%# 商品規格 %>
-    <section class="p-3 mb-3">
+    <section class="px-3 mb-3">
       <h2 class="block py-1 mb-1 text-lg font-bold border-b-2">商品規格</h2>
       <div class="flex my-2">
         <span class="block text-gray-400">分類:</span>
