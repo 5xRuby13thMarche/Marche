@@ -28,7 +28,7 @@
               <td><%= shop_orders.product.name %></td>
               <td><%= shop_orders.spec %></td>
               <td><%= shop_orders.quantity %></td>
-              <td><%= shop_orders.each_price * shop_orders.quantity %></td>
+              <td>$ <%= shop_orders.each_price.to_i * shop_orders.quantity %></td>
               <td>
                 <button class="flex items-center justify-center w-5 h-5 p-5 m-2 border-gray-500 rounded-full hover:bg-green-600 hover:text-white" data-action="click->shop--order#sendShippedMail">
                   <i class="fa-solid fa-truck"></i>
