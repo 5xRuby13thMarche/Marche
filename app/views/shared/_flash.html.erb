@@ -1,10 +1,8 @@
-<% if flash[:notice] %>
-<div class="flex justify-center">
-  <p class="inline-block px-3 py-2 mt-5 font-medium text-green-500 rounded-lg bg-green-50" id="notice"><%= flash[:notice] %></p>
-</div>
-<% elsif flash[:alert]%>
-<div class="flex justify-center">
-  <p class="inline-block px-3 py-2 mt-5 font-medium text-red-500 rounded-lg bg-red-50" id="notice"><%= flash[:alert] %></p>
-</div>
+<% if flash[:notice] || flash[:alert]%>
+  <div class="hidden" data-controller='flash'>
+      <p data-flash-target='notice'><%= flash[:notice] %></p>
+      <p data-flash-target='alert'><%= flash[:alert] %></p>
+  </div>
 <% end %>
+
 

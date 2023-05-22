@@ -19,8 +19,11 @@ application.register("category--assign", Category__AssignController);
 import Category__OrderController from "./category/order_controller";
 application.register("category--order", Category__OrderController);
 
-import HelloController from "./hello_controller";
-application.register("hello", HelloController);
+import FlashController from "./flash_controller"
+application.register("flash", FlashController)
+
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
 
 import Product__CartProductController from "./product/cart_product_controller";
 application.register("product--cart-product", Product__CartProductController);
