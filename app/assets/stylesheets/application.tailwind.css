@@ -64,7 +64,7 @@
 
   /* swiper */
   .swiper-slide{
-    @apply text-center text-[18px] p-4 flex justify-center items-center bg-cover bg-center
+    @apply p-1 flex justify-center items-center bg-cover bg-center
   }
   .swiper{
     @apply w-full h-72 mx-auto
