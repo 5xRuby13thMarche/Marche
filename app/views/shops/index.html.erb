@@ -42,7 +42,7 @@
     <% elsif params[:chart] == 'total_order' %>
       <div class="pl-4 my-4 ml-2 text-xl font-bold border-l-2 text-sky-800 border-sky-800">每日成交訂單</div>
       <div class="w-5/6 p-4 border-red-500 shadow stats">
-        <%= column_chart @chart, prefix: "$", empty: "No data" %>
+        <%= column_chart @chart, empty: "No data" %>
       </div>
     <% elsif params[:chart] == 'top_products' %>
       <div class="pl-4 my-4 ml-2 text-xl font-bold border-l-2 text-sky-800 border-sky-800">熱銷商品</div>
