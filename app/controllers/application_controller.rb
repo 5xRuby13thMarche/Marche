@@ -31,4 +31,8 @@ class ApplicationController < ActionController::Base
       format.all { render plain: '500 Internal Server Error', status: 500 }
     end
   end
+
+  def record_recent_path
+    session[:_prev_path_] = request.fullpath
+  end
 end
