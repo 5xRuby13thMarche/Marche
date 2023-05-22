@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :record_recent_path, only: [:show_like]
 
   def show_like
     @products = current_user.liked_products.includes(images_attachments: :blob).includes(:sale_infos)
