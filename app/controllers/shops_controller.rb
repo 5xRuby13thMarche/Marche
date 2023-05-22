@@ -3,7 +3,7 @@ class ShopsController < ApplicationController
   before_action :set_q_ransack, only: [:show]
   before_action :set_cart_num, only: [:show]
   before_action :authenticate_user!
-  before_action :set_shop
+  before_action :set_shop, expect: [:show]
   
   def index
     @shop_products = @shop.order_products_infos
@@ -35,8 +35,8 @@ class ShopsController < ApplicationController
   end
 
   def show
-    @products = @shop.products.includes(:category)
-    @sub_categories = @shop.products.includes(:category).pluck(:category_id ,:content).uniq
+    @products = Product.where(shop_id: params[:id]).includes(:category)
+    @sub_categories = Product.where(shop_id: params[:id]).includes(:category).pluck(:category_id ,:content).uniq
    
     if params[:category].present?
       @products = @products.where(category_id: params[:category])
