@@ -1,4 +1,4 @@
-<%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q} %>
+<%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q, user_cart_product_num: @user_cart_product_num} %>
 <%= render 'shared/flash' if flash.any? %>
 <%# 這段是要送給藍新的資訊%>
 <%= form_with(url: 'https://ccore.newebpay.com/MPG/mpg_gateway', method: "post") do |form| %>
@@ -7,34 +7,34 @@
   <input type="hidden" id="TradeSha" name="TradeSha" value="<%= @form_info[:TradeSha] %>">
   <input type="hidden" id="Version" name="Version" value="<%= @form_info[:Version] %>">
   <%# 客戶資訊 %>
-  <section class="border-2 my-20 mx-auto w-10/12">
+  <section class="w-10/12 mx-auto my-20 border-2">
     <div class="flex justify-center p-2 bg-gray-100 border-b">
       <p class="text-lg">配送資訊</p>
     </div>
-    <div class="flex justify-around items-center px-2 pt-4">
+    <div class="flex items-center justify-around px-2 pt-4">
       <p class="w-1/2 text-base text-center">收件人</p>
       <p class="w-1/2 text-base text-center break-words"><%= @order.receiver %></p>
     </div>
-    <div class="flex justify-around items-center px-2 pt-2">
+    <div class="flex items-center justify-around px-2 pt-2">
       <p class="w-1/2 text-base text-center">配送地址</p>
       <p class="w-1/2 text-base text-center break-words"><%= @order.shipping_address %></p>
     </div>
-    <div class="flex justify-around items-center px-2 p-2">
+    <div class="flex items-center justify-around p-2 px-2">
       <p class="w-1/2 text-base text-center">配送方式</p>
       <p class="w-1/2 text-base text-center ">宅配</p>
     </div>
-    <div class="flex justify-around items-center px-2 pb-4">
+    <div class="flex items-center justify-around px-2 pb-4">
       <p class="w-1/2 text-base text-center">備註</p>
       <p class="w-1/2 text-base text-center break-words"><%= @order.note %></p>
     </div>
-    <div class="flex justify-around items-center px-2 pb-4">
+    <div class="flex items-center justify-around px-2 pb-4">
       <p class="w-1/2 text-xl text-center text-red-600">總價</p>
       <p class="w-1/2 text-xl text-center text-red-600"><%=  number_to_currency(@order.total_price, precision: 0) %></p>
     </div>
 
       <%# 分隔線 %>
     <div class="flex justify-center m-2">
-      <div class="border w-4/5"></div> 
+      <div class="w-4/5 border"></div> 
     </div>
 
     <div class="flex justify-around mb-2">
