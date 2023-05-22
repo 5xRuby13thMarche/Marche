@@ -53,3 +53,7 @@ end
 
 
 gem "dockerfile-rails", ">= 1.2", :group => :development
+
+gem "chartkick", "~> 5.0"
+
+gem "groupdate", "~> 6.2"
