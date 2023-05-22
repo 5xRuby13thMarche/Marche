@@ -21,7 +21,7 @@
       <div class="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
         <%= render partial:'products/product', collection: @products %>
       </div>
-      <div class="flex justify-center my-4"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
+      <div class="flex justify-center my-4 mb-16"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
     <% else %>
       <div class="flex flex-col items-center justify-center my-8">
         <p class="mb-4 text-center text-gray-500">您目前沒有收藏商品</p>

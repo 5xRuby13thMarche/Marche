@@ -43,14 +43,14 @@
     </div>
     <%# 商品顯示區 %>
     <% if @products.blank? %>
-      <div class="flex flex-col justify-center mx-auto border-b my-7">
+      <div class="flex flex-col justify-center mx-auto mb-20 border-b my-7">
         <i class="m-5 text-6xl fa-solid fa-magnifying-glass text-marche_orange100"></i>
         <p class="flex flex-col mb-5 text-center">
           <span class="text-xl text-marche_black">該分類還沒有商品</span>
         </p>
       </div>
     <% else %>
-      <div class="grid grid-cols-2 gap-4 mx-auto sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
+      <div class="grid grid-cols-2 gap-4 mx-auto mb-20 sm:grid-cols-3 lg:grid-cols-5 md:grid-cols-4 xl:grid-cols-6">
         <%= render partial:'products/product',collection: @products, as: :product %>
       </div>
     <% end %>
