@@ -11,19 +11,11 @@
   </div>
   <%# 價格 %>
   <div class="px-2 py-1 my-5 align-middle bg-gray-50">
-    <strong class="block mb-1 text-4xl font-bold text-red-700" >$<%= sale_info.price %></strong>
+    <strong class="block mb-1 text-4xl font-bold text-red-700" ><%= number_to_currency(sale_info.price, precision: 0) %></strong>
   </div>
   <%# 規格 %>
   <div class="flex flex-wrap mb-5">
-    <% spec_all.each do |s| %>
-      <%= link_to (product_path(product, saleinfo: s.id )) do %>
-        <% if s.id == sale_info.id %>
-          <div class="block px-2 py-1 mb-2 mr-3 font-medium text-gray-900 border border-2 rounded-md border-rose-600"><%= s.spec %></div>
-        <% else %>
-          <div class="block px-2 py-1 mb-2 mr-3 font-medium text-gray-900 border "><%= s.spec %></div>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= render partial: "spec", collection: spec_all, locals: {product: product, sale_info: sale_info} %>
   </div>
   <%# 數量框 %>
   <%= form_with(model: cart_product, url: '#', method: :post, data: { turbo: false, controller: "product--cart-product" }) do |form| %>
