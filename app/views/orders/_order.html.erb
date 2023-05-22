@@ -12,7 +12,7 @@
   </div>
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">付款狀態</p>
-    <p class="w-1/2 text-left"><%= order.payment_status %></p>
+    <p class="w-1/2 text-left"><%= translate_payment_status(order.payment_status) %></p>
   </div>
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">付款方式</p>
@@ -29,7 +29,7 @@
   </section>
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 mt-1 text-left">出貨狀態</p>
-    <p class="w-1/2 text-left"><%= order.shipping_status %></p>
+    <p class="w-1/2 text-left"><%= translate_shipping_status(order.shipping_status) %></p>
   </div>
   <div class="flex justify-around px-3 pt-1 m-2">
     <p class="w-1/2 text-left">配送地址</p>
