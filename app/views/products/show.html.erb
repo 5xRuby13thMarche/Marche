@@ -3,10 +3,18 @@
   <div class="w-full mx-auto">
     <div class="w-full p-2 mx-auto mt-3">
       <%= render 'shared/flash' if flash.any? %>
-      <div class="flex items-center p-2 mb-1">
-        <i class="mr-1 fa-solid fa-backward text-zinc-800"></i>
-        <%= link_to '上一頁', :back, class: 'text-zinc-800 font-bold' %>
+      <div class="text-sm breadcrumbs">
+        <ul>
+          <li><%= link_to @main_category.content, category_path(@main_category.id)%></li>
+          <li><%= link_to @subcategory.content, category_path(@main_category.id, sub_category: @subcategory.id)%></li>
+        </ul>
       </div>
+      <% if @prev_path.present? %>
+        <div class="flex items-center p-2 mb-1">
+          <i class="mr-1 fa-solid fa-backward text-zinc-800"></i>
+          <%= link_to '上一頁', @prev_path, class: 'text-zinc-800 font-bold' %>
+        </div>
+      <% end %>
       <%# 商品基本欄位 %>
       <div class="grid flex-wrap w-full grid-cols-1 sm:grid-cols-2 sm:flex-none">
         <%# 大圖片小圖片 %>

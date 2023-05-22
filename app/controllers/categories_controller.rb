@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_q_ransack, only: [:show]
   before_action :set_cart_num, only: [:show]
+  before_action :record_recent_path, only: [:show]
   def show
     @parent_category = Category.find(params[:id])
     @child_categories = @parent_category.children
