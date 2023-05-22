@@ -66,9 +66,6 @@
   .swiper-slide{
     @apply text-center text-[18px] p-4 flex justify-center items-center bg-cover bg-center
   }
-  .swiper-slide img{
-    @apply block w-full h-full object-cover
-  }
   .swiper{
     @apply w-full h-72 mx-auto
   }

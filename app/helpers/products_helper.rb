@@ -22,11 +22,13 @@ module ProductsHelper
       image_tag "user.png", size: "#{size[0]}x#{size[1]}", class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
     end
   end
+
+  # 給商品頁面的大小圖使用
   def show_image(image, size: [250, 250])
     if  image.present?
-      image_tag image.representation(resize_to_limit: [400, 400]), class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
+      image_tag image.representation(resize_to_limit: [400, 400]), class:"mx-auto block h-full w-full rounded-t-sm aspect-1 object-cover"
     else
-      image_tag "user.png", size: "#{size[0]}x#{size[1]}", class:"mx-auto w-full rounded-t-sm aspect-1 object-cover"
+      image_tag "user.png", size: "#{size[0]}x#{size[1]}", class:"mx-auto block h-full w-full rounded-t-sm aspect-1 object-cover"
     end
   end
 
