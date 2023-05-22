@@ -36,11 +36,8 @@
           <p class="text-sm">清空購物車</p>
         </div>
         <p class="ml-auto mr-2 text-sm">總金額<span class="hidden md:inline"> (<span data-cart--form-target="productNum">0</span> 個商品)</span> :<span class="m-2 font-semibold texy-sm md:text-lg text-marche_orange" data-cart--form-target="totalPrice">$0</span></p>
-        <% if user_signed_in? %>
-          <%= form.submit "去買單", data: {cart__form_target: "submitBtn"} ,class: "checkout-btn"%>
-        <% else %>
-          <div class="flex items-center justify-center login-link"><%= link_to '登入即可結帳', new_user_session_path, class: "" %></div>
-        <% end %>
+        <%= form.submit "去買單", data: {cart__form_target: "submitBtn", sign_in_state: user_signed_in?} ,class: "checkout-btn hidden" %>
+        <div class="flex items-center justify-center login-link" data-cart--form-target="loginLink"><%= link_to '登入即可結帳', new_user_session_path %></div>
       <% end %>
     </div>
   </section>

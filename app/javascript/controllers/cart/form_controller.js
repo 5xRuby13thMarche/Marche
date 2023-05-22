@@ -13,6 +13,7 @@ export default class extends Controller {
     "cartItem",
     "submitBtn",
     "allProductsNum",
+    "loginLink",
   ];
   connect() {
     // form表單預設會找尋第一個submit or button進行click事件，因此要preventDefault
@@ -23,6 +24,7 @@ export default class extends Controller {
 
     this.isAllChecked = false;
     this.canPressSubmit = false;
+    this.switchSubmitBtn(this.submitBtnTarget.dataset.signInState === "true");
     this.update();
   }
   update() {
@@ -130,6 +132,16 @@ export default class extends Controller {
       this.allProductsNumTarget.textContent = `全選 ${
         this.checkboxTargets.length - 1
       }`;
+    }
+  }
+  // 未登入時切換結帳按鈕至登入按鈕
+  switchSubmitBtn(state) {
+    if (state) {
+      this.submitBtnTarget.classList.remove("hidden");
+      this.loginLinkTarget.classList.add("hidden");
+    } else {
+      this.submitBtnTarget.classList.add("hidden");
+      this.loginLinkTarget.classList.remove("hidden");
     }
   }
 }

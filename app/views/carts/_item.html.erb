@@ -13,7 +13,7 @@
     <%# 規格 %>
     <p class="block w-20 text-sm md:w-2/12 spec-btn"><%= cart_product.sale_info.spec %></p>
     <%# 單價 %>
-    <div class="block w-full my-2 text-sm md:mx-3 md:text-gray-900 text-marche_orange text:start md:text-center md:w-1/12">$<%= cart_product.sale_info.price %></div>
+    <div class="block w-full my-2 text-sm md:mx-3 md:text-gray-900 text-marche_orange text:start md:text-center md:w-1/12"><%= number_to_currency(cart_product.sale_info.price, precision: 0) %></div>
     <%# 數量 %>
     <div class="relative flex items-center justify-start w-full md:justify-center md:w-2/12" data-cart--item-target="inputArea">
       <button class="quantity-btn-left-arrow" data-action="click->cart--item#decrement click->cart--form#update">－</button>
