@@ -36,6 +36,7 @@ class ShopsController < ApplicationController
   end
 
   def show
+    @shop = Shop.find(params[:id])
     @products = Product.where(shop_id: params[:id]).includes(:category)
     @sub_categories = Product.where(shop_id: params[:id]).includes(:category).pluck(:category_id ,:content).uniq
    
