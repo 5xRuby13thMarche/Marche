@@ -18,6 +18,7 @@ user_email = ('a'..'t').to_a.map{|e| "#{e * 3}@#{e * 3}.#{e * 3}"}
 user_email.each do |e|
   user = User.new(email: e, password: "111111", name: "@#{e.split("@").first}")
   user.build_shop()
+  user.build_cart()
   user.save
 end
 p "Demo帳號創建完成"
