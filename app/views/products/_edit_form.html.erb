@@ -6,7 +6,7 @@
       <%= form.label :name ,'商品名稱 *'%>
       <%= form.text_field :name, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
-    <%= form.file_field :images %>
+    <%= form.file_field :images, multiple: true %>
     <div class="my-5" data-controller="category--assign">
       <h3 class="pb-2">分類 *</h3>
       <div data-category--assign-target="show" class="text-gray-700"><%= @main_category.content %> > <%= @subcategory.content %></div>
@@ -30,16 +30,14 @@
         </label>
       </label>
     </div>
-    
     <div class="my-5">
       <%= form.label :description, '商品描述 *' %>
       <%= form.text_area :description, rows: 4, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
   </section>
-
   <section class="flex flex-wrap px-6 py-3 mb-3 bg-white border rounded-md shadow-xl deleteFields">
     <h2 class="mb-4 text-xl font-bold">商品詳細資訊</h2>
-   <%= form.fields_for :property do |p| %>
+    <%= form.fields_for :property do |p| %>
       <div class="grid w-full grid-cols-2">
         <div class="grid items-center grid-cols-3 pr-2 mb-2">
           <%= p.label :brand, '品牌', class: "text-center " %>
@@ -57,7 +55,7 @@
           <%= p.label :quantity_per_set, '每組數量', class: "text-center" %>
           <%= p.number_field :quantity_per_set, class: "col-span-2 rounded-md border border-gray-200" %>
         </div>
-      </div>  
+      </div>
     <% end %>
   </section>
   <div class="mb-10">
