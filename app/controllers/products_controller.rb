@@ -43,19 +43,8 @@ class ProductsController < ApplicationController
     @main_category = @subcategory.parent
 
     # 上一頁的路徑
-    p '-'*40
-    p "before"
-    p session[:_prev_path_]
-    p session[:_prev_path_].class
-    p '-'*40
-
     @prev_path = session[:_prev_path_]
     session.delete(:_prev_path_)
-    p '-'*40
-    p "after"
-    p session[:_prev_path_]
-    p session[:_prev_path_].class
-    p '-'*40
   end
 
   def search
@@ -131,9 +120,10 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, 
                                     :description, 
                                     :category_id, 
-                                    :images, 
+                                    images: [], 
                                     sale_infos_attributes: [:storage, :price, :spec], 
                                     property_attributes: [:brand, :size, :weight, :quantity_per_set]
                                   )
   end
+  
 end
