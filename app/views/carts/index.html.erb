@@ -1,12 +1,12 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q, user_cart_product_num: @user_cart_product_num} %>
 <% if @cart.nil? || @cart_products.blank? %>
-  <section class="container flex flex-col items-center justify-center h-40 mx-auto mt-16">
+  <section class="container flex flex-col items-center justify-center h-40 mx-auto mt-36">
     <i class="text-5xl fa-solid fa-cart-shopping text-stone-500"></i>
     <p class="mt-2">購物車內沒有商品</p>
     <%= link_to '來去首頁逛逛~', root_path, class: "border-b border-slate-500" %>
   </section>
 <% else %>
-  <section class="container w-full mx-auto my-12 border lg:w-11/12 xl:w-10/12 bg-gay-200">
+  <section class="container w-full mx-auto my-12 border lg:w-11/12 xl:w-10/12 bg-gay-200 mt-36">
     <%= form_with url: new_order_path, method: :get, data: { turbo: "false", controller: "cart--form", cart_id: @cart&.id} do |form| %>
       <%# 標題欄區域 %>
       <div class="flex items-center justify-start w-full bg-gray-100 h-14">

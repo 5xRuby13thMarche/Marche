@@ -1,5 +1,5 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q, user_cart_product_num: @user_cart_product_num} %>
-<section class="w-9/12 mx-auto" data-controller="product--order" data-recent-order="<%= @recent_order%>">
+<section class="w-9/12 mx-auto mt-36" data-controller="product--order" data-recent-order="<%= @recent_order%>">
   <%# 標題 %>
   <h1 class="mt-8 mb-1 mr-4 text-xl font-bold text-marche_black">搜尋結果：<%= @search_keyword %> </h1>
   <%# 麵包屑 %>
