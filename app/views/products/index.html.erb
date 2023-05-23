@@ -1,7 +1,7 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q, user_cart_product_num: @user_cart_product_num} %>
 <%= render 'shared/flash' if flash.any? %>
 <%# Banner%>
-<div class="container w-full mx-auto my-10 sm:w-10/12">
+<div class="container w-full mx-auto my-10 mt-36 sm:w-10/12">
   <div class="slider">
     <div class="w-full cursor-pointer">
       <%= link_to category_path(86) do%>
