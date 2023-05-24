@@ -22,7 +22,7 @@
         </thead>
         <tbody>
           <% @shop_orders.each_with_index do |shop_orders, index| %>
-            <tr class="text-center hover" data-controller="shop--order" data-order-product-id="<%= shop_orders.id %>"> 
+            <tr class="h-[72px] text-center hover" data-controller="shop--order" data-order-product-id="<%= shop_orders.id %>"> 
               <td data-shop--order-traget="status"><%= translate_shipping_status(shop_orders.shipping_status) %></td>
               <td><%= format_date_with_time(shop_orders.created_at) %></td>
               <td><%= format_date_with_time(shop_orders.updated_at) %></td>
