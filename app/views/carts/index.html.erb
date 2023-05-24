@@ -1,4 +1,5 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q, user_cart_product_num: @user_cart_product_num} %>
+<%= render 'shared/flash' if flash.any? %>
 <% if @cart.nil? || @cart_products.blank? %>
   <section class="container flex flex-col items-center justify-center h-40 mx-auto mt-16">
     <i class="text-5xl fa-solid fa-cart-shopping text-stone-500"></i>

@@ -19,10 +19,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         cart.update(user_id: @user.id)
         session.delete(:_cart_)
         redirect_to carts_path
-      else
+      elsif @user.cart.nil? && session[:_cart_].nil?
         # 生成購物車給新使用者
         @user.build_cart()
         @user.save
+        redirect_to root_path
+      else
+        # 舊使用者，沒有session
         redirect_to root_path
       end
       # sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated

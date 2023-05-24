@@ -62,6 +62,7 @@ export default class extends Controller {
     } else {
       this.isAllChecked = true;
       for (let i = 0; i < this.checkboxTargets.length; i++) {
+        if (this.checkboxTargets[i].hasAttribute("disabled")) continue;
         this.checkboxTargets[i].checked = true;
       }
     }
