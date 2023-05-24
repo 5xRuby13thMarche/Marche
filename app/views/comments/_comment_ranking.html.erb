@@ -4,7 +4,7 @@
     <p class="text-xl"><span class="text-4xl"><%= average_rating %></span>/5</p>
     <%# 產生星星 %>
     <div class="rating rating-md">
-      <% if average_rating == "?" %>
+      <% if average_rating == 0 %>
         <% 5.times do |i|%>
           <input type="radio" class="pointer-events-none comment-star bg-slate-300"/>
         <% end %>
