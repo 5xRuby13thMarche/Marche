@@ -14,6 +14,21 @@ class CartProduct < ApplicationRecord
     end
   end
 
+  def self.check_storage(cart_products)
+    cart_products.each do |cart_product|
+      return false if cart_product.sale_info.storage < cart_product.quantity || cart_product.sale_info.storage == 0
+    end
+    return true
+  end
+
+  def self.reduce_storage(cart_products)
+    cart_products.each do |cart_product|
+      storage = cart_product.sale_info.storage -= cart_product.quantity
+      storage = (storage >=0 ) ? storage : 0
+      cart_product.sale_info.update(storage: storage)
+    end
+  end
+
   private
 
   def self.create_or_update_cart_product(cart, params)

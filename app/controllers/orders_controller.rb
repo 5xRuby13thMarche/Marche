@@ -12,6 +12,8 @@ class OrdersController < ApplicationController
     @cart_products =  @cart.cart_products.includes(sale_info: [:product]).where(id: params[:cart_product_ids])
     if @cart_products.count.zero?
       redirect_to carts_path, alert: '請先選擇商品'
+    elsif !CartProduct.check_storage(@cart_products)
+      redirect_to carts_path, alert: '商品數量超過庫存'
     end
     @order = Order.new
     @total_price = CartProduct.cal_total_price(@cart_products) # 算總價
@@ -26,7 +28,8 @@ class OrdersController < ApplicationController
     @order.user = current_user
     @order.total_price = total_price
 
-    if @order.save
+    if CartProduct.check_storage(@cart_products) && @order.save
+      CartProduct.reduce_storage(@cart_products)
       @cart_products.destroy_all # 購物車中減去訂單的商品
       redirect_to order_path(@order), notice: "訂單成立"
     else
