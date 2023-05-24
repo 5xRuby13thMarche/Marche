@@ -1,14 +1,17 @@
-<%= form_with(model:product, class: "contents", data: { turbo: false }) do |form| %>
+<%= form_with(model:product, class: "contents", data: { turbo: false, controller: "product--form" }) do |form| %>
   <%= render 'shared/error_message', record: product %>
   <section class="px-6 py-3 my-3 bg-white border rounded-md shadow-xl">
     <h2 class="text-xl font-bold">基本資料</h2>
     <div class="my-5">
-      <%= form.label :name ,'商品名稱 *'%>
-      <%= form.text_field :name, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.label :name ,'商品名稱', class:"after:content-['*'] after:ml-0.5 after:text-red-500"%>
+      <%= form.text_field :name, data: { product__form_target: "name" }, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
-    <%= form.file_field :images, multiple: true %>
+    <div class="my-5 ">
+      <%= form.label :images ,'商品圖片', class:"after:content-['*'] after:ml-0.5 after:text-red-500"%>
+      <%= form.file_field :images, multiple: true, data: { product__form_target: "images" }, class:"block outline-none mt-2 w-full" %>
+    </div>
     <div class="my-5" data-controller="category--assign">
-      <h3 class="pb-2">分類 *</h3>
+      <h3 class="pb-2 after:content-['*'] after:ml-0.5 after:text-red-500">分類</h3>
       <div data-category--assign-target="show" class="text-gray-700"></div>
       <!-- The button to open modal -->
       <label for="my-modal-4" class="py-2 text-base btn bg-sky-600 border-sky-600">請選擇</label>
@@ -23,7 +26,7 @@
               <option value="<%= id %>"><%= content %></option>
             <% end %>
           </select>
-          <%= form.select :category_id, "", { prompt: "請選擇" }, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2', data:{ category__assign_target: "subcategory" }%>
+          <%= form.select :category_id, "", { prompt: "請選擇" }, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2', data:{ category__assign_target: "subcategory", product__form_target: "category" }%>
           <div class="modal-action">
             <label for="my-modal-4" class="btn" data-action="click->category--assign#whichChoose">確定</label>
           </div>
@@ -31,8 +34,8 @@
       </label>
     </div>
     <div class="my-5">
-      <%= form.label :description, '商品描述 *' %>
-      <%= form.text_area :description, rows: 4, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.label :description, '商品描述', class:"after:content-['*'] after:ml-0.5 after:text-red-500" %>
+      <%= form.text_area :description, rows: 4, data: { product__form_target: "description" }, class: "block rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
   </section>
   <section class="flex flex-wrap px-6 py-3 mb-3 bg-white border rounded-md shadow-xl deleteFields">
@@ -59,7 +62,7 @@
     <% end %>
   </section>
   <section class="px-6 py-3 mb-3 bg-white border rounded-md shadow-xl">
-    <h2 class="mb-4 text-xl font-bold">銷售資訊*</h2>
+    <h2 class="mb-4 text-xl font-bold">銷售資訊</h2>
     <%# sale_info表單 %>
     <div data-controller="product--sale-info">
       <%= form.fields_for :sale_infos do |sale_info| %>
@@ -72,9 +75,9 @@
   </section>
   <div class="mb-10">
     <% if action_name == "new" %>
-      <%= form.submit "建立商品", class: "ml-5 rounded-lg py-3 px-5 bg-sky-600 text-baseborder-sky-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit "建立商品", data: { action: "click->product--form#submit" }, class: "ml-5 rounded-lg py-3 px-5 bg-sky-600 text-baseborder-sky-600 text-white inline-block font-medium cursor-pointer" %>
     <% else %>
-      <%= form.submit "儲存", class: "ml-5 rounded-lg py-3 px-5 bg-sky-600 border-sky-600 text-base text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit "儲存", data: { action: "click->product--form#submit" }, class: "ml-5 rounded-lg py-3 px-5 bg-sky-600 border-sky-600 text-base text-white inline-block font-medium cursor-pointer" %>
     <% end %>
   </div>
 <% end %>

@@ -14,9 +14,9 @@ export default class extends Controller {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton:
-          "border py-1 px-2 mx-2 rounded bg-lime-600 text-white hover:bg-lime-700",
+          "border py-2 px-4 mx-2 rounded bg-lime-600 text-white hover:bg-lime-700 text-lg ",
         cancelButton:
-          "border py-1 px-2 mx-2 rounded bg-red-400 text-white hover:bg-red-500",
+          "border py-2 px-4 mx-2 rounded bg-red-400 text-white hover:bg-red-500 text-lg ",
       },
       buttonsStyling: false,
     });
@@ -25,8 +25,8 @@ export default class extends Controller {
         title: "是否要出貨？",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes!",
-        cancelButtonText: "No!",
+        confirmButtonText: "確定",
+        cancelButtonText: "取消",
         reverseButtons: true,
       })
       .then((result) => {
