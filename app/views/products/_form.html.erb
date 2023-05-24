@@ -9,6 +9,8 @@
     <div class="my-5 ">
       <%= form.label :images ,'商品圖片', class:"after:content-['*'] after:ml-0.5 after:text-red-500"%>
       <%= form.file_field :images, multiple: true, data: { product__form_target: "images" }, class:"block outline-none mt-2 w-full" %>
+      <%= form.label :name ,'(最多可上傳五張圖片)', class:"text-gray-300" %>
+
     </div>
     <div class="my-5" data-controller="category--assign">
       <h3 class="pb-2 after:content-['*'] after:ml-0.5 after:text-red-500">分類</h3>
