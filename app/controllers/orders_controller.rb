@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
       @cart_products.destroy_all # 購物車中減去訂單的商品
       redirect_to order_path(@order), notice: "訂單成立"
     else
-      redirect_to :back, alert: "訂單不成立"
+      reder :new
     end
   end 
 

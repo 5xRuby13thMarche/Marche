@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :user
   has_many :order_products
   has_many :products, through: :order_products
+  validates :shipping_address, :receiver, presence: true
 
   def build_cart_products(cart_products)
     cart_products.each do |cart_product|
