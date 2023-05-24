@@ -6,7 +6,8 @@
     <%= link_to '來去首頁逛逛~', root_path, class: "border-b border-slate-500" %>
   </section>
 <% else %>
-  <section class="container w-full mx-auto my-12 border lg:w-11/12 xl:w-10/12 bg-gay-200 mt-36">
+  <h2 class="flex items-center justify-center pb-1 text-xl mt-28 text-marche_orange md:hidden">購物車</h2>
+  <section class="container w-full mx-auto my-12 mt-0 border lg:w-11/12 xl:w-10/12 bg-gay-200 md:mt-36">
     <%= form_with url: new_order_path, method: :get, data: { turbo: "false", controller: "cart--form", cart_id: @cart&.id} do |form| %>
       <%# 標題欄區域 %>
       <div class="flex items-center justify-start w-full bg-gray-100 h-14">
