@@ -1,3 +1,23 @@
-<%= @user.name %>，您好：
-<br>
-您在 Marche 購買的商品已寄出囉！
+<div>
+  <p>親愛的 <%= @user.name %> 您好，</p>
+  <br>
+  <p>感謝您在 Marche 上的訂購，我們很高興通知您，您購買的商品已經出貨。</p>
+  <br>
+</div>
+
+<div>
+  <p>以下是您的訂單詳細資訊：</p>
+  <ul>
+    <li>訂單編號：<%= order_product.order.tracking_number %></li>
+    <li>出貨商品：<%= order_product.product.name %></li>
+  </ul>
+  <br>
+</div>
+
+<div>
+  <p>如有任何關於您的訂單的問題或需要進一步協助，請隨時聯繫我們的服務團隊 astro13marche@gmail.com</p>
+  <br>
+  <p>感謝您對 Marche 的支持，我們期待為您提供更好的購物體驗。祝您有個美好的一天！</p>
+  <br>
+  <p>Marche 團隊</p>
+</div>
