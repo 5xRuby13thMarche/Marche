@@ -41,7 +41,7 @@ class ShopsController < ApplicationController
     @sub_categories = Product.where(shop_id: params[:id]).includes(:category).pluck(:category_id ,:content).uniq
    
     if params[:category].present?
-      @products = @products.where(category_id: params[:category])
+      @products = @products.where(category_id: params[:category]).order(created_at: :desc)
     end
 
     case params[:sort]

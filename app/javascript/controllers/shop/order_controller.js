@@ -25,8 +25,8 @@ export default class extends Controller {
         title: "是否要出貨？",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes!",
-        cancelButtonText: "No!",
+        confirmButtonText: "確定",
+        cancelButtonText: "取消",
         reverseButtons: true,
       })
       .then((result) => {
