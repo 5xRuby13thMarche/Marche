@@ -111,9 +111,16 @@
   <% end %>
   <%# 當前產品評論 %>
   <section>
-    <h3 class="m-2">評論：</h3>
     <div id="comment-list">
-      <%= render partial: 'comments/comment', collection: @comment_records %>
+      <% if @comment_records.blank? %>
+        <div class="relative flex flex-col items-center pt-10">
+          <i class="mt-2 text-5xl border-b-2 border-dashed border-lime-500 w-fit fa-solid fa-kiwi-bird text-amber-600"></i>
+          <p class="text-center btext-slate-700">尚無評價</p>
+        </div>
+      <% else %>
+        <h3 class="m-2">評論：</h3>
+        <%= render partial: 'comments/comment', collection: @comment_records %>
+      <% end %>
     </div>
     <div class="flex justify-center my-4 mb-16"><%== pagy_nav(@pagy) if @pagy.pages > 1 %></div>
   </section>

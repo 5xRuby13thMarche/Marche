@@ -11,6 +11,7 @@ import {faBackward} from "@fortawesome/free-solid-svg-icons";
 import {faTruck} from "@fortawesome/free-solid-svg-icons";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
 import {faCartShopping} from "@fortawesome/free-solid-svg-icons";
+import {faKiwiBird} from "@fortawesome/free-solid-svg-icons";
 
 library.add(regularHeart);
 library.add(solidHeart);
@@ -21,5 +22,5 @@ library.add(faBackward);
 library.add(faTruck);
 library.add(faGithub);
 library.add(faCartShopping);
-
+library.add(faKiwiBird);
 dom.watch();
