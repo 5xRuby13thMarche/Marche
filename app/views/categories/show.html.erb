@@ -1,6 +1,6 @@
 <%= render partial: 'layouts/page_header', locals: {ransack_q: @ransack_q, user_cart_product_num: @user_cart_product_num} %>
 <%# 標題區 %>
-<div class="flex items-center w-full mt-8 mb-1 ml-2 sm:mx-auto sm:w-10/12 mt-36">
+<div class="flex items-center w-full mb-1 ml-2 mt-36 sm:mx-auto sm:w-10/12">
   <%# 標題 %>
   <%= link_to category_path(@parent_category), class: "mr-4" do %>
     <h1 class="text-xl font-bold text-marche_black">分類：<%= @parent_category.content%></h1>
