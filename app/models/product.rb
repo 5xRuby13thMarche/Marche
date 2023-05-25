@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   validates :name, :category_id, presence: true
 
   belongs_to :shop
@@ -10,6 +13,7 @@ class Product < ApplicationRecord
   has_many :product_comments, dependent: :destroy
   has_many :sale_infos, dependent: :destroy
   has_one :property, dependent: :destroy
+  
   has_many_attached :images do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
