@@ -31,7 +31,11 @@ export default class extends Controller {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire("通知買家已出貨");
+          swalWithBootstrapButtons
+            .fire({
+              title: "通知買家已出貨",
+              confirmButtonText: "完成",
+            });
           this.changeStatus(); // 
         }
       });
