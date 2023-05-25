@@ -10,7 +10,7 @@ export default class extends Controller {
     e.preventDefault();
     // 驗證 name
     const name = this.nameTarget.value;
-    if (name.length < 2 || name.length > 12) {
+    if (name.length < 2) {
       this.nameTarget.classList.remove("border-gray-200");
       this.nameTarget.classList.add("border-red-500");
       const Toast = Swal.mixin({
