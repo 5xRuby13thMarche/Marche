@@ -26,7 +26,7 @@
     <p class="p-1 font-bold">所有分類</p>
     <span class="h-px w-28 bg-marche_pearl"></span>
     <ul>
-      <%= render partial: 'category_list', collection: @child_categories, as: :child_category,  locals:{parent_category: @parent_category} %>
+      <%= render partial: 'category_list', collection: @child_categories, as: :child_category,  locals:{parent_category: @parent_category, recent_child: @recent_child} %>
     </ul>
   </div>
   <%# 右側商品區 %>
