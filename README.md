@@ -3,8 +3,7 @@
 Website 網站: https://www.marche.asia/
 
 Video demonstration 示範影片: Insert URL 補放網址
-
-![Marche](https://imgpile.com/images/9PX5Cj.png)
+<img width="960" alt="marche_cover" src="https://github.com/5xRuby13thMarche/Marche/assets/112312121/71ee8d8e-3f2f-4c16-8b9f-7722f2c0160b">
 
 Discover Marche, your premier destination for a Shopee-inspired online shopping experience. Explore a diverse range of high-quality products, connect with trusted sellers, and enjoy secure transactions—all in one seamless platform.
 
@@ -14,11 +13,17 @@ Main functions:
 3. Buyer: Commenting and Rating, My Favorites, and My Orders.
 4. Payment System: Third-party payment integration with Newebpay.
 
-Marche是向購物網站蝦皮 Shopee 致敬的購物網站，有以下幾個主要功能：
+Marche 是向購物網站蝦皮 Shopee 致敬的購物網站，有以下幾個主要功能：
 1. 賣家中心 : 賣場簡介｜訂單管理｜商品管理
 2. 搜尋 : 文字搜尋｜分類搜尋
 3. 買家 : 留言評論｜我的收藏｜我的訂單
-4. 金流系統：第三方金流－藍新金流
+4. 金流系統：藍新金流
+
+![Screen Shot 0005-05-25 at 12 04 29](https://github.com/5xRuby13thMarche/Marche/assets/112312121/dc2792c0-e4bf-46a7-9f8d-db25e918d32b)![seller](https://github.com/5xRuby13thMarche/Marche/assets/112312121/cbdb3e79-475c-4b76-92be-ebf3516e93b7)
+
+
+
+
 
 ## Technologies 使用技術
 - **Front-end 前端** : HTML | CSS | JavaScript | Tailwind CSS | Stimulus
