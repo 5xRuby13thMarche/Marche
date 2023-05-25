@@ -8,7 +8,7 @@
         <div class="w-full mx-auto" data-controller="user--avatar">
           <%= form_with(model:@shop) do |form|%>
             <div class="flex flex-col items-center justify-center my-5">
-              <img src="" alt="" class="hidden object-cover w-full my-2 rounded aspect-1" data-user--avatar-target="preview">
+              <img src="" alt="" class="hidden object-cover my-2 rounded-full w-80 aspect-1" data-user--avatar-target="preview">
               <div class="m-2 rounded-full bg-slate-300 w-fit "><%= logo(@shop, size: [400, 400]) %></div>
             </div>
             <div class="flex items-center justify-start my-5">
