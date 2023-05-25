@@ -1,23 +1,23 @@
 <%= render 'shared/shop_flash' if flash.any? %>
-<div class="relative flex flex-col h-full min-h-screen pb-20 bg-blue-200">
+<div class="relative flex flex-col h-full min-h-screen pb-20 bg-marche_shop_grey">
   <%= render 'shared/shop_sidebar' %>
   <div class="w-9/12 mt-24 ml-auto">
     <div class="flex w-5/6 border-red-500 shadow stats">
       <div class="stat">
         <div class="stat-figure text-secondary">
         <%= link_to shops_path(chart: 'total_price') do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 rounded-full stroke-current hover:bg-rose-300"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 rounded-full stroke-current text-marche_orange hover:bg-orange-100"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         <% end %>
         </div>
         <div class="stat-title">累積銷售金額</div>
-        <div class="stat-value">$ <%= @total_price.to_i %></div>
+        <div class="stat-value py-2">$ <%= @total_price.to_i %></div>
         <div class="stat-desc"><%= format_date(@shop.created_at)%> - <%= format_date(Date.today)%></div>
       </div>
       
       <div class="stat">
         <div class="stat-figure text-secondary">
         <%= link_to shops_path(chart: 'top_products') do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 rounded-full stroke-current hover:bg-rose-300"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 rounded-full stroke-current text-marche_orange hover:bg-orange-100"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
         <% end %>
         </div>
         <div class="stat-title">賣出商品總量</div>
@@ -27,7 +27,7 @@
       <div class="stat">
         <div class="stat-figure text-secondary">
         <%= link_to shops_path(chart: 'total_order') do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 rounded-full stroke-current hover:bg-rose-300"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 rounded-full stroke-current text-marche_orange hover:bg-orange-100"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
         <% end %>
         </div>
         <div class="stat-title">已出貨次數</div>
