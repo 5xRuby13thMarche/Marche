@@ -1,4 +1,4 @@
-<%= link_to (product_path(product, saleinfo: spec.id )) do %>
+<%= link_to product_path(product, saleinfo: spec.id ) do %>
   <% if spec.id == sale_info.id %>
     <div class="block px-2 py-1 mb-2 mr-3 font-medium text-gray-900 border-2 rounded-md border-rose-600"><%= spec.spec %></div>
   <% else %>

@@ -22,7 +22,9 @@ gem "image_processing", ">= 1.2"
 gem "aws-sdk-s3", require: false
 gem "ransack", "~> 4.0"
 gem "tailwindcss-rails", "~> 2.0"
-
+gem "chartkick", "~> 5.0"
+gem "groupdate", "~> 6.2"
+gem 'friendly_id', '~> 5.4.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -46,14 +48,3 @@ group :test do
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   gem 'webdrivers'
 end
-
-
-
-
-
-
-gem "dockerfile-rails", ">= 1.2", :group => :development
-
-gem "chartkick", "~> 5.0"
-
-gem "groupdate", "~> 6.2"
