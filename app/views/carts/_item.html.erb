@@ -3,7 +3,7 @@
     <%# checkbox %>
     <%= check_box_tag "cart_product_ids[]", cart_product.id, false, id: "cart_product_#{cart_product.id}", class: "focus:outline-gray-600 checkbox checkbox-sm rounded ml-3 mr-2 md:ml-5" , data: {cart__item_target: "checkbox", cart__form_target: "checkbox", action: "change->cart--form#update"} %>
     <%# 商品圖片 %>
-    <%= link_to product_path(cart_product.sale_info.product_id), class: "block w-20 h-20 bg-slate-300 m-1 rounded mx-auto" do %>
+    <%= link_to product_path(cart_product.sale_info.product), class: "block w-20 h-20 bg-slate-300 m-1 rounded mx-auto" do %>
       <%= product_image(cart_product.sale_info.product) %>
     <% end %>
   </div>
