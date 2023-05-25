@@ -17,31 +17,31 @@
       </thead>
       <% @shop.shop_products_infos.each_with_index do |shop_products| %>
         <% shop_products.sale_infos.each do |s| %>
-        <tbody>
-          <tr class="text-center hover"> 
-            <td class="w-20 h-20">
-            <%= link_to product_path(shop_products.id) do %>
-              <%= product_image(shop_products) %>
-            <% end %>
-            </td>
-            <td><%= link_to shop_products.name, product_path(shop_products.id) %></td>
-            <td><%= s.spec %></td>
-            <td class="text-center">$ <%= s.price.to_i %></td>
-            <td class="text-center"><%= @shop.total_sales[s.spec] || 0 %></td>
-            <td class="text-center"><%= s.storage %></td>
-            <td>
-              <!-- Dropdown menu -->
-              <div class="w-20 dropdown dropdown-hover dropdown-end">
-                <label tabindex="0" class="btn bg-sky-600 border-sky-600">設定<svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></label>
-                <ul tabindex="0" class="p-2 shadow bg-marche_shop_white dropdown-content menu rounded-box w-52">
-                  <li><%= link_to "編輯商品", edit_product_path(shop_products.id), class:"active:bg-marche_shop_blue" %></li>
-                  <li><%= link_to '修改規格', edit_sale_info_path(s.id), class:"active:bg-marche_shop_blue" %></li>
-                  <li><%= link_to '刪除', product_path(shop_products.id), {method: :delete} %></li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        </tbody>
+          <tbody>
+            <tr class="text-center hover">
+              <td class="w-20 h-20">
+                <%= link_to product_path(shop_products) do %>
+                  <%= product_image(shop_products) %>
+                <% end %>
+              </td>
+              <td><%= link_to shop_products.name, product_path(shop_products) %></td>
+              <td><%= s.spec %></td>
+              <td class="text-center">$ <%= s.price.to_i %></td>
+              <td class="text-center"><%= @shop.total_sales[s.spec] || 0 %></td>
+              <td class="text-center"><%= s.storage %></td>
+              <td>
+                <!-- Dropdown menu -->
+                <div class="w-20 dropdown dropdown-hover dropdown-end">
+                  <label tabindex="0" class="btn bg-sky-600 border-sky-600">設定<svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></label>
+                  <ul tabindex="0" class="p-2 shadow bg-marche_shop_white dropdown-content menu rounded-box w-52">
+                    <li><%= link_to "編輯商品", edit_product_path(shop_products), class:"active:bg-marche_shop_blue" %></li>
+                    <li><%= link_to '修改規格', edit_sale_info_path(s.id), class:"active:bg-marche_shop_blue" %></li>
+                    <li><%= link_to '刪除', product_path(shop_products), {method: :delete} %></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
         <% end %>
       <% end %>
     </table>
