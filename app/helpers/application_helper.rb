@@ -17,4 +17,15 @@ module ApplicationHelper
     }
     translations[shipping_status]
   end
+
+  def current_page(url)
+    if current_page?(url)
+      classname = "mt-2 ml-12 py-1 text-sm text-sky-700 cursor-pointer hover:text-sky-700 hover:border-sky-600"
+      return classname
+    else
+      classname = "mt-2 ml-12 py-1 text-sm text-gray-500 cursor-pointer hover:text-sky-700 hover:border-sky-600"
+      return classname
+    end
+  end
+
 end
