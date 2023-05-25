@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
       @cart_products.destroy_all # 購物車中減去訂單的商品
       redirect_to order_path(@order), notice: "訂單成立"
     else
+      @total_price = CartProduct.cal_total_price(@cart_products) # 算總價
       render :new, status: :unprocessable_entity
     end
   end 
