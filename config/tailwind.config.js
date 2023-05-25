@@ -25,6 +25,7 @@ module.exports = {
         marche_shop_blue: '#A5BECF',
         marche_shop_blue500: '#668BC4',
         marche_shop_black: '#040A1B',
+        marche_shop_grey: '#d2dce4',
       },
     },
   },
