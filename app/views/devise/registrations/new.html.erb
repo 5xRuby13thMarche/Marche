@@ -10,23 +10,31 @@
     <%= image_tag "marche_logo_orangewhite.png" %>
   </div>
   <%# 輸入框 %>
-  <div class="w-[337px] bg-marche_white rounded-xl flex flex-wrap p-[37.99px]">
+  <div class="w-[337px] bg-marche_white rounded-xl flex flex-wrap p-[37.99px] relative">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: {class: "w-[305px]"} )  do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+      <% if resource.errors.any? %>
+        <section class="absolute p-2 text-white rounded opacity-75 bottom-full right-1 bg-slate-700">
+          <ul>
+            <% resource.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </section>
+      <% end %>
       <h3 class="mb-3 text-2xl font-bold text-left text-slate-500">註冊</h3>
       <div class="mb-3 field">
         <%= f.label :email ,"會員帳號" ,class: "leading-loose text-sm text-zinc-500" %>
         <br/>
-        <%= f.email_field :email, autofocus: true, autocomplete: "e-mail" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight active:ring active:ring-zinc-300 focus:ring-2 focus:ring-zinc-300" ,placeholder: "請輸入您的e-mail" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "e-mail" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight active:ring active:ring-zinc-300 focus:ring-2 focus:ring-zinc-300" ,placeholder: "請輸入您的e-mail", required: true %>
       </div>
       <div class="mb-3 field">
         <%= f.label :password ,"輸入密碼" ,class: "leading-loose text-sm text-zinc-500" %>
         <br />
-        <%= f.password_field :password, autocomplete: "new-password" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight active:ring active:ring-zinc-300 focus:ring-2 focus:ring-zinc-300" ,placeholder: "最少輸入6個字" %>
+        <%= f.password_field :password, autocomplete: "new-password" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight active:ring active:ring-zinc-300 focus:ring-2 focus:ring-zinc-300" ,placeholder: "最少輸入6個字", required: true %>
       </div>
       <div class="mb-5 field">
         <%= f.label :password_confirmation ,"確認密碼" ,class: "leading-loose text-sm text-zinc-500" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight active:ring active:ring-zinc-300 focus:ring-2 focus:ring-zinc-300", placeholder: "請再次輸入您的密碼" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: "w-full bg-marche_pearl rounded-md border-0 leading-tight active:ring active:ring-zinc-300 focus:ring-2 focus:ring-zinc-300", placeholder: "請再次輸入您的密碼", required: true %>
       </div>
       <div class="mb-4 action">
         <%= f.submit "註冊", class: " w-full text-lg p-2 bg-marche_orange rounded-lg text-marche_white cursor-pointer hover:bg-orange-600" %>
