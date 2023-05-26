@@ -19,6 +19,7 @@ export default class extends Controller {
     if (this.storageNum <= 0) this.disableComponents(); // 庫存為0
     this.updateItemTotalPrice();
     this.setQuantityTarget();
+    this.updateCartProductQuantityViaAPI();
   }
   // disable components when storage is 0
   disableComponents() {

@@ -14,8 +14,6 @@ export default class extends Controller {
     this.storageNum = parseInt(storage);
     this.saleInfoId = this.saleInfoIdTarget.value;
     this.quantityNum = Number(this.quantityTarget.value);
-    // console.log(this.storageNum);
-    if (this.storageNum <= 0) this.disableComponents(); // 庫存為0
   }
 
   //判斷輸入是否超過庫存or小於0
@@ -115,7 +113,6 @@ export default class extends Controller {
         color: "#333",
         background: "#eee",
       });
-      throw new Error("Invalid quantity");
     }
   }
 }
