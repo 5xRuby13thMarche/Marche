@@ -4,6 +4,8 @@ class Order < ApplicationRecord
   has_many :products, through: :order_products
   validates :shipping_address, presence: true
   validates :receiver, presence: true
+  extend FriendlyId
+  friendly_id :tracking_number, use: :slugged
 
 
   def build_cart_products(cart_products)

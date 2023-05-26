@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   end 
 
   def show
-    @order = Order.find(params[:id])
+    @order = Order.friendly.find(params[:id])
     order_products = @order.order_products
     @form_info = Newebpay::Mpg.new(
       {MerchantOrderNo: @order.tracking_number,
@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
   end
 
   def paid
-    @order = Order.find(params[:id])
+    @order = Order.friendly.find(params[:id])
     sign_in @order.user unless user_signed_in?
     
     if @order.payment_status == "pending"
