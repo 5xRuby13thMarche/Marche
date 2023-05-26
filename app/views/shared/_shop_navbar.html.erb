@@ -5,7 +5,7 @@
         <%= logo(@shop, size: [100, 100]) %>
       </div>
       <%= link_to "#{@shop.name}的賣場", shops_path, class: "text-gray-100 text-xl mr-auto" %>
-      <%= link_to "我的商店", shop_path(@shop), class: "px-4 text-gray-100 text-xs"%>
+      <%= link_to "我的商店", shop_path(@shop, sort: 'new'), class: "px-4 text-gray-100 text-xs"%>
     <% else %>
       <%= link_to "賣家中心", new_shop_path, class: "text-gray-100 text-xs mr-auto border border-x-0 border-t-0"%>
     <% end %>

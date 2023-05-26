@@ -37,11 +37,11 @@ class ShopsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:id])
-    @products = Product.where(shop_id: params[:id]).includes(:category).order(created_at: :desc)
+    @products = Product.where(shop_id: params[:id]).includes(:category)
     @sub_categories = Product.where(shop_id: params[:id]).includes(:category).pluck(:category_id ,:content).uniq
    
     if params[:category].present?
-      @products = @products.where(category_id: params[:category]).order(created_at: :desc)
+      @products = @products.where(category_id: params[:category])
     end
 
     case params[:sort]
