@@ -50,5 +50,12 @@ module ProductsHelper
       return "價格高到低"
     end
   end
-  
+
+  def default_quantity(sale_info)
+    if sale_info.storage == 0
+      return 0
+    else
+      return 1
+    end
+  end
 end
