@@ -43,7 +43,7 @@
     </div>
     <%# 商店資訊 %>
     <section class="pt-6 pb-2">
-      <%= link_to shop_path(@product.shop.id) do %>
+      <%= link_to shop_path(@product.shop.id, sort: 'new') do %>
         <div class="flex items-center py-1 mb-1 text-lg font-bold shadow sm:mx-auto">
           <div class="w-10 my-2 ml-2 mr-4 border rounded-full">
             <%= logo(@product.shop, size: [80, 80]) %>

@@ -4,7 +4,7 @@
     <div class="text-center bg-gray-200 border border-b-0 border-r-0 border-gray-400 rounded-tl-md">
       <%= sale_info.label :spec, '規格', class:"after:content-['*'] after:ml-0.5 after:text-red-500" %>
     </div>
-    <%= sale_info.text_field :spec, data: { product__form_target: "spec" }, class: "rounded-bl-md border border-gray-400 border-r-0" %>
+    <%= sale_info.text_field :spec, data: { product__form_target: "spec" }, class: "rounded-bl-md border border-gray-400 border-r-0 w-full" %>
   </div>
   <div class="flex flex-col w-1/3">
     <%= sale_info.label :price, '價格', class: "after:content-['*'] after:ml-0.5 after:text-red-500 text-center border bg-gray-200 border-gray-400 border-r-0 border-b-0" %>
