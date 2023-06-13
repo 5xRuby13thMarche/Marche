@@ -12,7 +12,7 @@ amazon:
   access_key_id: <%= ENV['amazon_access_key_id'] %>
   secret_access_key: <%= ENV['amazon_secret_access_key'] %>
   region: ap-northeast-1
-  bucket: marchev2
+  bucket: marchev1
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
